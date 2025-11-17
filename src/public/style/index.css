@@ -1,0 +1,140 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    color: #000000;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+a {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+header {
+    background-color: #004e64;
+    display: flex;
+    align-items: start;
+    justify-content: center;
+    flex-direction: column;
+    padding: 1dvw;
+}
+
+nav {
+    display: flex;
+    width: 98dvw;
+}
+
+.nav-content {
+    height: 100%;
+    display: flex;
+    width: 50%;
+    align-items: center;
+    justify-content: center;
+    gap: 2%;
+}
+ 
+/*Div da Logo*/
+
+.nav-img {
+    height: 100%;
+    width: 29%;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    padding-left: 1dvw;
+}
+
+/* Div para navegão */
+
+.nav-navegacao {
+    height: 100%;
+    width: 69%;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    gap: 4dvw;
+}
+
+.nav-navegacao p {
+    padding-bottom: 3px;
+    border-bottom: 1px solid rgba( 0, 0, 0, 0);
+    transition: all 0.4s;
+}
+
+.nav-navegacao p:hover{
+    color: #f7931e;
+    border-bottom: 1px solid #f7931e;
+
+}
+
+/* Div da pesquisa */
+
+.nav-pesquisa {
+    height: 100%;
+    width: 83%;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+}
+
+.pesquisa{
+    width: 60%;
+    height: 4dvh;
+    background-color: #f5f7fa;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.pesquisa input {
+    width: 100%;
+    height: 100%;
+    background-color: rgba( 0, 0, 0, 0);
+    border: none;
+    padding-left: 3%;
+    padding-right: 10%;
+    border-radius: 10px;
+    transition: all 0.09s;
+}
+
+.pesquisa input:focus{
+ outline: #f7931e 1px solid;
+}
+
+.pesquisa img{
+    width: 3dvh;
+    position: absolute;
+    margin-left: 22.5%;
+}
+
+/* Div do login */
+
+.nav-login {
+    height: 100%;
+    width: 15%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.nav-login a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1dvw;
+}
+
+.nav-login a p {
+    padding-bottom: 3px;
+    border-bottom: 1px solid rgba( 0, 0, 0, 0);
+    transition: all 0.4s;
+}
+
+.nav-login a p:hover{
+    color: #f7931e;
+    border-bottom: 1px solid #f7931e;
+
+}
