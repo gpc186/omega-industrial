@@ -1,0 +1,195 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #F5F7FA 0%, #e8ecf1 100%);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.header {
+    background: linear-gradient(135deg, #004E64 0%, #003949 100%);
+    padding: 20px 40px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/*Uma caixa onde define tudo pro centro*/
+.caixa {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+}
+
+/*Define um card onde ficara tudo de login*/
+.login-card {
+    background: white;
+    border-radius: 12px;
+    padding: 48px 40px;
+    box-shadow: 0 8px 24px rgba(0, 78, 100, 0.08);
+    border-top: 4px solid #F7931E;
+    width: 100%;
+    max-width: 440px;
+}
+
+/*Titulo de Bem-Vindo*/
+.titulo {
+    color: #004E64;
+    font-size: 32px;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 12px;
+}
+
+/*subtitulo*/
+.subtitulo {
+    color: #2F2F2F;
+    font-size: 16px;
+    text-align: center;
+    margin-bottom: 40px;
+    font-weight: 400;
+}
+
+/*Contera a label e o input*/
+.grupo-formulario {
+    margin-bottom: 24px;
+}
+
+
+label {
+    color: #2F2F2F;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    display: block;
+}
+
+input {
+    width: 100%;
+    padding: 14px 16px;
+    border: 2px solid #DADADA;
+    border-radius: 8px;
+    font-size: 15px;
+    color: #2F2F2F;
+    transition: all 0.3s ease;
+    background: #F5F7FA;
+}
+
+input:focus {
+    outline: none;
+    border-color: #335C67;
+    background: white;
+    box-shadow: 0 0 0 3px rgba(51, 92, 103, 0.1);
+}
+
+input:hover:not(:focus) {
+    border-color: #335C67;
+}
+
+input::placeholder {
+    color: #999;
+}
+
+.senha {
+    position: relative;
+}
+
+.senha input {
+    padding-right: 50px;
+}
+
+.button-imagem {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+/*Button de login*/
+.login-btn {
+    width: 100%;
+    padding: 16px;
+    background: linear-gradient(135deg, #F7931E 0%, #e88516 100%);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 32px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(247, 147, 30, 0.3);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.login-btn:hover {
+    background: linear-gradient(135deg, #e88516 0%, #d97a12 100%);
+    box-shadow: 0 6px 16px rgba(247, 146, 30, 0.767);
+}
+
+.login-btn:active {
+    transform: translateY(0);
+}
+
+/*define o tamanho da letra de OU e deixa tudo centralizado (inclusindo a linha)*/
+.divisao {
+    display: flex;
+    align-items: center;
+    margin: 32px 0;
+    color: #999;
+    font-size: 14px;
+}
+
+/*adiciona uma linha entre a divisao (ou)*/
+.divisao::before,
+.divisao::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: #DADADA;
+}
+
+.divisao::before {
+    margin-right: 16px;
+}
+
+.divisao::after {
+    margin-left: 16px;
+}
+
+/*tudo que estiver dentro dessa div, ficara no centro*/
+.criar-conta {
+    text-align: center;
+}
+
+/*muda o texto de criar conta*/
+.criar-conta-texto {
+    color: #2F2F2F;
+    font-size: 15px;
+    margin-bottom: 12px;
+}
+
+/*link para criar conta*/
+.criar-conta-link {
+    color: #004E64;
+    font-size: 16px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: color 0.3s ease;
+    display: inline-block;
+}
+
+.criar-conta-link:hover {
+    color: #F7931E;
+    text-decoration: underline;
+}
