@@ -13,18 +13,28 @@ a {
     text-decoration: none;
 }
 
+p {
+    margin: 0;
+}
+
+/* ------------ Header ------------ */
+
 header {
-    background-color: #004e64;
+    background-color: #004e64be;
+    width: 100%;
     display: flex;
-    align-items: start;
+    align-items: center;
     justify-content: center;
     flex-direction: column;
     padding: 1dvw;
+    position: fixed;
+    z-index: 2;
 }
 
 nav {
     display: flex;
-    width: 98dvw;
+    width: 70dvw;
+    align-items: center;
 }
 
 .nav-content {
@@ -35,7 +45,7 @@ nav {
     justify-content: center;
     gap: 2%;
 }
- 
+
 /*Div da Logo*/
 
 .nav-img {
@@ -59,12 +69,13 @@ nav {
 }
 
 .nav-navegacao p {
+    padding-top: 3px;
     padding-bottom: 3px;
-    border-bottom: 1px solid rgba( 0, 0, 0, 0);
+    border-bottom: 1px solid rgba(0, 0, 0, 0);
     transition: all 0.4s;
 }
 
-.nav-navegacao p:hover{
+.nav-navegacao p:hover {
     color: #f7931e;
     border-bottom: 1px solid #f7931e;
 
@@ -80,7 +91,7 @@ nav {
     justify-content: end;
 }
 
-.pesquisa{
+.pesquisa {
     width: 60%;
     height: 4dvh;
     background-color: #f5f7fa;
@@ -92,7 +103,7 @@ nav {
 .pesquisa input {
     width: 100%;
     height: 100%;
-    background-color: rgba( 0, 0, 0, 0);
+    background-color: rgba(0, 0, 0, 0);
     border: none;
     padding-left: 3%;
     padding-right: 10%;
@@ -100,14 +111,14 @@ nav {
     transition: all 0.09s;
 }
 
-.pesquisa input:focus{
- outline: #f7931e 1px solid;
+.pesquisa input:focus {
+    outline: #f7931e 1px solid;
 }
 
-.pesquisa img{
-    width: 3dvh;
+.pesquisa img {
+    width: 2.5dvh;
     position: absolute;
-    margin-left: 22.5%;
+    margin-left: 16%;
 }
 
 /* Div do login */
@@ -128,13 +139,88 @@ nav {
 }
 
 .nav-login a p {
+    padding-top: 3px;
     padding-bottom: 3px;
-    border-bottom: 1px solid rgba( 0, 0, 0, 0);
+    border-bottom: 1px solid rgba(0, 0, 0, 0);
     transition: all 0.4s;
 }
 
-.nav-login a p:hover{
+.nav-login a p:hover {
     color: #f7931e;
     border-bottom: 1px solid #f7931e;
 
 }
+
+/* ------------ Header ------------ */
+
+/* ------------ Hero ------------ */
+
+.hero-carousel {
+    position: relative;
+}
+
+.hero-carousel-img {
+    width: 100%;
+    height: 100dvh;
+}
+
+.hero-carousel-content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hero-content-box {
+    background-color: aquamarine;
+    height: 50dvh;
+    width: 40dvw;
+}
+
+/* ------------ Hero ------------ */
+
+/* ------------ Apresentação ------------ */
+
+.apresentacao-section {
+    width: 100%;
+    height: 70dvh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5dvw;
+}
+
+.apresentacao-content {
+    width: 30%;
+    height: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 7dvh;
+}
+
+.apresentacao-title {
+    font-size: 3.2rem;
+}
+
+.apresentacao-highlight {
+    color: #f7931e;
+}
+
+.apresentacao-text {
+    font-size: 1.3rem;
+}
+
+.apresentacao-btn {
+    width: 50%;
+    height: 10%;
+    border-radius: 15px;
+    border: none;
+    background-color: #f7931e;
+    color: #ffffff;
+}
+

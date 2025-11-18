@@ -4,11 +4,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OmegaPetro | Home</title>
+    <title>OmegaPetro - Home</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <link rel="stylesheet" href="/src/public/style/index.css">
 </head>
 
 <body>
+
+    <!-- Header -->
+
     <header>
         <nav>
             <div class="nav-content">
@@ -43,6 +48,85 @@
             </div>
         </nav>
     </header>
+
+    <!-- Hero -->
+
+    <div id="carouselExampleFade" class="carousel slide carousel-fade">
+        <div class="carousel-inner">
+            <div class="carousel-item active hero-carousel">
+                <img src="/src/public/assets/img/images.jpg" class="d-block w-100 hero-carousel-img">
+                <div class="hero-carousel-content">
+                    <div class="hero-content-box">
+                        Conteúdo
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item active hero-carousel">
+                <img src="/src/public/assets/img/images.jpg" class="d-block w-100 hero-carousel-img">
+                <div class="hero-carousel-content">
+                    <div class="hero-content-box">
+                        Conteúdo
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item active hero-carousel">
+                <img src="/src/public/assets/img/images.jpg" class="d-block w-100 hero-carousel-img">
+                <div class="hero-carousel-content">
+                    <div class="hero-content-box">
+                        Conteúdo
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+
+    <!-- Apresentação da empresa -->
+
+    <div class="apresentacao-section">
+        <div class="apresentacao-content">
+            <h1 class="apresentacao-title">Olá! Seja bem-vindo(a) <br> à <b>Omega Petro</b>.
+            </h1>
+            <p class="apresentacao-text">Fornecemos a robustez e a precisão que suas operações petroquímicas e de óleo
+                & gás exigem. Nossa expertise garante a máxima segurança e eficiência.</p>
+            <button>Explore o catálogo</button>
+        </div>
+        <div style="width: 30%; height: 80%; display: flex; flex-direction: column; justify-content: center;">
+            <div id="carouselExampleSlidesOnly" class="carousel slide carousel-fade" data-bs-ride="carousel" style="width: 100%; height: 80%; border-radius: 15px;">
+                <div class="carousel-inner">
+                    <div class="carousel-item active" style="position: relative;">
+                        <img src="/src/public/assets/img/OMEGA INDUSTRIAL (3).png" class="d-block w-100"
+                            style="width: 100%; height: 100%; border-radius: 25px;">
+                        <div
+                            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; align-items: end; justify-content: center; background-color: rgba(0, 0, 0, 0.3); border-radius: 20px;">
+                            <div style="background-color: #f4f4f4; height: 20dvh; width: 100%; border-radius: 0 0 20px 20px; padding: 1dvh;">
+                                <h5>Segurança no Local de Trabalho</h5>
+                                <br>
+                                <p>Compromisso inegociável com a segurança no local de trabalho. Nossos produtos e práticas são certificados para proteger vidas e ativos, atendendo e superando as Normas Regulamentadoras (NRs) e padrões globais.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="..." class="d-block w-100" alt="...">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="..." class="d-block w-100" alt="...">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
 </body>
 
 </html>
