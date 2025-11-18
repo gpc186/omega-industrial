@@ -16,12 +16,14 @@ async function setupDatabase() {
     await connection.query(`
       CREATE TABLE IF NOT EXISTS userRole(
         id INTEGER AUTO_INCREMENT NOT NULL PRIMARY KEY,
-        nome CHAR(25) NOT NULL,
-        email CHAR(50) NOT NULL,
+        nome VARCHAR(50) NOT NULL,
         CNPJ VARCHAR(18) NOT NULL,
-        password_hash CHAR(60) NOT NULL,
+        password_hash VARCHAR(60) NOT NULL,
         phone VARCHAR(20),
         role ENUM('adm', 'user') DEFAULT 'user'
+        created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+
+updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
       )
     `);
     console.log(' Tabela userRole criada');
@@ -47,6 +49,8 @@ async function setupDatabase() {
         category_id INT NOT NULL,
         quantidade INT DEFAULT 0,
         FOREIGN KEY (category_id) REFERENCES categories(id)
+        created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+        updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
       )
     `);
     console.log('Tabela produto criada');
@@ -61,6 +65,8 @@ async function setupDatabase() {
         FOREIGN KEY (user_id) REFERENCES userRole(id) ON DELETE CASCADE,
         FOREIGN KEY (product_id) REFERENCES produto(id) ON DELETE CASCADE,
         UNIQUE KEY unique_user_product (user_id, product_id)
+        created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+        updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
       )
     `);
     console.log(' Tabela cart_items criada');
@@ -74,6 +80,7 @@ async function setupDatabase() {
         total_preco DECIMAL(10, 2) NOT NULL,
         status VARCHAR(50) DEFAULT 'pending',
         notes TEXT,
+        data_compra DATETIME DEFAULT CURRENT_TIMESTAMP,
         FOREIGN KEY (user_id) REFERENCES userRole(id)
       )
     `);
@@ -89,6 +96,8 @@ async function setupDatabase() {
         preco_unidade DECIMAL(10, 2) NOT NULL,
         FOREIGN KEY (compra_id) REFERENCES compra(id) ON DELETE CASCADE,
         FOREIGN KEY (product_id) REFERENCES produto(id)
+        created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+        updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
       )
     `);
     console.log(' Tabela order_items criada');
