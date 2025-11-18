@@ -9,8 +9,31 @@
 </head>
 
 <body>
-    <div class="header">
-    </div>
+    <header>
+        <nav>
+            <div class="nav-content">
+                <div class="nav-img">
+                    <img class="nav-img-logo" src="/src/public/assets/img/logo.png">
+                </div>
+                <div class="nav-navegacao">
+                    <a href="">
+                        <p>Produtos</p>
+                    </a>
+                    <a href="">
+                        <p>Dashboard</p>
+                    </a>
+                    <a href="">
+                        <p>Carrinho</p>
+                    </a>
+                </div>
+            </div>
+            <div class="nav-content">
+                <div class="nav-btn-container">
+                    <a href="index.html"><button class="nav-btn-entrar">Entrar</button></a>
+                </div>
+            </div>
+        </nav>
+    </header>
 
     <div class="caixa">
         <div class="login-card">
@@ -27,8 +50,18 @@
                     <label for="senha">Senha</label>
                     <div class="senha">
                         <input type="password" id="senha" name="senha" placeholder="Digite sua senha" required>
-                        <button type="button" class="button-imagem" onclick="Senha()"><img id="minhaImagem"
-                                src="/src/public/assets/img/olho.png" alt="Imagem inicial" width="30"></button>
+                        <button type="button" class="button-imagem" onclick="toggleSenha()">
+                            <div class="eye-icon eye-closed" id="eyeIcon">
+                                <svg viewBox="0 0 24 24">
+                                    <!-- Contorno do olho -->
+                                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                    <!-- Pupila -->
+                                    <circle class="eye-pupil" cx="12" cy="12" r="3"></circle>
+                                    <!-- Linha que corta o olho (slash) -->
+                                    <line class="eye-slash" x1="3" y1="3" x2="21" y2="21"></line>
+                                </svg>
+                            </div>
+                        </button>
                     </div>
                 </div>
 
@@ -44,18 +77,19 @@
     </div>
 
     <script>
-
-        //Esconde a senha e ativa a visualização da mesma
-        function Senha() {
+        function toggleSenha() {
             const input = document.getElementById('senha');
-            input.type = input.type === 'password' ? 'text' : 'password';
+            const eyeIcon = document.getElementById('eyeIcon');
 
-            // atualiza a imagem imediatamente após trocar o tipo
-            const imagem = document.getElementById('minhaImagem');
-            if (input.type === 'text') {
-                imagem.src = '/src/public/assets/img/olho.png'; // imagem para mostrar a senha (olho aberto)
+            // Alterna o tipo do input
+            if (input.type === 'password') {
+                input.type = 'text';
+                eyeIcon.classList.remove('eye-closed');
+                eyeIcon.classList.add('eye-open');
             } else {
-                imagem.src = '/src/public/assets/img/olhoComRisco.png'; // imagem para esconder a senha (olho riscado)
+                input.type = 'password';
+                eyeIcon.classList.remove('eye-open');
+                eyeIcon.classList.add('eye-closed');
             }
         }
 

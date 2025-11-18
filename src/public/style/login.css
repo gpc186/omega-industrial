@@ -6,17 +6,127 @@
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, #F5F7FA 0%, #e8ecf1 100%);
+    background-image: url('/src/public/assets/img/Gemini_Generated_Image_9n7xjo9n7xjo9n7x.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center center;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
 }
 
-.header {
-    background: linear-gradient(135deg, #004E64 0%, #003949 100%);
-    padding: 20px 40px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+a {
+    color: #ffffff;
+    text-decoration: none;
 }
+
+p {
+    margin: 0;
+}
+
+header {
+    background-color: #004e64;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 1dvw;
+    position: fixed;
+    z-index: 2;
+}
+
+nav {
+    display: flex;
+    width: 70dvw;
+    align-items: center;
+
+}
+
+
+:root {
+    --bg: hsl(210, 40%, 98%);
+
+}
+
+.nav-content {
+    height: 100%;
+    display: flex;
+    width: 50%;
+    align-items: center;
+    justify-content: center;
+    gap: 2%;
+}
+
+/*Div da Logo*/
+
+.nav-img {
+    height: 100%;
+    width: 29%;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    padding-left: 1dvw;
+}
+
+/* Div para navegão */
+
+.nav-navegacao {
+    height: 100%;
+    width: 69%;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    gap: 4dvw;
+}
+
+.nav-navegacao p {
+    padding-top: 3px;
+    padding-bottom: 3px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0);
+    transition: all 0.4s;
+}
+
+.nav-navegacao p:hover {
+    color: #f7931e;
+    border-bottom: 1px solid #f7931e;
+
+}
+
+.nav-btn-entrar {
+    padding: 10px 24px;
+    background: white;
+    color: #004E64;
+    border: 2px solid white;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+.nav-btn-container {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: 100%;
+}
+
+.nav-btn-entrar:hover {
+    background: #F7931E;
+    color: white;
+    border-color: #F7931E;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(247, 147, 30, 0.4);
+}
+
+.nav-btn-entrar:active {
+    transform: translateY(0);
+}
+
 
 /*Uma caixa onde define tudo pro centro*/
 .caixa {
@@ -83,13 +193,13 @@ input {
 
 input:focus {
     outline: none;
-    border-color: #335C67;
+    border-color: #335c67b7;
     background: white;
-    box-shadow: 0 0 0 3px rgba(51, 92, 103, 0.1);
 }
 
 input:hover:not(:focus) {
-    border-color: #335C67;
+    border-color: #DADADA;
+    /* Mantem a cor padrão */
 }
 
 input::placeholder {
@@ -145,7 +255,7 @@ input::placeholder {
 .divisao {
     display: flex;
     align-items: center;
-    margin: 32px 0;
+    margin: 34px 0;
     color: #999;
     font-size: 14px;
 }
@@ -192,4 +302,54 @@ input::placeholder {
 .criar-conta-link:hover {
     color: #F7931E;
     text-decoration: underline;
+}
+
+
+/* Container do ícone do olho */
+.eye-icon {
+    width: 24px;
+    height: 24px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* SVG do olho */
+.eye-icon svg {
+    width: 70%;
+    height: 70%;
+    stroke: #335C67;
+    fill: none;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+/* Animação da pálpebra (linha que corta o olho) */
+.eye-slash {
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    transform-origin: center;
+}
+
+/* Quando a senha está visível (olho aberto) */
+.eye-open .eye-slash {
+    opacity: 0;
+    transform: translateY(-10px) scale(0.8);
+}
+
+/* Quando a senha está oculta (olho fechado) */
+.eye-closed .eye-slash {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+/* Animação da pupila */
+.eye-pupil {
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.eye-closed .eye-pupil {
+    transform: scale(0.5);
+    opacity: 0.5;
 }
