@@ -29,15 +29,19 @@ async function listarPorId(req, res) {
 }
 
 async function create(req, res) {
+    const { nome, preco, descricao, img_url, category_id, quantidade } = req.body;
+
+        if (!nome || !preco || !img_url || !category_id ) {
+            return res.status(400).json({ message: "Nome, preço e categoria são obrigatórios." });
+        };
+    
     try {
-        const { id } = req.params;
+        
+        const produtoId = await Product.create({
+            nome, preco, descricao, img_url, category_id, quantidade
+        });
 
-        const existe = await Product.findById(id)
-        if(!existe) return res.status(404).json({message: "Produto não encontrado!"});
-
-        await Product.delete(id);
-
-        return res.status(200).json({ok: true})
+        return res.status(200).json({ok: true, id: produtoId})
     } catch (error) {
         console.error(error);
         return res.status(500).json({message: "Erro interno do servidor"})
