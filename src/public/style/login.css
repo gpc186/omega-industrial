@@ -108,6 +108,7 @@ nav {
     text-transform: uppercase;
     letter-spacing: 0.5px;
 }
+
 .nav-btn-container {
     display: flex;
     justify-content: flex-end;
@@ -146,6 +147,7 @@ nav {
     border-top: 4px solid #F7931E;
     width: 100%;
     max-width: 440px;
+    margin-top: 50px;
 }
 
 /*Titulo de Bem-Vindo*/
@@ -352,4 +354,168 @@ input::placeholder {
 .eye-closed .eye-pupil {
     transform: scale(0.5);
     opacity: 0.5;
+}
+
+/*Estilos para o alerta personalizado*/
+#custom-alert {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background: #004E64;
+    color: white;
+    padding: 16px 22px;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 500;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.4s ease;
+    z-index: 9999;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+}
+
+#custom-alert.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Sucesso (laranja) */
+#custom-alert.success {
+    background: #F7931E;
+}
+
+/* Erro (azul petróleo padrão) */
+#custom-alert.error {
+    background: #004E64;
+}
+
+.mensagem-erro {
+    display: none;
+    background: rgba(230, 50, 50, 0.1);
+    border-left: 3px solid #e63232;
+    padding: 10px 14px;
+    margin-top: -12px;
+    margin-bottom: 10px;
+    font-size: 14px;
+    color: #e63232;
+    border-radius: 6px;
+    animation: fadeIn 0.3s ease;
+}
+
+/* opcional: pequena animação */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-6px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/*Deixa resposivo para o iphone SE*/
+
+@media (max-width: 380px) {
+
+    header {
+        padding: 10px;
+    }
+
+    .success-box {
+        max-width: 200px;
+        font-size: 12px;
+        padding: 8px;
+        margin: 10px auto 0;
+    }
+
+    body {
+        overflow: hidden;
+        /* evita rolagem */
+    }
+
+    nav {
+        width: 100%;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .nav-content {
+        width: 100%;
+        justify-content: space-between;
+        padding: 0 8px;
+    }
+
+    .nav-img {
+        width: auto;
+        padding-left: 0;
+    }
+
+    .nav-img-logo {
+        width: 120px;
+    }
+
+    .nav-navegacao {
+        display: none;/* esconde navegação se ficar apertado */
+    }
+
+    .nav-btn-container {
+        justify-content: center;
+    }
+
+    .nav-btn-entrar {
+        padding: 8px 18px;
+        font-size: 14px;
+    }
+
+    /* Centralização geral */
+    .caixa {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 80px 20px 80px 20px;/* cima e baixo iguais */
+    }
+
+    .login-card {
+        width: 100%;
+        padding: 32px 22px;
+        margin-top: 10px;
+        border-radius: 10px;
+    }
+
+    .titulo {
+        font-size: 24px;
+    }
+
+    .subtitulo {
+        font-size: 14px;
+        margin-bottom: 28px;
+    }
+
+    input {
+        font-size: 14px;
+        padding: 12px 14px;
+    }
+
+    .login-btn {
+        font-size: 14px;
+        padding: 14px;
+    }
+
+    .mensagem-erro {
+        font-size: 13px;
+    }
+
+    #custom-alert {
+        bottom: 20px;
+        left: 50%;
+        right: auto;
+        transform: translateX(-50%) translateY(30px);
+        font-size: 14px;
+        text-align: center;
+        width: 80%;
+    }
 }

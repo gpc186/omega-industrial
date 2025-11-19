@@ -29,7 +29,7 @@
             </div>
             <div class="nav-content">
                 <div class="nav-btn-container">
-                    <a href="index.html"><button class="nav-btn-entrar">Entrar</button></a>
+                    <a href="index.html"><button class="nav-btn-entrar">Voltar</button></a>
                 </div>
             </div>
         </nav>
@@ -64,9 +64,12 @@
                         </button>
                     </div>
                 </div>
+                <div id="mensagem-erro" class="mensagem-erro">
+                </div>
 
                 <button type="submit" class="login-btn">Entrar</button>
             </form>
+
 
             <div class="divisao">ou</div>
             <div class="criar-conta">
@@ -81,7 +84,6 @@
             const input = document.getElementById('senha');
             const eyeIcon = document.getElementById('eyeIcon');
 
-            // Alterna o tipo do input
             if (input.type === 'password') {
                 input.type = 'text';
                 eyeIcon.classList.remove('eye-closed');
@@ -95,9 +97,42 @@
 
         document.getElementById('formulario-login').addEventListener('submit', function (e) {
             e.preventDefault();
-            alert('Login realizado com sucesso!');
+
+            const senha = document.getElementById('senha').value;
+            const mensagemErro = document.getElementById('mensagem-erro');
+            const customAlert = document.getElementById('custom-alert');
+
+            const regexSenha = /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>]).{8,}$/;
+
+            // SE A SENHA ESTIVER ERRADA
+            if (!regexSenha.test(senha)) {
+                mensagemErro.style.display = 'block';
+                mensagemErro.innerHTML = `
+            A senha deve conter:
+            <br>• Min. 8 caracteres
+            <br>• Min. 1 letra maiúscula
+            <br>• Min. 1 número
+            <br>• Min. 1 caractere especial
+        `;
+                return;
+            }
+
+            // Remove mensagem de erro
+            mensagemErro.style.display = 'none';
+
+            // MOSTRA MENSAGEM DE SUCESSO
+            customAlert.textContent = "Login realizado com sucesso!";
+            customAlert.classList.remove('error');
+            customAlert.classList.add('show', 'success');
+
+            // Some sozinho depois de 1.8s (opcional)
+            setTimeout(() => {
+                customAlert.classList.remove('show');
+            }, 1800);
         });
     </script>
+    <div id="custom-alert"></div>
+
 </body>
 
 </html>
