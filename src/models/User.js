@@ -1,5 +1,5 @@
 const { query } = require('../config/database');
-const brcypt = require('bcrypt');
+const bcrypt = require('bcrypt');
 
 class User {
   static async create({email, nome, CNPJ, password, phone, role = 'user' }) {
@@ -10,7 +10,7 @@ class User {
       VALUES (?, ?, ?, ?, ?, ?)
     `;
     
-    const result = await query(sql, [nome, CNPJ, password_hash, phone, role]);
+    const result = await query(sql, [email, nome, CNPJ, password_hash, phone, role]);
     return result.insertId;
   }
   //Buscar por ID
@@ -43,7 +43,7 @@ class User {
      // Atualizar usuário
   static async update(id, { nome, phone, role }) {
     const sql = `
-      UPDATE userRole 
+      UPDATE user 
       SET nome = ?, phone = ?, role = ?
       WHERE id = ?
     `;
@@ -55,13 +55,13 @@ class User {
   // Atualizar senha
   static async updatePassword(id, newPassword) {
     const password_hash = await bcrypt.hash(newPassword, 10);
-    const sql = 'UPDATE userRole SET password_hash = ? WHERE id = ?';
+    const sql = 'UPDATE user SET password_hash = ? WHERE id = ?';
     await query(sql, [password_hash, id]);
   }
 
   // Deletar usuário
   static async delete(id) {
-    const sql = 'DELETE FROM userRole WHERE id = ?';
+    const sql = 'DELETE FROM user WHERE id = ?';
     const result = await query(sql, [id]);
     return result.affectedRows > 0;
   }

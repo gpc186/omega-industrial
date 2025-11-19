@@ -1,67 +1,75 @@
-const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
 const { generateToken } = require('../utils/generateToken')
-const { pool } = require('../config/database');
+const { findByEmail, create, verifyPassword } = require('../models/User');
 
 async function registrar(req, res) {
-    const { nome, email, CNPJ, phone, password } = req.body;
 
-    if (!nome || !email || !CNPJ || !phone || !password) {
-        return res.json({ message: "Preencha todos os campos!" });
-    }
+    try {
+        const { nome, email, CNPJ, phone, password } = req.body;
 
-    const [existingEmail] = await pool.query("SELECT id FROM user WHERE email=?", [email]);
-    if (existingEmail.length > 0) {
-        return res.json({ mensagem: "Email já cadastrado!" })
-    }
-
-    const password_hash = await bcrypt.hash(password, 10);
-
-    const [result] = await pool.query("INSERT INTO user (nome, CNPJ, password_hash, email, phone) VALUES (?, ?, ?, ?, ?)", [nome, CNPJ, password_hash, email, phone]);
-    const token = generateToken(result.insertId, "user");
-
-    return res.status(201).json({
-        ok: true,
-        token,
-        user: {
-            id: result.insertId,
-            nome,
-            email,
-            CNPJ,
-            role: "user"
+        if (!nome || !email || !CNPJ || !phone || !password) {
+            return res.json({ message: "Preencha todos os campos!" });
         }
-    })
+
+        const existingEmail = await findByEmail(email)
+        if (existingEmail) {
+            return res.json({ mensagem: "Email já cadastrado!" })
+        }
+
+        const id = await create(email, nome, CNPJ, password, phone);
+        const token = generateToken(id, "user");
+
+        return res.status(201).json({
+            ok: true,
+            token,
+            user: {
+                id,
+                nome,
+                email,
+                CNPJ,
+                role: "user"
+            }
+        })
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ message: "Erro interno do servidor!" })
+    }
 }
 
 async function login(req, res) {
-    const { email, password } = req.body;
-    if (!email || !password) {
-        return res.json({ message: "Os dois campos são necessários!" });
-    };
 
-    const [user] = await pool.query("SELECT * FROM user WHERE email = ?");
-    if (user.length === 0) {
-        return res.json({ message: "Usário não encontrado!" });
-    };
+    try {
+        const { email, password } = req.body;
+        if (!email || !password) {
+            return res.json({ message: "Os dois campos são necessários!" });
+        };
 
-    const senhacorreta = await bcrypt.compare(password, user[0].password_hash);
-    if (!senhacorreta) {
-        return res.json({ mensagem: "Usuário ou senha inválidos!" })
-    };
+        const user = await findByEmail(email);
+        if (!user) {
+            return res.json({ message: "Usário não encontrado!" });
+        };
 
-    const token = generateToken(user[0].id, user[0].role);
+        const senhacorreta = await verifyPassword(password, user.password_hash)
+        if (!senhacorreta) {
+            return res.json({ mensagem: "Usuário ou senha inválidos!" })
+        };
 
-    return res.status(200).json({
-        ok: true,
-        token,
-        user: {
-            id: user[0].id,
-            nome: user[0].nome,
-            email: user[0].email,
-            CNPJ: user[0].CNPJ,
-            role: user[0].role
-        }
-    });
+        const token = generateToken(user.id, user.role);
+
+        return res.status(200).json({
+            ok: true,
+            token,
+            user: {
+                id: user.id,
+                nome: user.nome,
+                email: user.email,
+                CNPJ: user.CNPJ,
+                role: user.role
+            }
+        });
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ message: "Erro interno do servidor!" })
+    }
 
 }
 
