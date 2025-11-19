@@ -25,11 +25,16 @@ class Order {
           [compra_id, item.product_id, item.quantidade, item.preco_unidade]
         );
 
-        // Atualizar estoque
-        await connection.execute(
-          'UPDATE produto SET quantidade = quantidade - ? WHERE id = ?',
-          [item.quantidade, item.product_id]
+        // Atualizar estoque - COM VERIFICAÇÃO ATÔMICA
+        const [updateResult] = await connection.execute(
+          'UPDATE produto SET quantidade = quantidade - ? WHERE id = ? AND quantidade >= ?',
+          [item.quantidade, item.product_id, item.quantidade]
         );
+
+        // Verificar se o estoque foi atualizado
+        if (updateResult.affectedRows === 0) {
+          throw new Error(`Estoque insuficiente para o produto ID ${item.product_id}`);
+        }
       }
 
       // Limpar carrinho

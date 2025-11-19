@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken');
 
 function adminMiddleware(req, res, next) {
-    if (req.user.role !== "adm"){
+    if ( !req.user ||req.user.role !== "adm"){
         return res.status(403).json({message: "Você não tem autorização!"});
     };
 
