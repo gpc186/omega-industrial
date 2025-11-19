@@ -151,8 +151,6 @@ nav {
 
 }
 
-/* ------------ Header ------------ */
-
 /* ------------ Hero ------------ */
 
 .hero-carousel {
@@ -181,8 +179,6 @@ nav {
     width: 40dvw;
 }
 
-/* ------------ Hero ------------ */
-
 /* ------------ Apresentação ------------ */
 
 .apresentacao-section {
@@ -192,6 +188,7 @@ nav {
     align-items: center;
     justify-content: center;
     gap: 5dvw;
+    background-color: #ffffff;
 }
 
 .apresentacao-content {
@@ -224,3 +221,47 @@ nav {
     color: #ffffff;
 }
 
+.apresentacao-carousel-wrapper {
+    width: 30%;
+    height: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.apresentacao-carousel {
+    width: 100%;
+    height: 80%;
+    border-radius: 15px;
+}
+
+.apresentacao-carousel-item {
+    position: relative;
+}
+
+.apresentacao-carousel-img {
+    width: 100%;
+    height: 100%;
+    border-radius: 25px;
+}
+
+.apresentacao-carousel-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: end;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 20px
+}
+
+.apresentacao-carousel-card {
+    background-color: #f4f4f4;
+    height: 20dvh;
+    width: 100%;
+    border-radius: 0 0 20px 20px;
+    padding: 1dvh;
+}

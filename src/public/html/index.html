@@ -63,8 +63,8 @@
             </div>
             <div class="carousel-item active hero-carousel">
                 <img src="/src/public/assets/img/images.jpg" class="d-block w-100 hero-carousel-img">
-                <div class="hero-carousel-content">
-                    <div class="hero-content-box">
+                <div class="hero-carousel-content" >
+                    <div class="hero-content-box"  style="background-color: brown;">
                         Conteúdo
                     </div>
                 </div>
@@ -92,24 +92,27 @@
 
     <div class="apresentacao-section">
         <div class="apresentacao-content">
-            <h1 class="apresentacao-title">Olá! Seja bem-vindo(a) <br> à <b>Omega Petro</b>.
+            <h1 class="apresentacao-title">Olá! Seja bem-vindo(a) <br> à <b class="apresentacao-highlight">Omega
+                    Petro</b>.
             </h1>
             <p class="apresentacao-text">Fornecemos a robustez e a precisão que suas operações petroquímicas e de óleo
                 & gás exigem. Nossa expertise garante a máxima segurança e eficiência.</p>
-            <button>Explore o catálogo</button>
+            <button class="apresentacao-btn">Explore o catálogo</button>
         </div>
-        <div style="width: 30%; height: 80%; display: flex; flex-direction: column; justify-content: center;">
-            <div id="carouselExampleSlidesOnly" class="carousel slide carousel-fade" data-bs-ride="carousel" style="width: 100%; height: 80%; border-radius: 15px;">
+        <div class="apresentacao-carousel-wrapper">
+            <div id="carouselExampleSlidesOnly" class="carousel slide carousel-fade apresentacao-carousel"
+                data-bs-ride="carousel">
                 <div class="carousel-inner">
-                    <div class="carousel-item active" style="position: relative;">
-                        <img src="/src/public/assets/img/OMEGA INDUSTRIAL (3).png" class="d-block w-100"
-                            style="width: 100%; height: 100%; border-radius: 25px;">
-                        <div
-                            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; align-items: end; justify-content: center; background-color: rgba(0, 0, 0, 0.3); border-radius: 20px;">
-                            <div style="background-color: #f4f4f4; height: 20dvh; width: 100%; border-radius: 0 0 20px 20px; padding: 1dvh;">
+                    <div class="carousel-item active apresentacao-carousel-item">
+                        <img src="/src/public/assets/img/OMEGA INDUSTRIAL (3).png"
+                            class="d-block w-100 apresentacao-carousel-img">
+                        <div class="apresentacao-carousel-overlay">
+                            <div class="apresentacao-carousel-card">
                                 <h5>Segurança no Local de Trabalho</h5>
                                 <br>
-                                <p>Compromisso inegociável com a segurança no local de trabalho. Nossos produtos e práticas são certificados para proteger vidas e ativos, atendendo e superando as Normas Regulamentadoras (NRs) e padrões globais.</p>
+                                <p>Compromisso inegociável com a segurança no local de trabalho. Nossos produtos e
+                                    práticas são certificados para proteger vidas e ativos, atendendo e superando as
+                                    Normas Regulamentadoras (NRs) e padrões globais.</p>
                             </div>
                         </div>
                     </div>
@@ -121,6 +124,14 @@
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+
+    <!-- Feedback -->
+
+    <div style="background-color: #fcfcfc; width: 100%; height: 70dvh; display: flex; align-items: center; justify-content: center;">
+        <div>
+            
         </div>
     </div>
 
