@@ -54,7 +54,7 @@ class Order {
         u.nome as usuario_nome,
         u.CNPJ as usuario_cnpj
       FROM compra c
-      JOIN userRole u ON c.user_id = u.id
+      JOIN user u ON c.user_id = u.id
       WHERE c.id = ?
     `;
     const results = await query(sql, [id]);
@@ -85,7 +85,7 @@ class Order {
         u.nome as usuario_nome,
         u.CNPJ as usuario_cnpj
       FROM compra c
-      JOIN userRole u ON c.user_id = u.id
+      JOIN user u ON c.user_id = u.id
       ORDER BY c.data_compra DESC
     `;
     return await query(sql);
