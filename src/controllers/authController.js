@@ -1,5 +1,5 @@
 const { generateToken } = require('../utils/generateToken')
-const { findByEmail, create, verifyPassword } = require('../models/User');
+const { findByEmail, create, verifyPassword, findById } = require('../models/User');
 
 async function registrar(req, res) {
 
@@ -15,7 +15,7 @@ async function registrar(req, res) {
             return res.json({ mensagem: "Email já cadastrado!" })
         }
 
-        const id = await create(email, nome, CNPJ, password, phone);
+        const id = await create({email, nome, CNPJ, password, phone, role: "user"});
         const token = generateToken(id, "user");
 
         return res.status(201).json({
@@ -73,4 +73,24 @@ async function login(req, res) {
 
 }
 
-module.exports = { registrar, login }
+async function me(req, res) {
+    const userId = req.user.id;
+
+    const user = await findById(userId);
+    if(!user){
+        return res.status(404).json({message: "Usuário não encontrado!"})
+    }
+
+    return res.status(200).json({ok: true,
+        user: {
+            id: user.id,
+            nome: user.nome,
+            email: user.email,
+            CNPJ: user.CNPJ,
+            phone: user.phone,
+            role: user.role
+        }
+    })
+}
+
+module.exports = { registrar, login, me }
