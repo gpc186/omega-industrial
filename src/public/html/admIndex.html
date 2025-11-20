@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel Administrativo - Petro</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Segoe UI", sans-serif;
+        }
+
+        body {
+            background: #f6f8fb;
+            color: #1f2d3d;
+        }
+
+        /* ---------- CONTENT ---------- */
+
+        .content {
+            display: flex;
+            gap: 30px;
+            padding: 100px;
+        }
+
+        /* ---------- CARDS ---------- */
+
+        .card {
+            background: white;
+            padding: 35px;
+            border-radius: 18px;
+            width: 50%;
+            position: relative;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+        }
+
+        .icon {
+            width: 70px;
+            height: 70px;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+        }
+
+        .icon img {
+            width: 36px;
+        }
+
+        .blue {
+            background: #245261;
+        }
+
+        .orange-bg {
+            background: #ff9800;
+        }
+
+        .badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            padding: 6px 14px;
+            border-radius: 15px;
+            font-size: 13px;
+            color: white;
+        }
+
+        .orange {
+            background: #ff9800;
+        }
+
+        .yellow {
+            background: #ff9800;
+        }
+
+        h2 {
+            font-size: 26px;
+            margin-bottom: 10px;
+        }
+
+        .descricao {
+            color: #d9d9d9;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+
+        .lista {
+            list-style: none;
+            margin-bottom: 25px;
+        }
+
+        .lista li {
+            margin-bottom: 8px;
+            color: #333;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .lista li::before {
+            content: "✔";
+            color: #ff9800;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+
+        .botao {
+            border: none;
+            padding: 14px 22px;
+            font-size: 15px;
+            border-radius: 10px;
+            cursor: pointer;
+            color: white;
+            font-weight: bold;
+        }
+
+        .blue-botao {
+            background: #245261;
+        }
+
+        .orange-botao {
+            background: #ff9800;
+        }
+
+    </style>
+</head>
+<body>
+
+    <main class="content">
+
+        <!-- Card 1 -->
+        <section class="card">
+            <div class="icon blue">
+                <img src="https://cdn-icons-png.flaticon.com/512/1828/1828911.png">
+            </div>
+
+            <span class="badge orange">ATUALIZADO</span>
+
+            <h2>Relatório de Vendas</h2>
+            <p class="descricao">
+                Acompanhe em tempo real o desempenho das vendas,
+                métricas de estoque e análises detalhadas do negócio.
+            </p>
+
+            <ul class="lista">
+                <li>Visão geral de vendas mensais</li>
+                <li>Análise de produtos críticos</li>
+                <li>Históricos de transações</li>
+                <li>Relatórios personalizados</li>
+            </ul>
+
+            <button class="botao blue-botao">Acessar Dashboard →</button>
+        </section>
+
+        <!-- Card 2 -->
+        <section class="card">
+            <div class="icon orange-bg">
+                <img src="https://cdn-icons-png.flaticon.com/512/1828/1828911.png">
+            </div>
+
+            <span class="badge yellow">1.248 itens</span>
+
+            <h2>Gerenciar Produtos</h2>
+            <p class="descricao">
+                Gerencie todo o catálogo de equipamentos industriais,
+                controle estoque e atualize informações de produtos.
+            </p>
+
+            <ul class="lista">
+                <li>Cadastro de novos produtos</li>
+                <li>Controle de estoque em tempo real</li>
+                <li>Edição de especificações técnicas</li>
+                <li>Gerenciamento de preços</li>
+            </ul>
+
+            <button class="botao orange-botao">Gerenciar Catálogo →</button>
+        </section>
+
+    </main>
+
+</body>
+</html>
