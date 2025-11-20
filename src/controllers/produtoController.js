@@ -80,4 +80,4 @@ async function remove(req, res) {
     }
 }
 
-module.exports = { listarTodos };
+module.exports = { listarTodos, listarPorId, create, update, remove };
