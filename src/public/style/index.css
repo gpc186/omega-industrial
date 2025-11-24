@@ -187,12 +187,13 @@ nav {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 5dvw;
+    gap: 4%;
+    padding: 0 15%;
     background-color: #ffffff;
 }
 
 .apresentacao-content {
-    width: 30%;
+    width: 48%;
     height: 80%;
     display: flex;
     flex-direction: column;
@@ -222,7 +223,7 @@ nav {
 }
 
 .apresentacao-carousel-wrapper {
-    width: 30%;
+    width: 48%;
     height: 80%;
     display: flex;
     flex-direction: column;
