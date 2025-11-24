@@ -1,0 +1,246 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: #f4f6fa;
+}
+
+a {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+p {
+    margin: 0;
+}
+
+header {
+    background-color: #004e64;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 1dvw;
+    position: fixed;
+    z-index: 2;
+}
+
+nav {
+    display: flex;
+    width: 70dvw;
+    align-items: center;
+
+}
+
+
+:root {
+    --bg: hsl(210, 40%, 98%);
+
+}
+
+.nav-content {
+    height: 100%;
+    display: flex;
+    width: 50%;
+    align-items: center;
+    justify-content: center;
+    gap: 2%;
+}
+
+/*Div da Logo*/
+
+.nav-img {
+    height: 100%;
+    width: 29%;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    padding-left: 1dvw;
+}
+
+/* Div para navegão */
+
+.nav-navegacao {
+    height: 100%;
+    width: 69%;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    gap: 4dvw;
+}
+
+.nav-navegacao p {
+    padding-top: 3px;
+    padding-bottom: 3px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0);
+    transition: all 0.4s;
+}
+
+.nav-navegacao p:hover {
+    color: #f7931e;
+    border-bottom: 1px solid #f7931e;
+
+}
+
+.nav-btn-entrar {
+    padding: 10px 24px;
+    background: white;
+    color: #004E64;
+    border: 2px solid white;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.nav-btn-container {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: 100%;
+}
+
+.nav-btn-entrar:hover {
+    background: #F7931E;
+    color: white;
+    border-color: #F7931E;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(247, 147, 30, 0.4);
+}
+
+.nav-btn-entrar:active {
+    transform: translateY(0);
+}
+
+/* ===================== CONTEÚDO ====================== */
+
+.container {
+    max-width: 2100px;
+    margin: 120px auto;
+    /* espaço devido ao header fixo */
+    display: flex;
+    gap: 40px;
+    padding: 100px;
+}
+
+/* CARD */
+.card {
+    background: white;
+    padding: 36px;
+    width: 520px;
+    border-radius: 16px;
+    box-shadow: 0px 10px 22px rgba(0, 0, 0, 0.05);
+}
+
+.card-top {
+    display: flex;
+    align-items: center;
+}
+
+.card-icon {
+    width: 200px;
+}
+
+/* TÍTULO */
+.card h2 {
+    margin-top: 24px;
+    margin-bottom: 10px;
+    color: #1F2A37;
+    font-size: 28px;
+}
+
+/* DESCRIÇÃO */
+.sub {
+    color: #7b8792;
+    line-height: 1.5;
+    margin-bottom: 30px;
+}
+
+/* BOTÕES */
+.btn {
+    width: 100%;
+    padding: 14px;
+    border: none;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Botão base */
+.btn {
+    position: relative;
+    overflow: hidden;
+    transition: all 0.25s ease;
+    border-radius: 8px;
+}
+
+/* ===================== AZUL ====================== */
+.btn.azul {
+    background: #004E64;
+    color: white;
+    border: 1px solid transparent;
+}
+
+.btn.azul:hover {
+    background: #005b78;
+    border-color: #004051;
+    transform: translateY(-2px);
+    box-shadow:
+        0 6px 16px rgba(0, 34, 45, 0.25),
+        0 0 0 1px rgba(255,255,255,0.05) inset;
+}
+
+.btn.azul:active {
+    transform: translateY(0);
+    box-shadow:
+        0 2px 6px rgba(0, 34, 45, 0.15),
+        0 0 0 1px rgba(255,255,255,0.05) inset;
+}
+
+/* ===================== LARANJA ====================== */
+.btn.laranja {
+    background: #F6A63A;
+    color: white;
+    border: 1px solid transparent;
+}
+
+.btn.laranja:hover {
+    background: #e18f23;
+    border-color: #c57515;
+    transform: translateY(-2px);
+    box-shadow:
+        0 6px 16px rgba(247, 147, 30, 0.30),
+        0 0 0 1px rgba(255,255,255,0.05) inset;
+}
+
+.btn.laranja:active {
+    transform: translateY(0);
+    box-shadow:
+        0 2px 6px rgba(247,147,30,0.20),
+        0 0 0 1px rgba(255,255,255,0.05) inset;
+}
+
+
+
+/* RESPONSIVO */
+@media (max-width: 1100px) {
+    .container {
+        flex-direction: column;
+        align-items: center;
+    }
+}
