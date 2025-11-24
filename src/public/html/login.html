@@ -99,26 +99,9 @@
             e.preventDefault();
 
             const senha = document.getElementById('senha').value;
-            const mensagemErro = document.getElementById('mensagem-erro');
             const customAlert = document.getElementById('custom-alert');
 
             const regexSenha = /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>]).{8,}$/;
-
-            // SE A SENHA ESTIVER ERRADA
-            if (!regexSenha.test(senha)) {
-                mensagemErro.style.display = 'block';
-                mensagemErro.innerHTML = `
-            A senha deve conter:
-            <br>• Min. 8 caracteres
-            <br>• Min. 1 letra maiúscula
-            <br>• Min. 1 número
-            <br>• Min. 1 caractere especial
-        `;
-                return;
-            }
-
-            // Remove mensagem de erro
-            mensagemErro.style.display = 'none';
 
             // MOSTRA MENSAGEM DE SUCESSO
             customAlert.textContent = "Login realizado com sucesso!";

@@ -1,0 +1,359 @@
+/* CSS completo para a página de cadastro - Petro */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-image: url('/src/public/assets/img/Gemini_Generated_Image_9n7xjo9n7xjo9n7x.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center center;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+a {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+p {
+    margin: 0;
+}
+
+header {
+    background-color: #004e64;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 1dvw;
+    position: fixed;
+    z-index: 2;
+}
+
+nav {
+    display: flex;
+    width: 70dvw;
+    align-items: center;
+
+}
+
+
+:root {
+    --bg: hsl(210, 40%, 98%);
+
+}
+
+.nav-content {
+    height: 100%;
+    display: flex;
+    width: 50%;
+    align-items: center;
+    justify-content: center;
+    gap: 2%;
+}
+
+/*Div da Logo*/
+
+.nav-img {
+    height: 100%;
+    width: 29%;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    padding-left: 1dvw;
+}
+
+/* Div para navegão */
+
+.nav-navegacao {
+    height: 100%;
+    width: 69%;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    gap: 4dvw;
+}
+
+.nav-navegacao p {
+    padding-top: 3px;
+    padding-bottom: 3px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0);
+    transition: all 0.4s;
+}
+
+.nav-navegacao p:hover {
+    color: #f7931e;
+    border-bottom: 1px solid #f7931e;
+
+}
+
+.nav-btn-entrar {
+    padding: 10px 24px;
+    background: white;
+    color: #004E64;
+    border: 2px solid white;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.nav-btn-container {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: 100%;
+}
+
+.nav-btn-entrar:hover {
+    background: #F7931E;
+    color: white;
+    border-color: #F7931E;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(247, 147, 30, 0.4);
+}
+
+.nav-btn-entrar:active {
+    transform: translateY(0);
+}
+
+/* CONTAINER */
+.caixa {
+    margin-top: 130px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 40px 20px;
+}
+
+.form-card {
+    background: white;
+    width: 100%;
+    max-width: 900px;
+    border-radius: 12px;
+    padding: 40px 35px;
+    box-shadow: 0 8px 24px rgba(0, 78, 100, 0.1);
+    border-top: 4px solid #f7931e;
+}
+
+.titulo {
+    font-size: 32px;
+    font-weight: 600;
+    color: #004e64;
+    margin-bottom: 10px;
+}
+
+.subtitulo {
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 35px;
+}
+
+/* INPUTS */
+.linha {
+    display: flex;
+    gap: 25px;
+    width: 100%;
+}
+
+.grupo-formulario {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    font-weight: 600;
+    margin-bottom: 6px;
+}
+
+input {
+    padding: 14px;
+    border-radius: 8px;
+    border: 2px solid #dadada;
+    background: #f5f7fa;
+    transition: 0.2s;
+    font-size: 15px;
+    width: 100%;
+}
+
+input:focus {
+    background: #fff;
+    border-color: #335c67b7;
+}
+
+/* SENHA + OLHO */
+.senha {
+    position: relative;
+}
+
+.button-imagem {
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.eye-icon {
+    width: 24px;
+    height: 24px;
+    display: flex;
+}
+
+.eye-icon svg {
+    width: 70%;
+    height: 70%;
+    stroke: #335c67;
+    fill: none;
+    stroke-width: 2;
+}
+
+.eye-slash {
+    transition: 0.3s;
+}
+
+.eye-open .eye-slash {
+    opacity: 0;
+    transform: scale(0.2) translateY(-5px);
+}
+
+.eye-pupil {
+    transition: 0.3s;
+}
+
+.eye-closed .eye-pupil {
+    opacity: 0.5;
+    transform: scale(0.5);
+}
+
+/* BOTÃO ENVIAR */
+.enviar-btn {
+    width: 100%;
+    margin-top: 35px;
+    padding: 16px;
+    border-radius: 8px;
+    border: none;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    background: linear-gradient(135deg, #f7931e, #e88516);
+    color: white;
+    transition: 0.3s;
+}
+
+.enviar-btn:hover {
+    background: linear-gradient(135deg, #e88516, #d97a12);
+}
+
+/*define o tamanho da letra de OU e deixa tudo centralizado (inclusindo a linha)*/
+.divisao {
+    display: flex;
+    align-items: center;
+    margin: 34px 0;
+    color: #999;
+    font-size: 14px;
+}
+
+/*adiciona uma linha entre a divisao (ou)*/
+.divisao::before,
+.divisao::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: #DADADA;
+}
+
+.divisao::before {
+    margin-right: 16px;
+}
+
+.divisao::after {
+    margin-left: 16px;
+}
+
+/*tudo que estiver dentro dessa div, ficara no centro*/
+.criar-conta {
+    text-align: center;
+}
+
+/*muda o texto de criar conta*/
+.criar-conta-texto {
+    color: #2F2F2F;
+    font-size: 15px;
+    margin-bottom: 12px;
+}
+
+/*link para criar conta*/
+.criar-conta-link {
+    color: #004E64;
+    font-size: 16px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: color 0.3s ease;
+    display: inline-block;
+}
+
+.criar-conta-link:hover {
+    color: #F7931E;
+    text-decoration: underline;
+}
+
+/* RESPONSIVIDADE - IPHONE SE (375px) */
+@media (max-width: 420px) {
+    header nav {
+        flex-direction: column;
+        width: 100%;
+        gap: 10px;
+    }
+
+    .nav-navegacao {
+        display: none;
+    }
+
+    .nav-img-logo {
+        width: 110px;
+    }
+
+    .caixa {
+        padding: 20px;
+        margin-top: 100px;
+    }
+
+    .form-card {
+        padding: 25px 20px;
+    }
+
+    .titulo {
+        font-size: 26px;
+    }
+
+    .linha {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    input {
+        font-size: 14px;
+        padding: 12px;
+    }
+
+    .enviar-btn {
+        font-size: 14px;
+        padding: 14px;
+    }
+}
