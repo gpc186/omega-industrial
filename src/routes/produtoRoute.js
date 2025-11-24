@@ -7,8 +7,8 @@ const adm = require('../middleware/adminMiddleware');
 router.get('/', produtoController.listarTodos);
 router.get('/:id', produtoController.listarPorId);
 
-router.post('/', auth, adm, produtoController.create);
-router.put('/:id', auth, adm, produtoController.update);
-router.delete('/:id', auth, adm, produtoController.delete);
+router.post('/adm/createProd', auth, adm, produtoController.create);
+router.put('/adm/:id/updateProd', auth, adm, produtoController.update);
+router.delete('/adm/:id/removeProd', auth, adm, produtoController.remove);
 
 module.exports = router;

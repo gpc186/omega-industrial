@@ -1,5 +1,5 @@
 const { generateToken } = require('../utils/generateToken')
-const { findByEmail, create, verifyPassword, findById } = require('../models/User');
+const User = require('../models/User');
 
 async function registrar(req, res) {
 
@@ -10,12 +10,12 @@ async function registrar(req, res) {
             return res.status(400).json({ message: "Preencha todos os campos!" });
         }
 
-        const existingEmail = await findByEmail(email)
+        const existingEmail = await User.findByEmail(email)
         if (existingEmail) {
             return res.status(409).json({ mensagem: "Email já cadastrado!" })
         }
 
-        const id = await create({email, nome, CNPJ, password, phone});
+        const id = await User.create({email, nome, CNPJ, password, phone});
         const token = generateToken(id, "user");
 
         return res.status(201).json({
@@ -43,12 +43,12 @@ async function login(req, res) {
             return res.status(400).json({ message: "Os dois campos são necessários!" });
         };
 
-        const user = await findByEmail(email);
+        const user = await User.findByEmail(email);
         if (!user) {
             return res.status(401).json({ message: "Credenciais inválidas!" });
         };
 
-        const senhacorreta = await verifyPassword(password, user.password_hash)
+        const senhacorreta = await User.verifyPassword(password, user.password_hash)
         if (!senhacorreta) {
             return res.status(401).json({ mensagem: "Credenciais inválidas!" })
         };
@@ -76,7 +76,7 @@ async function login(req, res) {
 async function me(req, res) {
     const userId = req.user.id;
 
-    const user = await findById(userId);
+    const user = await User.findById(userId);
     if(!user){
         return res.status(404).json({message: "Usuário não encontrado!"})
     }

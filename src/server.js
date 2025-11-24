@@ -1,13 +1,14 @@
 const express = require('express');
 const app = express();
 const authRoute = require('./routes/authRoute');
-const produtoRoute = require('./controllers/produtoController');
+// const errorHandler = require('./middleware/errorHandler')
+const produtoRoute = require('./routes/produtoRoute');
 const categoryRoute = require('./routes/categoryRoute');
 const cartRoute = require('./routes/cartRoute');
 const orderRoute = require('./routes/orderRoute');
 require('dotenv').config();
 
-app.use(errorHandler);
+// app.use(errorHandler);
 
 app.use(express.json());
 
