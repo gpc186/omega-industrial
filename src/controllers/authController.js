@@ -7,15 +7,15 @@ async function registrar(req, res) {
         const { nome, email, CNPJ, phone, password } = req.body;
 
         if (!nome || !email || !CNPJ || !phone || !password) {
-            return res.json({ message: "Preencha todos os campos!" });
+            return res.status(400).json({ message: "Preencha todos os campos!" });
         }
 
         const existingEmail = await findByEmail(email)
         if (existingEmail) {
-            return res.json({ mensagem: "Email já cadastrado!" })
+            return res.status(409).json({ mensagem: "Email já cadastrado!" })
         }
 
-        const id = await create({email, nome, CNPJ, password, phone, role: "user"});
+        const id = await create({email, nome, CNPJ, password, phone});
         const token = generateToken(id, "user");
 
         return res.status(201).json({
@@ -40,17 +40,17 @@ async function login(req, res) {
     try {
         const { email, password } = req.body;
         if (!email || !password) {
-            return res.json({ message: "Os dois campos são necessários!" });
+            return res.status(400).json({ message: "Os dois campos são necessários!" });
         };
 
         const user = await findByEmail(email);
         if (!user) {
-            return res.json({ message: "Usário não encontrado!" });
+            return res.status(401).json({ message: "Credenciais inválidas!" });
         };
 
         const senhacorreta = await verifyPassword(password, user.password_hash)
         if (!senhacorreta) {
-            return res.json({ mensagem: "Usuário ou senha inválidos!" })
+            return res.status(401).json({ mensagem: "Credenciais inválidas!" })
         };
 
         const token = generateToken(user.id, user.role);

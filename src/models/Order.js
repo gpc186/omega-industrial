@@ -25,11 +25,16 @@ class Order {
           [compra_id, item.product_id, item.quantidade, item.preco_unidade]
         );
 
-        // Atualizar estoque
-        await connection.execute(
-          'UPDATE produto SET quantidade = quantidade - ? WHERE id = ?',
-          [item.quantidade, item.product_id]
+        // Atualizar estoque - COM VERIFICAÇÃO ATÔMICA
+        const [updateResult] = await connection.execute(
+          'UPDATE produto SET quantidade = quantidade - ? WHERE id = ? AND quantidade >= ?',
+          [item.quantidade, item.product_id, item.quantidade]
         );
+
+        // Verificar se o estoque foi atualizado
+        if (updateResult.affectedRows === 0) {
+          throw new Error(`Estoque insuficiente para o produto ID ${item.product_id}`);
+        }
       }
 
       // Limpar carrinho
@@ -54,7 +59,7 @@ class Order {
         u.nome as usuario_nome,
         u.CNPJ as usuario_cnpj
       FROM compra c
-      JOIN userRole u ON c.user_id = u.id
+      JOIN user u ON c.user_id = u.id
       WHERE c.id = ?
     `;
     const results = await query(sql, [id]);
@@ -85,7 +90,7 @@ class Order {
         u.nome as usuario_nome,
         u.CNPJ as usuario_cnpj
       FROM compra c
-      JOIN userRole u ON c.user_id = u.id
+      JOIN user u ON c.user_id = u.id
       ORDER BY c.data_compra DESC
     `;
     return await query(sql);

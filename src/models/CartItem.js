@@ -3,6 +3,25 @@ const { query } = require('../config/database');
 class CartItem {
   // Adicionar item ao carrinho
   static async add(user_id, product_id, quantidade = 1) {
+    // Verificar estoque disponível
+    const [produto] = await query('SELECT quantidade FROM produto WHERE id = ?', [product_id]);
+    
+    if (!produto) {
+      throw new Error('Produto não encontrado');
+    }
+    
+    // Verificar quantidade atual no carrinho
+    const [itemCarrinho] = await query(
+      'SELECT quantidade FROM cart_items WHERE user_id = ? AND product_id = ?',
+      [user_id, product_id]
+    );
+    
+    const quantidadeTotal = itemCarrinho ? itemCarrinho.quantidade + quantidade : quantidade;
+    
+    if (produto.quantidade < quantidadeTotal) {
+      throw new Error('Estoque insuficiente');
+    }
+    
     const sql = `
       INSERT INTO cart_items (user_id, product_id, quantidade)
       VALUES (?, ?, ?)
@@ -32,6 +51,17 @@ class CartItem {
 
   // Atualizar quantidade
   static async updateQuantity(user_id, product_id, quantidade) {
+    // Verificar estoque disponível
+    const [produto] = await query('SELECT quantidade FROM produto WHERE id = ?', [product_id]);
+    
+    if (!produto) {
+      throw new Error('Produto não encontrado');
+    }
+    
+    if (produto.quantidade < quantidade) {
+      throw new Error('Estoque insuficiente');
+    }
+    
     const sql = `
       UPDATE cart_items 
       SET quantidade = ?

@@ -7,6 +7,8 @@ const cartRoute = require('./routes/cartRoute');
 const orderRoute = require('./routes/orderRoute');
 require('dotenv').config();
 
+app.use(errorHandler);
+
 app.use(express.json());
 
 app.use('/auth', authRoute);
@@ -14,6 +16,7 @@ app.use('/produto', produtoRoute);
 app.use('/category', categoryRoute);
 app.use('/cart', cartRoute);
 app.use('/orders', orderRoute);
+
 
 app.get('/', (req, res)=>{
     res.send('/')
