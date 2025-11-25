@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Equipamentos Petroquímicos</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma;
+            background: #f4f6fa;
+        }
+
+        header {
+            background-color: #004e64;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            padding: 1rem;
+            position: fixed;
+            top: 0;
+            z-index: 10;
+        }
+
+        nav {
+            display: flex;
+            width: 70%;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .nav-content {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .nav-img-logo {
+            height: 45px;
+        }
+
+        .nav-navegacao {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-navegacao p {
+            color: #fff;
+            font-weight: 500;
+            transition: .3s;
+        }
+
+        .nav-navegacao p:hover {
+            color: #f7931e;
+        }
+
+        .nav-btn-entrar {
+            padding: 10px 24px;
+            background: white;
+            color: #004E64;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .nav-btn-entrar:hover {
+            background: #F7931E;
+            color: #fff;
+        }
+
+        /* GRID */
+        .produtos-container {
+            max-width: 1400px;
+            margin: 140px auto;
+            padding: 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .card-produto {
+            background: #fff;
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 8px 18px rgba(0, 0, 0, 0.08);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card-produto img {
+            width: 100%;
+            border-radius: 12px;
+            margin-bottom: 18px;
+        }
+
+        .categoria {
+            background: #e7f6ff;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            color: #004e64;
+            display: inline-block;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .card-produto h3 {
+            font-size: 22px;
+            color: #1F2A37;
+            margin-bottom: 8px;
+        }
+
+        .card-produto p {
+            color: #6c7a86;
+            line-height: 1.4;
+            margin-bottom: 18px;
+        }
+
+        .preco {
+            font-size: 22px;
+            font-weight: 700;
+            color: #004e64;
+            margin-bottom: 18px;
+        }
+
+        .btn-comprar {
+            width: 100%;
+            background: #004e64;
+            color: #fff;
+            padding: 14px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: .3s;
+        }
+
+        .btn-comprar:hover {
+            background: #006a85;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <div class="nav-content">
+                <div class="nav-img">
+                    <img class="nav-img-logo" src="assets/img/logo.png" alt="Logo">
+                </div>
+                <div class="nav-navegacao">
+                    <a href="">
+                        <p>Produtos</p>
+                    </a>
+                    <a href="">
+                        <p>Dashboard</p>
+                    </a>
+                    <a href="">
+                        <p>Carrinho</p>
+                    </a>
+                </div>
+            </div>
+
+            <div class="nav-content">
+                <div class="nav-btn-container">
+                    <a href="index.html"><button class="nav-btn-entrar">Sair</button></a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <div class="filtros-container"
+            style="max-width:1400px;margin:140px auto 20px;padding:0 20px;display:flex;gap:20px;align-items:center;">
+            <input id="busca" type="text" placeholder="Buscar equipamento..."
+                style="flex:1;padding:12px 16px;border-radius:10px;border:1px solid #c9cdd2;font-size:16px;">
+            <select id="filtroCategoria"
+                style="padding:12px 16px;border-radius:10px;border:1px solid #c9cdd2;font-size:16px;">
+                <option value="">Todas categorias</option>
+                <option value="Trocadores de Calor">Trocadores de Calor</option>
+                <option value="Válvulas Industriais">Válvulas Industriais</option>
+                <option value="Bombas Químicas">Bombas Químicas</option>
+                <option value="Tanques de Armazenamento">Tanques de Armazenamento</option>
+                <option value="Compressores">Compressores</option>
+            </select>
+        </div>
+
+        <div class="produtos-container" id="listaProdutos">
+            <p style="text-align:center; width:100%; color:#666;">Carregando produtos...</p>
+        </div>
+    </main>
+
+    <script>
+        const lista = document.getElementById("listaProdutos");
+        const busca = document.getElementById("busca");
+        const filtroCategoria = document.getElementById("filtroCategoria");
+
+        let produtos = []; // Variável global para guardar os dados originais
+
+        // 1. Carregar JSON (Verifique se o caminho '../json/products.json' está correto para sua estrutura de pastas)
+        fetch('../json/products.json')
+            .then(res => res.json())
+            .then(data => {
+                produtos = data; // Salva os dados na variável global
+                renderProdutos(produtos); // Renderiza tudo inicialmente
+            })
+            .catch(error => {
+                console.error("Erro ao carregar JSON:", error);
+                lista.innerHTML = "<p>Erro ao carregar produtos.</p>";
+            });
+
+        // 2. Função de Renderização (Cria os Cards)
+        function renderProdutos(listaDeProdutos) {
+            lista.innerHTML = ""; // Limpa a tela antes de adicionar
+
+            if (listaDeProdutos.length === 0) {
+                lista.innerHTML = "<p>Nenhum produto encontrado.</p>";
+                return;
+            }
+
+            listaDeProdutos.forEach(p => {
+                const card = document.createElement("div");
+                card.className = "card-produto";
+
+                // Formatação correta de moeda BRL
+                // O Number(p.preco) garante que seja tratado como numero antes de formatar
+                const precoFormatado = Number(p.preco).toLocaleString('pt-BR', {
+                    style: 'currency',
+                    currency: 'BRL'
+                });
+
+                // ATENÇÃO: Verifique se no seu JSON a imagem chama "img" ou "imagem"
+                // Aqui estou usando p.img conforme seu primeiro script.
+                card.innerHTML = `
+                    <img src="${p.imagem}" alt="${p.nome}" />
+                    <span class="categoria">${p.categoria}</span>
+                    <h3>${p.nome}</h3>
+                    <p>${p.descricao}</p>
+                    <p class="preco">${precoFormatado}</p>
+                    <button class="btn-comprar">Comprar Agora →</button>
+                `;
+
+                lista.appendChild(card);
+            });
+        }
+
+        // 3. Função de Filtragem
+        function aplicarFiltros() {
+            const termoBusca = busca.value.toLowerCase();
+            const categoriaSelecionada = filtroCategoria.value;
+
+            const produtosFiltrados = produtos.filter(p => {
+                const matchTexto = p.nome.toLowerCase().includes(termoBusca) || p.descricao.toLowerCase().includes(termoBusca);
+                const matchCategoria = categoriaSelecionada === "" || p.categoria === categoriaSelecionada;
+
+                return matchTexto && matchCategoria;
+            });
+
+            renderProdutos(produtosFiltrados);
+        }
+
+        // 4. Event Listeners (Ouvem a digitação e o click)
+        busca.addEventListener("input", aplicarFiltros);
+        filtroCategoria.addEventListener("change", aplicarFiltros);
+    </script>
+</body>
+
+</html>

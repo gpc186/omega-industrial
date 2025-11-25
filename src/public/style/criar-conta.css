@@ -153,12 +153,14 @@ nav {
     font-weight: 600;
     color: #004e64;
     margin-bottom: 10px;
+    text-align: center;
 }
 
 .subtitulo {
     font-size: 16px;
     color: #555;
     margin-bottom: 35px;
+    text-align: center;
 }
 
 /* INPUTS */
