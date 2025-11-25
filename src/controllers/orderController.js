@@ -8,7 +8,7 @@ async function createOrder(req, res) {
         const cartItems = await CartItem.findByUser(userId);
 
         if (cartItems.length === 0) {
-            return res.status(400).json({ message: "O carrinho está vazio!" });
+            return res.status(400).json({ ok: false, error: "O carrinho está vazio!" });
         };
 
         const items = cartItems.map(item => ({
@@ -28,7 +28,7 @@ async function createOrder(req, res) {
         return res.status(201).json({ ok: true, message: "Pedido criado com sucesso!", compra_id, order_numero, total_preco });
     } catch (error) {
         console.error(error);
-        return res.status(500).json({ message: "Erro interno do servidor" });
+        return res.status(500).json({ ok: false, error: "Erro interno do servidor" });
     }
 }
 
@@ -38,14 +38,14 @@ async function getOrderById(req, res) {
 
         const order = await Order.findById(id);
 
-        if (!order) return res.status(404).json({ message: "Ordem não encontrada!" });
+        if (!order) return res.status(404).json({ ok: false, error: "Ordem não encontrada!" });
 
-        if (order.user_id !== req.user.id && req.user.role !== "adm") return res.status(403).json({ message: "Você não pode acessar!" });
+        if (order.user_id !== req.user.id && req.user.role !== "adm") return res.status(403).json({ ok: false, error: "Você não pode acessar!" });
 
-        return res.status(200).json({ ok: true, order });
+        return res.status(200).json({ ok: true, message: "Order pegada por id foi um sucesso!", order });
     } catch (error) {
         console.error(error);
-        return res.status(500).json({ message: "Erro interno do servidor" });
+        return res.status(500).json({ ok: false, error: "Erro interno do servidor" });
     }
 }
 
@@ -55,12 +55,12 @@ async function getMyOrders(req, res) {
 
         const pedidos = await Order.findByUser(userId);
 
-        if (pedidos.length === 0) return res.status(404).json({ message: "Nenhum pedido ainda foi feito" });
+        if (pedidos.length === 0) return res.status(404).json({ ok: false, error: "Nenhum pedido ainda foi feito" });
 
-        return res.status(200).json({ ok: true, pedidos });
+        return res.status(200).json({ ok: true, message: "Meus pedidos foram carregados com sucesso!", pedidos });
     } catch (error) {
         console.error(error);
-        return res.status(500).json({ message: "Erro interno do servidor" });
+        return res.status(500).json({ ok: false, error: "Erro interno do servidor" });
     }
 }
 
@@ -68,10 +68,10 @@ async function listAllOrders(req, res) {
     try {
         const pedidos = await Order.findAll();
 
-        return res.status(200).json({ ok: true, pedidos })
+        return res.status(200).json({ ok: true, message: "Todos os pedidos foram carregados com sucesso!", pedidos })
     } catch (error) {
         console.error(error);
-        return res.status(500).json({ message: "Erro interno do servidor" });
+        return res.status(500).json({ ok: false, error: "Erro interno do servidor" });
     }
 }
 
@@ -81,14 +81,14 @@ async function updateOrderstatus(req, res) {
         const { status } = req.body;
 
         const existe = await Order.findById(id);
-        if (!existe) return res.status(404).json({ message: "Ordem não encontrada!" });
+        if (!existe) return res.status(404).json({ ok: false, error: "Ordem não encontrada!" });
 
         const pedidoAtualizado = await Order.updateStatus(id, status);
 
-        return res.status(200).json({ ok: true, pedidoAtualizado })
+        return res.status(200).json({ ok: true, message: "Status da ordem alterada com sucesso!", pedidoAtualizado })
     } catch (error) {
         console.error(error);
-        return res.status(500).json({ message: "Erro interno do servidor" });
+        return res.status(500).json({ ok: false, error: "Erro interno do servidor" });
     }
 }
 

@@ -5,7 +5,7 @@ const auth = require('../middleware/authMiddleware');
 const adm = require('../middleware/adminMiddleware');
 
 router.get('/all', produtoController.listarTodos);
-router.get('/:id', produtoController.listarPorId);
+router.get('/:id/product', produtoController.listarPorId);
 
 router.post('/adm/createProd', auth, adm, produtoController.create);
 router.put('/adm/:id/updateProd', auth, adm, produtoController.update);

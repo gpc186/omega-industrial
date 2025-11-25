@@ -4,15 +4,15 @@ async function add(req, res) {
     const userId = req.user.id
     const { productId, quantity } = req.body;
     const quantidade = Number(quantity) > 0 ? Number(quantity) : 1;
-    if (!productId) return res.status(400).json({ message: "ID do produto é obrigatória!" });
+    if (!productId) return res.status(400).json({ ok: false, error: "ID do produto é obrigatória!" });
 
     try {
         const result = await CartItem.add(userId, productId, quantidade);
 
-        return res.json({ ok: true, result })
+        return res.json({ ok: true, message: "Produto adicionado com sucesso!", result })
     } catch (error) {
         console.error(error);
-        return res.status(500).json({ message: "Erro interno do servidor!" });
+        return res.status(500).json({ ok: false, error: "Erro interno do servidor!" });
     }
 };
 
@@ -21,10 +21,10 @@ async function list(req, res) {
         const userId = req.user.id;
         const cart = await CartItem.findByUser(userId);
 
-        return res.status(200).json({ ok: true, cart })
+        return res.status(200).json({ ok: true, message: "Listagem do carrinho completa!", cart })
     } catch (error) {
         console.error(error);
-        return res.status(500).json({ message: "Erro interno do servidor!" });
+        return res.status(500).json({ ok: false, error: "Erro interno do servidor!" });
     }
 }
 
@@ -40,7 +40,7 @@ async function update(req, res) {
 
     } catch (error) {
         console.error(error);
-        return res.status(500).json({ message: "Erro interno do servidor!" });
+        return res.status(500).json({ ok: false, error: "Erro interno do servidor!" });
     }
 }
 
@@ -49,23 +49,23 @@ async function remove(req, res) {
 
         const remover = await CartItem.remove(req.user.id, req.params.id);
 
-        if (!remover) return res.status(404).json({ message: "Produto não encontrado!" });
+        if (!remover) return res.status(404).json({ ok: false, error: "Produto não encontrado!" });
 
-        return res.json({ ok: true, remover })
+        return res.json({ ok: true, message: "Removido com sucesso!", remover })
     } catch (error) {
         console.error(error);
-        return res.status(500).json({ message: "Erro interno do servidor!" });
+        return res.status(500).json({ ok: false, error: "Erro interno do servidor!" });
     }
 }
 
 async function total(req, res) {
     const total = await CartItem.getTotal(req.user.id);
-    res.json({ ok: true, total });
+    res.json({ ok: true, message: "Total com sucesso!", total });
 }
 
 async function count(req, res) {
     const count = await CartItem.count(req.user.id);
-    res.json({ ok: true, count });
+    res.json({ ok: true, message: "Contado com sucesso!", count });
 }
 
 module.exports = { add, list, update, remove, total, count }
