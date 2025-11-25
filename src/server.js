@@ -12,11 +12,11 @@ require('dotenv').config();
 
 app.use(express.json());
 
-app.use('/auth', authRoute);
-app.use('/produto', produtoRoute);
-app.use('/category', categoryRoute);
-app.use('/cart', cartRoute);
-app.use('/orders', orderRoute);
+app.use('/api/auth', authRoute);
+app.use('/api/product', produtoRoute);
+app.use('/api/category', categoryRoute);
+app.use('/api/cart', cartRoute);
+app.use('/api/orders', orderRoute);
 
 
 app.get('/', (req, res)=>{
