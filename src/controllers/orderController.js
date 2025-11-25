@@ -25,7 +25,7 @@ async function createOrder(req, res) {
 
         const compra_id = await Order.create(userId, order_numero, total_preco, items, req.body.notes || null);
 
-        return res.status(201).json({ message: "Pedido criado com sucesso!", compra_id, order_numero, total_preco });
+        return res.status(201).json({ ok: true, message: "Pedido criado com sucesso!", compra_id, order_numero, total_preco });
     } catch (error) {
         console.error(error);
         return res.status(500).json({ message: "Erro interno do servidor" });
@@ -42,7 +42,7 @@ async function getOrderById(req, res) {
 
         if (order.user_id !== req.user.id && req.user.role !== "adm") return res.status(403).json({ message: "Você não pode acessar!" });
 
-        return res.status(200).json({ order });
+        return res.status(200).json({ ok: true, order });
     } catch (error) {
         console.error(error);
         return res.status(500).json({ message: "Erro interno do servidor" });
@@ -57,7 +57,7 @@ async function getMyOrders(req, res) {
 
         if (pedidos.length === 0) return res.status(404).json({ message: "Nenhum pedido ainda foi feito" });
 
-        return res.status(200).json({ pedidos });
+        return res.status(200).json({ ok: true, pedidos });
     } catch (error) {
         console.error(error);
         return res.status(500).json({ message: "Erro interno do servidor" });
@@ -68,7 +68,7 @@ async function listAllOrders(req, res) {
     try {
         const pedidos = await Order.findAll();
 
-        return res.status(200).json({ pedidos })
+        return res.status(200).json({ ok: true, pedidos })
     } catch (error) {
         console.error(error);
         return res.status(500).json({ message: "Erro interno do servidor" });
@@ -85,7 +85,7 @@ async function updateOrderstatus(req, res) {
 
         const pedidoAtualizado = await Order.updateStatus(id, status);
 
-        return res.status(200).json({ pedidoAtualizado })
+        return res.status(200).json({ ok: true, pedidoAtualizado })
     } catch (error) {
         console.error(error);
         return res.status(500).json({ message: "Erro interno do servidor" });

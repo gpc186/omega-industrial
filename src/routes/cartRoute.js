@@ -5,7 +5,7 @@ const auth = require('../middleware/authMiddleware');
 const CartController = require('../controllers/cartController');
 
 router.post('/add', auth, CartController.add);
-router.get('/', auth, CartController.list);
+router.get('/list', auth, CartController.list);
 router.put('/:id/updateCart', auth, CartController.update);
 router.delete('/:id', auth, CartController.remove);
 router.get('/total', auth, CartController.total);

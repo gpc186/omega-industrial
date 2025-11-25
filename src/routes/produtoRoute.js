@@ -4,7 +4,7 @@ const produtoController = require('../controllers/produtoController');
 const auth = require('../middleware/authMiddleware');
 const adm = require('../middleware/adminMiddleware');
 
-router.get('/', produtoController.listarTodos);
+router.get('/all', produtoController.listarTodos);
 router.get('/:id', produtoController.listarPorId);
 
 router.post('/adm/createProd', auth, adm, produtoController.create);

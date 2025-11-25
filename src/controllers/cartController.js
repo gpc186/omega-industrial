@@ -9,7 +9,7 @@ async function add(req, res) {
     try {
         const result = await CartItem.add(userId, productId, quantidade);
 
-        return res.json({ result })
+        return res.json({ ok: true, result })
     } catch (error) {
         console.error(error);
         return res.status(500).json({ message: "Erro interno do servidor!" });
@@ -21,7 +21,7 @@ async function list(req, res) {
         const userId = req.user.id;
         const cart = await CartItem.findByUser(userId);
 
-        return res.status(200).json({ cart })
+        return res.status(200).json({ ok: true, cart })
     } catch (error) {
         console.error(error);
         return res.status(500).json({ message: "Erro interno do servidor!" });
@@ -36,7 +36,7 @@ async function update(req, res) {
 
         await CartItem.updateQuantity(userId, productId, quantity);
 
-        return res.json({ message: "update com sucesso!" })
+        return res.json({ ok: true, message: "update com sucesso!" })
 
     } catch (error) {
         console.error(error);
@@ -47,11 +47,11 @@ async function update(req, res) {
 async function remove(req, res) {
     try {
 
-        const ok = await CartItem.remove(req.user.id, req.params.id);
+        const remover = await CartItem.remove(req.user.id, req.params.id);
 
-        if (!ok) return res.status(404).json({ message: "Produto não encontrado!" });
+        if (!remover) return res.status(404).json({ message: "Produto não encontrado!" });
 
-        return res.json({ ok })
+        return res.json({ ok: true, remover })
     } catch (error) {
         console.error(error);
         return res.status(500).json({ message: "Erro interno do servidor!" });
@@ -60,12 +60,12 @@ async function remove(req, res) {
 
 async function total(req, res) {
     const total = await CartItem.getTotal(req.user.id);
-    res.json({ total });
+    res.json({ ok: true, total });
 }
 
 async function count(req, res) {
     const count = await CartItem.count(req.user.id);
-    res.json({ count });
+    res.json({ ok: true, count });
 }
 
 module.exports = { add, list, update, remove, total, count }
