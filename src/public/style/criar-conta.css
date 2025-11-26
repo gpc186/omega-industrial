@@ -27,6 +27,10 @@ p {
     margin: 0;
 }
 
+/* =============================== */
+/*   HEADER / NAV                  */
+/* =============================== */
+
 header {
     background-color: #004e64;
     width: 100%;
@@ -54,8 +58,6 @@ nav {
     gap: 2%;
 }
 
-/* LOGO */
-
 .nav-img {
     height: 100%;
     width: 29%;
@@ -64,8 +66,6 @@ nav {
     justify-content: start;
     padding-left: 1dvw;
 }
-
-/* NAVEGAÇÃO */
 
 .nav-navegacao {
     height: 100%;
@@ -102,13 +102,6 @@ nav {
     letter-spacing: 0.5px;
 }
 
-.nav-btn-container {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    width: 100%;
-}
-
 .nav-btn-entrar:hover {
     background: #F7931E;
     color: white;
@@ -117,7 +110,9 @@ nav {
     box-shadow: 0 4px 12px rgba(247, 147, 30, 0.4);
 }
 
-/* FORM CONTAINER */
+/* =============================== */
+/*   FORM WRAPPER                  */
+/* =============================== */
 
 .caixa {
     margin-top: 130px;
@@ -152,7 +147,9 @@ nav {
     text-align: center;
 }
 
-/* INPUT LAYOUT */
+/* =============================== */
+/*   INPUTS – IGUAL AO LOGIN       */
+/* =============================== */
 
 .linha {
     display: flex;
@@ -169,32 +166,49 @@ nav {
 label {
     font-weight: 600;
     margin-bottom: 6px;
+    color: #2F2F2F;
 }
 
 input {
-    padding: 14px;
-    border-radius: 8px;
-    border: 2px solid #dadada;
-    background: #f5f7fa;
-    transition: 0.2s;
-    font-size: 15px;
     width: 100%;
+    padding: 14px 16px;
+    border: 2px solid #DADADA;
+    border-radius: 8px;
+    font-size: 15px;
+    color: #2F2F2F;
+    transition: all 0.3s ease;
+    background: #F5F7FA;
 }
 
 input:focus {
-    background: #fff;
+    outline: none;
     border-color: #335c67b7;
+    background: white;
 }
 
-/* SENHA */
+input:hover:not(:focus) {
+    border-color: #DADADA;
+}
+
+input::placeholder {
+    color: #999;
+}
+
+/* =============================== */
+/*   SENHA (OLHO) – IGUAL LOGIN    */
+/* =============================== */
 
 .senha {
     position: relative;
 }
 
+.senha input {
+    padding-right: 50px;
+}
+
 .button-imagem {
     position: absolute;
-    right: 14px;
+    right: 12px;
     top: 50%;
     transform: translateY(-50%);
     background: none;
@@ -205,28 +219,50 @@ input:focus {
 .eye-icon {
     width: 24px;
     height: 24px;
+    position: relative;
     display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .eye-icon svg {
     width: 70%;
     height: 70%;
-    stroke: #335c67;
+    stroke: #335C67;
     fill: none;
     stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+/* ANIMAÇÃO */
+.eye-slash {
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    transform-origin: center;
 }
 
 .eye-open .eye-slash {
     opacity: 0;
-    transform: scale(0.2) translateY(-5px);
+    transform: translateY(-10px) scale(0.8);
+}
+
+.eye-closed .eye-slash {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+.eye-pupil {
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .eye-closed .eye-pupil {
-    opacity: 0.5;
     transform: scale(0.5);
+    opacity: 0.5;
 }
 
-/* BOTÃO */
+/* =============================== */
+/*           BOTÃO                */
+/* =============================== */
 
 .enviar-btn {
     width: 100%;
@@ -239,13 +275,16 @@ input:focus {
     cursor: pointer;
     background: linear-gradient(135deg, #f7931e, #e88516);
     color: white;
+    transition: all 0.3s ease;
 }
 
 .enviar-btn:hover {
     background: linear-gradient(135deg, #e88516, #d97a12);
 }
 
-/* DIVISÃO */
+/* =============================== */
+/*      DIVISOR, LINKS            */
+/* =============================== */
 
 .divisao {
     display: flex;
@@ -271,8 +310,6 @@ input:focus {
     margin-left: 16px;
 }
 
-/* LINK CRIAR CONTA */
-
 .criar-conta {
     text-align: center;
 }
@@ -296,56 +333,58 @@ input:focus {
 }
 
 /* =============================== */
-/*      intl-tel-input (NOVO)      */
+/*  intl-tel-input estilizado      */
 /* =============================== */
 
 .iti {
     width: 100%;
 }
 
-/* O INPUT DO TELEFONE TEM QUE PARECER O SEU INPUT NORMAL */
 .iti--allow-dropdown input.iti__tel-input {
     width: 100%;
-    padding: 14px;
+    padding: 14px 16px;
     border-radius: 8px;
-    border: 2px solid #dadada !important;
-    background: #f5f7fa;
+    border: 2px solid #DADADA !important;
+    background: #F5F7FA;
     font-size: 15px;
-    transition: 0.2s;
+    transition: all 0.3s ease;
+    color: #2F2F2F;
 }
 
 .iti--allow-dropdown input.iti__tel-input:focus {
-    background: #fff;
+    background: white;
     border-color: #335c67b7 !important;
 }
 
-/* Bandeira */
+.iti--allow-dropdown input.iti__tel-input:hover:not(:focus) {
+    border-color: #DADADA !important;
+}
+
 .iti__selected-flag {
     padding: 0 10px;
-    background: #f5f7fa;
+    background: #F5F7FA;
     border-radius: 8px 0 0 8px;
 }
 
-/* Dropdown list */
 .iti__country-list {
     background: white;
-    border: 1px solid #ccc;
+    border: 1px solid #dadada;
     border-radius: 8px;
     width: 300px;
 }
 
-/* Dropdown items */
 .iti__country {
     padding: 8px 10px;
     font-size: 15px;
 }
 
-/* Hover */
 .iti__country:hover {
     background: #e6f7ff;
 }
 
-/* RESPONSIVIDADE - IPHONE SE (375px) */
+/* =============================== */
+/*   RESPONSIVIDADE IPHONE SE      */
+/* =============================== */
 
 @media (max-width: 420px) {
     header nav {
