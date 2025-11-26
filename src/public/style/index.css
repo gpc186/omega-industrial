@@ -20,7 +20,7 @@ p {
 /* ------------ Header ------------ */
 
 header {
-    background-color: #004e64be;
+    background-color: #004e64;
     width: 100%;
     display: flex;
     align-items: center;
@@ -281,7 +281,7 @@ nav {
 }
 
 .hero-carousel-content {
-    background-color: rgba(0, 0, 0, 0.2);
+    background-color: rgba(0, 0, 0, 0.3);
     position: absolute;
     top: 0;
     left: 0;
@@ -469,6 +469,7 @@ nav {
 
 .apresentacao-title {
     font-size: 3.2rem;
+    margin: 0;
 }
 
 .apresentacao-highlight {
@@ -1017,7 +1018,7 @@ nav {
 
 .faq-container {
     max-width: 100%;
-    background-color: white;
+    background-color: #fcfcfc;
     padding: 5% 15%;
     border-radius: 8px;
 }
