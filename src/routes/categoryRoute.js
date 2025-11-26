@@ -4,12 +4,12 @@ const categoryController = require('../controllers/categoryController');
 const auth = require('../middleware/authMiddleware');
 const adm = require('../middleware/adminMiddleware');
 
-router.get('/', categoryController.listarTodos);
-router.get('/:id', categoryController.listarPorId);
-router.get('/:id/products', categoryController.listarPorCategoria)
+router.get('/getAll', categoryController.listarTodos);
+router.get('/:id/produto', categoryController.listarPorId);
+router.get('/:id/category', categoryController.listarPorCategoria)
 
-router.post('/', auth, adm, categoryController.create);
-router.put('/:id', auth, adm, categoryController.update);
-router.delete('/:id', auth, adm, categoryController.remove);
+router.post('/adm/createCat', auth, adm, categoryController.create);
+router.put('/adm/:id/updateCat', auth, adm, categoryController.update);
+router.delete('/adm/:id/removeCat', auth, adm, categoryController.remove);
 
 module.exports = router

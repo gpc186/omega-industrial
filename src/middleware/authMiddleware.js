@@ -2,8 +2,8 @@ const jwt = require('jsonwebtoken');
 
 function authMiddleware(req, res, next) {
     const authHeader = req.headers.authorization;
-    if (!authHeader){
-        return res.status(401).json({message: "Não possui autenticação!"});
+    if (!authHeader) {
+        return res.status(401).json({ message: "Não possui autenticação!" });
     };
 
     const token = authHeader.split(" ")[1];
@@ -15,7 +15,7 @@ function authMiddleware(req, res, next) {
 
         return next()
     } catch (error) {
-        return res.status(401).json({message: "token invalido!"})
+        return res.status(401).json({ message: "token invalido!" })
     }
 }
 
