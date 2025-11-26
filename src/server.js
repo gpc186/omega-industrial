@@ -10,6 +10,8 @@ require('dotenv').config();
 
 // app.use(errorHandler);
 
+app.use('/uploads', express.static('uploads'));
+
 app.use(express.json());
 
 app.use('/api/auth', authRoute);
