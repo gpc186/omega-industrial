@@ -7,7 +7,7 @@
     <title>OmegaPetro - Home</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-    <link rel="stylesheet" href="/src/public/style/index.css">
+    <link rel="stylesheet" href="../style/index.css">
 </head>
 
 <body>
@@ -18,9 +18,9 @@
         <nav>
             <div class="nav-content">
                 <div class="nav-img">
-                    <img class="nav-img-logo" src="/src/public/assets/img/logo.png">
+                    <img class="nav-img-logo" src="../assets/img/logo.png" alt="OmegaPetro Logo">
                 </div>
-                <div class="nav-navegacao">
+                <div class="nav-navegacao" id="navMenu">
                     <a href="">
                         <p>Produtos</p>
                     </a>
@@ -32,18 +32,17 @@
                     </a>
                 </div>
             </div>
-            <div class="nav-content">
-                <div class="nav-pesquisa">
-                    <div class="pesquisa">
-                        <input placeholder="Pesquisar" type="text">
-                        <img src="/src/public/assets/img/lupa.png" alt="">
-                    </div>
-                </div>
+            <div class="nav-content" style="justify-content: end;">
                 <div class="nav-login">
                     <a href="">
-                        <img src="/src/public/assets/img/login-icon.png">
                         <p>Login</p>
+                        <img src="../assets/img/login-icon.png" alt="Login Icon">
                     </a>
+                </div>
+                <div class="hamburger" id="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
                 </div>
             </div>
         </nav>
@@ -54,7 +53,7 @@
     <div id="carouselExampleFade" class="carousel slide carousel-fade">
         <div class="carousel-inner">
             <div class="carousel-item active hero-carousel">
-                <img src="/src/public/assets/img/Listas_MaioresEmpresasPrivadasEUA_231120_Getty.jpg"
+                <img src="../assets/img/Listas_MaioresEmpresasPrivadasEUA_231120_Getty.jpg"
                     class="d-block w-100 hero-carousel-img">
                 <div class="hero-carousel-content">
                     <div class="hero-content-box">
@@ -65,14 +64,14 @@
                     </div>
                 </div>
             </div>
-            <div class="carousel-item active hero-carousel">
-                <img src="/src/public/assets/img/Listas_MaioresEmpresasPrivadasEUA_231120_Getty.jpg"
+            <div class="carousel-item hero-carousel">
+                <img src="../assets/img/Listas_MaioresEmpresasPrivadasEUA_231120_Getty.jpg"
                     class="d-block w-100 hero-carousel-img">
                 <div class="hero-carousel-content">
                     <div class="hero-content-box">
                         <h3>Soluções Essenciais que Transformam sua Indústria</h3>
-                        <h5>Transformamos recursos naturais em produtos petroquímicos 
-de alta qualidade para impulsionar o crescimento do seu negócio.</h5>
+                        <h5>Transformamos recursos naturais em produtos petroquímicos
+                            de alta qualidade para impulsionar o crescimento do seu negócio.</h5>
                         <a href="" class="hero-content-button" style="width: 10dvw;">Conheça a Empresa</a>
                     </div>
                 </div>
@@ -99,222 +98,475 @@ de alta qualidade para impulsionar o crescimento do seu negócio.</h5>
                 e gás exigem. Nossa expertise garante a máxima segurança e eficiência.</p>
             <button class="apresentacao-btn">Explore o catálogo</button>
         </div>
-        <div class="apresentacao-carousel-wrapper">
-            <div id="carouselExampleSlidesOnly" class="carousel slide carousel-fade apresentacao-carousel"
-                data-bs-ride="carousel">
-                <div class="carousel-inner">
-                    <div class="carousel-item active apresentacao-carousel-item">
-                        <img src="/src/public/assets/img/OMEGA INDUSTRIAL (3).png"
-                            class="d-block w-100 apresentacao-carousel-img">
-                        <div class="apresentacao-carousel-overlay">
-                            <div class="apresentacao-carousel-card">
-                                <h5>Segurança no Local de Trabalho</h5>
-                                <br>
-                                <p>Compromisso inegociável com a segurança no local de trabalho. Nossos produtos e
-                                    práticas são certificados para proteger vidas e ativos, atendendo e superando as
-                                    Normas Regulamentadoras (NRs) e padrões globais.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <img src="..." class="d-block w-100" alt="...">
-                    </div>
-                    <div class="carousel-item">
-                        <img src="..." class="d-block w-100" alt="...">
-                    </div>
-                </div>
-            </div>
+        <div class="apresentacao-image-wrapper">
+            <img src="../assets/img/OMEGA INDUSTRIAL (3).png" alt="Omega Petro Industrial" class="apresentacao-image">
         </div>
     </div>
 
     <!-- Feedback -->
 
-    <div class="d-flex flex-column justify-content-center"
-        style="background-color: #fcfcfc; width: 100%; height: auto; display: flex; justify-content: center; padding: 5% 15%; gap: 10%;">
+    <div class="feedback-section">
         <h1 class="mb-5">Feedback</h1>
-        <div class="column-gap-5" style="display: flex; align-items: center;">
-            <div class="card rounded-4 border border-0" style="width: 28rem; height: 24rem; "
-                style="background-color: #f4f4f4;">
-                <img src="/src/public/assets/img/Listas_MaioresEmpresasPrivadasEUA_231120_Getty.jpg"
-                    class="card-img-top rounded-top-4" style="height: 12rem;">
-                <div class="card-body rounded-bottom-4" style="background-color: #f4f4f4;">
-                    <img src="/src/public/assets/img/OMEGA INDUSTRIAL (5).png" style="height: 2rem;">
-                    <p class="card-text px-3">Some quick example text to build on the card title and make up the bulk of
-                        the
-                        card’s content.</p>
+        <div class="feedback-cards-container">
+            <div class="card rounded-4 border-0 feedback-card">
+                <img src="../assets/img/Listas_MaioresEmpresasPrivadasEUA_231120_Getty.jpg"
+                    class="card-img-top rounded-top-4 feedback-card-img">
+                <div class="card-body rounded-bottom-4 feedback-card-body">
+                    <img src="../assets/img/OMEGA INDUSTRIAL (5).png" class="feedback-card-logo">
+                    <p class="feedback-card-text">Some quick example text to build on the card title and make up the
+                        bulk of
+                        the card's content.</p>
                     <div class="text-end pt-3">
-                        <a href="" style="color: #004e64; font-size: 1rem; font-weight: bold;">AzkoNobel</a>
+                        <a href="" class="feedback-card-company">AzkoNobel</a>
                     </div>
                 </div>
             </div>
-            <div class="card rounded-4 border border-0" style="width: 28rem; height: 24rem; "
-                style="background-color: #f4f4f4;">
-                <img src="/src/public/assets/img/Listas_MaioresEmpresasPrivadasEUA_231120_Getty.jpg"
-                    class="card-img-top rounded-top-4" style="height: 12rem;">
-                <div class="card-body rounded-bottom-4" style="background-color: #f4f4f4;">
-                    <img src="/src/public/assets/img/OMEGA INDUSTRIAL (5).png" style="height: 2rem;">
-                    <p class="card-text px-3">Some quick example text to build on the card title and make up the bulk of
-                        the
-                        card’s content.</p>
+            <div class="card rounded-4 border-0 feedback-card">
+                <img src="../assets/img/Listas_MaioresEmpresasPrivadasEUA_231120_Getty.jpg"
+                    class="card-img-top rounded-top-4 feedback-card-img">
+                <div class="card-body rounded-bottom-4 feedback-card-body">
+                    <img src="../assets/img/OMEGA INDUSTRIAL (5).png" class="feedback-card-logo">
+                    <p class="feedback-card-text">Some quick example text to build on the card title and make up the
+                        bulk of
+                        the card's content.</p>
                     <div class="text-end pt-3">
-                        <a href="" style="color: #004e64; font-size: 1rem; font-weight: bold;">AzkoNobel</a>
+                        <a href="" class="feedback-card-company">AzkoNobel</a>
                     </div>
                 </div>
             </div>
-            <div class="card rounded-4 border border-0" style="width: 28rem; height: 24rem; "
-                style="background-color: #f4f4f4;">
-                <img src="/src/public/assets/img/Listas_MaioresEmpresasPrivadasEUA_231120_Getty.jpg"
-                    class="card-img-top rounded-top-4" style="height: 12rem;">
-                <div class="card-body rounded-bottom-4" style="background-color: #f4f4f4;">
-                    <img src="/src/public/assets/img/OMEGA INDUSTRIAL (5).png" style="height: 2rem;">
-                    <p class="card-text px-3">Some quick example text to build on the card title and make up the bulk of
-                        the
-                        card’s content.</p>
+            <div class="card rounded-4 border-0 feedback-card">
+                <img src="../assets/img/Listas_MaioresEmpresasPrivadasEUA_231120_Getty.jpg"
+                    class="card-img-top rounded-top-4 feedback-card-img">
+                <div class="card-body rounded-bottom-4 feedback-card-body">
+                    <img src="../assets/img/OMEGA INDUSTRIAL (5).png" class="feedback-card-logo">
+                    <p class="feedback-card-text">Some quick example text to build on the card title and make up the
+                        bulk of
+                        the card's content.</p>
                     <div class="text-end pt-3">
-                        <a href="" style="color: #004e64; font-size: 1rem; font-weight: bold;">AzkoNobel</a>
+                        <a href="" class="feedback-card-company">AzkoNobel</a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Lançamentos -->
+    <!-- Seção de Lançamentos -->
+    <div class="lancamentos-section">
+        <h1>Lançamentos</h1>
 
-    <div class="d-flex flex-column justify-content-center"
-        style="background-color: #ffffff; width: 100%; height: auto; display: flex; justify-content: center; padding: 5% 15%; gap: 10%;">
+        <!-- Container do Carousel -->
+        <div id="lancamentos-carousel-container">
+            <!-- O JavaScript vai gerar o conteúdo aqui -->
+        </div>
 
-
-        <h1 class="mb-5">Lançamentos</h1>
-        <div style="background-color: aquamarine; display: flex; overflow-x: auto;">
-            <button></button>
-            <div style="display: flex; width: 200%;">
-                <div class="lancamentos-card">
-                    <img src="/src/public/assets/img/Listas_MaioresEmpresasPrivadasEUA_231120_Getty.jpg"
-                        class=" lancamentos-card-img">
-                    <div class="lancamentos-card-titulo" style="background-color: rgba(0, 0, 0, 0.2);">
-                        <h5 class="fs-4 fw-bolder">Card title</h5>
-                    </div>
-                </div>
-                <div class="lancamentos-card">
-                    <img src="/src/public/assets/img/Listas_MaioresEmpresasPrivadasEUA_231120_Getty.jpg"
-                        class=" lancamentos-card-img">
-                    <div class="lancamentos-card-titulo" style="background-color: rgba(0, 0, 0, 0.2);">
-                        <h5 class="fs-4 fw-bolder">Card title</h5>
-                    </div>
-                </div>
-                <div class="lancamentos-card">
-                    <img src="/src/public/assets/img/Listas_MaioresEmpresasPrivadasEUA_231120_Getty.jpg"
-                        class=" lancamentos-card-img">
-                    <div class="lancamentos-card-titulo" style="background-color: rgba(0, 0, 0, 0.2);">
-                        <h5 class="fs-4 fw-bolder">Card title</h5>
-                    </div>
-                </div>
-                <div class="lancamentos-card">
-                    <img src="/src/public/assets/img/Listas_MaioresEmpresasPrivadasEUA_231120_Getty.jpg"
-                        class=" lancamentos-card-img">
-                    <div class="lancamentos-card-titulo" style="background-color: rgba(0, 0, 0, 0.2);">
-                        <h5 class="fs-4 fw-bolder">Card title</h5>
-                    </div>
-                </div>
-                <div class="lancamentos-card">
-                    <img src="/src/public/assets/img/Listas_MaioresEmpresasPrivadasEUA_231120_Getty.jpg"
-                        class=" lancamentos-card-img">
-                    <div class="lancamentos-card-titulo" style="background-color: rgba(0, 0, 0, 0.2);">
-                        <h5 class="fs-4 fw-bolder">Card title</h5>
-                    </div>
-                </div>
-                <div class="lancamentos-card">
-                    <img src="/src/public/assets/img/Listas_MaioresEmpresasPrivadasEUA_231120_Getty.jpg"
-                        class=" lancamentos-card-img">
-                    <div class="lancamentos-card-titulo" style="background-color: rgba(0, 0, 0, 0.2);">
-                        <h5 class="fs-4 fw-bolder">Card title</h5>
-                    </div>
-                </div>
-                <div class="lancamentos-card">
-                    <img src="/src/public/assets/img/Listas_MaioresEmpresasPrivadasEUA_231120_Getty.jpg"
-                        class=" lancamentos-card-img">
-                    <div class="lancamentos-card-titulo" style="background-color: rgba(0, 0, 0, 0.2);">
-                        <h5 class="fs-4 fw-bolder">Card title</h5>
-                    </div>
-                </div>
-                <div class="lancamentos-card">
-                    <img src="/src/public/assets/img/Listas_MaioresEmpresasPrivadasEUA_231120_Getty.jpg"
-                        class=" lancamentos-card-img">
-                    <div class="lancamentos-card-titulo" style="background-color: rgba(0, 0, 0, 0.2);">
-                        <h5 class="fs-4 fw-bolder">Card title</h5>
-                    </div>
-                </div>
-                <div class="lancamentos-card">
-                    <img src="/src/public/assets/img/Listas_MaioresEmpresasPrivadasEUA_231120_Getty.jpg"
-                        class=" lancamentos-card-img">
-                    <div class="lancamentos-card-titulo" style="background-color: rgba(0, 0, 0, 0.2);">
-                        <h5 class="fs-4 fw-bolder">Card title</h5>
-                    </div>
-                </div>
-                <div class="lancamentos-card">
-                    <img src="/src/public/assets/img/Listas_MaioresEmpresasPrivadasEUA_231120_Getty.jpg"
-                        class=" lancamentos-card-img">
-                    <div class="lancamentos-card-titulo" style="background-color: rgba(0, 0, 0, 0.2);">
-                        <h5 class="fs-4 fw-bolder">Card title</h5>
-                    </div>
-                </div>
-                <div class="lancamentos-card">
-                    <img src="/src/public/assets/img/Listas_MaioresEmpresasPrivadasEUA_231120_Getty.jpg"
-                        class=" lancamentos-card-img">
-                    <div class="lancamentos-card-titulo" style="background-color: rgba(0, 0, 0, 0.2);">
-                        <h5 class="fs-4 fw-bolder">Card title</h5>
-                    </div>
-                </div>
-                <div class="lancamentos-card">
-                    <img src="/src/public/assets/img/Listas_MaioresEmpresasPrivadasEUA_231120_Getty.jpg"
-                        class=" lancamentos-card-img">
-                    <div class="lancamentos-card-titulo" style="background-color: rgba(0, 0, 0, 0.2);">
-                        <h5 class="fs-4 fw-bolder">Card title</h5>
-                    </div>
-                </div>
-                <div class="lancamentos-card">
-                    <img src="/src/public/assets/img/Listas_MaioresEmpresasPrivadasEUA_231120_Getty.jpg"
-                        class=" lancamentos-card-img">
-                    <div class="lancamentos-card-titulo" style="background-color: rgba(0, 0, 0, 0.2);">
-                        <h5 class="fs-4 fw-bolder">Card title</h5>
-                    </div>
-                </div>
-            </div>
-            <button></button>
+        <!-- Indicadores -->
+        <div id="lancamentos-indicators">
+            <!-- O JavaScript vai gerar os indicadores aqui -->
         </div>
     </div>
 
     <!-- FAQ -->
 
-    <div class="d-flex flex-column justify-content-center"
-        style="background-color: #fcfcfc; width: 100%; height: auto; display: flex; justify-content: center; padding: 5% 15%; gap: 10%;">
+    <div class="faq-container">
+        <h1>FAQ</h1>
 
-        <h1 class="mb-5">FAQ</h1>
-        <div>
-            <div class="">
-                <h5>adbpfbosnfpobnsfponsfoç</h5>
-                <button></button>
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleAnswer(this)">
+                <h3>Os equipamentos da Omega Petro atendem às normas de segurança e qualidade do setor petroquímico
+                    (NRs, ISOs, etc.)?</h3>
+                <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M6 9l6 6 6-6" />
+                </svg>
             </div>
-            <hr>
-            <div class="">
-                <h5>adbpfbosnfpobnsfponsfoç</h5>
-                <button></button>
-            </div>
-            <hr>
-            <div class="">
-                <h5>adbpfbosnfpobnsfponsfoç</h5>
-                <button></button>
+            <div class="faq-answer">
+                <p>Sim, todos os nossos equipamentos são projetados e fabricados seguindo rigorosamente as normas
+                    regulamentadoras e certificações internacionais do setor petroquímico, incluindo ISOs e NRs
+                    aplicáveis.</p>
             </div>
         </div>
 
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleAnswer(this)">
+                <h3>Qual é a política de garantia e como funciona o suporte técnico para um cliente B2B?</h3>
+                <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M6 9l6 6 6-6" />
+                </svg>
+            </div>
+            <div class="faq-answer">
+                <p>Oferecemos uma garantia padrão de 11 meses contra defeitos de fabricação. Nosso suporte técnico é
+                    exclusivo e ágil, com uma equipe de engenheiros especializados pronta para atendimento imediato e
+                    consultoria técnica. Detalhes sobre o SLA (Service Level Agreement) de atendimento são definidos em
+                    contrato.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleAnswer(this)">
+                <h3>Como é feita a logística de entrega para grandes volumes ou equipamentos de grande porte?</h3>
+                <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M6 9l6 6 6-6" />
+                </svg>
+            </div>
+            <div class="faq-answer">
+                <p>Trabalhamos com parceiros logísticos especializados em cargas pesadas e de grande porte. Oferecemos
+                    soluções personalizadas incluindo transporte dedicado, seguro de carga, rastreamento em tempo real e
+                    equipe técnica para acompanhamento da instalação quando necessário.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleAnswer(this)">
+                <h3>É possível solicitar customizações nos equipamentos?</h3>
+                <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M6 9l6 6 6-6" />
+                </svg>
+            </div>
+            <div class="faq-answer">
+                <p>Sim, oferecemos soluções sob medida para atender às necessidades específicas de cada cliente. Nossa
+                    equipe de engenharia trabalha em conjunto com você para desenvolver equipamentos customizados que
+                    atendam perfeitamente aos requisitos do seu projeto.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleAnswer(this)">
+                <h3>Quais são os prazos de entrega para pedidos personalizados?</h3>
+                <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M6 9l6 6 6-6" />
+                </svg>
+            </div>
+            <div class="faq-answer">
+                <p>Os prazos variam de acordo com a complexidade e especificações do projeto. Após a aprovação do
+                    projeto técnico, fornecemos um cronograma detalhado. Em média, equipamentos customizados levam de 60
+                    a 120 dias para fabricação e entrega.</p>
+            </div>
+        </div>
 
     </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-newsletter">
+                <h2>Inscreva-se no<br>nosso <span class="newsletter-highlight">Newsletter</span></h2>
+            </div>
+            <div class="footer-form">
+                <p class="footer-subtitle">Conhecimento que Otimiza sua Operação</p>
+                <div class="newsletter-form">
+                    <input type="email" placeholder="E-mail" class="newsletter-input">
+                    <button class="newsletter-btn">Assinar Newsletter</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <div class="footer-logo">
+                <img src="../assets/img/logo.png" alt="OmegaPetro Logo">
+            </div>
+
+            <div class="footer-info">
+                <h3>Fale conosco</h3>
+                <p>Tel: (XX) XXXX-XXXX</p>
+                <p>E-mail: contato@omegapetro.com.br</p>
+                <p>Local: [Cidade, Estado]</p>
+            </div>
+
+            <div class="footer-nav">
+                <h3>Navegação</h3>
+                <a href="">Catálogo de Produtos</a>
+                <a href="">Contato</a>
+                <a href="">Política de Privacidade</a>
+                <a href="">Termos de Uso</a>
+            </div>
+        </div>
+
+        <div class="footer-copyright">
+            <p>© 2024 Omega Petro. Todos os direitos reservados.</p>
+        </div>
+    </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>
+    <script>
+        // ========== MENU HAMBÚRGUER ==========
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('navMenu');
+        const body = document.body;
 
-    <script src="/src/public/js/index.js"></script>
+        if (hamburger && navMenu) {
+            hamburger.addEventListener('click', () => {
+                hamburger.classList.toggle('active');
+                navMenu.classList.toggle('active');
+                body.classList.toggle('menu-open');
+            });
+
+            // Fechar menu ao clicar em um link
+            const navLinks = navMenu.querySelectorAll('a');
+            navLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    hamburger.classList.remove('active');
+                    navMenu.classList.remove('active');
+                    body.classList.remove('menu-open');
+                });
+            });
+
+            // Fechar menu ao clicar fora dele
+            document.addEventListener('click', (e) => {
+                if (!hamburger.contains(e.target) && !navMenu.contains(e.target)) {
+                    hamburger.classList.remove('active');
+                    navMenu.classList.remove('active');
+                    body.classList.remove('menu-open');
+                }
+            });
+        }
+
+
+
+
+
+
+        function toggleAnswer(element) {
+            const answer = element.nextElementSibling;
+            const arrow = element.querySelector('.arrow');
+
+            // Fecha todos os outros itens
+            document.querySelectorAll('.faq-answer').forEach(item => {
+                if (item !== answer) {
+                    item.classList.remove('active');
+                }
+            });
+
+            document.querySelectorAll('.arrow').forEach(item => {
+                if (item !== arrow) {
+                    item.classList.remove('active');
+                }
+            });
+
+            // Toggle do item clicado
+            answer.classList.toggle('active');
+            arrow.classList.toggle('active');
+        }
+
+
+
+
+        // Dados dos produtos de lançamento
+        const lancamentos = [
+            {
+                titulo: "Resina Epóxi Premium",
+                descricao: "Alta resistência química e térmica para aplicações industriais",
+                imagem: "../assets/img/Listas_MaioresEmpresasPrivadasEUA_231120_Getty.jpg"
+            },
+            {
+                titulo: "Catalisador Avançado",
+                descricao: "Otimização de processos petroquímicos com eficiência superior",
+                imagem: "../assets/img/Listas_MaioresEmpresasPrivadasEUA_231120_Getty.jpg"
+            },
+            {
+                titulo: "Aditivo Lubrificante",
+                descricao: "Redução de atrito e maior durabilidade em equipamentos",
+                imagem: "../assets/img/Listas_MaioresEmpresasPrivadasEUA_231120_Getty.jpg"
+            },
+            {
+                titulo: "Polímero Especial",
+                descricao: "Propriedades mecânicas excepcionais para indústria automotiva",
+                imagem: "../assets/img/Listas_MaioresEmpresasPrivadasEUA_231120_Getty.jpg"
+            },
+            {
+                titulo: "Solvente Industrial",
+                descricao: "Pureza garantida para processos de alta precisão",
+                imagem: "../assets/img/Listas_MaioresEmpresasPrivadasEUA_231120_Getty.jpg"
+            },
+            {
+                titulo: "Surfactante Premium",
+                descricao: "Máxima eficiência em aplicações de limpeza industrial",
+                imagem: "../assets/img/Listas_MaioresEmpresasPrivadasEUA_231120_Getty.jpg"
+            }
+        ];
+
+        class CarouselLancamentos {
+            constructor() {
+                this.currentIndex = 0;
+                this.cardsPerView = 3;
+                this.totalCards = lancamentos.length;
+                this.maxIndex = Math.max(0, this.totalCards - this.cardsPerView);
+
+                this.init();
+            }
+
+            init() {
+                this.renderCarousel();
+                this.setupEventListeners();
+                this.updateCarousel();
+            }
+
+            renderCarousel() {
+                const container = document.getElementById('lancamentos-carousel-container');
+                if (!container) return;
+
+                container.innerHTML = `
+            <button class="lancamentos-nav-btn" id="btn-prev" aria-label="Anterior">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M15 18l-6-6 6-6"/>
+                </svg>
+            </button>
+            
+            <div class="lancamentos-carousel-wrapper">
+                <div class="lancamentos-cards-track" id="cards-track">
+                    ${lancamentos.map((produto, index) => `
+                        <div class="lancamentos-card" data-index="${index}">
+                            <img src="${produto.imagem}" class="lancamentos-card-img" alt="${produto.titulo}">
+                            <div class="lancamentos-card-overlay">
+                                <h5 class="lancamentos-card-titulo">${produto.titulo}</h5>
+                                <p class="lancamentos-card-desc">${produto.descricao}</p>
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+            </div>
+            
+            <button class="lancamentos-nav-btn" id="btn-next" aria-label="Próximo">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M9 18l6-6-6-6"/>
+                </svg>
+            </button>
+        `;
+
+                // Adicionar indicadores
+                const indicatorsContainer = document.getElementById('lancamentos-indicators');
+                if (indicatorsContainer) {
+                    const numIndicators = Math.ceil(this.totalCards / this.cardsPerView);
+                    indicatorsContainer.innerHTML = Array.from({ length: numIndicators }, (_, i) =>
+                        `<span class="indicador ${i === 0 ? 'ativo' : ''}" data-index="${i}"></span>`
+                    ).join('');
+                }
+            }
+
+            setupEventListeners() {
+                const btnPrev = document.getElementById('btn-prev');
+                const btnNext = document.getElementById('btn-next');
+
+                if (btnPrev) btnPrev.addEventListener('click', () => this.prev());
+                if (btnNext) btnNext.addEventListener('click', () => this.next());
+
+                // Indicadores
+                const indicators = document.querySelectorAll('.indicador');
+                indicators.forEach(indicator => {
+                    indicator.addEventListener('click', (e) => {
+                        const index = parseInt(e.target.dataset.index);
+                        this.goToSlide(index * this.cardsPerView);
+                    });
+                });
+
+                // Touch events para mobile
+                const track = document.getElementById('cards-track');
+                if (track) {
+                    let startX = 0;
+                    let isDragging = false;
+
+                    track.addEventListener('touchstart', (e) => {
+                        startX = e.touches[0].clientX;
+                        isDragging = true;
+                    });
+
+                    track.addEventListener('touchmove', (e) => {
+                        if (!isDragging) return;
+                        e.preventDefault();
+                    });
+
+                    track.addEventListener('touchend', (e) => {
+                        if (!isDragging) return;
+                        const endX = e.changedTouches[0].clientX;
+                        const diff = startX - endX;
+
+                        if (Math.abs(diff) > 50) {
+                            if (diff > 0) {
+                                this.next();
+                            } else {
+                                this.prev();
+                            }
+                        }
+                        isDragging = false;
+                    });
+                }
+
+                // Responsividade
+                window.addEventListener('resize', () => this.handleResize());
+            }
+
+            updateCarousel() {
+                const track = document.getElementById('cards-track');
+                const btnPrev = document.getElementById('btn-prev');
+                const btnNext = document.getElementById('btn-next');
+
+                if (!track) return;
+
+                // Calcular o deslocamento
+                const cardWidth = 100 / this.cardsPerView;
+                const offset = -(this.currentIndex * cardWidth);
+
+                track.style.transform = `translateX(${offset}%)`;
+
+                // Atualizar botões
+                if (btnPrev) btnPrev.disabled = this.currentIndex === 0;
+                if (btnNext) btnNext.disabled = this.currentIndex >= this.maxIndex;
+
+                // Atualizar indicadores
+                const currentIndicator = Math.floor(this.currentIndex / this.cardsPerView);
+                document.querySelectorAll('.indicador').forEach((indicator, index) => {
+                    indicator.classList.toggle('ativo', index === currentIndicator);
+                });
+            }
+
+            next() {
+                if (this.currentIndex < this.maxIndex) {
+                    this.currentIndex = Math.min(this.currentIndex + this.cardsPerView, this.maxIndex);
+                    this.updateCarousel();
+                }
+            }
+
+            prev() {
+                if (this.currentIndex > 0) {
+                    this.currentIndex = Math.max(this.currentIndex - this.cardsPerView, 0);
+                    this.updateCarousel();
+                }
+            }
+
+            goToSlide(index) {
+                this.currentIndex = Math.min(Math.max(0, index), this.maxIndex);
+                this.updateCarousel();
+            }
+
+            handleResize() {
+                const width = window.innerWidth;
+
+                // Ajustar cards por visualização baseado no tamanho da tela
+                if (width < 768) {
+                    this.cardsPerView = 1;
+                } else if (width < 1024) {
+                    this.cardsPerView = 2;
+                } else {
+                    this.cardsPerView = 3;
+                }
+
+                this.maxIndex = Math.max(0, this.totalCards - this.cardsPerView);
+                this.currentIndex = Math.min(this.currentIndex, this.maxIndex);
+                this.updateCarousel();
+            }
+        }
+
+        // Inicializar quando o DOM estiver pronto
+        document.addEventListener('DOMContentLoaded', () => {
+            new CarouselLancamentos();
+        });
+    </script>
+    <script src="../js/index.js"></script>
 </body>
 
 </html>
