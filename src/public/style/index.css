@@ -209,6 +209,8 @@ nav {
         transition: right 0.3s ease;
         box-shadow: -5px 0 15px rgba(0, 0, 0, 0.3);
     }
+
+
     
     .nav-navegacao.active {
         right: 0;
@@ -479,11 +481,20 @@ nav {
 
 .apresentacao-btn {
     width: 50%;
-    height: 10%;
-    border-radius: 15px;
-    border: none;
+    min-width: 180px;
+    padding: 0.8rem 2rem;
     background-color: #f7931e;
+    border-radius: 10px;
+    border: none;
     color: #ffffff;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.apresentacao-btn:hover {
+    background-color: #e6841a;
+    transform: scale(1.05);
 }
 
 .apresentacao-image-wrapper {
