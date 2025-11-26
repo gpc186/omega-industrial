@@ -43,13 +43,6 @@ nav {
     display: flex;
     width: 70dvw;
     align-items: center;
-
-}
-
-
-:root {
-    --bg: hsl(210, 40%, 98%);
-
 }
 
 .nav-content {
@@ -61,7 +54,7 @@ nav {
     gap: 2%;
 }
 
-/*Div da Logo*/
+/* LOGO */
 
 .nav-img {
     height: 100%;
@@ -72,7 +65,7 @@ nav {
     padding-left: 1dvw;
 }
 
-/* Div para navegão */
+/* NAVEGAÇÃO */
 
 .nav-navegacao {
     height: 100%;
@@ -93,7 +86,6 @@ nav {
 .nav-navegacao p:hover {
     color: #f7931e;
     border-bottom: 1px solid #f7931e;
-
 }
 
 .nav-btn-entrar {
@@ -125,11 +117,8 @@ nav {
     box-shadow: 0 4px 12px rgba(247, 147, 30, 0.4);
 }
 
-.nav-btn-entrar:active {
-    transform: translateY(0);
-}
+/* FORM CONTAINER */
 
-/* CONTAINER */
 .caixa {
     margin-top: 130px;
     width: 100%;
@@ -163,7 +152,8 @@ nav {
     text-align: center;
 }
 
-/* INPUTS */
+/* INPUT LAYOUT */
+
 .linha {
     display: flex;
     gap: 25px;
@@ -196,7 +186,8 @@ input:focus {
     border-color: #335c67b7;
 }
 
-/* SENHA + OLHO */
+/* SENHA */
+
 .senha {
     position: relative;
 }
@@ -225,17 +216,9 @@ input:focus {
     stroke-width: 2;
 }
 
-.eye-slash {
-    transition: 0.3s;
-}
-
 .eye-open .eye-slash {
     opacity: 0;
     transform: scale(0.2) translateY(-5px);
-}
-
-.eye-pupil {
-    transition: 0.3s;
 }
 
 .eye-closed .eye-pupil {
@@ -243,7 +226,8 @@ input:focus {
     transform: scale(0.5);
 }
 
-/* BOTÃO ENVIAR */
+/* BOTÃO */
+
 .enviar-btn {
     width: 100%;
     margin-top: 35px;
@@ -255,14 +239,14 @@ input:focus {
     cursor: pointer;
     background: linear-gradient(135deg, #f7931e, #e88516);
     color: white;
-    transition: 0.3s;
 }
 
 .enviar-btn:hover {
     background: linear-gradient(135deg, #e88516, #d97a12);
 }
 
-/*define o tamanho da letra de OU e deixa tudo centralizado (inclusindo a linha)*/
+/* DIVISÃO */
+
 .divisao {
     display: flex;
     align-items: center;
@@ -271,7 +255,6 @@ input:focus {
     font-size: 14px;
 }
 
-/*adiciona uma linha entre a divisao (ou)*/
 .divisao::before,
 .divisao::after {
     content: '';
@@ -288,26 +271,23 @@ input:focus {
     margin-left: 16px;
 }
 
-/*tudo que estiver dentro dessa div, ficara no centro*/
+/* LINK CRIAR CONTA */
+
 .criar-conta {
     text-align: center;
 }
 
-/*muda o texto de criar conta*/
 .criar-conta-texto {
     color: #2F2F2F;
     font-size: 15px;
     margin-bottom: 12px;
 }
 
-/*link para criar conta*/
 .criar-conta-link {
     color: #004E64;
     font-size: 16px;
     font-weight: 600;
     text-decoration: none;
-    transition: color 0.3s ease;
-    display: inline-block;
 }
 
 .criar-conta-link:hover {
@@ -315,7 +295,58 @@ input:focus {
     text-decoration: underline;
 }
 
+/* =============================== */
+/*      intl-tel-input (NOVO)      */
+/* =============================== */
+
+.iti {
+    width: 100%;
+}
+
+/* O INPUT DO TELEFONE TEM QUE PARECER O SEU INPUT NORMAL */
+.iti--allow-dropdown input.iti__tel-input {
+    width: 100%;
+    padding: 14px;
+    border-radius: 8px;
+    border: 2px solid #dadada !important;
+    background: #f5f7fa;
+    font-size: 15px;
+    transition: 0.2s;
+}
+
+.iti--allow-dropdown input.iti__tel-input:focus {
+    background: #fff;
+    border-color: #335c67b7 !important;
+}
+
+/* Bandeira */
+.iti__selected-flag {
+    padding: 0 10px;
+    background: #f5f7fa;
+    border-radius: 8px 0 0 8px;
+}
+
+/* Dropdown list */
+.iti__country-list {
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    width: 300px;
+}
+
+/* Dropdown items */
+.iti__country {
+    padding: 8px 10px;
+    font-size: 15px;
+}
+
+/* Hover */
+.iti__country:hover {
+    background: #e6f7ff;
+}
+
 /* RESPONSIVIDADE - IPHONE SE (375px) */
+
 @media (max-width: 420px) {
     header nav {
         flex-direction: column;

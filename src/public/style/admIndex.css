@@ -181,14 +181,6 @@ nav {
     overflow: hidden;
 }
 
-/* Botão base */
-.btn {
-    position: relative;
-    overflow: hidden;
-    transition: all 0.25s ease;
-    border-radius: 8px;
-}
-
 /* ===================== AZUL ====================== */
 .btn.azul {
     background: #004E64;

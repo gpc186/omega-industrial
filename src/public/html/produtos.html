@@ -5,160 +5,22 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Equipamentos Petroquímicos</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma;
-            background: #f4f6fa;
-        }
-
-        header {
-            background-color: #004e64;
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            padding: 1rem;
-            position: fixed;
-            top: 0;
-            z-index: 10;
-        }
-
-        nav {
-            display: flex;
-            width: 70%;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .nav-content {
-            display: flex;
-            align-items: center;
-            gap: 2rem;
-        }
-
-        .nav-img-logo {
-            height: 45px;
-        }
-
-        .nav-navegacao {
-            display: flex;
-            gap: 2rem;
-        }
-
-        .nav-navegacao p {
-            color: #fff;
-            font-weight: 500;
-            transition: .3s;
-        }
-
-        .nav-navegacao p:hover {
-            color: #f7931e;
-        }
-
-        .nav-btn-entrar {
-            padding: 10px 24px;
-            background: white;
-            color: #004E64;
-            border-radius: 8px;
-            font-weight: 600;
-            cursor: pointer;
-        }
-
-        .nav-btn-entrar:hover {
-            background: #F7931E;
-            color: #fff;
-        }
-
-        /* GRID */
-        .produtos-container {
-            max-width: 1400px;
-            margin: 140px auto;
-            padding: 20px;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 30px;
-        }
-
-        .card-produto {
-            background: #fff;
-            border-radius: 16px;
-            padding: 24px;
-            box-shadow: 0 8px 18px rgba(0, 0, 0, 0.08);
-            display: flex;
-            flex-direction: column;
-        }
-
-        .card-produto img {
-            width: 100%;
-            border-radius: 12px;
-            margin-bottom: 18px;
-        }
-
-        .categoria {
-            background: #e7f6ff;
-            padding: 6px 14px;
-            border-radius: 20px;
-            font-size: 12px;
-            color: #004e64;
-            display: inline-block;
-            margin-bottom: 10px;
-            font-weight: 600;
-        }
-
-        .card-produto h3 {
-            font-size: 22px;
-            color: #1F2A37;
-            margin-bottom: 8px;
-        }
-
-        .card-produto p {
-            color: #6c7a86;
-            line-height: 1.4;
-            margin-bottom: 18px;
-        }
-
-        .preco {
-            font-size: 22px;
-            font-weight: 700;
-            color: #004e64;
-            margin-bottom: 18px;
-        }
-
-        .btn-comprar {
-            width: 100%;
-            background: #004e64;
-            color: #fff;
-            padding: 14px;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: .3s;
-        }
-
-        .btn-comprar:hover {
-            background: #006a85;
-        }
-    </style>
+    <link rel="stylesheet" href="../style/produtos.css" />
 </head>
 
 <body>
+
     <header>
         <nav>
             <div class="nav-content">
                 <div class="nav-img">
-                    <img class="nav-img-logo" src="assets/img/logo.png" alt="Logo">
+                    <img class="nav-img-logo" src="/src/public/assets/img/logo.png">
                 </div>
                 <div class="nav-navegacao">
-                    <a href="">
+                    <a href="produtos.html">
                         <p>Produtos</p>
                     </a>
-                    <a href="">
+                    <a href="admIndex.html">
                         <p>Dashboard</p>
                     </a>
                     <a href="">
@@ -166,7 +28,6 @@
                     </a>
                 </div>
             </div>
-
             <div class="nav-content">
                 <div class="nav-btn-container">
                     <a href="index.html"><button class="nav-btn-entrar">Sair</button></a>
@@ -176,10 +37,8 @@
     </header>
 
     <main>
-        <div class="filtros-container"
-            style="max-width:1400px;margin:140px auto 20px;padding:0 20px;display:flex;gap:20px;align-items:center;">
-            <input id="busca" type="text" placeholder="Buscar equipamento..."
-                style="flex:1;padding:12px 16px;border-radius:10px;border:1px solid #c9cdd2;font-size:16px;">
+        <div class="filtros-container">
+            <input id="busca" type="text" placeholder="Buscar equipamento..." class="barra-de-pesquisa">
             <select id="filtroCategoria"
                 style="padding:12px 16px;border-radius:10px;border:1px solid #c9cdd2;font-size:16px;">
                 <option value="">Todas categorias</option>
@@ -269,6 +128,33 @@
         busca.addEventListener("input", aplicarFiltros);
         filtroCategoria.addEventListener("change", aplicarFiltros);
     </script>
+
+    <footer class="footer">
+        <div class="footer-bottom">
+            <div class="footer-logo">
+                <img src="../assets/img/logo.png" alt="OmegaPetro Logo">
+            </div>
+
+            <div class="footer-info">
+                <h3>Fale conosco</h3>
+                <p>Tel: (XX) XXXX-XXXX</p>
+                <p>E-mail: contato@omegapetro.com.br</p>
+                <p>Local: [Cidade, Estado]</p>
+            </div>
+
+            <div class="footer-nav">
+                <h3>Navegação</h3>
+                <a href="">Catálogo de Produtos</a>
+                <a href="">Contato</a>
+                <a href="">Política de Privacidade</a>
+                <a href="">Termos de Uso</a>
+            </div>
+        </div>
+
+        <div class="footer-copyright">
+            <p>© 2024 Omega Petro. Todos os direitos reservados.</p>
+        </div>
+    </footer>
 </body>
 
 </html>
