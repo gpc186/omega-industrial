@@ -5,7 +5,7 @@
         "categoria": "Válvulas Industriais",
         "descricao": "Alta eficiência térmica para processos petroquímicos de alta pressão.",
         "preco": 45800,
-        "imagem": "https://images.unsplash.com/photo-1581092917451-5f3c5c89c1b5"
+        "imagem": "https://images.unsplash.com/photo-1520607162513-77705c0f0d4a"
     },
     {
         "id": 2,
@@ -13,7 +13,7 @@
         "categoria": "Válvulas Industriais",
         "descricao": "Projetada para linhas críticas com resistência a alta corrosão.",
         "preco": 12900,
-        "imagem": "https://images.unsplash.com/photo-1581092795360-7b4b1a3a3be8"
+        "imagem": "https://images.unsplash.com/photo-1520607162513-77705c0f0d4a"
     },
     {
         "id": 3,
@@ -29,7 +29,7 @@
         "categoria": "Tanques de Armazenamento",
         "descricao": "Construção reforçada para produtos químicos voláteis e corrosivos.",
         "preco": 87900,
-        "imagem": "https://images.unsplash.com/photo-1581093477990-088d1fbaa508"
+        "imagem": "https://images.unsplash.com/photo-1520607162513-77705c0f0d4a"
     },
     {
         "id": 5,
@@ -37,6 +37,6 @@
         "categoria": "Compressores",
         "descricao": "Alta performance para operações contínuas em plantas petroquímicas.",
         "preco": 56750,
-        "imagem": "https://images.unsplash.com/photo-1581092334651-d8888e1fbd40"
+        "imagem": "https://images.unsplash.com/photo-1520607162513-77705c0f0d4a"
     }
 ]
