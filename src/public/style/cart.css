@@ -1,0 +1,363 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    color: #000000;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+a {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+p {
+    margin: 0;
+}
+
+/* ------------ Header ------------ */
+
+header {
+    background-color: #004e64;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 1rem 2rem;
+    position: fixed;
+    z-index: 1000;
+}
+
+nav {
+    display: flex;
+    width: 100%;
+    max-width: 1400px;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.nav-content {
+    height: 100%;
+    display: flex;
+    width: 50%;
+    align-items: center;
+    justify-content: center;
+    gap: 2%;
+}
+
+/*Div da Logo*/
+
+.nav-img {
+    height: 100%;
+    width: 29%;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    padding-left: 1dvw;
+}
+
+.nav-img-logo {
+    height: 40px;
+    width: auto;
+}
+
+/* Menu Hambúrguer */
+
+.hamburger {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    gap: 5px;
+    z-index: 1001;
+}
+
+.hamburger span {
+    width: 28px;
+    height: 3px;
+    background-color: #ffffff;
+    transition: all 0.3s ease;
+    border-radius: 2px;
+}
+
+.hamburger.active span:nth-child(1) {
+    transform: rotate(45deg) translate(8px, 8px);
+}
+
+.hamburger.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(7px, -7px);
+}
+
+/* Div para navegação */
+
+.nav-navegacao {
+    height: 100%;
+    width: 69%;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    gap: 4dvw;
+}
+
+.nav-navegacao p {
+    padding-top: 3px;
+    padding-bottom: 3px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0);
+    transition: all 0.4s;
+}
+
+.nav-navegacao p:hover {
+    color: #f7931e;
+    border-bottom: 1px solid #f7931e;
+}
+
+/* Div do login */
+
+.nav-login {
+    height: 100%;
+    width: 15%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.nav-login a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1dvw;
+}
+
+.nav-login a p {
+    padding-top: 3px;
+    padding-bottom: 3px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0);
+    transition: all 0.4s;
+}
+
+.nav-login a p:hover {
+    color: #f7931e;
+    border-bottom: 1px solid #f7931e;
+}
+
+/* Responsividade Header */
+
+@media (max-width: 1024px) {
+    header {
+        padding: 1rem 1.5rem;
+    }
+
+    nav {
+        width: 100%;
+    }
+
+    .nav-navegacao {
+        gap: 3dvw;
+    }
+}
+
+@media (max-width: 768px) {
+    header {
+        padding: 1rem;
+    }
+
+    .hamburger {
+        display: flex;
+    }
+
+    nav {
+        position: relative;
+    }
+
+    .nav-content:first-child {
+        width: auto;
+        justify-content: flex-start;
+    }
+
+    .nav-content:last-child {
+        width: auto;
+    }
+
+    .nav-img {
+        width: auto;
+        padding-left: 0;
+    }
+
+    .nav-img-logo {
+        height: 35px;
+    }
+
+    /* Menu Mobile */
+    .nav-navegacao {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 70%;
+        height: 100dvh;
+        background-color: #004e64;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+        padding: 80px 30px 30px;
+        gap: 2rem;
+        transition: right 0.3s ease;
+        box-shadow: -5px 0 15px rgba(0, 0, 0, 0.3);
+    }
+
+
+
+    .nav-navegacao.active {
+        right: 0;
+    }
+
+    .nav-navegacao a {
+        width: 100%;
+        padding: 0.5rem 0;
+    }
+
+    .nav-navegacao p {
+        font-size: 1.1rem;
+        width: 100%;
+    }
+
+    .nav-login {
+        position: fixed;
+        bottom: 30px;
+        left: 30px;
+        right: 30px;
+        width: auto;
+        justify-content: flex-start;
+        display: none;
+    }
+
+    .nav-navegacao.active~.nav-content .nav-login {
+        display: flex;
+    }
+
+    /* Overlay quando menu está aberto */
+    body.menu-open::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 999;
+    }
+}
+
+@media (max-width: 480px) {
+    .nav-img-logo {
+        height: 30px;
+    }
+
+    .nav-navegacao {
+        width: 80%;
+        padding: 70px 20px 20px;
+    }
+
+    .hamburger span {
+        width: 25px;
+    }
+}
+
+
+/* main */
+
+.main {
+    width: 100%;
+    height: 100%;
+    padding: 18dvh 15%;
+    display: flex;
+    gap: 2%;
+    background-color: hsl(210, 40%, 98%);
+}
+
+.container {
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cart-card {
+    background-color: hsl(210, 40%, 98%);
+    width: 100% !important;
+    min-height: 70dvh;
+    height: auto;
+    padding: 1rem;
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+}
+
+.product-card {
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.08);
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 3dvh;
+}
+
+.card-item {
+    background-color: white;
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.08);
+    width: 100%;
+    height: 15dvh;
+    border-radius: 16px;
+    margin-bottom: 3dvh;
+    padding-left: 1%;
+    display: flex;
+    align-items: center;
+    gap: 1dvh;
+}
+
+.card-item__image {
+    width: 15%;
+    height: 90%;
+    object-fit: cover;
+    border-radius: 12px;
+}
+
+.card-item__quantity {
+    display: flex;
+    align-items: center;
+}
+
+#buttonMenos,
+#buttonMais {
+    background-color: #004e64;
+    border: none;
+    border-radius: 100%;
+    width: 1.2dvw;
+    height: 1.2dvw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+
+#buttonRemover {
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0);
+    border: none;
+}
+
+.card-totals {
+    background-color: white;
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.08);
+    width: 20dvw;
+    height: 50dvh;
+    border-radius: 16px;
+    margin-bottom: 3dvh;
+    z-index: 2;
+    position: fixed;
+}
