@@ -2,13 +2,15 @@ const { query } = require('../config/database');
 
 class Product {
   // Criar produto
-  static async create({ nome, preco, descricao, img_url, category_id, quantidade = 0 }) {
+  static async create({ nome, preco, descricao, img_urls, category_id, quantidade = 0 }) {
     const sql = `
-      INSERT INTO produto (nome, preco, descricao, img_url, category_id, quantidade)
+      INSERT INTO produto (nome, preco, descricao, img_urls, category_id, quantidade)
       VALUES (?, ?, ?, ?, ?, ?)
     `;
-    
-    const result = await query(sql, [nome, preco, descricao, img_url, category_id, quantidade]);
+
+    const imageUrlsJson = JSON.stringify(img_urls);
+
+    const result = await query(sql, [nome, preco, descricao, imageUrlsJson, category_id, quantidade]);
     return result.insertId;
   }
 
@@ -20,7 +22,12 @@ class Product {
       LEFT JOIN categories c ON p.category_id = c.id
       WHERE p.id = ?
     `;
+
     const results = await query(sql, [id]);
+    if (results[0] && results[0].img_urls) {
+
+      results[0].img_url = JSON.parse(results[0].img_urls);
+    }
     return results[0];
   }
 
@@ -31,7 +38,16 @@ class Product {
       FROM produto p
       LEFT JOIN categories c ON p.category_id = c.id
     `;
-    return await query(sql);
+
+    const results = await query(sql);
+
+    return results.map(produto => {
+      if (produto.image_urls) {
+        produto.image_urls = JSON.parse(produto.image_urls);
+      }
+      return produto;
+    });
+
   }
 
   // Buscar por categoria
@@ -49,18 +65,27 @@ class Product {
       WHERE p.nome LIKE ? OR p.descricao LIKE ?
     `;
     const term = `%${searchTerm}%`;
-    return await query(sql, [term, term]);
+    const results = await query(sql, [term, term]);
+
+    return results.map(produto => {
+      if (produto.image_urls) {
+        produto.image_urls = JSON.parse(produto.image_urls);
+      }
+      return produto;
+    });
   }
 
   // Atualizar produto
-  static async update(id, { nome, preco, descricao, img_url, category_id, quantidade }) {
+  static async update(id, { nome, preco, descricao, img_urls, category_id, quantidade }) {
     const sql = `
       UPDATE produto 
-      SET nome = ?, preco = ?, descricao = ?, img_url = ?, category_id = ?, quantidade = ?
+      SET nome = ?, preco = ?, descricao = ?, img_urls = ?, category_id = ?, quantidade = ?
       WHERE id = ?
     `;
-    
-    await query(sql, [nome, preco, descricao, img_url, category_id, quantidade, id]);
+
+    const imageUrlsJson = img_urls ? JSON.stringify(img_urls) : null;
+
+    await query(sql, [nome, preco, descricao, imageUrlsJson, category_id, quantidade, id]);
     return this.findById(id);
   }
 

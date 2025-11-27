@@ -1,4 +1,7 @@
 const Product = require("../models/Product");
+const fs = require('fs');
+const path = require('path');
+const { deleteUploadedFiles, deleteProductImages, getImageUrls } = require('../utils/fileHelper');
 
 async function listarTodos(req, res) {
     try {
@@ -29,20 +32,32 @@ async function listarPorId(req, res) {
 }
 
 async function create(req, res) {
-    const { nome, preco, descricao, img_url, category_id, quantidade } = req.body;
+    const { nome, preco, descricao, category_id, quantidade } = req.body;
 
-    if (!nome || !preco || !img_url || !category_id) {
+    if (!nome || !preco || !category_id || !quantidade) {
+        deleteUploadedFiles(req.files)
         return res.status(400).json({ ok: false, error: "Nome, preço e categoria são obrigatórios." });
     };
 
+    if (!req.files || req.files.length !== 2) {
+        return res.status(400).json({
+            ok: false,
+            error: "É obrigatório enviar exatamente 2 imagens!"
+        });
+    }
+
     try {
 
+        const img_urls = getImageUrls(req.files)
+
         const produtoId = await Product.create({
-            nome, preco, descricao, img_url, category_id, quantidade
+            nome, preco, descricao, img_urls, category_id, quantidade: quantidade || 0
         });
 
         return res.status(200).json({ ok: true, message: "Produto foi criado com sucesso!", id: produtoId })
     } catch (error) {
+
+        deleteUploadedFiles(req.files);
         console.error(error);
         return res.status(500).json({ ok: false, error: "Erro interno do servidor" })
     }
@@ -51,15 +66,34 @@ async function create(req, res) {
 async function update(req, res) {
     try {
         const { id } = req.params;
-        const dados = req.body;
+        const { nome, preco, descricao, category_id, quantidade } = req.body;
 
         const existe = await Product.findById(id);
-        if (!existe) return res.status(404).json({ ok: false, error: "Produto não encontrado!" });
+        
+        if (!existe) {
+            deleteUploadedFiles(req.files)
+            return res.status(404).json({ ok: false, error: "Produto não encontrado!" });
+        }
 
-        await Product.update(id, dados);
+        let img_urls = existe.img_urls;
+
+        if(req.files && req.files === 2) {
+            deleteProductImages(req.files);
+            img_urls = getImageUrls(req.files);
+        };
+
+        await Product.update(id, {
+            nome: nome || existe.nome,
+            preco: preco || existe.preco,
+            descricao: descricao || existe.descricao,
+            img_urls,
+            category_id: category_id || existe.category_id,
+            quantidade: quantidade !== undefined ? quantidade : existe.quantidade
+        });
         return res.status(200).json({ ok: true, message: "Produto foi atualizado com sucesso!" });
 
     } catch (error) {
+        deleteUploadedFiles(req.files)
         console.error(error);
         return res.status(500).json({ ok: false, error: "Erro interno do servidor" })
     }
@@ -73,6 +107,9 @@ async function remove(req, res) {
         if (!existe) return res.status(404).json({ ok: false, error: "Produto não encontrado!" });
 
         await Product.delete(id);
+
+        deleteProductImages(existe.img_urls)
+
         res.status(200).json({ ok: true, message: "Produto deletado com sucesso!" })
     } catch (error) {
         console.error(error);
