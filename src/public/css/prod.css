@@ -7,7 +7,7 @@
         body {
             color: #1a1a1a;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #ffffff;
+             background: linear-gradient(180deg, #fafafa 0%, #ffffff 100%);
             line-height: 1.6;
         }
 
@@ -20,7 +20,7 @@
             background: linear-gradient(135deg, #004e64 0%, #003d52 100%);
             backdrop-filter: blur(10px);
             width: 100%;
-            padding: 1.2rem 5%;
+            padding: 0.8rem 5%;
             position: fixed;
             z-index: 1000;
             top: 0;
@@ -87,12 +87,12 @@
         /* ------------ Main Content ------------ */
         main {
             margin-top: 100px;
-            padding: 4rem 0;
-            background: linear-gradient(180deg, #fafafa 0%, #ffffff 100%);
+            padding: 1rem 0;
+           
         }
 
         .main-prod {
-            max-width: 1400px;
+            max-width: 1600px;
             margin: 0 auto;
             padding: 0 5%;
         }
@@ -111,16 +111,22 @@
         .breadcrumb-nav a:hover {
             color: #f7931e;
         }
+        .container{
+            background: #ffffff;
+            padding: 3rem;
+            border-radius: 10px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+        
+        }
 
         .produto-container {
+            
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 5rem;
             margin-bottom: 6rem;
-            background: #ffffff;
-            padding: 3rem;
-            border-radius: 20px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+           
+            
         }
 
         /* Esquerda - Imagens */
@@ -138,6 +144,8 @@
             box-shadow: 0 8px 30px rgba(0, 78, 100, 0.15);
             background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
             position: relative;
+                
+            border-radius: 10px;
             transition: transform 0.3s ease;
         }
 
@@ -150,6 +158,7 @@
             height: 100%;
             object-fit: cover;
             transition: transform 0.5s ease;
+            
         }
 
         .block-img-grande:hover img {
@@ -166,6 +175,7 @@
             height: 160px;
             overflow: hidden;
             cursor: pointer;
+            border-radius: 10px;
             
             border: 3px solid transparent;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -206,21 +216,10 @@
         .direita {
             display: flex;
             flex-direction: column;
+            
            
         }
 
-        .product-badge {
-            display: inline-block;
-            background: linear-gradient(135deg, #f7931e 0%, #e6841a 100%);
-            color: #ffffff;
-            padding: 0.5rem 1.2rem;
-            border-radius: 25px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            width: fit-content;
-        }
 
         .direita h1 {
             font-size: 2.8rem;
@@ -245,15 +244,12 @@
         }
 
         .preco-container {
-            background: linear-gradient(135deg, #fff5e6 0%, #ffe8cc 100%);
-            padding: 1.5rem;
-            border-radius: 15px;
-            border-left: 4px solid #f7931e;
+            margin-bottom: 1em;
         }
 
         .preco {
             font-size: 2.5rem;
-            font-weight: 800;
+            font-weight: 340;
             color: #f7931e;
             margin: 0;
             line-height: 1;
@@ -284,11 +280,12 @@
         }
 
         .btt-buy {
-            padding: 1.3rem 3rem;
+            margin-top: 2em;
+            padding: 1rem 2rem;
             background: linear-gradient(135deg, #f7931e 0%, #e6841a 100%);
             color: #ffffff;
             border: none;
-            border-radius: 12px;
+            border-radius: 10px;
             font-size: 1.2rem;
             font-weight: 700;
             cursor: pointer;
@@ -300,39 +297,17 @@
             overflow: hidden;
         }
 
-        .btt-buy::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.3);
-            transform: translate(-50%, -50%);
-            transition: width 0.6s, height 0.6s;
-        }
-
-        .btt-buy:hover::before {
-            width: 300px;
-            height: 300px;
-        }
-
+        
         .btt-buy:hover {
             transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(247, 147, 30, 0.4);
         }
 
-        .btt-buy:active {
-            transform: translateY(-1px);
-        }
 
         .specs-list {
             background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
-            padding: 2rem;
+            padding: 1rem;
             border-radius: 15px;
-            border-left: 5px solid #004e64;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.164);
         }
 
         .specs-list h3 {
@@ -408,14 +383,13 @@
             color: #666;
             margin: 0;
         }
-
+        a{
+            
+        }
         /* Descrição Detalhada */
         .desc_prod {
-            background: #ffffff;
+            
             padding: 4rem;
-            border-radius: 20px;
-            margin: 4rem 0;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
         }
 
         .desc_prod h2 {
