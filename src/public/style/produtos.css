@@ -135,27 +135,130 @@ nav {
 
 .produtos-container {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* mantém SEMPRE o mesmo tamanho */
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    /* mantém SEMPRE o mesmo tamanho */
     gap: 20px;
 }
 
+
+/* =============================
+   ANIMAÇÃO EM CASCATA NOS CARDS
+   ============================= */
+
+/* animação base */
 .card-produto {
-    background: #fff;
-    border-radius: 16px;
-    padding: 24px;
-    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.08);
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 100%;
+    opacity: 0;
+    transform: translateY(25px);
+    animation: cascadeFade .6s ease forwards;
 }
 
+/* keyframes */
+@keyframes cascadeFade {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Delay em cascata */
+.card-produto:nth-child(1) {
+    animation-delay: .05s;
+}
+
+.card-produto:nth-child(2) {
+    animation-delay: .15s;
+}
+
+.card-produto:nth-child(3) {
+    animation-delay: .25s;
+}
+
+.card-produto:nth-child(4) {
+    animation-delay: .35s;
+}
+
+.card-produto:nth-child(5) {
+    animation-delay: .45s;
+}
+
+.card-produto:nth-child(6) {
+    animation-delay: .55s;
+}
+
+.card-produto:nth-child(7) {
+    animation-delay: .65s;
+}
+
+.card-produto:nth-child(8) {
+    animation-delay: .75s;
+}
+
+.card-produto:nth-child(9) {
+    animation-delay: .85s;
+}
+
+.card-produto:nth-child(10) {
+    animation-delay: .95s;
+}
+
+/* continua se tiver mais produtos */
+
+
+/* ============================
+   NOVO ESTILO DOS CARDS
+   ============================ */
+
 .card-produto {
+    background: #fff;
+    border-radius: 18px;
+    padding: 24px;
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.06);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     height: 100%;
+
+    /* ANIMAÇÃO AO APARECER */
+    opacity: 0;
+    transform: translateY(25px);
+    animation: cardFade 0.6s ease forwards;
 }
+
+/* Animação suave ao aparecer */
+@keyframes cardFade {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* EFEITO HOVER PROFISSIONAL */
+.card-produto:hover {
+    transform: translateY(-6px) scale(1.015);
+    box-shadow:
+        0 12px 32px rgba(0, 0, 0, 0.12),
+        0 0 0 2px rgba(0, 78, 100, 0.06);
+    border-color: transparent;
+    transition: all .28s ease;
+}
+
+/* imagem */
+.card-produto img {
+    width: 100%;
+    border-radius: 14px;
+    margin-bottom: 18px;
+    transition: transform .25s ease;
+}
+
+.card-produto:hover img {
+    transform: scale(1.03);
+}
+
+
+.card-produto>*:not(button) {
+    flex-grow: 1;
+}
+
 
 
 
@@ -181,7 +284,8 @@ nav {
     font-size: 22px;
     color: #1F2A37;
     margin-bottom: 8px;
-    min-height: 48px;  /* ajuste se quiser maior/menor */
+    min-height: 55px;
+    /* ajuste se quiser maior/menor */
     display: flex;
     align-items: center;
 }
@@ -190,17 +294,20 @@ nav {
 .card-produto p {
     color: #6c7a86;
     line-height: 1.4;
-    min-height: 40px;
+    min-height: 60px;
     margin-bottom: 18px;
 }
 
 
+
 .produtos-container:has(.card-produto:only-child) {
-    justify-content: center; /* centraliza */
+    justify-content: center;
+    /* centraliza */
 }
 
 .produtos-container:has(.card-produto:only-child) .card-produto {
-    max-width: 400px;   /* tamanho ideal */
+    max-width: 400px;
+    /* tamanho ideal */
     width: 100%;
 }
 
@@ -270,7 +377,7 @@ nav {
     outline: none;
     border-color: #004E64;
     box-shadow: 0 0 0 2px rgba(0, 78, 100, 0.2);
-    box-shadow: none!important;
+    box-shadow: none !important;
 }
 
 

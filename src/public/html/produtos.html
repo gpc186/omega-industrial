@@ -96,30 +96,31 @@
                 return;
             }
 
-            listaDeProdutos.forEach(p => {
+            listaDeProdutos.forEach((p, index) => {
                 const card = document.createElement("div");
                 card.className = "card-produto";
 
-                // Formatação correta de moeda BRL
-                // O Number(p.preco) garante que seja tratado como numero antes de formatar
+                // Animação em cascata funcionando 100%
+                const delay = `${index * 0.12}s`;
+                card.style.setProperty("--delay", delay);
+
                 const precoFormatado = Number(p.preco).toLocaleString('pt-BR', {
                     style: 'currency',
                     currency: 'BRL'
                 });
 
-                // ATENÇÃO: Verifique se no seu JSON a imagem chama "img" ou "imagem"
-                // Aqui estou usando p.img conforme seu primeiro script.
                 card.innerHTML = `
-                    <img src="${p.imagem}" alt="${p.nome}" />
-                    <span class="categoria">${p.categoria}</span>
-                    <h3>${p.nome}</h3>
-                    <p>${p.descricao}</p>
-                    <p class="preco">${precoFormatado}</p>
-                    <button class="btn-comprar">Comprar Agora →</button>
-                `;
+        <img src="${p.imagem}" alt="${p.nome}" />
+        <span class="categoria">${p.categoria}</span>
+        <h3>${p.nome}</h3>
+        <p>${p.descricao}</p>
+        <p class="preco">${precoFormatado}</p>
+        <button class="btn-comprar">Comprar Agora →</button>
+    `;
 
                 lista.appendChild(card);
             });
+
         }
 
         // 3. Função de Filtragem

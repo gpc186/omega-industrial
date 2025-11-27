@@ -289,7 +289,6 @@
             const email = document.getElementById("email").value;
             const senha1 = document.getElementById("senha1").value;
             const senha2 = document.getElementById("senha2").value;
-            const telefone = document.getElementById("telefone").value.replace(/\D/g, "");
 
             let erro = false;
             let msg = "";
@@ -297,15 +296,19 @@
             if (cnpj.replace(/\D/g, "").length < 14) {
                 erro = true;
                 msg = "CNPJ incompleto.";
+
             } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
                 erro = true;
                 msg = "Email inválido.";
-            } else if (telefone.length < 10) {
+
+            } else if (!iti.isValidNumber()) {
                 erro = true;
-                msg = "Telefone incompleto.";
+                msg = "Telefone inválido ou incompleto.";
+
             } else if (senha1 !== senha2) {
                 erro = true;
                 msg = "As senhas não coincidem.";
+
             } else if (senha1.length < 6) {
                 erro = true;
                 msg = "A senha deve ter pelo menos 6 caracteres.";
@@ -316,6 +319,7 @@
                 alert(msg);
             }
         });
+
     </script>
 
 

@@ -472,7 +472,7 @@ input::placeholder {
         display: flex;
         align-items: center;
         justify-content: center;
-        padding: 80px 20px 80px 20px;/* cima e baixo iguais */
+        padding: 109px 20px 80px 20px;/* cima e baixo iguais */
     }
 
     .login-card {
@@ -515,3 +515,5 @@ input::placeholder {
         width: 80%;
     }
 }
+
+
