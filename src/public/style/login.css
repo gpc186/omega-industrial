@@ -6,11 +6,7 @@
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-image: url('/src/public/assets/img/Gemini_Generated_Image_9n7xjo9n7xjo9n7x.png');
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-attachment: fixed;
-    background-position: center center;
+    background-color: #f4f6fa;
     min-height: 100vh;
     display: flex;
     flex-direction: column;

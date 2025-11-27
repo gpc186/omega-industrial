@@ -39,15 +39,28 @@
     <main>
         <div class="filtros-container">
             <input id="busca" type="text" placeholder="Buscar equipamento..." class="barra-de-pesquisa">
-            <select id="filtroCategoria"
-                style="padding:12px 16px;border-radius:10px;border:1px solid #c9cdd2;font-size:16px;">
-                <option value="">Todas categorias</option>
-                <option value="Trocadores de Calor">Trocadores de Calor</option>
-                <option value="Válvulas Industriais">Válvulas Industriais</option>
-                <option value="Bombas Químicas">Bombas Químicas</option>
-                <option value="Tanques de Armazenamento">Tanques de Armazenamento</option>
-                <option value="Compressores">Compressores</option>
-            </select>
+            <div class="select-wrapper">
+                <div class="select-display" id="dropdownTrigger">Todas categorias</div>
+                <div class="select-options" id="dropdownOptions">
+                    <div data-value="">Todas categorias</div>
+                    <div data-value="Trocadores de Calor">Trocadores de Calor</div>
+                    <div data-value="Válvulas Industriais">Válvulas Industriais</div>
+                    <div data-value="Bombas Químicas">Bombas Químicas</div>
+                    <div data-value="Tanques de Armazenamento">Tanques de Armazenamento</div>
+                    <div data-value="Compressores">Compressores</div>
+                </div>
+
+                <!-- Select real escondido, só pro JS funcionar -->
+                <select id="filtroCategoria" class="hidden-select">
+                    <option value="">Todas categorias</option>
+                    <option value="Trocadores de Calor">Trocadores de Calor</option>
+                    <option value="Válvulas Industriais">Válvulas Industriais</option>
+                    <option value="Bombas Químicas">Bombas Químicas</option>
+                    <option value="Tanques de Armazenamento">Tanques de Armazenamento</option>
+                    <option value="Compressores">Compressores</option>
+                </select>
+            </div>
+
         </div>
 
         <div class="produtos-container" id="listaProdutos">
@@ -128,6 +141,51 @@
         busca.addEventListener("input", aplicarFiltros);
         filtroCategoria.addEventListener("change", aplicarFiltros);
     </script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const display = document.getElementById("dropdownTrigger");
+            const options = document.getElementById("dropdownOptions");
+            const selectReal = document.getElementById("filtroCategoria");
+
+            // Toggle abrir/fechar
+            display.addEventListener("click", (e) => {
+                e.stopPropagation();
+                options.classList.toggle("open");
+                display.classList.toggle("active");
+            });
+
+            // Clicar em item
+            options.querySelectorAll("div").forEach(item => {
+                item.addEventListener("click", () => {
+                    const value = item.dataset.value;
+
+                    // Atualiza display
+                    display.textContent = item.textContent;
+
+                    // Atualiza visual da seleção
+                    options.querySelectorAll("div").forEach(i => i.classList.remove("selected"));
+                    item.classList.add("selected");
+
+                    // Atualiza select real (para funcionar no filtro)
+                    selectReal.value = value;
+                    selectReal.dispatchEvent(new Event("change"));
+
+                    // Fecha dropdown
+                    options.classList.remove("open");
+                    display.classList.remove("active");
+                });
+            });
+
+            // Fecha ao clicar fora
+            document.addEventListener("click", () => {
+                options.classList.remove("open");
+                display.classList.remove("active");
+            });
+        });
+    </script>
+
+
 
     <footer class="footer">
         <div class="footer-bottom">
