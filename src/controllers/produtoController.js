@@ -1,6 +1,7 @@
 const Product = require("../models/Product");
 const fs = require('fs');
 const path = require('path');
+const { deleteUploadedFiles, deleteProductImages, getImageUrls } = require('../utils/fileHelper');
 
 async function listarTodos(req, res) {
     try {
@@ -34,9 +35,7 @@ async function create(req, res) {
     const { nome, preco, descricao, category_id, quantidade } = req.body;
 
     if (!nome || !preco || !category_id || !quantidade) {
-        if (req.files) {
-            req.files.forEach(file => fs.unlinkSync(file.path));
-        }
+        deleteUploadedFiles(req.files)
         return res.status(400).json({ ok: false, error: "Nome, preço e categoria são obrigatórios." });
     };
 
@@ -49,7 +48,7 @@ async function create(req, res) {
 
     try {
 
-        const img_urls = req.files.map(f => `/uploads/products/${f.filename}`);
+        const img_urls = getImageUrls(req.files)
 
         const produtoId = await Product.create({
             nome, preco, descricao, img_urls, category_id, quantidade: quantidade || 0
@@ -58,15 +57,7 @@ async function create(req, res) {
         return res.status(200).json({ ok: true, message: "Produto foi criado com sucesso!", id: produtoId })
     } catch (error) {
 
-        if (req.files) {
-            req.files.forEach(f => {
-                try {
-                    fs.unlinkSync(f.path);
-                } catch (err) {
-                    console.error('Erro ao deletar arquivo:', err);
-                }
-            });
-        }
+        deleteUploadedFiles(req.files);
         console.error(error);
         return res.status(500).json({ ok: false, error: "Erro interno do servidor" })
     }
@@ -80,30 +71,15 @@ async function update(req, res) {
         const existe = await Product.findById(id);
         
         if (!existe) {
-            
-            if (req.files) {
-                req.files.forEach(file => fs.unlinkSync(file.path));
-            }
-            
+            deleteUploadedFiles(req.files)
             return res.status(404).json({ ok: false, error: "Produto não encontrado!" });
         }
 
         let img_urls = existe.img_urls;
 
         if(req.files && req.files === 2) {
-            if(existe.img_urls && Array.isArray(existe.img_urls)) {
-                existe.img_urls.forEach(url =>{
-                    const filePath = path.join(__dirname, '../../', url);
-                    try {
-                        if (fs.existsSync(filePath)) {
-                            fs.unlinkSync(filePath);
-                        };
-                    } catch (error) {
-                       console.log(error);
-                    }
-                })
-            }
-            img_urls = req.files.map(file => `/uploads/products/${file.filename}`);
+            deleteProductImages(req.files);
+            img_urls = getImageUrls(req.files);
         };
 
         await Product.update(id, {
@@ -117,17 +93,7 @@ async function update(req, res) {
         return res.status(200).json({ ok: true, message: "Produto foi atualizado com sucesso!" });
 
     } catch (error) {
-
-        if (req.files) {
-            req.files.forEach(file => {
-                try {
-                    fs.unlinkSync(file.path);
-                } catch (err) {
-                    console.error('Erro ao deletar arquivo:', err);
-                }
-            });
-        }
-
+        deleteUploadedFiles(req.files)
         console.error(error);
         return res.status(500).json({ ok: false, error: "Erro interno do servidor" })
     }
@@ -142,18 +108,7 @@ async function remove(req, res) {
 
         await Product.delete(id);
 
-        if (existe.image_urls && Array.isArray(existe.image_urls)) {
-            existe.image_urls.forEach(url => {
-                const filePath = path.join(__dirname, '../../', url);
-                try {
-                    if (fs.existsSync(filePath)) {
-                        fs.unlinkSync(filePath);
-                    }
-                } catch (err) {
-                    console.error('Erro ao deletar imagem:', err);
-                }
-            });
-        };
+        deleteProductImages(existe.img_urls)
 
         res.status(200).json({ ok: true, message: "Produto deletado com sucesso!" })
     } catch (error) {
