@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Painel Admin - Produtos</title>
+  <style>
+    body { font-family: Arial; background:#f4f6fa; padding:40px; }
+    h1 { margin-bottom:20px; }
+    form { background:#fff; padding:20px; border-radius:12px; max-width:500px; box-shadow:0 8px 18px rgba(0,0,0,.08); }
+    input, select, textarea { width:100%; padding:12px; margin:8px 0; border:1px solid #ccc; border-radius:8px; }
+    button { background:#004e64; color:#fff; padding:14px; border:none; border-radius:8px; cursor:pointer; font-size:16px; width:100%; }
+    .preview { margin-top:20px; padding:20px; background:#fff; border-radius:12px; box-shadow:0 8px 18px rgba(0,0,0,.08); }
+  </style>
+</head>
+<body>
+  <h1>Painel Admin - Adicionar Produto</h1>
+
+  <form id="formProduto">
+    <input type="text" id="nome" placeholder="Nome do produto" required>
+    <input type="text" id="categoria" placeholder="Categoria" required>
+    <input type="text" id="preco" placeholder="Preço" required>
+    <textarea id="descricao" placeholder="Descrição" required></textarea>
+    <input type="text" id="img" placeholder="URL da imagem" required>
+    <button type="submit">Adicionar Produto</button>
+  </form>
+
+  <div class="preview" id="preview"></div>
+
+  <script>
+    // Apenas exibe preview. Para salvar realmente no JSON, precisa backend.
+    const form = document.getElementById('formProduto');
+    const preview = document.getElementById('preview');
+
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+
+      const produto = {
+        nome: nome.value,
+        categoria: categoria.value,
+        preco: preco.value,
+        descricao: descricao.value,
+        img: img.value
+      };
+
+      preview.innerHTML = `
+        <h2>Produto Gerado:</h2>
+        <pre>${JSON.stringify(produto, null, 2)}</pre>
+      `;
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,454 @@
+/* CSS completo para a página de cadastro - Petro */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: #f4f6fa;
+}
+
+a {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+p {
+    margin: 0;
+}
+
+/* =============================== */
+/*   HEADER / NAV                  */
+/* =============================== */
+
+header {
+    background-color: #004e64;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 1dvw;
+    position: fixed;
+    z-index: 2;
+}
+
+nav {
+    display: flex;
+    width: 70dvw;
+    align-items: center;
+}
+
+.nav-content {
+    height: 100%;
+    display: flex;
+    width: 50%;
+    align-items: center;
+    justify-content: center;
+    gap: 2%;
+}
+
+.nav-img {
+    height: 100%;
+    width: 29%;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    padding-left: 1dvw;
+}
+
+.nav-navegacao {
+    height: 100%;
+    width: 69%;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    gap: 4dvw;
+}
+
+.nav-navegacao p {
+    padding-top: 3px;
+    padding-bottom: 3px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0);
+    transition: all 0.4s;
+}
+
+.nav-navegacao p:hover {
+    color: #f7931e;
+    border-bottom: 1px solid #f7931e;
+}
+
+.nav-btn-entrar {
+    padding: 10px 24px;
+    background: white;
+    color: #004E64;
+    border: 2px solid white;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.nav-btn-entrar:hover {
+    background: #F7931E;
+    color: white;
+    border-color: #F7931E;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(247, 147, 30, 0.4);
+}
+
+/* =============================== */
+/*   FORM WRAPPER                  */
+/* =============================== */
+
+.caixa {
+    margin-top: 130px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 40px 20px;
+}
+
+.form-card {
+    background: white;
+    width: 100%;
+    max-width: 900px;
+    border-radius: 12px;
+    padding: 40px 35px;
+    box-shadow: 0 8px 24px rgba(0, 78, 100, 0.1);
+    border-top: 4px solid #f7931e;
+}
+
+.titulo {
+    font-size: 32px;
+    font-weight: 600;
+    color: #004e64;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.subtitulo {
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 35px;
+    text-align: center;
+}
+
+/* =============================== */
+/*   INPUTS – IGUAL AO LOGIN       */
+/* =============================== */
+
+.linha {
+    display: flex;
+    gap: 25px;
+    width: 100%;
+}
+
+.grupo-formulario {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: #2F2F2F;
+}
+
+input {
+    width: 100%;
+    padding: 14px 16px;
+    border: 2px solid #DADADA;
+    border-radius: 8px;
+    font-size: 15px;
+    color: #2F2F2F;
+    transition: all 0.3s ease;
+    background: #F5F7FA;
+}
+
+input:focus {
+    outline: none;
+    border-color: #335c67b7;
+    background: white;
+}
+
+input:hover:not(:focus) {
+    border-color: #DADADA;
+}
+
+input::placeholder {
+    color: #999;
+}
+
+/* =============================== */
+/*   SENHA (OLHO) – IGUAL LOGIN    */
+/* =============================== */
+
+.senha {
+    position: relative;
+}
+
+.senha input {
+    padding-right: 50px;
+}
+
+.button-imagem {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.eye-icon {
+    width: 24px;
+    height: 24px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.eye-icon svg {
+    width: 70%;
+    height: 70%;
+    stroke: #335C67;
+    fill: none;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+/* ANIMAÇÃO */
+.eye-slash {
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    transform-origin: center;
+}
+
+.eye-open .eye-slash {
+    opacity: 0;
+    transform: translateY(-10px) scale(0.8);
+}
+
+.eye-closed .eye-slash {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+.eye-pupil {
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.eye-closed .eye-pupil {
+    transform: scale(0.5);
+    opacity: 0.5;
+}
+
+/* =============================== */
+/*           BOTÃO                */
+/* =============================== */
+
+.enviar-btn {
+    width: 100%;
+    margin-top: 35px;
+    padding: 16px;
+    border-radius: 8px;
+    border: none;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    background: linear-gradient(135deg, #f7931e, #e88516);
+    color: white;
+    transition: all 0.3s ease;
+}
+
+.enviar-btn:hover {
+    background: linear-gradient(135deg, #e88516, #d97a12);
+}
+
+/* =============================== */
+/*      DIVISOR, LINKS            */
+/* =============================== */
+
+.divisao {
+    display: flex;
+    align-items: center;
+    margin: 34px 0;
+    color: #999;
+    font-size: 14px;
+}
+
+.divisao::before,
+.divisao::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: #DADADA;
+}
+
+.divisao::before {
+    margin-right: 16px;
+}
+
+.divisao::after {
+    margin-left: 16px;
+}
+
+.criar-conta {
+    text-align: center;
+}
+
+.criar-conta-texto {
+    color: #2F2F2F;
+    font-size: 15px;
+    margin-bottom: 12px;
+}
+
+.criar-conta-link {
+    color: #004E64;
+    font-size: 16px;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.criar-conta-link:hover {
+    color: #F7931E;
+    text-decoration: underline;
+}
+
+/* =============================== */
+/*  intl-tel-input estilizado      */
+/* =============================== */
+
+.iti {
+    width: 100%;
+}
+
+.iti--allow-dropdown input.iti__tel-input {
+    width: 100%;
+    padding: 14px 16px;
+    border-radius: 8px;
+    border: 2px solid #DADADA !important;
+    background: #F5F7FA;
+    font-size: 15px;
+    transition: all 0.3s ease;
+    color: #2F2F2F;
+}
+
+.iti--allow-dropdown input.iti__tel-input:focus {
+    background: white;
+    border-color: #335c67b7 !important;
+}
+
+.iti--allow-dropdown input.iti__tel-input:hover:not(:focus) {
+    border-color: #DADADA !important;
+}
+
+.iti__selected-flag {
+    padding: 0 10px;
+    background: #F5F7FA;
+    border-radius: 8px 0 0 8px;
+}
+
+.iti__country-list {
+    background: white;
+    border: 1px solid #dadada;
+    border-radius: 8px;
+    width: 300px;
+}
+
+.iti__country {
+    padding: 8px 10px;
+    font-size: 15px;
+}
+
+.iti__country:hover {
+    background: #e6f7ff;
+}
+
+/*Botão */
+.enviar-btn {
+    width: 100%;
+    padding: 16px;
+    background: linear-gradient(135deg, #F7931E 0%, #e88516 100%);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 32px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(247, 147, 30, 0.3);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.enviar-btn:hover {
+    background: linear-gradient(135deg, #e88516 0%, #d97a12 100%);
+    box-shadow: 0 6px 16px rgba(247, 146, 30, 0.767);
+}
+
+.enviar-btn:active {
+    transform: translateY(0);
+}
+
+/* =============================== */
+/*   RESPONSIVIDADE IPHONE SE      */
+/* =============================== */
+
+@media (max-width: 420px) {
+    header nav {
+        flex-direction: column;
+        width: 100%;
+        gap: 10px;
+    }
+
+    .nav-navegacao {
+        display: none;
+    }
+
+    .nav-img-logo {
+        width: 110px;
+    }
+
+    .caixa {
+        padding: 20px;
+        margin-top: 100px;
+    }
+
+    .form-card {
+        padding: 25px 20px;
+    }
+
+    .titulo {
+        font-size: 26px;
+    }
+
+    .linha {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    input {
+        font-size: 14px;
+        padding: 12px;
+    }
+
+    .enviar-btn {
+        font-size: 14px;
+        padding: 14px;
+    }
+}

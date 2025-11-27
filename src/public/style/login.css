@@ -1,0 +1,517 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f6fa;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+
+a {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+p {
+    margin: 0;
+}
+
+header {
+    background-color: #004e64;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 1dvw;
+    position: fixed;
+    z-index: 2;
+}
+
+nav {
+    display: flex;
+    width: 70dvw;
+    align-items: center;
+
+}
+
+
+:root {
+    --bg: hsl(210, 40%, 98%);
+
+}
+
+.nav-content {
+    height: 100%;
+    display: flex;
+    width: 50%;
+    align-items: center;
+    justify-content: center;
+    gap: 2%;
+}
+
+/*Div da Logo*/
+
+.nav-img {
+    height: 100%;
+    width: 29%;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    padding-left: 1dvw;
+}
+
+/* Div para navegão */
+
+.nav-navegacao {
+    height: 100%;
+    width: 69%;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    gap: 4dvw;
+}
+
+.nav-navegacao p {
+    padding-top: 3px;
+    padding-bottom: 3px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0);
+    transition: all 0.4s;
+}
+
+.nav-navegacao p:hover {
+    color: #f7931e;
+    border-bottom: 1px solid #f7931e;
+
+}
+
+.nav-btn-entrar {
+    padding: 10px 24px;
+    background: white;
+    color: #004E64;
+    border: 2px solid white;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.nav-btn-container {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: 100%;
+}
+
+.nav-btn-entrar:hover {
+    background: #F7931E;
+    color: white;
+    border-color: #F7931E;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(247, 147, 30, 0.4);
+}
+
+.nav-btn-entrar:active {
+    transform: translateY(0);
+}
+
+
+/*Uma caixa onde define tudo pro centro*/
+.caixa {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+}
+
+/*Define um card onde ficara tudo de login*/
+.login-card {
+    background: white;
+    border-radius: 12px;
+    padding: 48px 40px;
+    box-shadow: 0 8px 24px rgba(0, 78, 100, 0.08);
+    border-top: 4px solid #F7931E;
+    width: 100%;
+    max-width: 440px;
+    margin-top: 50px;
+}
+
+/*Titulo de Bem-Vindo*/
+.titulo {
+    color: #004E64;
+    font-size: 32px;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 12px;
+}
+
+/*subtitulo*/
+.subtitulo {
+    color: #2F2F2F;
+    font-size: 16px;
+    text-align: center;
+    margin-bottom: 40px;
+    font-weight: 400;
+}
+
+/*Contera a label e o input*/
+.grupo-formulario {
+    margin-bottom: 24px;
+}
+
+
+label {
+    color: #2F2F2F;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    display: block;
+}
+
+input {
+    width: 100%;
+    padding: 14px 16px;
+    border: 2px solid #DADADA;
+    border-radius: 8px;
+    font-size: 15px;
+    color: #2F2F2F;
+    transition: all 0.3s ease;
+    background: #F5F7FA;
+}
+
+input:focus {
+    outline: none;
+    border-color: #335c67b7;
+    background: white;
+}
+
+input:hover:not(:focus) {
+    border-color: #DADADA;
+    /* Mantem a cor padrão */
+}
+
+input::placeholder {
+    color: #999;
+}
+
+.senha {
+    position: relative;
+}
+
+.senha input {
+    padding-right: 50px;
+}
+
+.button-imagem {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+/*Button de login*/
+.login-btn {
+    width: 100%;
+    padding: 16px;
+    background: linear-gradient(135deg, #F7931E 0%, #e88516 100%);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 32px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(247, 147, 30, 0.3);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.login-btn:hover {
+    background: linear-gradient(135deg, #e88516 0%, #d97a12 100%);
+    box-shadow: 0 6px 16px rgba(247, 146, 30, 0.767);
+}
+
+.login-btn:active {
+    transform: translateY(0);
+}
+
+/*define o tamanho da letra de OU e deixa tudo centralizado (inclusindo a linha)*/
+.divisao {
+    display: flex;
+    align-items: center;
+    margin: 34px 0;
+    color: #999;
+    font-size: 14px;
+}
+
+/*adiciona uma linha entre a divisao (ou)*/
+.divisao::before,
+.divisao::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: #DADADA;
+}
+
+.divisao::before {
+    margin-right: 16px;
+}
+
+.divisao::after {
+    margin-left: 16px;
+}
+
+/*tudo que estiver dentro dessa div, ficara no centro*/
+.criar-conta {
+    text-align: center;
+}
+
+/*muda o texto de criar conta*/
+.criar-conta-texto {
+    color: #2F2F2F;
+    font-size: 15px;
+    margin-bottom: 12px;
+}
+
+/*link para criar conta*/
+.criar-conta-link {
+    color: #004E64;
+    font-size: 16px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: color 0.3s ease;
+    display: inline-block;
+}
+
+.criar-conta-link:hover {
+    color: #F7931E;
+    text-decoration: underline;
+}
+
+
+/* Container do ícone do olho */
+.eye-icon {
+    width: 24px;
+    height: 24px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* SVG do olho */
+.eye-icon svg {
+    width: 70%;
+    height: 70%;
+    stroke: #335C67;
+    fill: none;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+/* Animação da pálpebra (linha que corta o olho) */
+.eye-slash {
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    transform-origin: center;
+}
+
+/* Quando a senha está visível (olho aberto) */
+.eye-open .eye-slash {
+    opacity: 0;
+    transform: translateY(-10px) scale(0.8);
+}
+
+/* Quando a senha está oculta (olho fechado) */
+.eye-closed .eye-slash {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+/* Animação da pupila */
+.eye-pupil {
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.eye-closed .eye-pupil {
+    transform: scale(0.5);
+    opacity: 0.5;
+}
+
+/*Estilos para o alerta personalizado*/
+#custom-alert {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background: #004E64;
+    color: white;
+    padding: 16px 22px;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 500;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.4s ease;
+    z-index: 9999;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+}
+
+#custom-alert.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Sucesso (laranja) */
+#custom-alert.success {
+    background: #F7931E;
+}
+
+/* Erro (azul petróleo padrão) */
+#custom-alert.error {
+    background: #004E64;
+}
+
+.mensagem-erro {
+    display: none;
+    background: rgba(230, 50, 50, 0.1);
+    border-left: 3px solid #e63232;
+    padding: 10px 14px;
+    margin-top: -12px;
+    margin-bottom: 10px;
+    font-size: 14px;
+    color: #e63232;
+    border-radius: 6px;
+    animation: fadeIn 0.3s ease;
+}
+
+/* opcional: pequena animação */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-6px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/*Deixa resposivo para o iphone SE*/
+
+@media (max-width: 380px) {
+
+    header {
+        padding: 10px;
+    }
+
+    .success-box {
+        max-width: 200px;
+        font-size: 12px;
+        padding: 8px;
+        margin: 10px auto 0;
+    }
+
+    body {
+        overflow: hidden;
+        /* evita rolagem */
+    }
+
+    nav {
+        width: 100%;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .nav-content {
+        width: 100%;
+        justify-content: space-between;
+        padding: 0 8px;
+    }
+
+    .nav-img {
+        width: auto;
+        padding-left: 0;
+    }
+
+    .nav-img-logo {
+        width: 120px;
+    }
+
+    .nav-navegacao {
+        display: none;/* esconde navegação se ficar apertado */
+    }
+
+    .nav-btn-container {
+        justify-content: center;
+    }
+
+    .nav-btn-entrar {
+        padding: 8px 18px;
+        font-size: 14px;
+    }
+
+    /* Centralização geral */
+    .caixa {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 80px 20px 80px 20px;/* cima e baixo iguais */
+    }
+
+    .login-card {
+        width: 100%;
+        padding: 32px 22px;
+        margin-top: 10px;
+        border-radius: 10px;
+    }
+
+    .titulo {
+        font-size: 24px;
+    }
+
+    .subtitulo {
+        font-size: 14px;
+        margin-bottom: 28px;
+    }
+
+    input {
+        font-size: 14px;
+        padding: 12px 14px;
+    }
+
+    .login-btn {
+        font-size: 14px;
+        padding: 14px;
+    }
+
+    .mensagem-erro {
+        font-size: 13px;
+    }
+
+    #custom-alert {
+        bottom: 20px;
+        left: 50%;
+        right: auto;
+        transform: translateX(-50%) translateY(30px);
+        font-size: 14px;
+        text-align: center;
+        width: 80%;
+    }
+}
