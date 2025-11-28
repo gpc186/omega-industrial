@@ -1,53 +1,206 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Painel Admin - Produtos</title>
   <style>
-    body { font-family: Arial; background:#f4f6fa; padding:40px; }
-    h1 { margin-bottom:20px; }
-    form { background:#fff; padding:20px; border-radius:12px; max-width:500px; box-shadow:0 8px 18px rgba(0,0,0,.08); }
-    input, select, textarea { width:100%; padding:12px; margin:8px 0; border:1px solid #ccc; border-radius:8px; }
-    button { background:#004e64; color:#fff; padding:14px; border:none; border-radius:8px; cursor:pointer; font-size:16px; width:100%; }
-    .preview { margin-top:20px; padding:20px; background:#fff; border-radius:12px; box-shadow:0 8px 18px rgba(0,0,0,.08); }
+    body {
+      font-family: Arial;
+      background: #f4f6fa;
+      padding: 40px;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+    }
+
+    form {
+      background: #fff;
+      padding: 20px;
+      border-radius: 12px;
+      max-width: 500px;
+      box-shadow: 0 8px 18px rgba(0, 0, 0, .08);
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      padding: 12px;
+      margin: 8px 0;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+    }
+
+    button {
+      background: #004e64;
+      color: #fff;
+      padding: 14px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+      width: 100%;
+    }
+
+    .preview {
+      margin-top: 20px;
+      padding: 20px;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 8px 18px rgba(0, 0, 0, .08);
+    }
   </style>
 </head>
-<body>
-  <h1>Painel Admin - Adicionar Produto</h1>
 
-  <form id="formProduto">
-    <input type="text" id="nome" placeholder="Nome do produto" required>
-    <input type="text" id="categoria" placeholder="Categoria" required>
-    <input type="text" id="preco" placeholder="Preço" required>
-    <textarea id="descricao" placeholder="Descrição" required></textarea>
-    <input type="text" id="img" placeholder="URL da imagem" required>
-    <button type="submit">Adicionar Produto</button>
+<body>
+  <h2>Gerenciar Categorias</h2>
+
+  <!-- FORM PARA CRIAR CATEGORIA -->
+  <form id="formCategoria">
+    <input type="text" id="cat_nome" placeholder="Nome da categoria" required>
+    <input type="text" id="cat_desc" placeholder="Descrição (opcional)">
+    <button type="submit">Criar Categoria</button>
   </form>
+
+  <br>
+
+  <!-- LISTA DE CATEGORIAS -->
+  <table border="1" width="100%">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nome</th>
+        <th>Descrição</th>
+        <th>Ações</th>
+      </tr>
+    </thead>
+    <tbody id="listaCategorias"></tbody>
+  </table>
+
+  <hr><br>
+
+  <h2>Criar Produto</h2>
+
+  <h1>Gerenciamento de Produtos</h1>
+
+  <hr>
+
+  <!-- ==================== FORM DE CRIAÇÃO ==================== -->
+  <h2>Criar Produto</h2>
+
+  <form id="formCriarProduto" enctype="multipart/form-data">
+
+    <input type="text" name="nome" placeholder="Nome" required><br><br>
+
+    <select name="category_id" id="selectCategoria" required>
+      <option value="">Carregando categorias...</option>
+    </select><br><br>
+
+    <input type="number" name="preco" step="0.01" placeholder="Preço" required><br><br>
+
+    <input type="number" name="quantidade" placeholder="Quantidade" required><br><br>
+
+    <textarea name="descricao" placeholder="Descrição" required></textarea><br><br>
+
+    <label>Imagens (2 obrigatórias):</label><br>
+    <input type="file" name="images" id="imagesCriar" multiple required><br><br>
+
+    <button type="submit">Criar Produto</button>
+
+  </form>
+
+  <hr>
+
+  <!-- ==================== LISTA DE PRODUTOS ==================== -->
+  <h2>Lista de Produtos</h2>
+
+  <table border="1" cellpadding="5">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nome</th>
+        <th>Categoria</th>
+        <th>Preço</th>
+        <th>Qtd</th>
+        <th>Imagens</th>
+        <th>Ações</th>
+      </tr>
+    </thead>
+    <tbody id="tabelaProdutos">
+      <tr>
+        <td colspan="7">Carregando produtos...</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <hr>
+
+  <!-- ==================== MODAL DE EDIÇÃO ==================== -->
+  <div id="modalEdicao" style="display:none; border:1px solid #333; padding:20px; margin-top:20px;">
+    <h3>Editar Produto</h3>
+
+    <form id="formEditarProduto" enctype="multipart/form-data">
+
+      <input type="hidden" id="edit_id">
+
+      Nome:<br>
+      <input type="text" id="edit_nome" name="nome" required><br><br>
+
+      Categoria:<br>
+      <select id="edit_categoria" name="category_id" required></select><br><br>
+
+      Preço:<br>
+      <input type="number" id="edit_preco" name="preco" step="0.01" required><br><br>
+
+      Quantidade:<br>
+      <input type="number" id="edit_quantidade" name="quantidade" required><br><br>
+
+      Descrição:<br>
+      <textarea id="edit_descricao" name="descricao" required></textarea><br><br>
+
+      Imagens atuais:<br>
+      <div id="edit_preview"></div><br>
+
+      Substituir imagens? (envie 2 novas se quiser trocar)<br>
+      <input type="file" id="edit_images" name="images" multiple><br><br>
+
+      <button type="submit">Salvar Alterações</button>
+      <button type="button" onclick="fecharModal()">Cancelar</button>
+
+    </form>
+  </div>
+
+  <script type="module" src="../js/admin/prodECat.js"></script>
+
+
 
   <div class="preview" id="preview"></div>
 
   <script>
     // Apenas exibe preview. Para salvar realmente no JSON, precisa backend.
-    const form = document.getElementById('formProduto');
-    const preview = document.getElementById('preview');
-
-    form.addEventListener('submit', e => {
-      e.preventDefault();
-
-      const produto = {
-        nome: nome.value,
-        categoria: categoria.value,
-        preco: preco.value,
-        descricao: descricao.value,
-        img: img.value
-      };
-
-      preview.innerHTML = `
-        <h2>Produto Gerado:</h2>
-        <pre>${JSON.stringify(produto, null, 2)}</pre>
-      `;
-    });
+    // const form = document.getElementById('formProduto');
+    // const preview = document.getElementById('preview');
+    // 
+    // form.addEventListener('submit', e => {
+    // e.preventDefault();
+    // 
+    // const produto = {
+    // nome: nome.value,
+    // categoria: categoria.value,
+    // preco: preco.value,
+    // descricao: descricao.value,
+    // img: img.value
+    // };
+    // 
+    // preview.innerHTML = `
+    // <h2>Produto Gerado:</h2>
+    // <pre>${JSON.stringify(produto, null, 2)}</pre>
+    // `;
+    // });
   </script>
 </body>
+
 </html>

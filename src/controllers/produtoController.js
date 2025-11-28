@@ -34,7 +34,7 @@ async function listarPorId(req, res) {
 async function create(req, res) {
     const { nome, preco, descricao, category_id, quantidade } = req.body;
 
-    if (!nome || !preco || !category_id || !quantidade) {
+    if (!nome || !preco || !category_id) {
         deleteUploadedFiles(req.files)
         return res.status(400).json({ ok: false, error: "Nome, preço e categoria são obrigatórios." });
     };
@@ -69,7 +69,7 @@ async function update(req, res) {
         const { nome, preco, descricao, category_id, quantidade } = req.body;
 
         const existe = await Product.findById(id);
-        
+
         if (!existe) {
             deleteUploadedFiles(req.files)
             return res.status(404).json({ ok: false, error: "Produto não encontrado!" });
@@ -77,7 +77,7 @@ async function update(req, res) {
 
         let img_urls = existe.img_urls;
 
-        if(req.files && req.files === 2) {
+        if (req.files && req.files === 2) {
             deleteProductImages(req.files);
             img_urls = getImageUrls(req.files);
         };

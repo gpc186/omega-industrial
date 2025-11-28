@@ -1,4 +1,4 @@
-const API_URL = 'http://localhost:3000/api';
+const API_URL = 'http://localhost:4000/api';
 
 // Funções auxiliares
 function getToken() {
@@ -16,7 +16,7 @@ async function handleResponse(response) {
     const data = await response.json().catch(() => ({}));
 
     if (!response.ok) {
-        throw new Error(data.message || "Erro desconhecido");
+        throw new Error(JSON.stringify(data));
     }
 
     return data;
@@ -51,12 +51,12 @@ async function pegarDadosUsuario() {
 // ==================== PRODUTOS ==================== //
 async function listarProdutos() {
     const response = await fetch(`${API_URL}/product/all`);
-    return await response.json();
+    return handleResponse(response);
 }
 
 async function buscarProduto(id) {
     const response = await fetch(`${API_URL}/product/${id}/product`);
-    return await response.json();
+    return handleResponse(response);
 }
 
 async function criarProduto(formData) {
@@ -65,7 +65,7 @@ async function criarProduto(formData) {
         headers: { 'Authorization': `Bearer ${getToken()}` },
         body: formData // FormData já tem Content-Type correto
     });
-    return await response.json();
+    return handleResponse(response);
 }
 
 async function atualizarProduto(id, formData) {
@@ -74,7 +74,7 @@ async function atualizarProduto(id, formData) {
         headers: { 'Authorization': `Bearer ${getToken()}` },
         body: formData
     });
-    return await response.json();
+    return handleResponse(response);
 }
 
 async function deletarProduto(id) {
@@ -82,18 +82,18 @@ async function deletarProduto(id) {
         method: 'DELETE',
         headers: { 'Authorization': `Bearer ${getToken()}` }
     });
-    return await response.json();
+    return handleResponse(response);
 }
 
 // ==================== CATEGORIAS ==================== //
 async function listarCategorias() {
     const response = await fetch(`${API_URL}/category/getAll`);
-    return await response.json();
+    return handleResponse(response);
 }
 
 async function buscarProdutosPorCategoria(categoryId) {
     const response = await fetch(`${API_URL}/category/${categoryId}/category`);
-    return await response.json();
+    return handleResponse(response);
 }
 
 async function criarCategoria(nome, description) {
@@ -102,8 +102,26 @@ async function criarCategoria(nome, description) {
         headers: getAuthHeaders(),
         body: JSON.stringify({ nome, description })
     });
-    return await response.json();
+    return handleResponse(response);
 }
+
+async function atualizarCategoria(nome, description, id) {
+    const response = await fetch(`${API_URL}/category/adm/${id}/updateCat`, {
+        method: 'POST',
+        headers: getAuthHeaders(),
+        body: JSON.stringify({ nome, description })
+    });
+    return handleResponse(response);
+}
+
+async function deletarCategoria(id) {
+    const response = await fetch(`${API_URL}/adm/${id}/removeCat`, {
+        method: 'PUT',
+        headers: getAuthHeaders(),
+    });
+    return handleResponse(response);
+}
+
 
 // ==================== CARRINHO ====================
 async function adicionarAoCarrinho(productId, quantity = 1) {
@@ -112,14 +130,14 @@ async function adicionarAoCarrinho(productId, quantity = 1) {
         headers: getAuthHeaders(),
         body: JSON.stringify({ productId, quantity })
     });
-    return await response.json();
+    return handleResponse(response);
 }
 
 async function verCarrinho() {
     const response = await fetch(`${API_URL}/cart/list`, {
         headers: { 'Authorization': `Bearer ${getToken()}` }
     });
-    return await response.json();
+    return handleResponse(response);
 }
 
 async function atualizarQuantidadeCarrinho(productId, quantity) {
@@ -128,7 +146,7 @@ async function atualizarQuantidadeCarrinho(productId, quantity) {
         headers: getAuthHeaders(),
         body: JSON.stringify({ quantity })
     });
-    return await response.json();
+    return handleResponse(response);
 }
 
 async function removerDoCarrinho(productId) {
@@ -136,21 +154,21 @@ async function removerDoCarrinho(productId) {
         method: 'DELETE',
         headers: { 'Authorization': `Bearer ${getToken()}` }
     });
-    return await response.json();
+    return handleResponse(response);
 }
 
 async function totalCarrinho() {
     const response = await fetch(`${API_URL}/cart/total`, {
         headers: { 'Authorization': `Bearer ${getToken()}` }
     });
-    return await response.json();
+    return handleResponse(response);
 }
 
 async function contarItensCarrinho() {
     const response = await fetch(`${API_URL}/cart/count`, {
         headers: { 'Authorization': `Bearer ${getToken()}` }
     });
-    return await response.json();
+    return handleResponse(response);
 }
 
 // ==================== PEDIDOS ====================
@@ -160,28 +178,28 @@ async function finalizarCompra(notes = null) {
         headers: getAuthHeaders(),
         body: JSON.stringify({ notes })
     });
-    return await response.json();
+    return handleResponse(response);
 }
 
 async function meusPedidos() {
     const response = await fetch(`${API_URL}/orders/me`, {
         headers: { 'Authorization': `Bearer ${getToken()}` }
     });
-    return await response.json();
+    return handleResponse(response);
 }
 
 async function detalhesPedido(orderId) {
     const response = await fetch(`${API_URL}/orders/${orderId}/order`, {
         headers: { 'Authorization': `Bearer ${getToken()}` }
     });
-    return await response.json();
+    return handleResponse(response);
 }
 
 async function listarTodosPedidos() {
     const response = await fetch(`${API_URL}/orders/adm/allOrders`, {
         headers: { 'Authorization': `Bearer ${getToken()}` }
     });
-    return await response.json();
+    return handleResponse(response);
 }
 
 async function atualizarStatusPedido(orderId, status) {
@@ -190,7 +208,7 @@ async function atualizarStatusPedido(orderId, status) {
         headers: getAuthHeaders(),
         body: JSON.stringify({ status })
     });
-    return await response.json();
+    return handleResponse(response);
 }
 
 export const api = {
@@ -207,6 +225,8 @@ export const api = {
     listarCategorias,
     buscarProdutosPorCategoria,
     criarCategoria,
+    atualizarCategoria,
+    deletarCategoria,
 
     adicionarAoCarrinho,
     verCarrinho,
