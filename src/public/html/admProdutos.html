@@ -2,171 +2,374 @@
 <html lang="pt-BR">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Painel Admin - Produtos</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Painel Admin - Produtos</title>
 
-  <style>
-    body {
-        font-family: Arial, sans-serif;
-        background: #eef2f7;
-        padding: 30px;
-        display: flex;
-        justify-content: center;
-    }
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #eef2f7;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10dvh;
+        }
 
-    h1 {
-        text-align: center;
-        margin-bottom: 25px;
-        color: #003a4d;
-    }
+        h1 {
+            text-align: center;
+            margin-bottom: 25px;
+            color: #003a4d;
+        }
 
-    .container {
-        width: 100%;
-        max-width: 650px;
-    }
+        .container {
+            width: 100%;
+            max-width: 650px;
+        }
 
-    form {
-        background: #ffffff;
-        padding: 25px;
-        border-radius: 16px;
-        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
-        margin-bottom: 20px;
-    }
+        form {
+            background: #ffffff;
+            padding: 25px;
+            border-radius: 16px;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
 
-    input, select, textarea {
-        width: 100%;
-        padding: 12px;
-        margin: 10px 0;
-        border: 1px solid #cfd6dd;
-        border-radius: 10px;
-        font-size: 15px;
-    }
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid #cfd6dd;
+            border-radius: 10px;
+            font-size: 15px;
+        }
 
-    input:focus, select:focus, textarea:focus {
-        outline: none;
-        border-color: #007f99;
-        box-shadow: 0 0 4px rgba(0, 127, 153, 0.4);
-    }
+        input:focus,
+        select:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #007f99;
+            box-shadow: 0 0 4px rgba(0, 127, 153, 0.4);
+        }
 
-    label {
-        font-weight: bold;
-        margin-top: 12px;
-        display: block;
-        color: #003a4d;
-    }
+        label {
+            font-weight: bold;
+            margin-top: 12px;
+            display: block;
+            color: #003a4d;
+        }
 
-    button {
-        margin-top: 15px;
-        background: #007f99;
-        color: #fff;
-        padding: 14px;
-        border: none;
-        border-radius: 10px;
-        font-size: 17px;
-        cursor: pointer;
-        width: 100%;
-        transition: 0.2s;
-    }
+        button {
+            margin-top: 15px;
+            background: #007f99;
+            color: #fff;
+            padding: 14px;
+            border: none;
+            border-radius: 10px;
+            font-size: 17px;
+            cursor: pointer;
+            width: 100%;
+            transition: 0.2s;
+        }
 
-    button:hover {
-        background: #005f73;
-    }
+        button:hover {
+            background: #005f73;
+        }
 
-    .message {
-        padding: 12px;
-        border-radius: 8px;
-        margin-bottom: 20px;
-        display: none;
-        text-align: center;
-    }
+        .btn-voltar {
+            width: auto;
+            padding: 10px 20px;
+            margin-bottom: 20px;
+        }
 
-    .success {
-        background-color: #d4edda;
-        color: #155724;
-        border: 1px solid #b5e4c3;
-    }
+        .message {
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: none;
+            text-align: center;
+        }
 
-    .error {
-        background-color: #f8d7da;
-        color: #721c24;
-        border: 1px solid #e4b5b9;
-    }
+        .success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #b5e4c3;
+        }
 
-    /* ---- Inputs de imagem ---- */
-    .image-row {
-        display: flex;
-        gap: 15px;
-        margin-top: 15px;
-    }
+        .error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #e4b5b9;
+        }
 
-    .image-group {
-        flex: 1;
-    }
+        .image-row {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+        }
 
-    .image-group input {
-        padding: 8px;
-    }
+        .image-group {
+            flex: 1;
+        }
 
-    .preview {
-        background: #ffffff;
-        padding: 20px;
-        border-radius: 16px;
-        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
-        margin-top: 30px;
-        text-align: center;
-    }
-  </style>
+        .image-group input {
+            padding: 8px;
+        }
+
+        .preview {
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 16px;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+            margin-top: 30px;
+        }
+
+        table {
+            width: 100%;
+            background: #fff;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        table thead {
+            background: #007f99;
+            color: #fff;
+        }
+
+        table th,
+        table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        table tbody tr:hover {
+            background: #f5f5f5;
+        }
+
+        .btn-del-cat {
+            background: #dc3545;
+            color: #fff;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .btn-del-cat:hover {
+            background: #c82333;
+        }
+
+        .btnEditar {
+            background: #ffc107;
+            color: #000;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            margin-right: 5px;
+        }
+
+        .btnEditar:hover {
+            background: #e0a800;
+        }
+
+        .btnExcluir {
+            background: #dc3545;
+            color: #fff;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .btnExcluir:hover {
+            background: #c82333;
+        }
+
+        /* Modal de Edição */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            overflow: auto;
+        }
+
+        .modal-content {
+            background-color: #fff;
+            margin: 50px auto;
+            padding: 30px;
+            border-radius: 16px;
+            width: 90%;
+            max-width: 600px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover {
+            color: #000;
+        }
+    </style>
 </head>
 
 <body>
-<div class="container">
-    <button class="btn-voltar" onclick="history.back()">← Voltar</button>
-    <h1>Painel Admin — Adicionar Produto</h1>
-    
-    <div id="message" class="message"></div>
+    <!-- Seção de Produtos -->
+    <div class="container">
+        <button class="btn-voltar" onclick="history.back()">← Voltar</button>
+        <h1>Painel Admin – Adicionar Produto</h1>
 
-    <form id="formProduto" enctype="multipart/form-data">
+        <div id="message" class="message"></div>
 
-        <label>Nome do Produto</label>
-        <input type="text" id="nome" name="nome" placeholder="Ex: Teclado Mecânico RGB" required>
+        <form id="formCriarProduto" enctype="multipart/form-data">
 
-        <label>Categoria</label>
-        <select id="category_id" name="category_id" required>
-            <option value="">Selecione uma Categoria</option>
-        </select>
+            <label>Nome do Produto</label>
+            <input type="text" id="nome" name="nome" placeholder="Ex: Teclado Mecânico RGB" required>
 
-        <label>Preço</label>
-        <input type="number" id="preco" name="preco" step="0.01" placeholder="Ex: 1200.50" required>
+            <label>Categoria</label>
+            <select id="selectCategoria" name="category_id" required>
+                <option value="">Selecione uma Categoria</option>
+            </select>
 
-        <label>Quantidade</label>
-        <input type="number" id="quantidade" name="quantidade" placeholder="Quantidade em estoque" required>
+            <label>Preço</label>
+            <input type="number" id="preco" name="preco" step="0.01" placeholder="Ex: 1200.50" required>
 
-        <label>Descrição</label>
-        <textarea id="descricao" name="descricao" rows="4" placeholder="Descrição do produto..." required></textarea>
+            <label>Quantidade</label>
+            <input type="number" id="quantidade" name="quantidade" placeholder="Quantidade em estoque" required>
 
-        <label>Imagens do Produto (Exatamente 2):</label>
+            <label>Descrição</label>
+            <textarea id="descricao" name="descricao" rows="4" placeholder="Descrição do produto..."
+                required></textarea>
 
-        <div class="image-row">
-            <div class="image-group">
-                <label>Imagem 1</label>
-                <input type="file" name="image1" accept="image/*" required>
+            <label>Imagens do Produto (Exatamente 2):</label>
+
+            <div class="image-row">
+                <div class="image-group">
+                    <label>Imagem 1</label>
+                    <input type="file" id="imagesCriar" name="image1" accept="image/*" required>
+                </div>
+
+                <div class="image-group">
+                    <label>Imagem 2</label>
+                    <input type="file" name="image2" accept="image/*" required>
+                </div>
             </div>
 
-            <div class="image-group">
-                <label>Imagem 2</label>
-                <input type="file" name="image2" accept="image/*" required>
-            </div>
+            <button type="submit">Adicionar Produto</button>
+        </form>
+
+        <div class="preview">
+            <h2>Lista de Produtos</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nome</th>
+                        <th>Categoria</th>
+                        <th>Preço</th>
+                        <th>Quantidade</th>
+                        <th>Imagens</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody id="tabelaProdutos"></tbody>
+            </table>
         </div>
+    </div>
 
-        <button type="submit">Adicionar Produto</button>
-    </form>
+    <!-- Seção de Categorias -->
+    <div class="container">
+        <h1>Painel Admin – Gerenciar Categorias</h1>
 
-    <div class="preview" id="preview"></div>
+        <form id="formCategoria">
 
-</div>
+            <label>Nome da Categoria</label>
+            <input type="text" id="nomeCategoria" name="nomeCategoria" placeholder="Ex: Teclados" required>
 
+            <label>Descrição</label>
+            <textarea id="descricaoCategoria" name="descricaoCategoria" rows="4"
+                placeholder="Descrição da categoria..." required></textarea>
 
+            <button type="submit">Adicionar Categoria</button>
+        </form>
+
+        <div class="preview">
+            <h2>Lista de Categorias</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nome</th>
+                        <th>Descrição</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody id="listaCategorias"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Modal de Edição de Produto -->
+    <div id="modalEdicao" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="fecharModal()">&times;</span>
+            <h2>Editar Produto</h2>
+
+            <form id="formEditarProduto" enctype="multipart/form-data">
+                <input type="hidden" id="edit_id">
+
+                <label>Nome do Produto</label>
+                <input type="text" id="edit_nome" name="nome" required>
+
+                <label>Categoria</label>
+                <select id="edit_categoria" name="category_id" required></select>
+
+                <label>Preço</label>
+                <input type="number" id="edit_preco" name="preco" step="0.01" required>
+
+                <label>Quantidade</label>
+                <input type="number" id="edit_quantidade" name="quantidade" required>
+
+                <label>Descrição</label>
+                <textarea id="edit_descricao" name="descricao" rows="4" required></textarea>
+
+                <label>Imagens Atuais:</label>
+                <div id="edit_preview"></div>
+
+                <label>Novas Imagens (opcional - enviar 2 para substituir):</label>
+                <div class="image-row">
+                    <div class="image-group">
+                        <input type="file" name="image1" accept="image/*">
+                    </div>
+                    <div class="image-group">
+                        <input type="file" name="image2" accept="image/*">
+                    </div>
+                </div>
+
+                <button type="submit">Salvar Alterações</button>
+            </form>
+        </div>
+    </div>
+
+    <script type="module" src="/js/admin/prodECat.js"></script>
 </body>
 
 </html>
