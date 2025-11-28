@@ -42,11 +42,13 @@
                         <img src="../assets/img/login.png" alt="Login Icon">
                     </a>
                 </div>
-                <div class="hamburger" id="hamburger">
+
+                <button class="op-hamburger" id="hamburger">
                     <span></span>
                     <span></span>
                     <span></span>
-                </div>
+                </button>
+
             </div>
         </nav>
     </header>
@@ -297,38 +299,27 @@
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>
     <script>
-        // ========== MENU HAMBÚRGUER ==========
-        const hamburger = document.getElementById('hamburger');
+       
+         const hamburger = document.getElementById('hamburger');
         const navMenu = document.getElementById('navMenu');
-        const body = document.body;
 
-        if (hamburger && navMenu) {
-            hamburger.addEventListener('click', () => {
-                hamburger.classList.toggle('active');
-                navMenu.classList.toggle('active');
-                body.classList.toggle('menu-open');
-            });
+        hamburger.addEventListener('click', (e) => {
+            e.stopPropagation(); // ⚡ Impede que o clique se propague
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
 
-            // Fechar menu ao clicar em um link
-            const navLinks = navMenu.querySelectorAll('a');
-            navLinks.forEach(link => {
-                link.addEventListener('click', () => {
-                    hamburger.classList.remove('active');
-                    navMenu.classList.remove('active');
-                    body.classList.remove('menu-open');
-                });
-            });
+        // Fecha o menu quando clicar fora
+        document.addEventListener('click', (e) => {
+            if (!navMenu.contains(e.target) && !hamburger.contains(e.target)) {
+                navMenu.classList.remove('active');
+                hamburger.classList.remove('active');
+            }
+        });
 
-            // Fechar menu ao clicar fora dele
-            document.addEventListener('click', (e) => {
-                if (!hamburger.contains(e.target) && !navMenu.contains(e.target)) {
-                    hamburger.classList.remove('active');
-                    navMenu.classList.remove('active');
-                    body.classList.remove('menu-open');
-                }
-            });
-        }
-
+        // Impede seleção de texto acidental
+        document.body.style.userSelect = "none";
+        navMenu.style.userSelect = "auto"; // Só permite selecio
 
 
 

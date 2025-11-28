@@ -11,13 +11,11 @@ const orderRoute = require('./routes/orderRoute');
 require('dotenv').config();
 
 // app.use(errorHandler);
-app.use(cors())
 
 app.use('/uploads', express.static('uploads'));
-app.use(express.static(path.join(__dirname, 'public')))
 
 app.use(express.json());
- 
+
 app.use('/api/auth', authRoute);
 app.use('/api/product', produtoRoute);
 app.use('/api/category', categoryRoute);

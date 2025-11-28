@@ -183,15 +183,17 @@
                 : 'https://via.placeholder.com/350x250?text=Sem+Imagem';
 
             card.innerHTML = `
-                <img src="${imgUrl}" alt="${p.nome}" onerror="this.src='https://via.placeholder.com/350x250?text=Sem+Imagem'" />
-                <span class="categoria">${p.categoria_nome || 'Sem Categoria'}</span>
-                <h3>${p.nome}</h3>
-                <p>${p.descricao || 'Sem descrição'}</p>
-                <p class="preco">${precoFormatado}</p>
+                <a href="prod.html?id=${p.id}" style="text-decoration: none; color: inherit;">
+                    <img src="${imgUrl}" alt="${p.nome}" onerror="this.src='https://via.placeholder.com/350x250?text=Sem+Imagem'" />
+                    <span class="categoria">${p.categoria_nome || 'Sem Categoria'}</span>
+                    <h3>${p.nome}</h3>
+                    <p>${p.descricao || 'Sem descrição'}</p>
+                    <p class="preco">${precoFormatado}</p>
+                </a>
                 <button class="btn-comprar" onclick="adicionarAoCarrinho(${p.id})">
                     Adicionar ao Carrinho →
                 </button>
-            `;
+            `
 
             lista.appendChild(card);
         });
