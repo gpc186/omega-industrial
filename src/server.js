@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const path = require('path')
 const authRoute = require('./routes/authRoute');
+const cors = require('cors')
 // const errorHandler = require('./middleware/errorHandler')
 const produtoRoute = require('./routes/produtoRoute');
 const categoryRoute = require('./routes/categoryRoute');
@@ -10,6 +11,7 @@ const orderRoute = require('./routes/orderRoute');
 require('dotenv').config();
 
 // app.use(errorHandler);
+app.use(cors())
 
 app.use('/uploads', express.static('uploads'));
 app.use(express.static(path.join(__dirname, 'public')))

@@ -9,32 +9,39 @@
 </head>
 
 <body>
-    <header>
-        <nav>
-            <div class="nav-content">
-                <div class="nav-img">
-                    <img class="nav-img-logo" src="/src/public/assets/img/logo.png">
+     <!-- ====================== HEADER NOVO ======================= -->
+
+    <header class="op-header">
+        <nav class="op-nav">
+            <div class="op-container">
+
+                <a href="index.html" class="op-logo">
+                    <img src="../assets/img/logo.png" alt="OmegaPetro Logo">
+                </a>
+
+                <div class="op-menu" id="navMenu">
+
+                    <a href="produtos.html">Produtos</a>
+                    <a href="admIndex.html" id="dashboardLink" style="display:none;">Dashboard</a>
+                    <a href="carrinho.html">Carrinho</a>
+
+                    <div class="op-login nav-btn-container">
+                        <a href="login.html" id="loginLink">
+                            <img src="../assets/img/login.png" alt="">
+                        </a>
+                    </div>
+
                 </div>
-                <div class="nav-navegacao">
-                    <a href="produtos.html">
-                        <p>Produtos</p>
-                    </a>
-                    <a href="">
-                        <p>Dashboard</p>
-                    </a>
-                    <a href="">
-                        <p>Carrinho</p>
-                    </a>
-                </div>
-            </div>
-            <div class="nav-content">
-                <div class="nav-btn-container">
-                    <a href="index.html"><button class="nav-btn-entrar">Sair</button></a>
-                </div>
+
+                <button class="op-hamburger" id="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+
             </div>
         </nav>
     </header>
-
     <!-- CONTEÚDO PRINCIPAL -->
     <main class="container">
 
@@ -49,7 +56,7 @@
                 Acompanhe em tempo real o desempenho das vendas, métricas de estoque e análises detalhadas do negócio.
             </p>
 
-            <button class="btn azul">Acessar Dashboard →</button>
+            <a href="admRelatorio.html" class="btn azul">Acessar Dashboard →</a>
         </div>
 
         <!-- CARD 2 -->
@@ -63,10 +70,89 @@
                 Controle todo o catálogo de equipamentos industriais, atualize dados e acompanhe estoque.
             </p>
 
-            <button class="btn laranja">Gerenciar Catálogo →</button>
+            <a href="admProdutos.html" class="btn laranja">Gerenciar Catálogo →</a>
         </div>
 
     </main>
 
+   <!-- =================== HEADER JS ADM =================== -->
+<script>
+  // ======== VERIFICAÇÃO DE LOGIN E ROLE ========
+  const token = localStorage.getItem('token');
+    console.log(token)
+  let user = {};
+
+  try {
+    user = JSON.parse(localStorage.getItem('user') || '{}');
+  } catch (err) {
+    console.error("Erro ao ler usuário do localStorage:", err);
+  }
+
+  const role = user?.role?.toLowerCase() || '';
+
+  // Redireciona para login se não tiver token ou role de admin
+  if (!token || !["adm", "admin"].includes(role)) {
+    window.location.href = 'login.html';
+  }
+
+  // ======== HEADER DINÂMICO ========
+  const loginLink = document.getElementById('loginLink');
+  const dashboardLink = document.getElementById('dashboardLink');
+  const navLoginContainer = document.querySelector('.nav-btn-container');
+
+  function logout() {
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    window.location.href = 'index.html';
+  }
+
+  if (token && user?.nome) {
+    // Esconde link de login
+    if (loginLink) loginLink.style.display = "none";
+
+    // Mostra botão de sair
+    if (navLoginContainer) {
+      // Remove conteúdo anterior e adiciona botão
+      navLoginContainer.innerHTML = '';
+      const logoutBtn = document.createElement('button');
+      logoutBtn.textContent = 'Sair';
+      logoutBtn.className = 'nav-btn-entrar';
+      logoutBtn.onclick = logout;
+      navLoginContainer.appendChild(logoutBtn);
+    }
+
+    // Mostra dashboard somente para admin
+    if (dashboardLink && ["adm", "admin"].includes(role)) {
+      dashboardLink.style.display = "block";
+    }
+  }
+
+  // ======== MENU HAMBÚRGUER ========
+  const hamburger = document.getElementById('hamburger');
+  const navMenu = document.getElementById('navMenu');
+
+  if (hamburger && navMenu) {
+    hamburger.addEventListener('click', (e) => {
+      e.stopPropagation();
+      hamburger.classList.toggle('active');
+      navMenu.classList.toggle('active');
+    });
+
+    // Fecha menu ao clicar fora
+    document.addEventListener('click', (e) => {
+      if (!navMenu.contains(e.target) && !hamburger.contains(e.target)) {
+        navMenu.classList.remove('active');
+        hamburger.classList.remove('active');
+      }
+    });
+  }
+
+  // ======== BLOQUEIO DE SELEÇÃO DE TEXTO (OPCIONAL) ========
+  // Evita bloquear seleção em todo o body, permite seleção normal fora do menu
+  if (navMenu) navMenu.style.userSelect = "auto";
+</script>
+
+
 </body>
+
 </html>
