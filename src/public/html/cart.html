@@ -53,101 +53,31 @@
         <div class="container" style="width: 69%;">
             <div class="cart-card">
                 <h4>Meu Carrinho</h4>
-                <hr style="color: rgba( 0, 0, 0, 0.5);">
-                <div class="card-item">
-                    <img class="card-item__image" src="../assets/img/Listas_MaioresEmpresasPrivadasEUA_231120_Getty.jpg"
-                        alt="">
-                    <div style="width: 40%; height: 90%; display: flex; flex-direction: column; align-items: start; justify-content: space-between;">
-                        <div class="card-item__details">
-                            <h6>ssiugbu</h6>
-                            <p>sfahwh</p>
-                        </div>
-                        <div class="card-item__quantity">
-                            <button id="buttonMenos">-</button>
-                            <input type="number">
-                            <button id="buttonMais">+</button>
-                        </div>
-                    </div>
-                    <div style="width: 40%; height: 90%; display: flex; flex-direction: column; align-items: end; justify-content: space-between;" >
-                        <div class="card-item__remove">
-                            <button id="buttonRemover">x</button>
-                        </div>
-                        <div class="card-item__price">
-                            <p>R$ 3125,34</p>
-                        </div>
-                    </div>
-                </div>
+                <hr style="color: rgba(0, 0, 0, 0.5);">
+                <div id="cartItems"></div>
             </div>
         </div>
-        <div class="container" style="width: 29%; align-items: start;">
-            <div class="card-totals"></div>
+        <div class="container container-totals">
+            <div class="card-totals">
+                <h5>Resumo do Pedido</h5>
+                <div class="totals-row">
+                    <span>Subtotal:</span>
+                    <span id="subtotal">R$ 0,00</span>
+                </div>
+                <div class="totals-row">
+                    <span>Frete:</span>
+                    <span id="frete">R$ 0,00</span>
+                </div>
+                <div class="totals-row">
+                    <span>Total:</span>
+                    <span id="total">R$ 0,00</span>
+                </div>
+                <button class="btn-finalizar" onclick="finalizarCompra()">Finalizar Compra</button>
+            </div>
         </div>
     </div>
 
-
-
-    <script>
-
-        // ========== MENU HAMBÚRGUER ==========
-        const hamburger = document.getElementById('hamburger');
-        const navMenu = document.getElementById('navMenu');
-        const body = document.body;
-
-        if (hamburger && navMenu) {
-            hamburger.addEventListener('click', () => {
-                hamburger.classList.toggle('active');
-                navMenu.classList.toggle('active');
-                body.classList.toggle('menu-open');
-            });
-
-            // Fechar menu ao clicar em um link
-            const navLinks = navMenu.querySelectorAll('a');
-            navLinks.forEach(link => {
-                link.addEventListener('click', () => {
-                    hamburger.classList.remove('active');
-                    navMenu.classList.remove('active');
-                    body.classList.remove('menu-open');
-                });
-            });
-
-            // Fechar menu ao clicar fora dele
-            document.addEventListener('click', (e) => {
-                if (!hamburger.contains(e.target) && !navMenu.contains(e.target)) {
-                    hamburger.classList.remove('active');
-                    navMenu.classList.remove('active');
-                    body.classList.remove('menu-open');
-                }
-            });
-        }
-
-
-
-
-
-
-        function toggleAnswer(element) {
-            const answer = element.nextElementSibling;
-            const arrow = element.querySelector('.arrow');
-
-            // Fecha todos os outros itens
-            document.querySelectorAll('.faq-answer').forEach(item => {
-                if (item !== answer) {
-                    item.classList.remove('active');
-                }
-            });
-
-            document.querySelectorAll('.arrow').forEach(item => {
-                if (item !== arrow) {
-                    item.classList.remove('active');
-                }
-            });
-
-            // Toggle do item clicado
-            answer.classList.toggle('active');
-            arrow.classList.toggle('active');
-        }
-
-    </script>
+    <script src="../js/cart.js"></script>
 </body>
 
 </html>
