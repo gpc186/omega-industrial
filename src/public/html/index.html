@@ -15,32 +15,26 @@
 
     <!-- Header -->
 
-    <header>
-        <nav>
-            <div class="nav-content">
-                <div class="nav-img">
-                    <a href="">
-                        <img class="nav-img-logo" src="../assets/img/logo.png" alt="OmegaPetro Logo">
-                    </a>
-                </div>
-                <div class="nav-navegacao" id="navMenu">
-                    <a href="/produtos">
-                        <p>Produtos</p>
-                    </a>
-                    <a href="/adm/index">
-                        <p>Dashboard</p>
-                    </a>
-                    <a href="/carrinho">
-                        <p>Carrinho</p>
-                    </a>
-                </div>
-            </div>
-            <div class="nav-content" style="justify-content: end;">
-                <div class="nav-login">
-                    <a href="">
-                        <p>Login</p>
-                        <img src="../assets/img/login.png" alt="Login Icon">
-                    </a>
+  <header class="op-header">
+        <nav class="op-nav">
+            <div class="op-container">
+
+                <a href="index.html" class="op-logo">
+                    <img src="../assets/img/logo.png" alt="OmegaPetro Logo">
+                </a>
+
+                <div class="op-menu" id="navMenu">
+
+                    <a href="/produtos">Produtos</a>
+                    <a href="/adm/index" id="dashboardLink" style="display:none;">Dashboard</a>
+                    <a href="/carrinho">Carrinho</a>
+
+                    <div class="op-login nav-btn-container">
+                        <a href="/login" id="loginLink">
+                            <img src="../assets/img/login.png" alt="">
+                        </a>
+                    </div>
+
                 </div>
 
                 <button class="op-hamburger" id="hamburger">
@@ -299,6 +293,9 @@
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>
     <script>
+       
+
+
        
          const hamburger = document.getElementById('hamburger');
         const navMenu = document.getElementById('navMenu');

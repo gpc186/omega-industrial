@@ -20,76 +20,20 @@ a {
 p {
     margin: 0;
 }
+/* ================= HEADER ================== */
 
-header {
-    background-color: #004e64;
+.op-header {
+    background: #003548;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+    position: sticky;
+    top: 0;
     width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    padding: 1dvw;
-    position: fixed;
-    z-index: 2;
+    z-index: 999;
 }
 
-nav {
-    display: flex;
-    width: 70dvw;
-    align-items: center;
-
+.op-nav {
+    padding: 0.8rem 0;
 }
-
-
-:root {
-    --bg: hsl(210, 40%, 98%);
-
-}
-
-.nav-content {
-    height: 100%;
-    display: flex;
-    width: 50%;
-    align-items: center;
-    justify-content: center;
-    gap: 2%;
-}
-
-/*Div da Logo*/
-
-.nav-img {
-    height: 100%;
-    width: 29%;
-    display: flex;
-    align-items: center;
-    justify-content: start;
-    padding-left: 1dvw;
-}
-
-/* Div para navegão */
-
-.nav-navegacao {
-    height: 100%;
-    width: 69%;
-    display: flex;
-    align-items: center;
-    justify-content: start;
-    gap: 4dvw;
-}
-
-.nav-navegacao p {
-    padding-top: 3px;
-    padding-bottom: 3px;
-    border-bottom: 1px solid rgba(0, 0, 0, 0);
-    transition: all 0.4s;
-}
-
-.nav-navegacao p:hover {
-    color: #f7931e;
-    border-bottom: 1px solid #f7931e;
-
-}
-
 .nav-btn-entrar {
     padding: 10px 24px;
     background: white;
@@ -103,14 +47,6 @@ nav {
     text-transform: uppercase;
     letter-spacing: 0.5px;
 }
-
-.nav-btn-container {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    width: 100%;
-}
-
 .nav-btn-entrar:hover {
     background: #F7931E;
     color: white;
@@ -122,6 +58,122 @@ nav {
 .nav-btn-entrar:active {
     transform: translateY(0);
 }
+
+.op-container {
+    width: 92%;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* LOGO */
+.op-logo img {
+    height: 55px;
+    transition: 0.2s ease;
+}
+
+.op-logo img:hover {
+    opacity: 0.85;
+}
+
+/* MENU DESKTOP */
+.op-menu {
+    display: flex;
+    align-items: center;
+    gap: 2.5rem;
+}
+
+.op-menu a {
+    text-decoration: none;
+    color: #ffff;
+    font-weight: 500;
+    font-size: 1.05rem;
+    transition: 0.2s;
+}
+
+.op-menu a:hover {
+    color: #0088aa;
+}
+
+/* LOGIN */
+.op-login {
+    display: flex;
+    align-items: center;
+}
+
+.op-login a {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    color: #ffff;
+}
+
+/* ====== HAMBURGUER ====== */
+.op-hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.op-hamburger span {
+    width: 28px;
+    height: 3px;
+    background: #ffff;
+    transition: 0.3s;
+    border-radius: 10px;
+}
+
+/* Estado ativo vira X */
+.op-hamburger.active span:nth-child(1) {
+    transform: rotate(45deg) translateY(8px);
+}
+.op-hamburger.active span:nth-child(2) {
+    opacity: 0;
+}
+.op-hamburger.active span:nth-child(3) {
+    transform: rotate(-45deg) translateY(-8px);
+}
+
+/* ======= MOBILE ========= */
+@media (max-width: 870px) {
+
+    .op-hamburger {
+        display: flex;
+    }
+
+    .op-menu {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        height: 100%;
+        width: 260px;
+        background: #ffffff;
+        flex-direction: column;
+        padding-top: 7rem;
+        padding-left: 2rem;
+        gap: 2rem;
+        box-shadow: -4px 0px 14px rgba(0,0,0,0.15);
+        transition: 0.3s ease-in-out;
+    }
+
+    .op-menu.active {
+        right: 0;
+        background: #003548;
+        color: #ffff;
+    }
+
+    /* Aumenta tamanho no mobile */
+    .op-menu a {
+        font-size: 1.3rem;
+        color: #ffff;
+    }
+}
+
+
 
 /* ===================== CONTEÚDO ====================== */
 

@@ -10,28 +10,34 @@
 
 <body>
 
-    <header>
-        <nav>
-            <div class="nav-content">
-                <div class="nav-img">
-                    <img class="nav-img-logo" src="../assets/img/logo.png">
+    <header class="op-header">
+        <nav class="op-nav">
+            <div class="op-container">
+
+                <a href="index.html" class="op-logo">
+                    <img src="../assets/img/logo.png" alt="OmegaPetro Logo">
+                </a>
+
+                <div class="op-menu" id="navMenu">
+
+                    <a href="/produtos">Produtos</a>
+                    <a href="/adm/index" id="dashboardLink" style="display:none;">Dashboard</a>
+                    <a href="/carrinho">Carrinho</a>
+
+                    <div class="op-login nav-btn-container">
+                        <a href="/login" id="loginLink">
+                            <img src="../assets/img/login.png" alt="">
+                        </a>
+                    </div>
+
                 </div>
-                <div class="nav-navegacao">
-                    <a href="#">
-                        <p>Produtos</p>
-                    </a>
-                    <a href="/adm/index">
-                        <p>Dashboard</p>
-                    </a>
-                    <a href="/carrinho">
-                        <p>Carrinho</p>
-                    </a>
-                </div>
-            </div>
-            <div class="nav-content">
-                <div class="nav-btn-container">
-                    <a href="/index" onclick="logout()"><button class="nav-btn-entrar">Sair</button></a>
-                </div>
+
+                <button class="op-hamburger" id="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+
             </div>
         </nav>
     </header>
@@ -85,7 +91,7 @@
     const navLogin = document.querySelector('.nav-btn-container');
     if (token && user.nome) {
         navLogin.innerHTML = `
-            <span style="color: #004e64; margin-right: 1rem;">Olá, ${user.nome.split(' ')[0]}</span>
+            <span style="color: #ffff; margin-right: 1rem;">Olá, ${user.nome.split(' ')[0]}</span>
             <button class="nav-btn-entrar" onclick="logout()">Sair</button>
         `;
     }

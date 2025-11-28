@@ -28,11 +28,11 @@ const pool = mysql.createPool({
 async function testConnection() {
   try {
     const connection = await pool.getConnection();
-    console.log(' MySQL conectado!');
+    console.log('✅ MySQL conectado!');
     connection.release();
     return true;
   } catch (error) {
-    console.error(' Erro:', error.message);
+    console.error('❌ Erro:', error.message);
     return false;
   }
 }
@@ -48,4 +48,5 @@ async function query(sql, params = []) {
   }
 }
 
+// EXPORTAR AMBOS OS POOLS
 module.exports = { pool, poolWithoutDB, testConnection, query };
