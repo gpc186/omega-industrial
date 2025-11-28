@@ -87,10 +87,10 @@ async function update(req, res) {
         const { id } = req.params;
         const { nome, preco, descricao, category_id, quantidade } = req.body;
 
-        const produto = await Product.findByPk(id);
+        const existe = await Product.findById(id);
 
-        if (!produto) {
-            deleteUploadedFiles(req.files);
+        if (!existe) {
+            deleteUploadedFiles(req.files)
             return res.status(404).json({ ok: false, error: "Produto não encontrado!" });
         }
 

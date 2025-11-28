@@ -17,20 +17,20 @@
                     <img class="nav-img-logo" src="../assets/img/logo.png">
                 </div>
                 <div class="nav-navegacao">
-                    <a href="produtos.html">
+                    <a href="#">
                         <p>Produtos</p>
                     </a>
-                    <a href="admIndex.html">
+                    <a href="/adm/index">
                         <p>Dashboard</p>
                     </a>
-                    <a href="">
+                    <a href="/carrinho">
                         <p>Carrinho</p>
                     </a>
                 </div>
             </div>
             <div class="nav-content">
                 <div class="nav-btn-container">
-                    <a href="index.html"><button class="nav-btn-entrar">Sair</button></a>
+                    <a href="/index" onclick="logout()"><button class="nav-btn-entrar">Sair</button></a>
                 </div>
             </div>
         </nav>
@@ -93,7 +93,7 @@
     function logout() {
         localStorage.removeItem('token');
         localStorage.removeItem('user');
-        window.location.href = 'index.html';
+        window.location.href = '/index';
     }
 
     // Carregar produtos da API
