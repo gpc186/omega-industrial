@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Petro - Login</title>
+    <link rel="stylesheet" href="../style/login.css">
+</head>
+
+<body>
+    <!-- ====================== HEADER NOVO ======================= -->
+
+    <header class="op-header">
+        <nav class="op-nav">
+            <div class="op-container">
+
+                <a href="index.html" class="op-logo">
+                    <img src="../assets/img/logo.png" alt="OmegaPetro Logo">
+                </a>
+
+                <div class="op-menu" id="navMenu">
+
+                    <a href="/produtos">Produtos</a>
+                    <a href="/adm/index" id="dashboardLink" style="display:none;">Dashboard</a>
+                    <a href="/carrinho">Carrinho</a>
+
+                    <div class="op-login nav-btn-container">
+                        <a href="#" id="loginLink">
+                            <img src="../assets/img/login.png" alt="">
+                        </a>
+                    </div>
+
+                </div>
+
+                <button class="op-hamburger" id="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+
+            </div>
+        </nav>
+    </header>
+
+    <div class="caixa">
+        <div class="login-card">
+            <h1 class="titulo">Bem-Vindo</h1>
+            <p class="subtitulo">Por favor, insira seus dados para fazer login</p>
+
+            <form id="formulario-login">
+                <div class="grupo-formulario">
+                    <label for="email">Endereço de Email</label>
+                    <input type="email" id="email" name="email" placeholder="seu@email.com" required>
+                </div>
+
+                <div class="grupo-formulario">
+                    <label for="senha">Senha</label>
+                    <div class="senha">
+                        <input type="password" id="senha" name="senha" placeholder="Digite sua senha" required>
+                        <button type="button" class="button-imagem" onclick="toggleSenha()">
+                            <div class="eye-icon eye-closed" id="eyeIcon">
+                                <svg viewBox="0 0 24 24">
+                                    <!-- Contorno do olho -->
+                                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                    <!-- Pupila -->
+                                    <circle class="eye-pupil" cx="12" cy="12" r="3"></circle>
+                                    <!-- Linha que corta o olho (slash) -->
+                                    <line class="eye-slash" x1="3" y1="3" x2="21" y2="21"></line>
+                                </svg>
+                            </div>
+                        </button>
+                    </div>
+                </div>
+                <div id="mensagem-erro" class="mensagem-erro">
+                </div>
+
+                <button type="submit" class="login-btn" id="loginButton">Entrar</button>
+            </form>
+
+
+            <div class="divisao">ou</div>
+            <div class="criar-conta">
+                <p class="criar-conta-texto">Novo por aqui?</p>
+                <a href="/registrar" class="criar-conta-link">CRIAR CONTA</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleSenha() {
+            const input = document.getElementById('senha');
+            const eyeIcon = document.getElementById('eyeIcon');
+
+            if (input.type === 'password') {
+                input.type = 'text';
+                eyeIcon.classList.remove('eye-closed');
+                eyeIcon.classList.add('eye-open');
+            } else {
+                input.type = 'password';
+                eyeIcon.classList.remove('eye-open');
+                eyeIcon.classList.add('eye-closed');
+            }
+        }
+
+        document.getElementById('formulario-login').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const senha = document.getElementById('senha').value;
+            const customAlert = document.getElementById('custom-alert');
+
+            const regexSenha = /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>]).{8,}$/;
+
+            // MOSTRA MENSAGEM DE SUCESSO
+            customAlert.textContent = "Login realizado com sucesso!";
+            customAlert.classList.remove('error');
+            customAlert.classList.add('show', 'success');
+
+            // Some sozinho depois de 1.8s (opcional)
+            setTimeout(() => {
+                customAlert.classList.remove('show');
+            }, 1800);
+        });
+    </script>
+    <script type="module" src="/js/login.js"></script>
+    <div id="custom-alert"></div>
+
+</body>
+
+</html>

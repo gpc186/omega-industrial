@@ -1,14 +1,25 @@
 const { query } = require('../config/database');
 
 class Product {
+
   // Criar produto
-  static async create({ nome, preco, descricao, img_url, category_id, quantidade = 0 }) {
+  static async create({ nome, preco, descricao, image_urls, category_id, quantidade = 0 }) {
     const sql = `
-      INSERT INTO produto (nome, preco, descricao, img_url, category_id, quantidade)
+      INSERT INTO produto (nome, preco, descricao, image_urls, category_id, quantidade)
       VALUES (?, ?, ?, ?, ?, ?)
     `;
-    
-    const result = await query(sql, [nome, preco, descricao, img_url, category_id, quantidade]);
+
+    const imageUrlsJson = JSON.stringify(image_urls);
+
+    const result = await query(sql, [
+      nome,
+      preco,
+      descricao,
+      imageUrlsJson,
+      category_id,
+      quantidade
+    ]);
+
     return result.insertId;
   }
 
@@ -20,7 +31,16 @@ class Product {
       LEFT JOIN categories c ON p.category_id = c.id
       WHERE p.id = ?
     `;
+
     const results = await query(sql, [id]);
+
+    if (!results[0]) return null;
+
+    // Converte JSON -> array
+    if (results[0].image_urls) {
+      results[0].image_urls = JSON.parse(results[0].image_urls);
+    }
+
     return results[0];
   }
 
@@ -31,7 +51,15 @@ class Product {
       FROM produto p
       LEFT JOIN categories c ON p.category_id = c.id
     `;
-    return await query(sql);
+
+    const results = await query(sql);
+
+    return results.map(produto => {
+      if (produto.image_urls) {
+        produto.image_urls = JSON.parse(produto.image_urls);
+      }
+      return produto;
+    });
   }
 
   // Buscar por categoria
@@ -40,7 +68,7 @@ class Product {
     return await query(sql, [category_id]);
   }
 
-  // Buscar por nome (pesquisa)
+  // Buscar por nome
   static async search(searchTerm) {
     const sql = `
       SELECT p.*, c.nome as categoria_nome 
@@ -49,18 +77,37 @@ class Product {
       WHERE p.nome LIKE ? OR p.descricao LIKE ?
     `;
     const term = `%${searchTerm}%`;
-    return await query(sql, [term, term]);
+
+    const results = await query(sql, [term, term]);
+
+    return results.map(produto => {
+      if (produto.image_urls) {
+        produto.image_urls = JSON.parse(produto.image_urls);
+      }
+      return produto;
+    });
   }
 
   // Atualizar produto
-  static async update(id, { nome, preco, descricao, img_url, category_id, quantidade }) {
+  static async update(id, { nome, preco, descricao, image_urls, category_id, quantidade }) {
     const sql = `
       UPDATE produto 
-      SET nome = ?, preco = ?, descricao = ?, img_url = ?, category_id = ?, quantidade = ?
+      SET nome = ?, preco = ?, descricao = ?, image_urls = ?, category_id = ?, quantidade = ?
       WHERE id = ?
     `;
-    
-    await query(sql, [nome, preco, descricao, img_url, category_id, quantidade, id]);
+
+    const imageUrlsJson = image_urls ? JSON.stringify(image_urls) : null;
+
+    await query(sql, [
+      nome,
+      preco,
+      descricao,
+      imageUrlsJson,
+      category_id,
+      quantidade,
+      id
+    ]);
+
     return this.findById(id);
   }
 
@@ -71,14 +118,14 @@ class Product {
     return this.findById(id);
   }
 
-  // Deletar produto
+  // Deletar
   static async delete(id) {
     const sql = 'DELETE FROM produto WHERE id = ?';
     const result = await query(sql, [id]);
     return result.affectedRows > 0;
   }
 
-  // Verificar disponibilidade
+  // Disponibilidade
   static async checkAvailability(id, quantidadeDesejada) {
     const produto = await this.findById(id);
     return produto && produto.quantidade >= quantidadeDesejada;

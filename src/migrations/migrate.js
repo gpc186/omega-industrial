@@ -3,8 +3,10 @@ const path = require('path');
 const { pool } = require('../config/database');
 
 async function executarMigrations(direction = 'executar') {
-  const migrationsDir = path.join(__dirname, 'migrations');
-  const files = fs.readdirSync(migrationsDir).sort();
+  const migrationsDir = __dirname;
+  const files = fs.readdirSync(migrationsDir).sort()
+  .filter(f => f.endsWith('.js') && f !== 'migrate.js') // Ignorar o próprio migrate.js
+    .sort()
 
   console.log(`\n Executando migrations (${direction})...\n`);
 

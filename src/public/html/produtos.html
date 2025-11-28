@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Equipamentos Petroquímicos</title>
+    <link rel="stylesheet" href="../style/produtos.css" />
+</head>
+
+<body>
+
+    <header>
+        <nav>
+            <div class="nav-content">
+                <div class="nav-img">
+                    <img class="nav-img-logo" src="../assets/img/logo.png">
+                </div>
+                <div class="nav-navegacao">
+                    <a href="#">
+                        <p>Produtos</p>
+                    </a>
+                    <a href="/adm/index">
+                        <p>Dashboard</p>
+                    </a>
+                    <a href="/carrinho">
+                        <p>Carrinho</p>
+                    </a>
+                </div>
+            </div>
+            <div class="nav-content">
+                <div class="nav-btn-container">
+                    <a href="/index" onclick="logout()"><button class="nav-btn-entrar">Sair</button></a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <div class="filtros-container">
+            <input id="busca" type="text" placeholder="Buscar equipamento..." class="barra-de-pesquisa">
+            <div class="select-wrapper">
+                <div class="select-display" id="dropdownTrigger">Todas categorias</div>
+                <div class="select-options" id="dropdownOptions">
+                    <div data-value="">Todas categorias</div>
+                    <div data-value="Trocadores de Calor">Trocadores de Calor</div>
+                    <div data-value="Válvulas Industriais">Válvulas Industriais</div>
+                    <div data-value="Bombas Químicas">Bombas Químicas</div>
+                    <div data-value="Tanques de Armazenamento">Tanques de Armazenamento</div>
+                    <div data-value="Compressores">Compressores</div>
+                </div>
+
+                <!-- Select real escondido, só pro JS funcionar -->
+                <select id="filtroCategoria" class="hidden-select">
+                    <option value="">Todas categorias</option>
+                    <option value="Trocadores de Calor">Trocadores de Calor</option>
+                    <option value="Válvulas Industriais">Válvulas Industriais</option>
+                    <option value="Bombas Químicas">Bombas Químicas</option>
+                    <option value="Tanques de Armazenamento">Tanques de Armazenamento</option>
+                    <option value="Compressores">Compressores</option>
+                </select>
+            </div>
+
+        </div>
+
+        <div class="produtos-container" id="listaProdutos">
+            <p style="text-align:center; width:100%; color:#666;">Carregando produtos...</p>
+        </div>
+    </main>
+
+    <script>
+    const API_URL = 'http://localhost:3000/api';
+    const lista = document.getElementById("listaProdutos");
+    const busca = document.getElementById("busca");
+    const filtroCategoria = document.getElementById("filtroCategoria");
+
+    let produtos = [];
+    let categorias = [];
+
+    // Verificar se está logado
+    const token = localStorage.getItem('token');
+    const user = JSON.parse(localStorage.getItem('user') || '{}');
+
+    // Atualizar navegação
+    const navLogin = document.querySelector('.nav-btn-container');
+    if (token && user.nome) {
+        navLogin.innerHTML = `
+            <span style="color: #004e64; margin-right: 1rem;">Olá, ${user.nome.split(' ')[0]}</span>
+            <button class="nav-btn-entrar" onclick="logout()">Sair</button>
+        `;
+    }
+
+    function logout() {
+        localStorage.removeItem('token');
+        localStorage.removeItem('user');
+        window.location.href = '/index';
+    }
+
+    // Carregar produtos da API
+    async function carregarProdutos() {
+        try {
+            lista.innerHTML = '<p style="text-align:center; width:100%; color:#666;">Carregando produtos...</p>';
+            
+            const response = await fetch(`${API_URL}/product/all`);
+            const data = await response.json();
+            
+            if (data.ok && data.produtos) {
+                produtos = data.produtos;
+                renderProdutos(produtos);
+            } else {
+                lista.innerHTML = '<p style="text-align:center; width:100%;">Nenhum produto encontrado.</p>';
+            }
+        } catch (error) {
+            console.error('Erro ao carregar produtos:', error);
+            lista.innerHTML = '<p style="text-align:center; width:100%; color:red;">Erro ao carregar produtos. Verifique se a API está rodando.</p>';
+        }
+    }
+
+    // Carregar categorias
+    async function carregarCategorias() {
+        try {
+            const response = await fetch(`${API_URL}/category/getAll`);
+            const data = await response.json();
+            
+            if (data.ok && data.categorias) {
+                categorias = data.categorias;
+                preencherFiltroCategoria();
+            }
+        } catch (error) {
+            console.error('Erro ao carregar categorias:', error);
+        }
+    }
+
+    // Preencher dropdown de categorias
+    function preencherFiltroCategoria() {
+        const dropdownOptions = document.getElementById('dropdownOptions');
+        const selectReal = document.getElementById('filtroCategoria');
+        
+        // Limpar opções antigas
+        dropdownOptions.innerHTML = '<div data-value="">Todas categorias</div>';
+        selectReal.innerHTML = '<option value="">Todas categorias</option>';
+        
+        // Adicionar categorias
+        categorias.forEach(cat => {
+            // Dropdown visual
+            const div = document.createElement('div');
+            div.dataset.value = cat.nome;
+            div.textContent = cat.nome;
+            dropdownOptions.appendChild(div);
+            
+            // Select real
+            const option = document.createElement('option');
+            option.value = cat.nome;
+            option.textContent = cat.nome;
+            selectReal.appendChild(option);
+        });
+        
+        // Re-adicionar eventos de click
+        setupDropdownEvents();
+    }
+
+    // Função de Renderização
+    function renderProdutos(listaDeProdutos) {
+        lista.innerHTML = "";
+
+        if (listaDeProdutos.length === 0) {
+            lista.innerHTML = "<p>Nenhum produto encontrado.</p>";
+            return;
+        }
+
+        listaDeProdutos.forEach(p => {
+            const card = document.createElement("div");
+            card.className = "card-produto";
+
+            const precoFormatado = Number(p.preco).toLocaleString('pt-BR', {
+                style: 'currency',
+                currency: 'BRL'
+            });
+
+            // Usar a primeira imagem do array ou uma imagem placeholder
+            const imgUrl = p.image_urls && p.image_urls.length > 0 
+                ? `http://localhost:3000${p.image_urls[0]}`
+                : 'https://via.placeholder.com/350x250?text=Sem+Imagem';
+
+            card.innerHTML = `
+                <a href="prod.html?id=${p.id}" style="text-decoration: none; color: inherit;">
+                    <img src="${imgUrl}" alt="${p.nome}" onerror="this.src='https://via.placeholder.com/350x250?text=Sem+Imagem'" />
+                    <span class="categoria">${p.categoria_nome || 'Sem Categoria'}</span>
+                    <h3>${p.nome}</h3>
+                    <p>${p.descricao || 'Sem descrição'}</p>
+                    <p class="preco">${precoFormatado}</p>
+                </a>
+                <button class="btn-comprar" onclick="adicionarAoCarrinho(${p.id})">
+                    Adicionar ao Carrinho →
+                </button>
+            `
+
+            lista.appendChild(card);
+        });
+    }
+
+    // Função de Filtragem
+    function aplicarFiltros() {
+        const termoBusca = busca.value.toLowerCase();
+        const categoriaSelecionada = filtroCategoria.value;
+
+        const produtosFiltrados = produtos.filter(p => {
+            const matchTexto = p.nome.toLowerCase().includes(termoBusca) || 
+                              (p.descricao && p.descricao.toLowerCase().includes(termoBusca));
+            const matchCategoria = categoriaSelecionada === "" || 
+                                  p.categoria_nome === categoriaSelecionada;
+
+            return matchTexto && matchCategoria;
+        });
+
+        renderProdutos(produtosFiltrados);
+    }
+
+    // Adicionar ao carrinho
+    async function adicionarAoCarrinho(productId) {
+        if (!token) {
+            alert('Você precisa estar logado para adicionar ao carrinho!');
+            window.location.href = 'login.html';
+            return;
+        }
+
+        try {
+            const response = await fetch(`${API_URL}/cart/add`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify({
+                    productId: productId,
+                    quantity: 1
+                })
+            });
+
+            const data = await response.json();
+
+            if (response.ok) {
+                alert('Produto adicionado ao carrinho!');
+            } else {
+                alert(data.error || 'Erro ao adicionar ao carrinho');
+            }
+        } catch (error) {
+            console.error('Erro:', error);
+            alert('Erro ao conectar com o servidor');
+        }
+    }
+
+    // Event Listeners
+    busca.addEventListener("input", aplicarFiltros);
+    filtroCategoria.addEventListener("change", aplicarFiltros);
+
+    // Setup dropdown events (do código original)
+    function setupDropdownEvents() {
+        const display = document.getElementById("dropdownTrigger");
+        const options = document.getElementById("dropdownOptions");
+        const selectReal = document.getElementById("filtroCategoria");
+
+        display.addEventListener("click", (e) => {
+            e.stopPropagation();
+            options.classList.toggle("open");
+            display.classList.toggle("active");
+        });
+
+        options.querySelectorAll("div").forEach(item => {
+            item.addEventListener("click", () => {
+                const value = item.dataset.value;
+                display.textContent = item.textContent;
+                options.querySelectorAll("div").forEach(i => i.classList.remove("selected"));
+                item.classList.add("selected");
+                selectReal.value = value;
+                selectReal.dispatchEvent(new Event("change"));
+                options.classList.remove("open");
+                display.classList.remove("active");
+            });
+        });
+
+        document.addEventListener("click", () => {
+            options.classList.remove("open");
+            display.classList.remove("active");
+        });
+    }
+
+    // Inicializar
+    document.addEventListener("DOMContentLoaded", () => {
+        setupDropdownEvents();
+        carregarCategorias();
+        carregarProdutos();
+    });
+</script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const display = document.getElementById("dropdownTrigger");
+            const options = document.getElementById("dropdownOptions");
+            const selectReal = document.getElementById("filtroCategoria");
+
+            // Toggle abrir/fechar
+            display.addEventListener("click", (e) => {
+                e.stopPropagation();
+                options.classList.toggle("open");
+                display.classList.toggle("active");
+            });
+
+            // Clicar em item
+            options.querySelectorAll("div").forEach(item => {
+                item.addEventListener("click", () => {
+                    const value = item.dataset.value;
+
+                    // Atualiza display
+                    display.textContent = item.textContent;
+
+                    // Atualiza visual da seleção
+                    options.querySelectorAll("div").forEach(i => i.classList.remove("selected"));
+                    item.classList.add("selected");
+
+                    // Atualiza select real (para funcionar no filtro)
+                    selectReal.value = value;
+                    selectReal.dispatchEvent(new Event("change"));
+
+                    // Fecha dropdown
+                    options.classList.remove("open");
+                    display.classList.remove("active");
+                });
+            });
+
+            // Fecha ao clicar fora
+            document.addEventListener("click", () => {
+                options.classList.remove("open");
+                display.classList.remove("active");
+            });
+        });
+    </script>
+
+
+
+    <footer class="footer">
+        <div class="footer-bottom">
+            <div class="footer-logo">
+                <img src="../assets/img/logo.png" alt="OmegaPetro Logo">
+            </div>
+
+            <div class="footer-info">
+                <h3>Fale conosco</h3>
+                <p>Tel: (XX) XXXX-XXXX</p>
+                <p>E-mail: contato@omegapetro.com.br</p>
+                <p>Local: [Cidade, Estado]</p>
+            </div>
+
+            <div class="footer-nav">
+                <h3>Navegação</h3>
+                <a href="">Catálogo de Produtos</a>
+                <a href="">Contato</a>
+                <a href="">Política de Privacidade</a>
+                <a href="">Termos de Uso</a>
+            </div>
+        </div>
+
+        <div class="footer-copyright">
+            <p>© 2024 Omega Petro. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+</body>
+
+</html>
