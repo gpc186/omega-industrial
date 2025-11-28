@@ -8,10 +8,10 @@ import {
 document.addEventListener("DOMContentLoaded", () => {
 
     // Se já estiver logado, redireciona
-    // if (isAuthenticated()) {
-    //     window.location.href = '/produtos';
-    //     return;
-    // }
+    if (isAuthenticated()) {
+        window.location.href = '/produtos';
+        return;
+    }
 
     const formLogin = document.getElementById('formulario-login');
     const emailInput = document.getElementById('email');
@@ -51,11 +51,10 @@ document.addEventListener("DOMContentLoaded", () => {
                 saveToken(data.token);
                 saveUser(data.user);
 
-                // Verifica o tipo de usuário
                 if (data.user.role === "admin") {
-                    window.location.href = "/html/admin-dashboard.html";
+                    window.location.href = "/adm/index";
                 } else {
-                    window.location.href = "/html/index.html";
+                    window.location.href = "/produtos";
                 }
 
                 return;

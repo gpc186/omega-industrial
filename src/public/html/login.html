@@ -21,12 +21,12 @@
 
                 <div class="op-menu" id="navMenu">
 
-                    <a href="produtos.html">Produtos</a>
-                    <a href="admIndex.html" id="dashboardLink" style="display:none;">Dashboard</a>
-                    <a href="carrinho.html">Carrinho</a>
+                    <a href="/produtos">Produtos</a>
+                    <a href="/adm/index" id="dashboardLink" style="display:none;">Dashboard</a>
+                    <a href="/carrinho">Carrinho</a>
 
                     <div class="op-login nav-btn-container">
-                        <a href="login.html" id="loginLink">
+                        <a href="#" id="loginLink">
                             <img src="../assets/img/login.png" alt="">
                         </a>
                     </div>
@@ -82,55 +82,10 @@
             <div class="divisao">ou</div>
             <div class="criar-conta">
                 <p class="criar-conta-texto">Novo por aqui?</p>
-                <a href="criar-conta.html" class="criar-conta-link">CRIAR CONTA</a>
+                <a href="/registrar" class="criar-conta-link">CRIAR CONTA</a>
             </div>
         </div>
     </div>
-
-    <script>
-          const token = localStorage.getItem('token');
-        const user = JSON.parse(localStorage.getItem('user') || '{}');
-        const loginLink = document.getElementById('loginLink');
-        const dashboardLink = document.getElementById('dashboardLink');
-        const navLoginContainer = document.querySelector('.nav-btn-container');
-
-        function logout() {
-            localStorage.removeItem('token');
-            localStorage.removeItem('user');
-            window.location.href = 'index.html';
-        }
-
-        if (token && user.nome) {
-            loginLink.style.display = "none";
-            navLoginContainer.innerHTML = `<button class="nav-btn-entrar" onclick="logout()">Sair</button>`;
-            if (user.role === "admin" || user.role === "adm") {
-                dashboardLink.style.display = "block";
-            }
-        } else {
-            dashboardLink.style.display = "none";
-        }
-
-            const hamburger = document.getElementById('hamburger');
-        const navMenu = document.getElementById('navMenu');
-
-        hamburger.addEventListener('click', (e) => {
-            e.stopPropagation(); // ⚡ Impede que o clique se propague
-            hamburger.classList.toggle('active');
-            navMenu.classList.toggle('active');
-        });
-
-        // Fecha o menu quando clicar fora
-        document.addEventListener('click', (e) => {
-            if (!navMenu.contains(e.target) && !hamburger.contains(e.target)) {
-                navMenu.classList.remove('active');
-                hamburger.classList.remove('active');
-            }
-        });
-
-        // Impede seleção de texto acidental
-        document.body.style.userSelect = "none";
-        navMenu.style.userSelect = "auto"; // Só permite selecio
-    </script>
 
     <script>
         function toggleSenha() {
