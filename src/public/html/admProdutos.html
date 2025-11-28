@@ -4,50 +4,167 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Painel Admin - Produtos</title>
+
   <style>
-    body { font-family: Arial; background:#f4f6fa; padding:40px; }
-    h1 { margin-bottom:20px; }
-    form { background:#fff; padding:20px; border-radius:12px; max-width:500px; box-shadow:0 8px 18px rgba(0,0,0,.08); }
-    input, select, textarea { width:100%; padding:12px; margin:8px 0; border:1px solid #ccc; border-radius:8px; }
-    button { background:#004e64; color:#fff; padding:14px; border:none; border-radius:8px; cursor:pointer; font-size:16px; width:100%; }
-    .preview { margin-top:20px; padding:20px; background:#fff; border-radius:12px; box-shadow:0 8px 18px rgba(0,0,0,.08); }
+    body {
+        font-family: Arial, sans-serif;
+        background: #eef2f7;
+        padding: 30px;
+        display: flex;
+        justify-content: center;
+    }
+
+    h1 {
+        text-align: center;
+        margin-bottom: 25px;
+        color: #003a4d;
+    }
+
+    .container {
+        width: 100%;
+        max-width: 650px;
+    }
+
+    form {
+        background: #ffffff;
+        padding: 25px;
+        border-radius: 16px;
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+        margin-bottom: 20px;
+    }
+
+    input, select, textarea {
+        width: 100%;
+        padding: 12px;
+        margin: 10px 0;
+        border: 1px solid #cfd6dd;
+        border-radius: 10px;
+        font-size: 15px;
+    }
+
+    input:focus, select:focus, textarea:focus {
+        outline: none;
+        border-color: #007f99;
+        box-shadow: 0 0 4px rgba(0, 127, 153, 0.4);
+    }
+
+    label {
+        font-weight: bold;
+        margin-top: 12px;
+        display: block;
+        color: #003a4d;
+    }
+
+    button {
+        margin-top: 15px;
+        background: #007f99;
+        color: #fff;
+        padding: 14px;
+        border: none;
+        border-radius: 10px;
+        font-size: 17px;
+        cursor: pointer;
+        width: 100%;
+        transition: 0.2s;
+    }
+
+    button:hover {
+        background: #005f73;
+    }
+
+    .message {
+        padding: 12px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+        display: none;
+        text-align: center;
+    }
+
+    .success {
+        background-color: #d4edda;
+        color: #155724;
+        border: 1px solid #b5e4c3;
+    }
+
+    .error {
+        background-color: #f8d7da;
+        color: #721c24;
+        border: 1px solid #e4b5b9;
+    }
+
+    /* ---- Inputs de imagem ---- */
+    .image-row {
+        display: flex;
+        gap: 15px;
+        margin-top: 15px;
+    }
+
+    .image-group {
+        flex: 1;
+    }
+
+    .image-group input {
+        padding: 8px;
+    }
+
+    .preview {
+        background: #ffffff;
+        padding: 20px;
+        border-radius: 16px;
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+        margin-top: 30px;
+        text-align: center;
+    }
   </style>
 </head>
+
 <body>
-  <h1>Painel Admin - Adicionar Produto</h1>
+<div class="container">
+    <button class="btn-voltar" onclick="history.back()">← Voltar</button>
+    <h1>Painel Admin — Adicionar Produto</h1>
+    
+    <div id="message" class="message"></div>
 
-  <form id="formProduto">
-    <input type="text" id="nome" placeholder="Nome do produto" required>
-    <input type="text" id="categoria" placeholder="Categoria" required>
-    <input type="text" id="preco" placeholder="Preço" required>
-    <textarea id="descricao" placeholder="Descrição" required></textarea>
-    <input type="text" id="img" placeholder="URL da imagem" required>
-    <button type="submit">Adicionar Produto</button>
-  </form>
+    <form id="formProduto" enctype="multipart/form-data">
 
-  <div class="preview" id="preview"></div>
+        <label>Nome do Produto</label>
+        <input type="text" id="nome" name="nome" placeholder="Ex: Teclado Mecânico RGB" required>
 
-  <script>
-    // Apenas exibe preview. Para salvar realmente no JSON, precisa backend.
-    const form = document.getElementById('formProduto');
-    const preview = document.getElementById('preview');
+        <label>Categoria</label>
+        <select id="category_id" name="category_id" required>
+            <option value="">Selecione uma Categoria</option>
+        </select>
 
-    form.addEventListener('submit', e => {
-      e.preventDefault();
+        <label>Preço</label>
+        <input type="number" id="preco" name="preco" step="0.01" placeholder="Ex: 1200.50" required>
 
-      const produto = {
-        nome: nome.value,
-        categoria: categoria.value,
-        preco: preco.value,
-        descricao: descricao.value,
-        img: img.value
-      };
+        <label>Quantidade</label>
+        <input type="number" id="quantidade" name="quantidade" placeholder="Quantidade em estoque" required>
 
-      preview.innerHTML = `
-        <h2>Produto Gerado:</h2>
-        <pre>${JSON.stringify(produto, null, 2)}</pre>
-      `;
-    });
-  </script>
+        <label>Descrição</label>
+        <textarea id="descricao" name="descricao" rows="4" placeholder="Descrição do produto..." required></textarea>
+
+        <label>Imagens do Produto (Exatamente 2):</label>
+
+        <div class="image-row">
+            <div class="image-group">
+                <label>Imagem 1</label>
+                <input type="file" name="image1" accept="image/*" required>
+            </div>
+
+            <div class="image-group">
+                <label>Imagem 2</label>
+                <input type="file" name="image2" accept="image/*" required>
+            </div>
+        </div>
+
+        <button type="submit">Adicionar Produto</button>
+    </form>
+
+    <div class="preview" id="preview"></div>
+
+</div>
+
+
 </body>
 </html>

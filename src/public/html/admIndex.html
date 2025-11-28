@@ -9,32 +9,39 @@
 </head>
 
 <body>
-    <header>
-        <nav>
-            <div class="nav-content">
-                <div class="nav-img">
-                    <img class="nav-img-logo" src="/src/public/assets/img/logo.png">
+     <!-- ====================== HEADER NOVO ======================= -->
+
+    <header class="op-header">
+        <nav class="op-nav">
+            <div class="op-container">
+
+                <a href="index.html" class="op-logo">
+                    <img src="../assets/img/logo.png" alt="OmegaPetro Logo">
+                </a>
+
+                <div class="op-menu" id="navMenu">
+
+                    <a href="produtos.html">Produtos</a>
+                    <a href="admIndex.html" id="dashboardLink" style="display:none;">Dashboard</a>
+                    <a href="carrinho.html">Carrinho</a>
+
+                    <div class="op-login nav-btn-container">
+                        <a href="login.html" id="loginLink">
+                            <img src="../assets/img/login.png" alt="">
+                        </a>
+                    </div>
+
                 </div>
-                <div class="nav-navegacao">
-                    <a href="produtos.html">
-                        <p>Produtos</p>
-                    </a>
-                    <a href="">
-                        <p>Dashboard</p>
-                    </a>
-                    <a href="">
-                        <p>Carrinho</p>
-                    </a>
-                </div>
-            </div>
-            <div class="nav-content">
-                <div class="nav-btn-container">
-                    <a href="index.html"><button class="nav-btn-entrar">Sair</button></a>
-                </div>
+
+                <button class="op-hamburger" id="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+
             </div>
         </nav>
     </header>
-
     <!-- CONTEÚDO PRINCIPAL -->
     <main class="container">
 
@@ -49,7 +56,7 @@
                 Acompanhe em tempo real o desempenho das vendas, métricas de estoque e análises detalhadas do negócio.
             </p>
 
-            <button class="btn azul">Acessar Dashboard →</button>
+            <a href="admRelatorio.html" class="btn azul">Acessar Dashboard →</a>
         </div>
 
         <!-- CARD 2 -->
@@ -63,10 +70,15 @@
                 Controle todo o catálogo de equipamentos industriais, atualize dados e acompanhe estoque.
             </p>
 
-            <button class="btn laranja">Gerenciar Catálogo →</button>
+            <a href="admProdutos.html" class="btn laranja">Gerenciar Catálogo →</a>
         </div>
 
     </main>
 
+   <!-- =================== HEADER JS ADM =================== -->
+
+
+
 </body>
+
 </html>

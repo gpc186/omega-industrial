@@ -14,7 +14,7 @@
         <nav>
             <div class="nav-content">
                 <div class="nav-img">
-                    <img class="nav-img-logo" src="/src/public/assets/img/logo.png">
+                    <img class="nav-img-logo" src="../assets/img/logo.png">
                 </div>
                 <div class="nav-navegacao">
                     <a href="produtos.html">
@@ -69,78 +69,227 @@
     </main>
 
     <script>
-        const lista = document.getElementById("listaProdutos");
-        const busca = document.getElementById("busca");
-        const filtroCategoria = document.getElementById("filtroCategoria");
+    const API_URL = 'http://localhost:3000/api';
+    const lista = document.getElementById("listaProdutos");
+    const busca = document.getElementById("busca");
+    const filtroCategoria = document.getElementById("filtroCategoria");
 
-        let produtos = []; // Variável global para guardar os dados originais
+    let produtos = [];
+    let categorias = [];
 
-        // 1. Carregar JSON (Verifique se o caminho '../json/products.json' está correto para sua estrutura de pastas)
-        fetch('../json/products.json')
-            .then(res => res.json())
-            .then(data => {
-                produtos = data; // Salva os dados na variável global
-                renderProdutos(produtos); // Renderiza tudo inicialmente
-            })
-            .catch(error => {
-                console.error("Erro ao carregar JSON:", error);
-                lista.innerHTML = "<p>Erro ao carregar produtos.</p>";
-            });
+    // Verificar se está logado
+    const token = localStorage.getItem('token');
+    const user = JSON.parse(localStorage.getItem('user') || '{}');
 
-        // 2. Função de Renderização (Cria os Cards)
-        function renderProdutos(listaDeProdutos) {
-            lista.innerHTML = ""; // Limpa a tela antes de adicionar
+    // Atualizar navegação
+    const navLogin = document.querySelector('.nav-btn-container');
+    if (token && user.nome) {
+        navLogin.innerHTML = `
+            <span style="color: #004e64; margin-right: 1rem;">Olá, ${user.nome.split(' ')[0]}</span>
+            <button class="nav-btn-entrar" onclick="logout()">Sair</button>
+        `;
+    }
 
-            if (listaDeProdutos.length === 0) {
-                lista.innerHTML = "<p>Nenhum produto encontrado.</p>";
-                return;
+    function logout() {
+        localStorage.removeItem('token');
+        localStorage.removeItem('user');
+        window.location.href = 'index.html';
+    }
+
+    // Carregar produtos da API
+    async function carregarProdutos() {
+        try {
+            lista.innerHTML = '<p style="text-align:center; width:100%; color:#666;">Carregando produtos...</p>';
+            
+            const response = await fetch(`${API_URL}/product/all`);
+            const data = await response.json();
+            
+            if (data.ok && data.produtos) {
+                produtos = data.produtos;
+                renderProdutos(produtos);
+            } else {
+                lista.innerHTML = '<p style="text-align:center; width:100%;">Nenhum produto encontrado.</p>';
             }
+        } catch (error) {
+            console.error('Erro ao carregar produtos:', error);
+            lista.innerHTML = '<p style="text-align:center; width:100%; color:red;">Erro ao carregar produtos. Verifique se a API está rodando.</p>';
+        }
+    }
 
-            listaDeProdutos.forEach(p => {
-                const card = document.createElement("div");
-                card.className = "card-produto";
+    // Carregar categorias
+    async function carregarCategorias() {
+        try {
+            const response = await fetch(`${API_URL}/category/getAll`);
+            const data = await response.json();
+            
+            if (data.ok && data.categorias) {
+                categorias = data.categorias;
+                preencherFiltroCategoria();
+            }
+        } catch (error) {
+            console.error('Erro ao carregar categorias:', error);
+        }
+    }
 
-                // Formatação correta de moeda BRL
-                // O Number(p.preco) garante que seja tratado como numero antes de formatar
-                const precoFormatado = Number(p.preco).toLocaleString('pt-BR', {
-                    style: 'currency',
-                    currency: 'BRL'
-                });
+    // Preencher dropdown de categorias
+    function preencherFiltroCategoria() {
+        const dropdownOptions = document.getElementById('dropdownOptions');
+        const selectReal = document.getElementById('filtroCategoria');
+        
+        // Limpar opções antigas
+        dropdownOptions.innerHTML = '<div data-value="">Todas categorias</div>';
+        selectReal.innerHTML = '<option value="">Todas categorias</option>';
+        
+        // Adicionar categorias
+        categorias.forEach(cat => {
+            // Dropdown visual
+            const div = document.createElement('div');
+            div.dataset.value = cat.nome;
+            div.textContent = cat.nome;
+            dropdownOptions.appendChild(div);
+            
+            // Select real
+            const option = document.createElement('option');
+            option.value = cat.nome;
+            option.textContent = cat.nome;
+            selectReal.appendChild(option);
+        });
+        
+        // Re-adicionar eventos de click
+        setupDropdownEvents();
+    }
 
-                // ATENÇÃO: Verifique se no seu JSON a imagem chama "img" ou "imagem"
-                // Aqui estou usando p.img conforme seu primeiro script.
-                card.innerHTML = `
-                    <img src="${p.imagem}" alt="${p.nome}" />
-                    <span class="categoria">${p.categoria}</span>
-                    <h3>${p.nome}</h3>
-                    <p>${p.descricao}</p>
-                    <p class="preco">${precoFormatado}</p>
-                    <button class="btn-comprar">Comprar Agora →</button>
-                `;
+    // Função de Renderização
+    function renderProdutos(listaDeProdutos) {
+        lista.innerHTML = "";
 
-                lista.appendChild(card);
-            });
+        if (listaDeProdutos.length === 0) {
+            lista.innerHTML = "<p>Nenhum produto encontrado.</p>";
+            return;
         }
 
-        // 3. Função de Filtragem
-        function aplicarFiltros() {
-            const termoBusca = busca.value.toLowerCase();
-            const categoriaSelecionada = filtroCategoria.value;
+        listaDeProdutos.forEach(p => {
+            const card = document.createElement("div");
+            card.className = "card-produto";
 
-            const produtosFiltrados = produtos.filter(p => {
-                const matchTexto = p.nome.toLowerCase().includes(termoBusca) || p.descricao.toLowerCase().includes(termoBusca);
-                const matchCategoria = categoriaSelecionada === "" || p.categoria === categoriaSelecionada;
-
-                return matchTexto && matchCategoria;
+            const precoFormatado = Number(p.preco).toLocaleString('pt-BR', {
+                style: 'currency',
+                currency: 'BRL'
             });
 
-            renderProdutos(produtosFiltrados);
+            // Usar a primeira imagem do array ou uma imagem placeholder
+            const imgUrl = p.image_urls && p.image_urls.length > 0 
+                ? `http://localhost:3000${p.image_urls[0]}`
+                : 'https://via.placeholder.com/350x250?text=Sem+Imagem';
+
+            card.innerHTML = `
+                <img src="${imgUrl}" alt="${p.nome}" onerror="this.src='https://via.placeholder.com/350x250?text=Sem+Imagem'" />
+                <span class="categoria">${p.categoria_nome || 'Sem Categoria'}</span>
+                <h3>${p.nome}</h3>
+                <p>${p.descricao || 'Sem descrição'}</p>
+                <p class="preco">${precoFormatado}</p>
+                <button class="btn-comprar" onclick="adicionarAoCarrinho(${p.id})">
+                    Adicionar ao Carrinho →
+                </button>
+            `;
+
+            lista.appendChild(card);
+        });
+    }
+
+    // Função de Filtragem
+    function aplicarFiltros() {
+        const termoBusca = busca.value.toLowerCase();
+        const categoriaSelecionada = filtroCategoria.value;
+
+        const produtosFiltrados = produtos.filter(p => {
+            const matchTexto = p.nome.toLowerCase().includes(termoBusca) || 
+                              (p.descricao && p.descricao.toLowerCase().includes(termoBusca));
+            const matchCategoria = categoriaSelecionada === "" || 
+                                  p.categoria_nome === categoriaSelecionada;
+
+            return matchTexto && matchCategoria;
+        });
+
+        renderProdutos(produtosFiltrados);
+    }
+
+    // Adicionar ao carrinho
+    async function adicionarAoCarrinho(productId) {
+        if (!token) {
+            alert('Você precisa estar logado para adicionar ao carrinho!');
+            window.location.href = 'login.html';
+            return;
         }
 
-        // 4. Event Listeners (Ouvem a digitação e o click)
-        busca.addEventListener("input", aplicarFiltros);
-        filtroCategoria.addEventListener("change", aplicarFiltros);
-    </script>
+        try {
+            const response = await fetch(`${API_URL}/cart/add`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify({
+                    productId: productId,
+                    quantity: 1
+                })
+            });
+
+            const data = await response.json();
+
+            if (response.ok) {
+                alert('Produto adicionado ao carrinho!');
+            } else {
+                alert(data.error || 'Erro ao adicionar ao carrinho');
+            }
+        } catch (error) {
+            console.error('Erro:', error);
+            alert('Erro ao conectar com o servidor');
+        }
+    }
+
+    // Event Listeners
+    busca.addEventListener("input", aplicarFiltros);
+    filtroCategoria.addEventListener("change", aplicarFiltros);
+
+    // Setup dropdown events (do código original)
+    function setupDropdownEvents() {
+        const display = document.getElementById("dropdownTrigger");
+        const options = document.getElementById("dropdownOptions");
+        const selectReal = document.getElementById("filtroCategoria");
+
+        display.addEventListener("click", (e) => {
+            e.stopPropagation();
+            options.classList.toggle("open");
+            display.classList.toggle("active");
+        });
+
+        options.querySelectorAll("div").forEach(item => {
+            item.addEventListener("click", () => {
+                const value = item.dataset.value;
+                display.textContent = item.textContent;
+                options.querySelectorAll("div").forEach(i => i.classList.remove("selected"));
+                item.classList.add("selected");
+                selectReal.value = value;
+                selectReal.dispatchEvent(new Event("change"));
+                options.classList.remove("open");
+                display.classList.remove("active");
+            });
+        });
+
+        document.addEventListener("click", () => {
+            options.classList.remove("open");
+            display.classList.remove("active");
+        });
+    }
+
+    // Inicializar
+    document.addEventListener("DOMContentLoaded", () => {
+        setupDropdownEvents();
+        carregarCategorias();
+        carregarProdutos();
+    });
+</script>
 
     <script>
         document.addEventListener("DOMContentLoaded", () => {
