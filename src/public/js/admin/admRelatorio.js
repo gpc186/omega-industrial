@@ -59,9 +59,10 @@ document.addEventListener('DOMContentLoaded', function () {
 // ===================== AUTENTICAÇÃO =====================
 function checkAuthentication() {
     const token = localStorage.getItem('token');
-    const userRole = localStorage.getItem('userRole');
+    const data = localStorage.getItem('user');
+    const user = JSON.parse(data)
 
-    if (!token || userRole !== 'adm') {
+    if (!token || user.role !== 'adm') {
         // Redirecionar para login se não estiver autenticado ou não for admin
         window.location.href = 'login.html';
     }
@@ -69,10 +70,8 @@ function checkAuthentication() {
 
 function logout() {
     localStorage.removeItem('token');
-    localStorage.removeItem('userId');
-    localStorage.removeItem('userRole');
-    localStorage.removeItem('userName');
-    window.location.href = 'login.html';
+    localStorage.removeItem('user');
+    window.location.href = '/login';
 }
 
 // ===================== CARREGAMENTO DE DADOS =====================
