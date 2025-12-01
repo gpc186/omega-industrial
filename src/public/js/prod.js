@@ -1,5 +1,5 @@
 // ===================== CONFIGURAÇÕES GLOBAIS =====================
-const API_BASE_URL = 'http://localhost:3000/api';
+const API_BASE_URL = 'http://localhost:4000/api';
 let currentProduct = null;
 let relatedProducts = [];
 
@@ -54,20 +54,20 @@ function initHamburgerMenu() {
 // ===================== CARREGAMENTO DINÂMICO DO PRODUTO =====================
 async function loadProductFromURL() {
     try {
-        // Obter o ID do produto da URL (ex: prod.html?id=1)
+        // Obter o ID do produto da URL (ex: /produto?id=1)
         const urlParams = new URLSearchParams(window.location.search);
         const productId = urlParams.get('id');
 
         if (!productId) {
             showError('ID do produto não fornecido. Redirecionando para produtos...');
             setTimeout(() => {
-                window.location.href = 'produtos.html';
+                window.location.href = '/produtos';
             }, 2000);
             return;
         }
 
         // Buscar dados do produto no backend
-        const response = await fetch(`${API_BASE_URL}/produto/${productId}/product`);
+        const response = await fetch(`${API_BASE_URL}/product/${productId}/product`);
 
         if (!response.ok) {
             throw new Error('Produto não encontrado');
@@ -162,7 +162,7 @@ function updateSpecifications(product) {
 
     // Especificações padrão baseadas no produto
     const specs = [
-        { label: 'Categoria', value: product.category_id || 'Não especificada' },
+        { label: 'Categoria', value: product.categoria_nome || 'Não especificada' },
         { label: 'Quantidade em Estoque', value: `${product.quantidade || 0} unidades` },
         { label: 'Preço Unitário', value: formatCurrency(product.preco) },
         { label: 'Disponibilidade', value: product.quantidade > 0 ? 'Em estoque' : 'Fora de estoque' },
@@ -196,7 +196,7 @@ function changeImage(index) {
 // ===================== CARREGAR PRODUTOS RELACIONADOS =====================
 async function loadRelatedProducts() {
     try {
-        const response = await fetch(`${API_BASE_URL}/produto/all`);
+        const response = await fetch(`${API_BASE_URL}/product/all`);
 
         if (!response.ok) {
             throw new Error('Erro ao buscar produtos');
@@ -233,7 +233,7 @@ function loadCarouselProducts(products) {
         card.className = 'card';
         card.style.cursor = 'pointer';
         card.onclick = () => {
-            window.location.href = `prod.html?id=${product.id}`;
+            window.location.href = `/produto?id=${product.id}`;
         };
 
         const img = document.createElement('img');
@@ -284,15 +284,14 @@ async function addToCart(product) {
                 'Authorization': `Bearer ${token}`
             },
             body: JSON.stringify({
-                user_id: userId,
-                product_id: product.id,
+                productId: product.id,
                 quantidade: 1,
-                preco: product.preco
             })
         });
 
         if (!response.ok) {
-            throw new Error('Erro ao adicionar ao carrinho');
+            console.log(response);
+            throw new Error("Não foi possivel adicionar ao carrinho!");
         }
 
         // Feedback visual

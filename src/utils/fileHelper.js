@@ -23,10 +23,10 @@ function deleteUploadedFiles(files) {
     });
 };
 
-function deleteProductImage(img_urls) {
-    if(!img_urls || !Array.isArray(img_urls)) return;
+function deleteProductImage(image_urls) {
+    if(!image_urls || !Array.isArray(image_urls)) return;
 
-    img_urls.forEach(url =>{
+    image_urls.forEach(url =>{
         const filePath = path.join(__dirname, '../../', url);
         deleteFiles(filePath);
     });

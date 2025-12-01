@@ -4,7 +4,6 @@ const authRoute = require('./routes/authRoute');
 const path = require('path');
 const cors = require('cors');
 // const errorHandler = require('./middleware/errorHandler')
-const auth = require('./middleware/authMiddleware');
 const produtoRoute = require('./routes/produtoRoute');
 const categoryRoute = require('./routes/categoryRoute');
 const cartRoute = require('./routes/cartRoute');
