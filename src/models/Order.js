@@ -102,7 +102,7 @@ class Order {
       SELECT 
         oi.*,
         p.nome as produto_nome,
-        p.img_url,
+        p.img_urls,
         (oi.quantidade * oi.preco_unidade) as subtotal
       FROM order_items oi
       JOIN produto p ON oi.product_id = p.id

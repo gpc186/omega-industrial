@@ -25,7 +25,7 @@ export function isAuthenticated() {
 
 export function isAdmin() {
     const user = getUser();
-    return user && user.role === "admin";
+    return user && user.role === "adm";
 }
 
 export function logout() {
