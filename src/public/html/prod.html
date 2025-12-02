@@ -22,7 +22,7 @@
                     <a href="/produtos">
                         <p>Produtos</p>
                     </a>
-                    <a href="admIndex.html">
+                    <a href="/admIndex">
                         <p>Dashboard</p>
                     </a>
                     <a href="/carrinho">
@@ -32,7 +32,7 @@
             </div>
             <div class="nav-content" style="justify-content: end;">
                 <div class="nav-login">
-                    <a href="login.html">
+                    <a href="/login">
                         <p>Login</p>
                         <img src="../assets/img/login.png" style="width: 4dvh;" alt="Login Icon">
                     </a>
@@ -80,18 +80,11 @@
                             </ul>
                         </div>
                 
-                        <button class="btt-buy">Adicionar ao Carrinho</button>
+                        <button class="btt-buy" id="bttBuy">Adicionar ao Carrinho</button>
                     </div>
                 </div>
                 <div class="a">
                     <hr>
-                </div>
-                <!-- Descrição Detalhada -->
-                <div class="desc_prod">
-                    <h2>Descrição Detalhada do Produto</h2>
-                    <p>
-                        Carregando informações detalhadas do produto...
-                    </p>
                 </div>
             </div>
         </section>
@@ -140,7 +133,9 @@
             <p>© 2025 Omega Petro. Todos os direitos reservados.</p>
         </div>
     </footer>
-
+    
+    <script type="module" src="../js/auth.js"></script>
+    <script type="module" src="../js/checkAuth.js"></script>
     <script src="../js/prod.js"></script>
 </body>
 </html>

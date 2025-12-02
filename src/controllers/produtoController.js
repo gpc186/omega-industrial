@@ -20,12 +20,13 @@ async function listarTodos(req, res) {
 async function listarPorId(req, res) {
     try {
         const { id } = req.params;
-        const produto = await Product.findByPk(id);
+        const produto = await Product.findById(id);
 
         if (!produto) {
             return res.status(404).json({ ok: false, error: "Produto não encontrado!" });
         }
-
+        console.log(produto);
+        
         return res.status(200).json({
             ok: true,
             message: "Produto listado por ID com sucesso!",
