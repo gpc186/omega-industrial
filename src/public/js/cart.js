@@ -39,13 +39,14 @@ async function carregarCarrinho() {
         });
 
         const data = await handleResponse(response);
+        console.log(data.cart);
         
-        if (!data.items || data.items.length === 0) {
+        if (!data.cart || data.cart.length === 0) {
             mostrarCarrinhoVazio();
             return;
         }
 
-        renderizarCarrinho(data.items);
+        renderizarCarrinho(data.cart);
         atualizarTotais();
         
     } catch (error) {
@@ -73,37 +74,36 @@ function renderizarCarrinho(items) {
     const cartItems = document.getElementById('cartItems');
     
     cartItems.innerHTML = items.map(item => `
-        <div class="card-item" data-product-id="${item.product._id}">
+        <div class="card-item" data-product-id="${item.product_id}">
             <img class="card-item__image" 
-                 src="${item.product.image || '../assets/img/placeholder.png'}" 
-                 alt="${item.product.nome}"
-                 onerror="this.src='../assets/img/placeholder.png'">
+                 src="${JSON.parse(item.image_urls)[0   ]}" 
+                 alt="${item.nome}">
             
             <div class="card-item__info">
                 <div class="card-item__details">
-                    <h6>${item.product.nome}</h6>
-                    <p>${item.product.description || 'Sem descrição'}</p>
+                    <h6>${item.nome}</h6>
+                    <p>${item.description || 'Sem descrição'}</p>
                 </div>
                 
                 <div class="card-item__quantity">
-                    <button onclick="diminuirQuantidade('${item.product._id}', ${item.quantity})">-</button>
+                    <button onclick="diminuirQuantidade('${item.product_id}', ${item.quantidade})">-</button>
                     <input type="number" 
-                           value="${item.quantity}" 
+                           value="${item.quantidade}" 
                            min="1" 
                            readonly>
-                    <button onclick="aumentarQuantidade('${item.product._id}', ${item.quantity})">+</button>
+                    <button onclick="aumentarQuantidade('${item.product_id}', ${item.quantidade})">+</button>
                 </div>
             </div>
             
             <div class="card-item__actions">
                 <div class="card-item__remove">
-                    <button onclick="removerItem('${item.product._id}')" title="Remover item">
+                    <button onclick="removerItem('${item.product_id}')" title="Remover item">
                         🗑️
                     </button>
                 </div>
                 
                 <div class="card-item__price">
-                    R$ ${(item.product.preco * item.quantity).toFixed(2).replace('.', ',')}
+                    R$ ${(item.preco * item.quantidade).toFixed(2).replace('.', ',')}
                 </div>
             </div>
         </div>
@@ -202,7 +202,7 @@ async function finalizarCompra() {
         
         if (!token) {
             alert('Você precisa estar logado para finalizar a compra!');
-            window.location.href = '../pages/login.html';
+            window.location.href = '/login';
             return;
         }
 
@@ -216,9 +216,10 @@ async function finalizarCompra() {
         });
 
         const data = await handleResponse(response);
+        const dados = JSON.parse(data)
         
-        alert('Pedido realizado com sucesso!');
-        window.location.href = '../pages/pedidos.html'; // Redirecionar para página de pedidos
+        alert(`Pedido realizado com sucesso! ID de compra: ${dados.compra_id}, Numero da ordem:${dados.order_numero}, total: ${dados.total_preco}`);
+        window.location.href = '/produtos';
         
     } catch (error) {
         console.error('Erro ao finalizar compra:', error);

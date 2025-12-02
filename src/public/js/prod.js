@@ -7,11 +7,20 @@ let relatedProducts = [];
 document.addEventListener('DOMContentLoaded', () => {
     // Inicializar o menu hambúrguer
     initHamburgerMenu();
+
+    const user = JSON.parse(localStorage.getItem('user'));
+
+    console.log(user);
+    
+    if (!user) {
+        const buttonBuy = document.getElementById("bttBuy");
+        buttonBuy.textContent = 'Precisa logar antes!';
+        buttonBuy.setAttribute('disabled', true)
+    }
     
     // Carregar dados do produto baseado no ID da URL
     loadProductFromURL();
     
-    // Inicializar o carrossel de produtos relacionados
     const carousel = new ProductCarousel();
     
     console.log('JavaScript carregado com sucesso!');
@@ -274,8 +283,6 @@ async function addToCart(product) {
             window.location.href = 'login.html';
             return;
         }
-
-        const userId = localStorage.getItem('userId');
 
         const response = await fetch(`${API_BASE_URL}/cart/add`, {
             method: 'POST',
