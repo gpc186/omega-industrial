@@ -9,4 +9,8 @@ router.post('/login', authController.login)
 
 router.get('/me', auth, authController.me)
 
+router.get("/validate-token", auth, (req, res) => {
+    res.json({ ok: true });
+});
+
 module.exports = router;
