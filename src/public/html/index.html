@@ -15,32 +15,28 @@
 
     <!-- Header -->
 
-    <header>
-        <nav>
-            <div class="nav-content">
-                <div class="nav-img">
-                    <a href="#">
-                        <img class="nav-img-logo" src="../assets/img/logo.png" alt="OmegaPetro Logo">
-                    </a>
-                </div>
-                <div class="nav-navegacao" id="navMenu">
-                    <a href="/produtos">
-                        <p>Produtos</p>
-                    </a>
-                    <a href="/adm/index">
-                        <p>Dashboard</p>
-                    </a>
-                    <a href="/carrinho">
-                        <p>Carrinho</p>
-                    </a>
-                </div>
-            </div>
-            <div class="nav-content" style="justify-content: end;">
-                <div class="nav-login">
-                    <a href="/login">
-                        <p>Login</p>
-                        <img src="../assets/img/login.png" style="width: 4dvh;" alt="Login Icon">
-                    </a>
+    <!-- ====================== HEADER NOVO ======================= -->
+
+    <header class="op-header">
+        <nav class="op-nav">
+            <div class="op-container">
+
+                <a href="/index" class="op-logo">
+                    <img src="../assets/img/logo.png" alt="OmegaPetro Logo">
+                </a>
+
+                <div class="op-menu" id="navMenu">
+
+                    <a href="/produtos">Produtos</a>
+                    <a href="/adm/index" id="dashboardLink" style="display:none;">Dashboard</a>
+                    <a href="/carrinho">Carrinho</a>
+
+                    <div class="op-login nav-btn-container">
+                        <a href="#" id="loginLink">
+                            <img src="../assets/img/login.png" alt="">
+                        </a>
+                    </div>
+
                 </div>
 
                 <button class="op-hamburger" id="hamburger">
@@ -51,202 +47,187 @@
 
             </div>
         </nav>
-    </header>
-
-    <!-- Hero -->
-
-    <div id="carouselExampleFade" class="carousel slide carousel-fade">
-        <div class="carousel-inner">
-            <div class="carousel-item active hero-carousel">
-                <video src="../assets/videos/14763860_3840_2160_24fps.mp4" class="d-block w-100 hero-carousel-img"
-                    autoplay muted loop playsinline></video>
-                <div class="hero-carousel-content">
-                    <div class="hero-content-box">
-                        <h3>Encontre o Produto Químico Ideal</h3>
-                        <h5>Mais de 450 produtos petroquímicos em estoque. Busque por nome, aplicação ou segmento
-                            industrial.</h5>
-                        <a href="/produtos" class="hero-content-button">Ver Produtos</a>
+    </header>   
+    <main>
+        <!-- Hero -->
+        <div id="carouselExampleFade" class="carousel slide carousel-fade">
+            <div class="carousel-inner">
+                <div class="carousel-item active hero-carousel">
+                    <video src="../assets/videos/14763860_3840_2160_24fps.mp4" class="d-block w-100 hero-carousel-img"
+                        autoplay muted loop playsinline></video>
+                    <div class="hero-carousel-content">
+                        <div class="hero-content-box">
+                            <h3>Encontre o Produto Químico Ideal</h3>
+                            <h5>Mais de 450 produtos petroquímicos em estoque. Busque por nome, aplicação ou segmento
+                                industrial.</h5>
+                            <a href="/produtos" class="hero-content-button">Ver Produtos</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item hero-carousel">
+                    <video src="../assets/videos/2282013-uhd_3840_2024_24fps.mp4" class="d-block w-100 hero-carousel-img"
+                        autoplay muted loop playsinline></video>
+                    <div class="hero-carousel-content">
+                        <div class="hero-content-box">
+                            <h3>Soluções Essenciais que Transformam sua Indústria</h3>
+                            <h5>Transformamos recursos naturais em produtos petroquímicos
+                                de alta qualidade para impulsionar o crescimento do seu negócio.</h5>
+                            <a href="" class="hero-content-button" style="width: 10dvw;">Conheça a Empresa</a>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="carousel-item hero-carousel">
-                <video src="../assets/videos/2282013-uhd_3840_2024_24fps.mp4" class="d-block w-100 hero-carousel-img"
-                    autoplay muted loop playsinline></video>
-                <div class="hero-carousel-content">
-                    <div class="hero-content-box">
-                        <h3>Soluções Essenciais que Transformam sua Indústria</h3>
-                        <h5>Transformamos recursos naturais em produtos petroquímicos
-                            de alta qualidade para impulsionar o crescimento do seu negócio.</h5>
-                        <a href="" class="hero-content-button" style="width: 10dvw;">Conheça a Empresa</a>
-                    </div>
-                </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+        <!-- Apresentação da empresa -->
+        <div class="apresentacao-section">
+            <div class="apresentacao-content">
+                <h1 class="apresentacao-title">Olá! Seja bem-vindo(a) <br> à <b class="apresentacao-highlight">Omega
+                        Petro</b>.
+                </h1>
+                <p class="apresentacao-text">Fornecemos a robustez e a precisão que suas operações petroquímicas, de óleo
+                    e gás exigem. Nossa expertise garante a máxima segurança e eficiência.</p>
+                <button class="apresentacao-btn">Explore o catálogo</button>
+            </div>
+            <div class="apresentacao-image-wrapper">
+                <img src="../assets/img/Gemini_Generated_Image_fxq1p3fxq1p3fxq1.png" alt="Omega Petro Industrial" class="apresentacao-image">
             </div>
         </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-        </button>
-    </div>
-
-    <!-- Apresentação da empresa -->
-
-    <div class="apresentacao-section">
-        <div class="apresentacao-content">
-            <h1 class="apresentacao-title">Olá! Seja bem-vindo(a) <br> à <b class="apresentacao-highlight">Omega
-                    Petro</b>.
-            </h1>
-            <p class="apresentacao-text">Fornecemos a robustez e a precisão que suas operações petroquímicas, de óleo
-                e gás exigem. Nossa expertise garante a máxima segurança e eficiência.</p>
-            <button class="apresentacao-btn">Explore o catálogo</button>
-        </div>
-        <div class="apresentacao-image-wrapper">
-            <img src="../assets/img/Gemini_Generated_Image_fxq1p3fxq1p3fxq1.png" alt="Omega Petro Industrial" class="apresentacao-image">
-        </div>
-    </div>
-
-    <!-- Feedback -->
-
-    <div class="feedback-section">
-        <h1 class="mb-5">Feedback</h1>
-        <div class="feedback-cards-container">
-            <div class="card rounded-4 border-0 feedback-card">
-                <img src="../assets/img/braskem-logo.jpg"
-                    class="card-img-top rounded-top-4 feedback-card-img">
-                <div class="card-body rounded-bottom-4 feedback-card-body">
-                    <img src="../assets/img/citacao.png" class="feedback-card-logo">
-                    <p class="feedback-card-text">Os ativos entregues superaram nossas especificações técnicas e atenderam com rigor a todos os padrões de segurança industrial. Sua alta confiabilidade é fundamental para a integridade operacional de nossas unidades.</p>
-                    <div class="text-end pt-3">
-                        <a href="" class="feedback-card-company">Braskem</a>
+        <!-- Feedback -->
+        <div class="feedback-section">
+            <h1 class="mb-5">Feedback</h1>
+            <div class="feedback-cards-container">
+                <div class="card rounded-4 border-0 feedback-card">
+                    <img src="../assets/img/braskem-logo.jpg"
+                        class="card-img-top rounded-top-4 feedback-card-img">
+                    <div class="card-body rounded-bottom-4 feedback-card-body">
+                        <img src="../assets/img/citacao.png" class="feedback-card-logo">
+                        <p class="feedback-card-text">Os ativos entregues superaram nossas especificações técnicas e atenderam com rigor a todos os padrões de segurança industrial. Sua alta confiabilidade é fundamental para a integridade operacional de nossas unidades.</p>
+                        <div class="text-end pt-3">
+                            <a href="" class="feedback-card-company">Braskem</a>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="card rounded-4 border-0 feedback-card">
-                <img src="../assets/img/innova-logo.png"
-                    class="card-img-top rounded-top-4 feedback-card-img">
-                <div class="card-body rounded-bottom-4 feedback-card-body">
-                    <img src="../assets/img/citacao.png" class="feedback-card-logo">
-                    <p class="feedback-card-text">A qualidade dos equipamentos demonstrou total conformidade e a robustez esperada para nossas unidades, especialmente as que trabalham com produção de monômeros e poliestireno. Isso reflete o alto padrão do seu processo produtivo.</p>
-                    <div class="text-end pt-3">
-                        <a href="" class="feedback-card-company">Innova</a>
+                <div class="card rounded-4 border-0 feedback-card">
+                    <img src="../assets/img/innova-logo.png"
+                        class="card-img-top rounded-top-4 feedback-card-img">
+                    <div class="card-body rounded-bottom-4 feedback-card-body">
+                        <img src="../assets/img/citacao.png" class="feedback-card-logo">
+                        <p class="feedback-card-text">A qualidade dos equipamentos demonstrou total conformidade e a robustez esperada para nossas unidades, especialmente as que trabalham com produção de monômeros e poliestireno. Isso reflete o alto padrão do seu processo produtivo.</p>
+                        <div class="text-end pt-3">
+                            <a href="" class="feedback-card-company">Innova</a>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="card rounded-4 border-0 feedback-card">
-                <img src="../assets/img/petrobras-logo.png"
-                    class="card-img-top rounded-top-4 feedback-card-img">
-                <div class="card-body rounded-bottom-4 feedback-card-body">
-                    <img src="../assets/img/citacao.png" class="feedback-card-logo">
-                    <p class="feedback-card-text">A qualidade dos equipamentos fornecidos não só atendeu, mas superou nossas exigências técnicas. O cumprimento dos prazos de entrega foi impecável, o que é crucial para manter nosso cronograma operacional sem interrupções.</p>
-                    <div class="text-end pt-3">
-                        <a href="" class="feedback-card-company">Petrobras</a>
+                <div class="card rounded-4 border-0 feedback-card">
+                    <img src="../assets/img/petrobras-logo.png"
+                        class="card-img-top rounded-top-4 feedback-card-img">
+                    <div class="card-body rounded-bottom-4 feedback-card-body">
+                        <img src="../assets/img/citacao.png" class="feedback-card-logo">
+                        <p class="feedback-card-text">A qualidade dos equipamentos fornecidos não só atendeu, mas superou nossas exigências técnicas. O cumprimento dos prazos de entrega foi impecável, o que é crucial para manter nosso cronograma operacional sem interrupções.</p>
+                        <div class="text-end pt-3">
+                            <a href="" class="feedback-card-company">Petrobras</a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-
-    <!-- Seção de Lançamentos -->
-    <div class="lancamentos-section">
-        <h1>Lançamentos</h1>
-
-        <!-- Container do Carousel -->
-        <div id="lancamentos-carousel-container">
-            <!-- O JavaScript vai gerar o conteúdo aqui -->
-        </div>
-
-        <!-- Indicadores -->
-        <div id="lancamentos-indicators">
-            <!-- O JavaScript vai gerar os indicadores aqui -->
-        </div>
-    </div>
-
-    <!-- FAQ -->
-
-    <div class="faq-container">
-        <h1>FAQ</h1>
-
-        <div class="faq-item">
-            <div class="faq-question" onclick="toggleAnswer(this)">
-                <h3>Os equipamentos da Omega Petro atendem às normas de segurança e qualidade do setor petroquímico
-                    (NRs, ISOs, etc.)?</h3>
-                <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-                    stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M6 9l6 6 6-6" />
-                </svg>
+        <!-- Seção de Lançamentos -->
+        <div class="lancamentos-section">
+            <h1>Lançamentos</h1>
+            <!-- Container do Carousel -->
+            <div id="lancamentos-carousel-container">
+                <!-- O JavaScript vai gerar o conteúdo aqui -->
             </div>
-            <div class="faq-answer">
-                <p>Sim, todos os nossos equipamentos são projetados e fabricados seguindo rigorosamente as normas
-                    regulamentadoras e certificações internacionais do setor petroquímico, incluindo ISOs e NRs
-                    aplicáveis.</p>
+            <!-- Indicadores -->
+            <div id="lancamentos-indicators">
+                <!-- O JavaScript vai gerar os indicadores aqui -->
             </div>
         </div>
-
-        <div class="faq-item">
-            <div class="faq-question" onclick="toggleAnswer(this)">
-                <h3>Qual é a política de garantia e como funciona o suporte técnico para um cliente B2B?</h3>
-                <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-                    stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M6 9l6 6 6-6" />
-                </svg>
+        <!-- FAQ -->
+        <div class="faq-container">
+            <h1>FAQ</h1>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleAnswer(this)">
+                    <h3>Os equipamentos da Omega Petro atendem às normas de segurança e qualidade do setor petroquímico
+                        (NRs, ISOs, etc.)?</h3>
+                    <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M6 9l6 6 6-6" />
+                    </svg>
+                </div>
+                <div class="faq-answer">
+                    <p>Sim, todos os nossos equipamentos são projetados e fabricados seguindo rigorosamente as normas
+                        regulamentadoras e certificações internacionais do setor petroquímico, incluindo ISOs e NRs
+                        aplicáveis.</p>
+                </div>
             </div>
-            <div class="faq-answer">
-                <p>Oferecemos uma garantia padrão de 11 meses contra defeitos de fabricação. Nosso suporte técnico é
-                    exclusivo e ágil, com uma equipe de engenheiros especializados pronta para atendimento imediato e
-                    consultoria técnica. Detalhes sobre o SLA (Service Level Agreement) de atendimento são definidos em
-                    contrato.</p>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleAnswer(this)">
+                    <h3>Qual é a política de garantia e como funciona o suporte técnico para um cliente B2B?</h3>
+                    <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M6 9l6 6 6-6" />
+                    </svg>
+                </div>
+                <div class="faq-answer">
+                    <p>Oferecemos uma garantia padrão de 11 meses contra defeitos de fabricação. Nosso suporte técnico é
+                        exclusivo e ágil, com uma equipe de engenheiros especializados pronta para atendimento imediato e
+                        consultoria técnica. Detalhes sobre o SLA (Service Level Agreement) de atendimento são definidos em
+                        contrato.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleAnswer(this)">
+                    <h3>Como é feita a logística de entrega para grandes volumes ou equipamentos de grande porte?</h3>
+                    <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M6 9l6 6 6-6" />
+                    </svg>
+                </div>
+                <div class="faq-answer">
+                    <p>Trabalhamos com parceiros logísticos especializados em cargas pesadas e de grande porte. Oferecemos
+                        soluções personalizadas incluindo transporte dedicado, seguro de carga, rastreamento em tempo real e
+                        equipe técnica para acompanhamento da instalação quando necessário.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleAnswer(this)">
+                    <h3>É possível solicitar customizações nos equipamentos?</h3>
+                    <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M6 9l6 6 6-6" />
+                    </svg>
+                </div>
+                <div class="faq-answer">
+                    <p>Sim, oferecemos soluções sob medida para atender às necessidades específicas de cada cliente. Nossa
+                        equipe de engenharia trabalha em conjunto com você para desenvolver equipamentos customizados que
+                        atendam perfeitamente aos requisitos do seu projeto.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleAnswer(this)">
+                    <h3>Quais são os prazos de entrega para pedidos personalizados?</h3>
+                    <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M6 9l6 6 6-6" />
+                    </svg>
+                </div>
+                <div class="faq-answer">
+                    <p>Os prazos variam de acordo com a complexidade e especificações do projeto. Após a aprovação do
+                        projeto técnico, fornecemos um cronograma detalhado. Em média, equipamentos customizados levam de 60
+                        a 120 dias para fabricação e entrega.</p>
+                </div>
             </div>
         </div>
-
-        <div class="faq-item">
-            <div class="faq-question" onclick="toggleAnswer(this)">
-                <h3>Como é feita a logística de entrega para grandes volumes ou equipamentos de grande porte?</h3>
-                <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-                    stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M6 9l6 6 6-6" />
-                </svg>
-            </div>
-            <div class="faq-answer">
-                <p>Trabalhamos com parceiros logísticos especializados em cargas pesadas e de grande porte. Oferecemos
-                    soluções personalizadas incluindo transporte dedicado, seguro de carga, rastreamento em tempo real e
-                    equipe técnica para acompanhamento da instalação quando necessário.</p>
-            </div>
-        </div>
-
-        <div class="faq-item">
-            <div class="faq-question" onclick="toggleAnswer(this)">
-                <h3>É possível solicitar customizações nos equipamentos?</h3>
-                <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-                    stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M6 9l6 6 6-6" />
-                </svg>
-            </div>
-            <div class="faq-answer">
-                <p>Sim, oferecemos soluções sob medida para atender às necessidades específicas de cada cliente. Nossa
-                    equipe de engenharia trabalha em conjunto com você para desenvolver equipamentos customizados que
-                    atendam perfeitamente aos requisitos do seu projeto.</p>
-            </div>
-        </div>
-
-        <div class="faq-item">
-            <div class="faq-question" onclick="toggleAnswer(this)">
-                <h3>Quais são os prazos de entrega para pedidos personalizados?</h3>
-                <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-                    stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M6 9l6 6 6-6" />
-                </svg>
-            </div>
-            <div class="faq-answer">
-                <p>Os prazos variam de acordo com a complexidade e especificações do projeto. Após a aprovação do
-                    projeto técnico, fornecemos um cronograma detalhado. Em média, equipamentos customizados levam de 60
-                    a 120 dias para fabricação e entrega.</p>
-            </div>
-        </div>
-
-    </div>
+    </main>
 
     <!-- Footer -->
     <footer class="footer">
