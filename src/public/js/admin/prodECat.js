@@ -16,7 +16,7 @@ async function carregarCategorias(selectElement) {
         op.textContent = cat.nome;
         selectElement.appendChild(op);
     });
-
+    
     tabela.innerHTML = "";
     res.categorias.forEach(cat => {
         const tr = document.createElement("tr");
@@ -25,7 +25,7 @@ async function carregarCategorias(selectElement) {
                 <td>${cat.nome}</td>
                 <td>${cat.description || ""}</td>
                 <td>
-                    <button data-id="${cat.id}" class="btn-del-cat">Excluir</button>
+                    <button data-id="${cat.id}" class="btnExcluir btn-del-cat">Excluir</button>
                 </td>
             `;
         tabela.appendChild(tr);
