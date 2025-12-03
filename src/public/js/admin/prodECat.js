@@ -44,21 +44,21 @@ async function carregarProdutos() {
         const tr = document.createElement("tr");
 
         tr.innerHTML = `
-                    <td>${prod.id}</td>
-                    <td>${prod.nome}</td>
-                    <td>${prod.categoria_nome}</td>
-                    <td>R$ ${prod.preco}</td>
-                    <td>${prod.quantidade}</td>
-                    <td>
-                        ${(JSON.parse(prod.img_urls || "[]"))
+            <td>${prod.id}</td>
+            <td>${(JSON.parse(prod.img_urls || "[]"))
                 .map(url => `<img src="${url}" width="60">`)
                 .join("")}
-                    </td>
-                    <td>
-                        <button class="btnEditar" data-id="${prod.id}">Editar</button>
-                        <button class="btnExcluir" data-id="${prod.id}">Excluir</button>
-                    </td>
-                `;
+            </td>
+            <td>${prod.nome}</td>
+            <td>${prod.categoria_nome}</td>
+            <td>R$ ${prod.preco}</td>
+            <td>${prod.quantidade}</td>
+            <td class="actions">
+        <button class="btnEditar" data-id="${prod.id}">Editar</button>
+        <button class="btnExcluir" data-id="${prod.id}">Excluir</button>
+    </td>
+`;
+
 
         tabelaProdutos.appendChild(tr);
     });
@@ -158,3 +158,23 @@ function fecharModal() {
 // ========================================================
 carregarCategorias(selectCategoria);
 carregarProdutos();
+
+/* ===========================================
+   EVENTO DE EXCLUSÃO DE CATEGORIA
+   =========================================== */
+document.getElementById("listaCategorias").addEventListener("click", async e => {
+    if (!e.target.classList.contains("btn-del-cat")) return;
+
+    const id = e.target.dataset.id;
+
+    if (!confirm("Excluir esta categoria?")) return;
+
+    const res = await api.deletarCategoria(id);
+
+    if (res.ok) {
+        alert("Categoria removida!");
+        carregarCategorias(selectCategoria); // recarrega a tabela e o select
+    } else {
+        alert(res.error || "Erro ao excluir categoria");
+    }
+});
