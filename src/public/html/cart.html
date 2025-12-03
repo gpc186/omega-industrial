@@ -11,7 +11,7 @@
 </head>
 
 <body>
-     <!-- ====================== HEADER NOVO ======================= -->
+    <!-- ====================== HEADER NOVO ======================= -->
 
     <header class="op-header">
         <nav class="op-nav">
@@ -60,9 +60,16 @@
                     <span>Subtotal:</span>
                     <span id="subtotal">R$ 0,00</span>
                 </div>
-                <div class="totals-row">
-                    <span>Frete:</span>
-                    <span id="frete">R$ 0,00</span>
+                <div class="totals-row" style="display: block !important;">
+                    <div class="frete-row" style="display: flex;">
+                        <span>Frete:</span>
+                        <span id="frete">R$ 0,00</span>
+                    </div>
+                    <div style="display: block; justify-content: space-between;">
+                        <input type="text" id="cep" oninput="maskCEP(this)" placeholder="Digite seu CEP" maxlength="9">
+                        <button class="btn-frete" id="btnCalcularFrete">Calcular Frete</button>
+                        <div id="freteOpcoes"></div>
+                    </div>
                 </div>
                 <div class="totals-row">
                     <span>Total:</span>
@@ -72,6 +79,18 @@
             </div>
         </div>
     </div>
+
+    <script>
+        function maskCEP(input) {
+            let value = input.value.replace(/\D/g, ""); // remove tudo que não é número
+
+            if (value.length > 5) {
+                value = value.replace(/(\d{5})(\d)/, "$1-$2"); // adiciona o hífen
+            }
+
+            input.value = value;
+        }
+    </script>
 
     <script type="module" src="../js/auth.js"></script>
     <script type="module" src="../js/checkAuth.js"></script>

@@ -168,9 +168,6 @@ p {
         font-size: 1.3rem;
         color: #ffff;
     }
-}
-
-
 
     .main {
         padding: 100px 5% 30px;
@@ -387,6 +384,13 @@ p {
     border-bottom: 1px solid #eee;
 }
 
+.frete-row{
+        display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+    padding-bottom: 5px;
+}
+
 .totals-row:last-of-type {
     border-bottom: 2px solid #004e64;
     font-weight: 600;
@@ -400,6 +404,19 @@ p {
     border: none;
     color: white;
     padding: 12px;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn-frete{
+    height: 5dvh;
+    background-color: #f7931e;
+    border: none;
+    color: white;
+    padding: 1dvh;
     border-radius: 8px;
     font-size: 1rem;
     font-weight: 600;
