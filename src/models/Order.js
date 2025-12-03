@@ -2,7 +2,7 @@ const { query, pool } = require('../config/database');
 
 class Order {
   // Criar pedido
-  static async create(user_id, order_numero, total_preco, items, notes = null) {
+  static async create(user_id, order_numero, total_preco, items, notes = null, frete) {
     const connection = await pool.getConnection();
     
     try {
@@ -10,9 +10,9 @@ class Order {
 
       // Inserir pedido
       const [orderResult] = await connection.execute(
-        `INSERT INTO compra (user_id, order_numero, total_preco, notes, status)
+        `INSERT INTO compra (user_id, order_numero, total_preco, notes, status, frete)
          VALUES (?, ?, ?, ?, 'pending')`,
-        [user_id, order_numero, total_preco, notes]
+        [user_id, order_numero, total_preco, notes, frete]
       );
 
       const compra_id = orderResult.insertId;

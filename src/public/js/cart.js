@@ -1,3 +1,4 @@
+import { calcularFrete } from "/js/utils/frete.js";
 const API_URL = 'http://localhost:4000/api';
 
 // Funções auxiliares
@@ -27,7 +28,7 @@ async function handleResponse(response) {
 async function carregarCarrinho() {
     try {
         const token = getToken();
-        
+
         if (!token) {
             mostrarCarrinhoVazio('Faça login para ver seu carrinho');
             return;
@@ -40,7 +41,7 @@ async function carregarCarrinho() {
 
         const data = await handleResponse(response);
         console.log(data.cart);
-        
+
         if (!data.cart || data.cart.length === 0) {
             mostrarCarrinhoVazio();
             return;
@@ -48,7 +49,7 @@ async function carregarCarrinho() {
 
         renderizarCarrinho(data.cart);
         atualizarTotais();
-        
+
     } catch (error) {
         console.error('Erro ao carregar carrinho:', error);
         mostrarCarrinhoVazio('Erro ao carregar o carrinho. Tente novamente.');
@@ -63,7 +64,7 @@ function mostrarCarrinhoVazio(mensagem = 'Seu carrinho está vazio') {
             <p>Adicione produtos para continuar comprando</p>
         </div>
     `;
-    
+
     // Zerar totais
     document.getElementById('subtotal').textContent = 'R$ 0,00';
     document.getElementById('frete').textContent = 'R$ 0,00';
@@ -72,11 +73,11 @@ function mostrarCarrinhoVazio(mensagem = 'Seu carrinho está vazio') {
 
 function renderizarCarrinho(items) {
     const cartItems = document.getElementById('cartItems');
-    
+
     cartItems.innerHTML = items.map(item => `
         <div class="card-item" data-product-id="${item.product_id}">
             <img class="card-item__image" 
-                 src="${JSON.parse(item.image_urls)[0   ]}" 
+                 src="${JSON.parse(item.image_urls)[0]}" 
                  alt="${item.nome}">
             
             <div class="card-item__info">
@@ -113,7 +114,7 @@ function renderizarCarrinho(items) {
 async function aumentarQuantidade(productId, quantidadeAtual) {
     try {
         const novaQuantidade = quantidadeAtual + 1;
-        
+
         const response = await fetch(`${API_URL}/cart/${productId}/updateCart`, {
             method: 'PUT',
             headers: getAuthHeaders(),
@@ -122,7 +123,7 @@ async function aumentarQuantidade(productId, quantidadeAtual) {
 
         await handleResponse(response);
         await carregarCarrinho();
-        
+
     } catch (error) {
         console.error('Erro ao aumentar quantidade:', error);
         alert('Erro ao atualizar quantidade. Tente novamente.');
@@ -138,9 +139,9 @@ async function diminuirQuantidade(productId, quantidadeAtual) {
             }
             return;
         }
-        
+
         const novaQuantidade = quantidadeAtual - 1;
-        
+
         const response = await fetch(`${API_URL}/cart/${productId}/updateCart`, {
             method: 'PUT',
             headers: getAuthHeaders(),
@@ -149,7 +150,7 @@ async function diminuirQuantidade(productId, quantidadeAtual) {
 
         await handleResponse(response);
         await carregarCarrinho();
-        
+
     } catch (error) {
         console.error('Erro ao diminuir quantidade:', error);
         alert('Erro ao atualizar quantidade. Tente novamente.');
@@ -165,7 +166,7 @@ async function removerItem(productId) {
 
         await handleResponse(response);
         await carregarCarrinho();
-        
+
     } catch (error) {
         console.error('Erro ao remover item:', error);
         alert('Erro ao remover item. Tente novamente.');
@@ -179,18 +180,18 @@ async function atualizarTotais() {
         });
 
         const data = await handleResponse(response);
-        
-        const subtotal = data.totalPrice || 0;
-        const frete = 0; // Definir lógica de frete se necessário
-        const total = subtotal + frete;
-        
-        document.getElementById('subtotal').textContent = 
+
+        const subtotal = Number(data.total) || 0;
+        const frete = Number(window.ultimoCalculoFrete?.preco) || 0;
+        const total = Number(subtotal) + frete;
+
+        document.getElementById('subtotal').textContent =
             `R$ ${subtotal.toFixed(2).replace('.', ',')}`;
-        document.getElementById('frete').textContent = 
+        document.getElementById('frete').textContent =
             `R$ ${frete.toFixed(2).replace('.', ',')}`;
-        document.getElementById('total').textContent = 
+        document.getElementById('total').textContent =
             `R$ ${total.toFixed(2).replace('.', ',')}`;
-        
+
     } catch (error) {
         console.error('Erro ao atualizar totais:', error);
     }
@@ -199,10 +200,15 @@ async function atualizarTotais() {
 async function finalizarCompra() {
     try {
         const token = getToken();
-        
+
         if (!token) {
             alert('Você precisa estar logado para finalizar a compra!');
             window.location.href = '/login';
+            return;
+        }
+
+        if (!window.ultimoCalculoFrete) {
+            alert("Escolha um frete antes de finalizar a compra!");
             return;
         }
 
@@ -212,26 +218,69 @@ async function finalizarCompra() {
         const response = await fetch(`${API_URL}/orders/criarOrder`, {
             method: 'POST',
             headers: getAuthHeaders(),
-            body: JSON.stringify({ notes: null })
+            body: JSON.stringify({
+                notes: null,
+                frete: window.ultimoCalculoFrete
+            })
         });
 
         const data = await handleResponse(response);
         const dados = JSON.parse(data)
-        
+
         alert(`Pedido realizado com sucesso! ID de compra: ${dados.compra_id}, Numero da ordem:${dados.order_numero}, total: ${dados.total_preco}`);
         window.location.href = '/produtos';
-        
+
     } catch (error) {
         console.error('Erro ao finalizar compra:', error);
         alert('Erro ao finalizar compra. Tente novamente.');
     }
 }
 
+function calcularFreteFinal(){
+    const cep = document.getElementById("cep").value;
+    const subtotal = window.subtotalCarrinho || 0;
+
+    const opcoes = calcularFrete(cep, subtotal);
+
+    if (!opcoes) {
+        alert("CEP inválido!");
+        return;
+    }
+
+    const div = document.getElementById("freteOpcoes");
+    div.innerHTML = "";
+
+    opcoes.forEach(f => {
+        const btn = document.createElement("button");
+        btn.textContent = `${f.nome} - R$ ${f.preco.toFixed(2)} (${f.prazo})`;
+
+        btn.onclick = () => selecionarOpcaoFrete(f);
+
+        div.appendChild(btn);
+    });
+}
+
+function selecionarOpcaoFrete(frete) {
+    window.ultimoCalculoFrete = frete;
+
+    const subtotal = window.subtotalCarrinho || 0;
+    const total = subtotal + frete.preco;
+
+    document.getElementById("frete").textContent =
+        "R$ " + frete.preco.toFixed(2).replace('.', ',');
+
+    document.getElementById("total").textContent =
+        "R$ " + total.toFixed(2).replace('.', ',');
+
+    alert(`Frete selecionado: ${frete.nome} | R$ ${frete.preco.toFixed(2)}`);
+}
+
+
 // ==================== INICIALIZAÇÃO ====================
 
 document.addEventListener('DOMContentLoaded', () => {
     carregarCarrinho();
-    
+
     // Verificar autenticação e atualizar UI do header
     const token = getToken();
     if (!token) {
