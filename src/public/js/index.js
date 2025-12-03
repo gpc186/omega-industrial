@@ -1,3 +1,5 @@
+const API_URL = 'http://localhost:4000/api';
+
 // ========== MENU HAMBÚRGUER ==========
 const hamburger = document.getElementById('hamburger');
 const navMenu = document.getElementById('navMenu');
@@ -69,8 +71,6 @@ async function carregarLancamentos() {
             })
             .slice(0, 6) // Pega apenas os 6 primeiros (mais recentes)
             .map(produto => {
-                // Processar a URL da imagem
-                let imagemUrl = '../assets/img/Listas_MaioresEmpresasPrivadasEUA_231120_Getty.jpg';
                 
                 if (produto.image_urls) {
                     // Se image_urls é uma string JSON, fazer parse
@@ -84,18 +84,13 @@ async function carregarLancamentos() {
                     } else if (Array.isArray(produto.image_urls)) {
                         imageArray = produto.image_urls;
                     }
-                    
-                    // Se tem imagem, usar a primeira
-                    if (imageArray.length > 0) {
-                        imagemUrl = `http://localhost:4000${imageArray[0]}`;
-                    }
+                
                 }
 
                 return {
                     id: produto.id,
                     titulo: produto.nome,
                     descricao: produto.descricao || 'Produto de alta qualidade para aplicações industriais',
-                    imagem: imagemUrl,
                     preco: parseFloat(produto.preco) || 0,
                     categoria: produto.categoria_nome || 'Produto Industrial',
                     created_at: produto.created_at
@@ -135,7 +130,7 @@ function renderizarCarrossel(lancamentos) {
             <div class="lancamentos-cards-track" id="cards-track">
                 ${lancamentos.map((produto, index) => `
                     <div class="lancamentos-card" data-index="${index}" onclick="irParaProduto(${produto.id})">
-                        <img src="${produto.imagem}" class="lancamentos-card-img" alt="${produto.titulo}" onerror="this.src='../assets/img/Listas_MaioresEmpresasPrivadasEUA_231120_Getty.jpg'">
+                        <img src="${produto.imagem}" class="lancamentos-card-img" alt="${produto.titulo}"">
                         <div class="lancamentos-card-overlay">
                             <span class="lancamentos-card-categoria">${produto.categoria || 'Produto'}</span>
                             <h5 class="lancamentos-card-titulo">${produto.titulo}</h5>
