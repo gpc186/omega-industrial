@@ -69,7 +69,7 @@
     </main>
 
     <script>
-    const API_URL = 'http://localhost:3000/api';
+    const API_URL = 'http://localhost:4000/api';
     const lista = document.getElementById("listaProdutos");
     const busca = document.getElementById("busca");
     const filtroCategoria = document.getElementById("filtroCategoria");
@@ -179,11 +179,11 @@
 
             // Usar a primeira imagem do array ou uma imagem placeholder
             const imgUrl = p.image_urls && p.image_urls.length > 0 
-                ? `http://localhost:3000${p.image_urls[0]}`
+                ? `http://localhost:4000${p.image_urls[0]}`
                 : 'https://via.placeholder.com/350x250?text=Sem+Imagem';
 
             card.innerHTML = `
-                <a href="prod.html?id=${p.id}" style="text-decoration: none; color: inherit;">
+                <a href="/produto?id=${p.id}" style="text-decoration: none; color: inherit;">
                     <img src="${imgUrl}" alt="${p.nome}" onerror="this.src='https://via.placeholder.com/350x250?text=Sem+Imagem'" />
                     <span class="categoria">${p.categoria_nome || 'Sem Categoria'}</span>
                     <h3>${p.nome}</h3>
@@ -364,6 +364,9 @@
             <p>© 2025 Omega Petro. Todos os direitos reservados.</p>
         </div>
     </footer>
+    
+    <script type="module" src="../js/auth.js"></script>
+    <script type="module" src="../js/checkAuth.js"></script>
 </body>
 
 </html>

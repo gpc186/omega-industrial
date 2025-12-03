@@ -39,7 +39,7 @@ class CartItem {
         ci.*,
         p.nome,
         p.preco,
-        p.img_url,
+        p.image_urls,
         p.quantidade as estoque,
         (ci.quantidade * p.preco) as subtotal
       FROM cart_items ci

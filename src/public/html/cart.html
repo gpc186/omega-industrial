@@ -11,40 +11,36 @@
 </head>
 
 <body>
-    <!-- Header -->
+     <!-- ====================== HEADER NOVO ======================= -->
 
-    <header>
-        <nav>
-            <div class="nav-content">
-                <div class="nav-img">
-                    <a href="">
-                        <img class="nav-img-logo" src="../assets/img/logo.png" alt="OmegaPetro Logo">
-                    </a>
+    <header class="op-header">
+        <nav class="op-nav">
+            <div class="op-container">
+
+                <a href="/index" class="op-logo">
+                    <img src="../assets/img/logo.png" alt="OmegaPetro Logo">
+                </a>
+
+                <div class="op-menu" id="navMenu">
+
+                    <a href="/produtos">Produtos</a>
+                    <a href="/adm/index" id="dashboardLink" style="display:none;">Dashboard</a>
+                    <a href="/carrinho">Carrinho</a>
+
+                    <div class="op-login nav-btn-container">
+                        <a href="#" id="loginLink">
+                            <img src="../assets/img/login.png" alt="">
+                        </a>
+                    </div>
+
                 </div>
-                <div class="nav-navegacao" id="navMenu">
-                    <a href="/produtos">
-                        <p>Produtos</p>
-                    </a>
-                    <a href="/adm/index">
-                        <p>Dashboard</p>
-                    </a>
-                    <a href="/carrinho">
-                        <p>Carrinho</p>
-                    </a>
-                </div>
-            </div>
-            <div class="nav-content" style="justify-content: end;">
-                <div class="nav-login">
-                    <a href="/login">
-                        <p>Login</p>
-                        <img src="../assets/img/login.png" alt="Login Icon">
-                    </a>
-                </div>
-                <div class="hamburger" id="hamburger">
+
+                <button class="op-hamburger" id="hamburger">
                     <span></span>
                     <span></span>
                     <span></span>
-                </div>
+                </button>
+
             </div>
         </nav>
     </header>
@@ -77,6 +73,8 @@
         </div>
     </div>
 
+    <script type="module" src="../js/auth.js"></script>
+    <script type="module" src="../js/checkAuth.js"></script>
     <script src="../js/cart.js"></script>
 </body>
 
