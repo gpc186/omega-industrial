@@ -207,11 +207,14 @@
         //  TELEFONE INTERNACIONAL
         //  (SEM BORDAS VERDES/VERMELHAS)
         // =========================
+
+        let iti;
+
         (function () {
             const input = document.getElementById("telefone");
             if (!input) return;
 
-            const iti = intlTelInput(input, {
+            iti = intlTelInput(input, {
                 initialCountry: "br",
                 separateDialCode: true,
                 nationalMode: true,
@@ -334,7 +337,7 @@
             const telefone = document.getElementById("telefone").value.replace(/\D/g, "");
 
             let erro = false;
-            let msg = "";   
+            let msg = "";
 
             if (cnpj.replace(/\D/g, "").length < 14) {
                 erro = true;
@@ -347,18 +350,14 @@
             const pais = iti.getSelectedCountryData().iso2.toUpperCase();
             const phoneUtil = libphonenumber.PhoneNumberUtil.getInstance();
 
-            try {
-                const parsed = phoneUtil.parse(phoneInput.value, pais);
+            const digits = telefone.replace(/\D/g, "");
+            const max = getMaxDigits(pais);
 
-                if (!phoneUtil.isValidNumber(parsed)) {
-                    erro = true;
-                    msg = "Telefone inválido para o país selecionado.";
-                }
-
-            } catch (e) {
+            if (digits.length !== max) {
                 erro = true;
-                msg = "Número de telefone inválido.";
+                msg = `O número para ${pais} deve ter ${max} dígitos. Você digitou ${digits.length}.`;
             }
+
 
             // OUTRAS VALIDAÇÕES AQUI ⬇️
             if (!erro && senha1 !== senha2) {
