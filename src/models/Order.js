@@ -11,7 +11,7 @@ class Order {
       // Inserir pedido
       const [orderResult] = await connection.execute(
         `INSERT INTO compra (user_id, order_numero, total_preco, notes, status, frete)
-         VALUES (?, ?, ?, ?, 'pending')`,
+         VALUES (?, ?, ?, ?, 'pending', ?)`,
         [user_id, order_numero, total_preco, notes, frete]
       );
 
