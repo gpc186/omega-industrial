@@ -83,7 +83,7 @@ function renderizarCarrinho(items) {
             <div class="card-item__info">
                 <div class="card-item__details">
                     <h6>${item.nome}</h6>
-                    <p>${item.description || 'Sem descrição'}</p>
+                    <p>${item.descricao || 'Sem descrição'}</p>
                 </div>
                 
                 <div class="card-item__quantity">
@@ -95,8 +95,8 @@ function renderizarCarrinho(items) {
             
             <div class="card-item__actions">
                 <div class="card-item__remove">
-                    <button class="removeItem" data-id="${item.product_id}" title="Remover item">
-                        🗑️
+                    <button onclick="removerItem('${item.product_id}')" title="Remover item">
+                        x
                     </button>
                 </div>
                 
@@ -338,3 +338,56 @@ if (hamburger && navMenu) {
         }
     });
 }
+
+
+
+
+function maskCEP(input) {
+    let value = input.value.replace(/\D/g, ""); // remove tudo que não é número
+
+    if (value.length > 5) {
+        value = value.replace(/(\d{5})(\d)/, "$1-$2"); // adiciona o hífen
+    }
+
+    input.value = value;
+}
+
+
+document.addEventListener("DOMContentLoaded", () => {
+    const selectReal = document.getElementById("tiposFrete");
+
+    // Toggle abrir/fechar
+    display.addEventListener("click", (e) => {
+        e.stopPropagation();
+        options.classList.toggle("open");
+        display.classList.toggle("active");
+    });
+
+    // Clicar em item
+    options.querySelectorAll("div").forEach(item => {
+        item.addEventListener("click", () => {
+            const value = item.dataset.value;
+
+            // Atualiza display
+            display.textContent = item.textContent;
+
+            // Atualiza visual da seleção
+            options.querySelectorAll("div").forEach(i => i.classList.remove("selected"));
+            item.classList.add("selected");
+
+            // Atualiza select real (para funcionar no filtro)
+            selectReal.value = value;
+            selectReal.dispatchEvent(new Event("change"));
+
+            // Fecha dropdown
+            options.classList.remove("open");
+            display.classList.remove("active");
+        });
+    });
+
+    // Fecha ao clicar fora
+    document.addEventListener("click", () => {
+        options.classList.remove("open");
+        display.classList.remove("active");
+    });
+});
