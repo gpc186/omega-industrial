@@ -1,3 +1,4 @@
+import { calcularFrete } from "/js/utils/frete.js";
 const API_URL = 'http://localhost:4000/api';
 
 // Funções auxiliares
@@ -86,12 +87,9 @@ function renderizarCarrinho(items) {
                 </div>
                 
                 <div class="card-item__quantity">
-                    <button onclick="diminuirQuantidade('${item.product_id}', ${item.quantidade})">-</button>
-                    <input type="number" 
-                           value="${item.quantidade}" 
-                           min="1" 
-                           readonly>
-                    <button onclick="aumentarQuantidade('${item.product_id}', ${item.quantidade})">+</button>
+                    <button class="removeQuant" data-id="${item.product_id}" data-qnt="${item.quantidade}"">-</button>
+                    <input type="number" value="${item.quantidade}" min="1" readonly>
+                    <button class="addQuant" data-id="${item.product_id}" data-qnt="${item.quantidade}"">+</button>
                 </div>
             </div>
             
@@ -108,6 +106,25 @@ function renderizarCarrinho(items) {
             </div>
         </div>
     `).join('');
+
+    cartItems.querySelectorAll(".addQuant").forEach(btn => {
+        btn.addEventListener("click", () =>
+            aumentarQuantidade(btn.dataset.id, Number(btn.dataset.qnt))
+        );
+    });
+
+    cartItems.querySelectorAll(".removeQuant").forEach(btn => {
+        btn.addEventListener("click", () =>
+            diminuirQuantidade(btn.dataset.id, Number(btn.dataset.qnt))
+        );
+    });
+
+    cartItems.querySelectorAll(".removeItem").forEach(btn => {
+        btn.addEventListener("click", () =>
+            removerItem(btn.dataset.id)
+        );
+    });
+
 }
 
 async function aumentarQuantidade(productId, quantidadeAtual) {
@@ -180,9 +197,9 @@ async function atualizarTotais() {
 
         const data = await handleResponse(response);
 
-        const subtotal = data.totalPrice || 0;
-        const frete = 0; // Definir lógica de frete se necessário
-        const total = subtotal + frete;
+        const subtotal = Number(data.total) || 0;
+        const frete = Number(window.ultimoCalculoFrete?.preco) || 0;
+        const total = Number(subtotal) + frete;
 
         document.getElementById('subtotal').textContent =
             `R$ ${subtotal.toFixed(2).replace('.', ',')}`;
@@ -206,13 +223,21 @@ async function finalizarCompra() {
             return;
         }
 
+        if (!window.ultimoCalculoFrete) {
+            alert("Escolha um frete antes de finalizar a compra!");
+            return;
+        }
+
         const confirmar = confirm('Deseja finalizar a compra?');
         if (!confirmar) return;
 
         const response = await fetch(`${API_URL}/orders/criarOrder`, {
             method: 'POST',
             headers: getAuthHeaders(),
-            body: JSON.stringify({ notes: null })
+            body: JSON.stringify({
+                notes: null,
+                frete: window.ultimoCalculoFrete
+            })
         });
 
         const data = await handleResponse(response);
@@ -226,6 +251,50 @@ async function finalizarCompra() {
         alert('Erro ao finalizar compra. Tente novamente.');
     }
 }
+
+document.getElementById("finalizarCompra").addEventListener("click", finalizarCompra);
+
+function calcularFreteFinal() {
+    const cep = document.getElementById("cep").value;
+    const subtotal = window.subtotalCarrinho || 0;
+
+    const opcoes = calcularFrete(cep, subtotal);
+
+    if (!opcoes) {
+        alert("CEP inválido!");
+        return;
+    }
+
+    const div = document.getElementById("freteOpcoes");
+    div.innerHTML = "";
+
+    opcoes.forEach(f => {
+        const btn = document.createElement("button");
+        btn.textContent = `${f.nome} - R$ ${f.preco.toFixed(2)} (${f.prazo})`;
+
+        btn.onclick = () => selecionarOpcaoFrete(f);
+
+        div.appendChild(btn);
+    });
+}
+
+function selecionarOpcaoFrete(frete) {
+    window.ultimoCalculoFrete = frete;
+
+    const subtotal = window.subtotalCarrinho || 0;
+    const total = subtotal + frete.preco;
+
+    document.getElementById("frete").textContent =
+        "R$ " + frete.preco.toFixed(2).replace('.', ',');
+
+    document.getElementById("total").textContent =
+        "R$ " + total.toFixed(2).replace('.', ',');
+
+    alert(`Frete selecionado: ${frete.nome} | R$ ${frete.preco.toFixed(2)}`);
+}
+
+window.calcularFreteFinal = calcularFreteFinal;
+window.selecionarOpcaoFrete = selecionarOpcaoFrete;
 
 // ==================== INICIALIZAÇÃO ====================
 

@@ -17,13 +17,26 @@
 
     <!-- ====================== HEADER NOVO ======================= -->
 
-    <header>
-        <nav>
-            <div class="nav-content">
-                <div class="nav-img">
-                    <a href="/index">
-                        <img class="nav-img-logo" src="../assets/img/logo.png" alt="OmegaPetro Logo">
-                    </a>
+    <header class="op-header">
+        <nav class="op-nav">
+            <div class="op-container">
+
+                <a href="/index" class="op-logo">
+                    <img src="../assets/img/logo.png" alt="OmegaPetro Logo">
+                </a>
+
+                <div class="op-menu" id="navMenu">
+
+                    <a href="/produtos">Produtos</a>
+                    <a href="/adm/index" id="dashboardLink" style="display:none;">Dashboard</a>
+                    <a href="/carrinho">Carrinho</a>
+
+                    <div class="op-login nav-btn-container">
+                        <a href="/login" id="loginLink">
+                            <img src="../assets/img/login.png" alt="">
+                        </a>
+                    </div>
+
                 </div>
                 <div class="nav-navegacao" id="navMenu">
                     <a href="/produtos">

@@ -13,6 +13,7 @@ async function executar() {
         status VARCHAR(50) DEFAULT 'pending',
         notes TEXT,
         data_compra DATETIME DEFAULT CURRENT_TIMESTAMP,
+        frete JSON NULL,
         FOREIGN KEY (user_id) REFERENCES user(id)
       )
     `);

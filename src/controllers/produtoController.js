@@ -26,7 +26,7 @@ async function listarPorId(req, res) {
             return res.status(404).json({ ok: false, error: "Produto não encontrado!" });
         }
         console.log(produto);
-        
+
         return res.status(200).json({
             ok: true,
             message: "Produto listado por ID com sucesso!",
