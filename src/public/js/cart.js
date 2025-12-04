@@ -27,7 +27,7 @@ async function handleResponse(response) {
 async function carregarCarrinho() {
     try {
         const token = getToken();
-        
+
         if (!token) {
             mostrarCarrinhoVazio('Faça login para ver seu carrinho');
             return;
@@ -40,7 +40,7 @@ async function carregarCarrinho() {
 
         const data = await handleResponse(response);
         console.log(data.cart);
-        
+
         if (!data.cart || data.cart.length === 0) {
             mostrarCarrinhoVazio();
             return;
@@ -48,7 +48,7 @@ async function carregarCarrinho() {
 
         renderizarCarrinho(data.cart);
         atualizarTotais();
-        
+
     } catch (error) {
         console.error('Erro ao carregar carrinho:', error);
         mostrarCarrinhoVazio('Erro ao carregar o carrinho. Tente novamente.');
@@ -63,7 +63,7 @@ function mostrarCarrinhoVazio(mensagem = 'Seu carrinho está vazio') {
             <p>Adicione produtos para continuar comprando</p>
         </div>
     `;
-    
+
     // Zerar totais
     document.getElementById('subtotal').textContent = 'R$ 0,00';
     document.getElementById('frete').textContent = 'R$ 0,00';
@@ -72,17 +72,17 @@ function mostrarCarrinhoVazio(mensagem = 'Seu carrinho está vazio') {
 
 function renderizarCarrinho(items) {
     const cartItems = document.getElementById('cartItems');
-    
+
     cartItems.innerHTML = items.map(item => `
         <div class="card-item" data-product-id="${item.product_id}">
             <img class="card-item__image" 
-                 src="${JSON.parse(item.image_urls)[0   ]}" 
+                 src="${JSON.parse(item.image_urls)[0]}" 
                  alt="${item.nome}">
             
             <div class="card-item__info">
                 <div class="card-item__details">
                     <h6>${item.nome}</h6>
-                    <p>${item.description || 'Sem descrição'}</p>
+                    <p>${item.descricao || 'Sem descrição'}</p>
                 </div>
                 
                 <div class="card-item__quantity">
@@ -98,7 +98,7 @@ function renderizarCarrinho(items) {
             <div class="card-item__actions">
                 <div class="card-item__remove">
                     <button onclick="removerItem('${item.product_id}')" title="Remover item">
-                        🗑️
+                        x
                     </button>
                 </div>
                 
@@ -113,7 +113,7 @@ function renderizarCarrinho(items) {
 async function aumentarQuantidade(productId, quantidadeAtual) {
     try {
         const novaQuantidade = quantidadeAtual + 1;
-        
+
         const response = await fetch(`${API_URL}/cart/${productId}/updateCart`, {
             method: 'PUT',
             headers: getAuthHeaders(),
@@ -122,7 +122,7 @@ async function aumentarQuantidade(productId, quantidadeAtual) {
 
         await handleResponse(response);
         await carregarCarrinho();
-        
+
     } catch (error) {
         console.error('Erro ao aumentar quantidade:', error);
         alert('Erro ao atualizar quantidade. Tente novamente.');
@@ -138,9 +138,9 @@ async function diminuirQuantidade(productId, quantidadeAtual) {
             }
             return;
         }
-        
+
         const novaQuantidade = quantidadeAtual - 1;
-        
+
         const response = await fetch(`${API_URL}/cart/${productId}/updateCart`, {
             method: 'PUT',
             headers: getAuthHeaders(),
@@ -149,7 +149,7 @@ async function diminuirQuantidade(productId, quantidadeAtual) {
 
         await handleResponse(response);
         await carregarCarrinho();
-        
+
     } catch (error) {
         console.error('Erro ao diminuir quantidade:', error);
         alert('Erro ao atualizar quantidade. Tente novamente.');
@@ -165,7 +165,7 @@ async function removerItem(productId) {
 
         await handleResponse(response);
         await carregarCarrinho();
-        
+
     } catch (error) {
         console.error('Erro ao remover item:', error);
         alert('Erro ao remover item. Tente novamente.');
@@ -179,18 +179,18 @@ async function atualizarTotais() {
         });
 
         const data = await handleResponse(response);
-        
+
         const subtotal = data.totalPrice || 0;
         const frete = 0; // Definir lógica de frete se necessário
         const total = subtotal + frete;
-        
-        document.getElementById('subtotal').textContent = 
+
+        document.getElementById('subtotal').textContent =
             `R$ ${subtotal.toFixed(2).replace('.', ',')}`;
-        document.getElementById('frete').textContent = 
+        document.getElementById('frete').textContent =
             `R$ ${frete.toFixed(2).replace('.', ',')}`;
-        document.getElementById('total').textContent = 
+        document.getElementById('total').textContent =
             `R$ ${total.toFixed(2).replace('.', ',')}`;
-        
+
     } catch (error) {
         console.error('Erro ao atualizar totais:', error);
     }
@@ -199,7 +199,7 @@ async function atualizarTotais() {
 async function finalizarCompra() {
     try {
         const token = getToken();
-        
+
         if (!token) {
             alert('Você precisa estar logado para finalizar a compra!');
             window.location.href = '/login';
@@ -217,10 +217,10 @@ async function finalizarCompra() {
 
         const data = await handleResponse(response);
         const dados = JSON.parse(data)
-        
+
         alert(`Pedido realizado com sucesso! ID de compra: ${dados.compra_id}, Numero da ordem:${dados.order_numero}, total: ${dados.total_preco}`);
         window.location.href = '/produtos';
-        
+
     } catch (error) {
         console.error('Erro ao finalizar compra:', error);
         alert('Erro ao finalizar compra. Tente novamente.');
@@ -231,7 +231,7 @@ async function finalizarCompra() {
 
 document.addEventListener('DOMContentLoaded', () => {
     carregarCarrinho();
-    
+
     // Verificar autenticação e atualizar UI do header
     const token = getToken();
     if (!token) {
@@ -269,3 +269,56 @@ if (hamburger && navMenu) {
         }
     });
 }
+
+
+
+
+function maskCEP(input) {
+    let value = input.value.replace(/\D/g, ""); // remove tudo que não é número
+
+    if (value.length > 5) {
+        value = value.replace(/(\d{5})(\d)/, "$1-$2"); // adiciona o hífen
+    }
+
+    input.value = value;
+}
+
+
+document.addEventListener("DOMContentLoaded", () => {
+    const selectReal = document.getElementById("tiposFrete");
+
+    // Toggle abrir/fechar
+    display.addEventListener("click", (e) => {
+        e.stopPropagation();
+        options.classList.toggle("open");
+        display.classList.toggle("active");
+    });
+
+    // Clicar em item
+    options.querySelectorAll("div").forEach(item => {
+        item.addEventListener("click", () => {
+            const value = item.dataset.value;
+
+            // Atualiza display
+            display.textContent = item.textContent;
+
+            // Atualiza visual da seleção
+            options.querySelectorAll("div").forEach(i => i.classList.remove("selected"));
+            item.classList.add("selected");
+
+            // Atualiza select real (para funcionar no filtro)
+            selectReal.value = value;
+            selectReal.dispatchEvent(new Event("change"));
+
+            // Fecha dropdown
+            options.classList.remove("open");
+            display.classList.remove("active");
+        });
+    });
+
+    // Fecha ao clicar fora
+    document.addEventListener("click", () => {
+        options.classList.remove("open");
+        display.classList.remove("active");
+    });
+});

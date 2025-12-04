@@ -65,10 +65,18 @@
                         <span>Frete:</span>
                         <span id="frete">R$ 0,00</span>
                     </div>
-                    <div style="display: block; justify-content: space-between;">
-                        <input type="text" id="cep" oninput="maskCEP(this)" placeholder="Digite seu CEP" maxlength="9">
+                    <div class="frete-row" id="freteOpcoes">
+                        <span>Tipo de Entrega: </span>
+                        <select class="tipo-frete" id="tiposFrete" class="hidden-select">
+                            <option value="Economica">Economica - R$100</option>
+                            <option value="Normal">Normal - R$150</option>
+                            <option value="Expressa">Expressa - R$200</option>
+                        </select>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; width: 100%;">
+                        <input class="input-frete" type="text" id="cep" oninput="maskCEP(this)"
+                            placeholder="Digite seu CEP" maxlength="9">
                         <button class="btn-frete" id="btnCalcularFrete">Calcular Frete</button>
-                        <div id="freteOpcoes"></div>
                     </div>
                 </div>
                 <div class="totals-row">
@@ -79,18 +87,6 @@
             </div>
         </div>
     </div>
-
-    <script>
-        function maskCEP(input) {
-            let value = input.value.replace(/\D/g, ""); // remove tudo que não é número
-
-            if (value.length > 5) {
-                value = value.replace(/(\d{5})(\d)/, "$1-$2"); // adiciona o hífen
-            }
-
-            input.value = value;
-        }
-    </script>
 
     <script type="module" src="../js/auth.js"></script>
     <script type="module" src="../js/checkAuth.js"></script>

@@ -48,13 +48,13 @@ async function carregarLancamentos() {
     try {
         // Buscar todos os produtos do banco de dados via API
         const response = await fetch(`${API_URL}/product/all`);
-        
+
         if (!response.ok) {
             throw new Error('Erro ao buscar produtos do banco de dados');
         }
 
         const data = await response.json();
-        
+
         // Verificar se a resposta tem produtos
         if (!data.ok || !data.produtos) {
             throw new Error('Resposta inválida da API');
@@ -71,10 +71,10 @@ async function carregarLancamentos() {
             })
             .slice(0, 6) // Pega apenas os 6 primeiros (mais recentes)
             .map(produto => {
-                
+
+                let imageArray = [];
+
                 if (produto.image_urls) {
-                    // Se image_urls é uma string JSON, fazer parse
-                    let imageArray = [];
                     if (typeof produto.image_urls === 'string') {
                         try {
                             imageArray = JSON.parse(produto.image_urls);
@@ -84,7 +84,6 @@ async function carregarLancamentos() {
                     } else if (Array.isArray(produto.image_urls)) {
                         imageArray = produto.image_urls;
                     }
-                
                 }
 
                 return {
@@ -93,7 +92,8 @@ async function carregarLancamentos() {
                     descricao: produto.descricao || 'Produto de alta qualidade para aplicações industriais',
                     preco: parseFloat(produto.preco) || 0,
                     categoria: produto.categoria_nome || 'Produto Industrial',
-                    created_at: produto.created_at
+                    created_at: produto.created_at,
+                    imagem: imageArray[0] || '/img/default.png' // <<< AQUI ESTÁ A CORREÇÃO
                 };
             });
 
@@ -183,7 +183,7 @@ function mostrarMensagemVazia() {
             <p style="font-size: 0.95rem; color: #999; margin-top: 0.5rem;">Adicione produtos para vê-los aqui.</p>
         </div>
     `;
-    
+
     // Esconder indicadores
     const indicators = document.getElementById('lancamentos-indicators');
     if (indicators) indicators.style.display = 'none';
@@ -208,7 +208,7 @@ function mostrarErro() {
             </button>
         </div>
     `;
-    
+
     // Esconder indicadores
     const indicators = document.getElementById('lancamentos-indicators');
     if (indicators) indicators.style.display = 'none';
