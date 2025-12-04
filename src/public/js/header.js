@@ -88,3 +88,46 @@ function logout() {
     localStorage.removeItem('user');
     window.location.href = '/index';
 }
+
+// ========== MENU HAMBÚRGUER ==========
+const hamburger = document.getElementById('hamburger');
+const navMenu = document.getElementById('navMenu');
+const body = document.body;
+
+if (hamburger && navMenu) {
+    // Toggle do menu hambúrguer
+    hamburger.addEventListener('click', (e) => {
+        e.stopPropagation();
+        hamburger.classList.toggle('active');
+        navMenu.classList.toggle('active');
+        body.classList.toggle('menu-open');
+    });
+
+    // Fechar menu ao clicar em um link
+    const navLinks = navMenu.querySelectorAll('a');
+    navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            hamburger.classList.remove('active');
+            navMenu.classList.remove('active');
+            body.classList.remove('menu-open');
+        });
+    });
+
+    // Fechar menu ao clicar fora dele
+    document.addEventListener('click', (e) => {
+        if (!hamburger.contains(e.target) && !navMenu.contains(e.target)) {
+            hamburger.classList.remove('active');
+            navMenu.classList.remove('active');
+            body.classList.remove('menu-open');
+        }
+    });
+}
+
+// Impede seleção de texto acidental
+document.body.style.userSelect = "none";
+if (navMenu) {
+    navMenu.style.userSelect = "auto";
+}
+
+
+
