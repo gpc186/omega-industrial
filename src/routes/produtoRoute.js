@@ -10,6 +10,6 @@ router.get('/:id/product', produtoController.listarPorId);
 
 router.post('/adm/createProd', auth, adm, uploadProductImages, produtoController.create);
 router.put('/adm/:id/updateProd', auth, adm, uploadProductImages, produtoController.update);
-router.delete('/adm/:id/removeProd', auth, adm, uploadProductImages, produtoController.remove);
+router.delete('/adm/:id/removeProd', auth, adm, produtoController.remove);
 
 module.exports = router;

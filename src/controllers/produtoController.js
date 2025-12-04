@@ -1,5 +1,5 @@
 const Product = require("../models/Product");
-const { deleteUploadedFiles, deleteProductImages, getImageUrls } = require("../utils/fileHelper");
+const { deleteUploadedFiles, deleteProductImage, getImageUrls } = require("../utils/fileHelper");
 
 // LISTAR TODOS
 async function listarTodos(req, res) {
@@ -88,17 +88,17 @@ async function update(req, res) {
         const { id } = req.params;
         const { nome, preco, descricao, category_id, quantidade } = req.body;
 
-        const existe = await Product.findById(id);
+        const produto = await Product.findById(id);
 
-        if (!existe) {
+        if (!produto) {
             deleteUploadedFiles(req.files)
             return res.status(404).json({ ok: false, error: "Produto não encontrado!" });
         }
 
-        let image_urls = produto.image_urls;
+        let image_urls = produto.image_urls || [];
 
         if (req.files && req.files.length === 2) {
-            deleteProductImages(produto.image_urls);
+            deleteProductImage(produto.image_urls);
             image_urls = getImageUrls(req.files);
         }
 
@@ -127,16 +127,20 @@ async function remove(req, res) {
     try {
         const { id } = req.params;
 
-        const produto = await Product.findByPk(id);
+        const produto = await Product.findById(id);
         if (!produto) {
             return res.status(404).json({ ok: false, error: "Produto não encontrado!" });
         }
 
         if (produto.image_urls) {
-            deleteProductImages(produto.image_urls);
+            deleteProductImage(produto.image_urls);
         }
 
-        await produto.destroy();
+        const removed = await Product.delete(id);
+
+        if (!removed) {
+            return res.status(500).json({ ok: false, error: "Erro ao remover produto." });
+        }
 
         return res.status(200).json({
             ok: true,
