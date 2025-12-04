@@ -87,18 +87,15 @@ function renderizarCarrinho(items) {
                 </div>
                 
                 <div class="card-item__quantity">
-                    <button onclick="diminuirQuantidade('${item.product_id}', ${item.quantidade})">-</button>
-                    <input type="number" 
-                           value="${item.quantidade}" 
-                           min="1" 
-                           readonly>
-                    <button onclick="aumentarQuantidade('${item.product_id}', ${item.quantidade})">+</button>
+                    <button class="removeQuant" data-id="${item.product_id}" data-qnt="${item.quantidade}"">-</button>
+                    <input type="number" value="${item.quantidade}" min="1" readonly>
+                    <button class="addQuant" data-id="${item.product_id}" data-qnt="${item.quantidade}"">+</button>
                 </div>
             </div>
             
             <div class="card-item__actions">
                 <div class="card-item__remove">
-                    <button onclick="removerItem('${item.product_id}')" title="Remover item">
+                    <button class="removeItem" data-id="${item.product_id}" title="Remover item">
                         🗑️
                     </button>
                 </div>
@@ -109,6 +106,25 @@ function renderizarCarrinho(items) {
             </div>
         </div>
     `).join('');
+
+    cartItems.querySelectorAll(".addQuant").forEach(btn => {
+        btn.addEventListener("click", () =>
+            aumentarQuantidade(btn.dataset.id, Number(btn.dataset.qnt))
+        );
+    });
+
+    cartItems.querySelectorAll(".removeQuant").forEach(btn => {
+        btn.addEventListener("click", () =>
+            diminuirQuantidade(btn.dataset.id, Number(btn.dataset.qnt))
+        );
+    });
+
+    cartItems.querySelectorAll(".removeItem").forEach(btn => {
+        btn.addEventListener("click", () =>
+            removerItem(btn.dataset.id)
+        );
+    });
+
 }
 
 async function aumentarQuantidade(productId, quantidadeAtual) {
@@ -236,7 +252,9 @@ async function finalizarCompra() {
     }
 }
 
-function calcularFreteFinal(){
+document.getElementById("finalizarCompra").addEventListener("click", finalizarCompra);
+
+function calcularFreteFinal() {
     const cep = document.getElementById("cep").value;
     const subtotal = window.subtotalCarrinho || 0;
 
@@ -275,6 +293,8 @@ function selecionarOpcaoFrete(frete) {
     alert(`Frete selecionado: ${frete.nome} | R$ ${frete.preco.toFixed(2)}`);
 }
 
+window.calcularFreteFinal = calcularFreteFinal;
+window.selecionarOpcaoFrete = selecionarOpcaoFrete;
 
 // ==================== INICIALIZAÇÃO ====================
 
