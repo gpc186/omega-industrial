@@ -285,6 +285,7 @@
             color: var(--text-dark);
             font-size: 14px;
             font-weight: 500;
+            width: 1px;
         }
 
         tr:last-child td {
@@ -299,6 +300,8 @@
             border-radius: 8px;
             box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
             object-fit: cover;
+            margin-right: 5px;
+            margin-left: 5px;
         }
 
 
@@ -353,10 +356,19 @@
             font-weight: 600;
             transition: 0.2s;
             color: #fff;
+            display: flex;
+            gap: 8px;
         }
 
         .btnEditar {
             background-color: #007bff;
+            margin-right: 8px;
+            display: flex;
+            margin-bottom: 4px;
+            width: 38%;
+            text-align: center;
+            align-items: center;
+            justify-content: center;
         }
 
         .btnEditar:hover {
@@ -365,12 +377,40 @@
 
         .btnExcluir {
             background-color: #e63946;
+            padding: 6px 12px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: 0.2s;
+            color: #fff;
         }
 
         .btnExcluir:hover {
             background-color: #b02130;
         }
 
+        .btnExcluirProd:hover {
+            background-color: #b02130;
+        }
+
+
+        .btnExcluirProd {
+            background-color: #e63946;
+            padding: 6px 12px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: 0.2s;
+            color: #fff;
+            width: 38%;
+            justify-content: center;
+            align-items: center;
+            display: flex;  
+        }
 
 
 
@@ -478,12 +518,6 @@
                             required>
                     </div>
 
-                    <div class="input-group">
-                        <label>Descrição</label>
-                        <textarea id="descricaoCategoria" name="descricaoCategoria" rows="4"
-                            placeholder="Descrição da Categoria..." required></textarea>
-                    </div>
-
                     <button type="submit" class="btn btn-primary btn-full" style="margin-top: 5px;">
                         Adicionar Categoria
                     </button>
@@ -493,10 +527,9 @@
                     <table>
                         <thead>
                             <tr>
-                                <th width="10%">ID</th>
-                                <th width="30%">Nome</th>
-                                <th width="40%">Descrição</th>
-                                <th width="20%">Ações</th>
+                                <th width="20%">ID</th>
+                                <th width="40%">Nome</th>
+                                <th width="40%">Ações</th>
                             </tr>
                         </thead>
                         <tbody id="listaCategorias">

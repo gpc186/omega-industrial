@@ -1,7 +1,7 @@
 import { api } from "/js/api.js";
 
 const tabelaProdutos = document.getElementById("tabelaProdutos");
-const tabelaCategorias = document.getElementById("listaCategorias");
+const tabela = document.getElementById("listaCategorias");
 const selectCategoria = document.getElementById("selectCategoria");
 const modalEdicao = document.getElementById("modalEdicao");
 
@@ -15,14 +15,13 @@ async function carregarCategorias() {
         op.textContent = cat.nome;
         selectCategoria.appendChild(op);
     });
-    
+
     tabela.innerHTML = "";
     res.categorias.forEach(cat => {
         const tr = document.createElement("tr");
         tr.innerHTML = `
                 <td>${cat.id}</td>
                 <td>${cat.nome}</td>
-                <td>${cat.description || ""}</td>
                 <td>
                     <button data-id="${cat.id}" class="btnExcluir btn-del-cat">Excluir</button>
                 </td>
@@ -48,7 +47,7 @@ document.getElementById("formCategoria").addEventListener("submit", async e => {
     }
 });
 
-tabelaCategorias.addEventListener("click", async e => {
+tabela.addEventListener("click", async e => {
     if (!e.target.classList.contains("btn-del-cat")) return;
 
     const id = e.target.dataset.id;
@@ -78,17 +77,14 @@ async function carregarProdutos() {
 
         tr.innerHTML = `
             <td>${prod.id}</td>
-            <td>${(JSON.parse(prod.img_urls || "[]"))
-                .map(url => `<img src="${url}" width="60">`)
-                .join("")}
-            </td>
+            <td>${imagens.map(url => `<img src="${url}" width="60">`).join("")}</td>
             <td>${prod.nome}</td>
             <td>${prod.categoria_nome}</td>
             <td>R$ ${prod.preco}</td>
             <td>${prod.quantidade}</td>
             <td class="actions">
         <button class="btnEditar" data-id="${prod.id}">Editar</button>
-        <button class="btnExcluir" data-id="${prod.id}">Excluir</button>
+        <button class="btnExcluirProd" data-id="${prod.id}">Excluir</button>
     </td>
 `;
 
@@ -120,7 +116,7 @@ document.getElementById("formCriarProduto").addEventListener("submit", async e =
 
     const res = await api.criarProduto(form);
 
-    if (res.ok) {
+    if (res.success || res.ok) {
         alert("Produto criado!");
         e.target.reset();
         carregarProdutos();
@@ -156,7 +152,7 @@ tabelaProdutos.addEventListener("click", async e => {
             preview.appendChild(img);
         });
 
-        modalEdicao.style.display = "block";
+        modalEdicao.style.display = "flex";
     }
 
     if (e.target.classList.contains("btnExcluir")) {
@@ -166,7 +162,8 @@ tabelaProdutos.addEventListener("click", async e => {
 
         const res = await api.deletarProduto(id);
 
-        if (res.ok) {
+        if (res.success || res.ok) {
+
             alert("Produto excluído!");
             carregarProdutos();
         } else {

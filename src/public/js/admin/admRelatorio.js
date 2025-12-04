@@ -7,8 +7,6 @@ let currentChartPeriod = 'monthly';
 
 const hamburger = document.getElementById('hamburger');
 const navMenu = document.getElementById('navMenu');
-const hamburger = document.getElementById('hamburger');
-const navMenu = document.getElementById('navMenu');
 
 hamburger.addEventListener('click', (e) => {
     e.stopPropagation(); 
@@ -41,7 +39,6 @@ navMenu.style.userSelect = "auto"; // Só permite selecio
 
 
 // ===================== INICIALIZAÇÃO =====================
-document.addEventListener('DOMContentLoaded', function () {
 document.addEventListener('DOMContentLoaded', function () {
     // Verificar se o usuário está autenticado
     checkAuthentication();
