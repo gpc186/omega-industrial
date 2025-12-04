@@ -239,33 +239,3 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log('Usuário não autenticado');
     }
 });
-
-// ==================== MENU HAMBÚRGUER ====================
-const hamburger = document.getElementById('hamburger');
-const navMenu = document.getElementById('navMenu');
-const body = document.body;
-
-if (hamburger && navMenu) {
-    hamburger.addEventListener('click', () => {
-        hamburger.classList.toggle('active');
-        navMenu.classList.toggle('active');
-        body.classList.toggle('menu-open');
-    });
-
-    const navLinks = navMenu.querySelectorAll('a');
-    navLinks.forEach(link => {
-        link.addEventListener('click', () => {
-            hamburger.classList.remove('active');
-            navMenu.classList.remove('active');
-            body.classList.remove('menu-open');
-        });
-    });
-
-    document.addEventListener('click', (e) => {
-        if (!hamburger.contains(e.target) && !navMenu.contains(e.target)) {
-            hamburger.classList.remove('active');
-            navMenu.classList.remove('active');
-            body.classList.remove('menu-open');
-        }
-    });
-}
