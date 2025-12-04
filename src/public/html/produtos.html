@@ -20,7 +20,7 @@
                     <a href="#">
                         <p>Produtos</p>
                     </a>
-                    <a href="/adm/index">
+                    <a href="/adm/index" id="btnAdm">
                         <p>Dashboard</p>
                     </a>
                     <a href="/carrinho">
@@ -184,7 +184,7 @@
 
             card.innerHTML = `
                 <a href="/produto?id=${p.id}" style="text-decoration: none; color: inherit;">
-                    <img src="${imgUrl}" alt="${p.nome}" onerror="this.src='https://via.placeholder.com/350x250?text=Sem+Imagem'" />
+                    <img src="${imgUrl}" alt="${p.nome}"/>
                     <span class="categoria">${p.categoria_nome || 'Sem Categoria'}</span>
                     <h3>${p.nome}</h3>
                     <p>${p.descricao || 'Sem descrição'}</p>

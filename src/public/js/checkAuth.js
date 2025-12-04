@@ -25,6 +25,11 @@ if (userProtected.includes(page)) {
     }
 }
 
+if (!isAdmin()){
+    const btnAdm = document.getElementById("btnAdm");
+    btnAdm.style.display = "none"
+}
+
 if (adminProtected.includes(page)) {
     if (!isAuthenticated()) {
         window.location.href = "/login";

@@ -24,7 +24,7 @@
                 <div class="op-menu" id="navMenu">
 
                     <a href="/produtos">Produtos</a>
-                    <a href="/adm/index" id="dashboardLink" style="display:none;">Dashboard</a>
+                    <a href="/adm/index" id="btnAdm">Dashboard</a>
                     <a href="/carrinho">Carrinho</a>
 
                     <div class="op-login nav-btn-container">
@@ -68,14 +68,14 @@
                     <span>Total:</span>
                     <span id="total">R$ 0,00</span>
                 </div>
-                <button class="btn-finalizar" onclick="finalizarCompra()">Finalizar Compra</button>
+                <button class="btn-finalizar" id="finalizarCompra">Finalizar Compra</button>
             </div>
         </div>
     </div>
 
     <script type="module" src="../js/auth.js"></script>
     <script type="module" src="../js/checkAuth.js"></script>
-    <script src="../js/cart.js"></script>
+    <script type="module" src="../js/cart.js"></script>
 </body>
 
 </html>
