@@ -11,18 +11,18 @@ document.addEventListener('DOMContentLoaded', () => {
     const user = JSON.parse(localStorage.getItem('user'));
 
     console.log(user);
-    
+
     if (!user) {
         const buttonBuy = document.getElementById("bttBuy");
         buttonBuy.textContent = 'Precisa logar antes!';
         buttonBuy.setAttribute('disabled', true)
     }
-    
+
     // Carregar dados do produto baseado no ID da URL
     loadProductFromURL();
-    
+
     const carousel = new ProductCarousel();
-    
+
     console.log('JavaScript carregado com sucesso!');
 });
 
@@ -113,7 +113,7 @@ function loadProductData(product) {
 
     // Atualizar informações do produto
     document.querySelector('.direita h1').textContent = product.nome;
-    
+
     // Atualizar preço
     const priceElement = document.querySelector('.preco');
     priceElement.textContent = formatCurrency(product.preco);
@@ -189,14 +189,14 @@ function updateSpecifications(product) {
 function changeImage(index) {
     const mainImage = document.getElementById('mainImage');
     const thumbnails = document.querySelectorAll('.thumbnail');
-    
+
     if (currentProduct && currentProduct.image_urls && currentProduct.image_urls[index]) {
         // Troca a imagem principal
         mainImage.src = currentProduct.image_urls[index];
-        
+
         // Remove a classe 'active' de todas as thumbnails
         thumbnails.forEach(thumb => thumb.classList.remove('active'));
-        
+
         // Adiciona a classe 'active' na thumbnail clicada
         thumbnails[index].classList.add('active');
     }
@@ -230,7 +230,7 @@ async function loadRelatedProducts() {
 // ===================== CARREGAR PRODUTOS NO CARROSSEL =====================
 function loadCarouselProducts(products) {
     const track = document.getElementById('carouselTrack');
-    
+
     if (!track) return;
 
     // Limpar carrossel
@@ -277,7 +277,7 @@ function loadCarouselProducts(products) {
 async function addToCart(product) {
     try {
         const token = localStorage.getItem('token');
-        
+
         if (!token) {
             alert('Você precisa estar logado para adicionar itens ao carrinho');
             window.location.href = 'login.html';
@@ -329,10 +329,10 @@ class ProductCarousel {
         this.currentIndex = 0;
         this.cardsToShow = this.getCardsToShow();
         this.totalCards = this.track ? this.track.children.length : 0;
-        
+
         this.init();
     }
-    
+
     getCardsToShow() {
         const width = window.innerWidth;
         if (width < 480) return 1;
@@ -340,21 +340,21 @@ class ProductCarousel {
         if (width < 1024) return 3;
         return 4;
     }
-    
+
     get maxIndex() {
         return Math.max(0, this.totalCards - this.cardsToShow);
     }
-    
+
     updateCarousel() {
         if (!this.track || this.totalCards === 0) return;
-        
+
         const firstCard = this.track.children[0];
         const cardWidth = firstCard.offsetWidth;
         const gap = parseFloat(getComputedStyle(this.track).gap) || 32;
         const offset = -(this.currentIndex * (cardWidth + gap));
-        
+
         this.track.style.transform = `translateX(${offset}px)`;
-        
+
         // Atualiza estado dos botões
         if (this.prevBtn) {
             this.prevBtn.disabled = this.currentIndex === 0;
@@ -363,21 +363,21 @@ class ProductCarousel {
             this.nextBtn.disabled = this.currentIndex >= this.maxIndex;
         }
     }
-    
+
     prev() {
         if (this.currentIndex > 0) {
             this.currentIndex--;
             this.updateCarousel();
         }
     }
-    
+
     next() {
         if (this.currentIndex < this.maxIndex) {
             this.currentIndex++;
             this.updateCarousel();
         }
     }
-    
+
     handleResize() {
         const newCardsToShow = this.getCardsToShow();
         if (newCardsToShow !== this.cardsToShow) {
@@ -386,24 +386,24 @@ class ProductCarousel {
             this.updateCarousel();
         }
     }
-    
+
     init() {
         if (!this.track || !this.prevBtn || !this.nextBtn) {
             console.error('Elementos do carrossel não encontrados');
             return;
         }
-        
+
         // Event listeners dos botões
         this.prevBtn.addEventListener('click', () => this.prev());
         this.nextBtn.addEventListener('click', () => this.next());
-        
+
         // Event listener para redimensionamento
         let resizeTimer;
         window.addEventListener('resize', () => {
             clearTimeout(resizeTimer);
             resizeTimer = setTimeout(() => this.handleResize(), 250);
         });
-        
+
         // Inicializa o carrossel
         this.updateCarousel();
     }
