@@ -102,8 +102,6 @@ async function carregarLancamentos() {
             mostrarMensagemVazia();
             return;
         }
-    });
-
         console.log(`✅ ${lancamentos.length} lançamentos carregados do banco de dados`);
 
         // Renderizar o carrossel com os produtos do banco
@@ -367,12 +365,6 @@ class CarouselLancamentos {
         } else {
             this.cardsPerView = 3;
         }
-
-        this.maxIndex = Math.max(0, this.totalCards - this.cardsPerView);
-        this.currentIndex = Math.min(this.currentIndex, this.maxIndex);
-        this.updateCarousel();
-    }
-}
 
         this.maxIndex = Math.max(0, this.totalCards - this.cardsPerView);
         this.currentIndex = Math.min(this.currentIndex, this.maxIndex);
