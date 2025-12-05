@@ -15,32 +15,20 @@
 
     <!-- Header -->
 
-    <!-- ====================== HEADER NOVO ======================= -->
-
-    <header class="op-header">
-        <nav class="op-nav">
-            <div class="op-container">
-
-                <a href="/index" class="op-logo">
-                    <img src="../assets/img/logo.png" alt="OmegaPetro Logo">
-                </a>
-
-                <div class="op-menu" id="navMenu">
-
-                    <a href="/produtos">Produtos</a>
-                    <a href="/adm/index" id="dashboardLink" style="display:none;">Dashboard</a>
-                    <a href="/carrinho">Carrinho</a>
-
-                    <div class="op-login nav-btn-container">
-                        <a href="/login" id="loginLink">
-                            <img src="../assets/img/login.png" alt="">
-                        </a>
-                    </div>
-
+    <header>
+        <nav>
+            <div class="nav-content">
+                <div class="nav-img">
+                    <a href="/index">
+                        <img class="nav-img-logo" src="../assets/img/logo.png" alt="OmegaPetro Logo">
+                    </a>
                 </div>
                 <div class="nav-navegacao" id="navMenu">
                     <a href="/produtos">
                         <p>Produtos</p>
+                    </a>
+                    <a href="/adm/index" class="btnAdm">
+                        <p>Dashboard</p>
                     </a>
                     <a href="/carrinho">
                         <p>Carrinho</p>
@@ -65,8 +53,10 @@
             </div>
         </nav>
     </header>
-    
-    
+
+    <!-- Header -->
+
+
 
     <main>
         <!-- Hero -->
@@ -85,23 +75,25 @@
                     </div>
                 </div>
                 <div class="carousel-item hero-carousel">
-                    <video src="../assets/videos/2282013-uhd_3840_2024_24fps.mp4" class="d-block w-100 hero-carousel-img"
-                        autoplay muted loop playsinline></video>
+                    <video src="../assets/videos/2282013-uhd_3840_2024_24fps.mp4"
+                        class="d-block w-100 hero-carousel-img" autoplay muted loop playsinline></video>
                     <div class="hero-carousel-content">
                         <div class="hero-content-box">
                             <h3>Soluções Essenciais que Transformam sua Indústria</h3>
                             <h5>Transformamos recursos naturais em produtos petroquímicos
                                 de alta qualidade para impulsionar o crescimento do seu negócio.</h5>
-                            <a href="" class="hero-content-button" style="width: 10dvw;">Conheça a Empresa</a>
+                            <a href="" class="hero-content-button" style="width: 11dvw;">Conheça a Empresa</a>
                         </div>
                     </div>
                 </div>
             </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade"
+                data-bs-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Previous</span>
             </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade"
+                data-bs-slide="next">
                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Next</span>
             </button>
@@ -112,12 +104,13 @@
                 <h1 class="apresentacao-title">Olá! Seja bem-vindo(a) <br> à <b class="apresentacao-highlight">Omega
                         Petro</b>.
                 </h1>
-                <p class="apresentacao-text">Fornecemos a robustez e a precisão que suas operações petroquímicas, de óleo
+                <p class="apresentacao-text">Fornecemos a robustez e a precisão que suas operações petroquímicas, de
+                    óleo
                     e gás exigem. Nossa expertise garante a máxima segurança e eficiência.</p>
                 <button class="apresentacao-btn">Explore o catálogo</button>
             </div>
             <div class="apresentacao-image-wrapper">
-                <img src="../assets/img/Gemini_Generated_Image_fxq1p3fxq1p3fxq1.png" alt="Omega Petro Industrial" class="apresentacao-image">
+                <img src="../assets/img/imgMulherIndustri.svg" alt="Omega Petro Industrial" class="apresentacao-image">
             </div>
         </div>
         <!-- Feedback -->
@@ -125,33 +118,36 @@
             <h1 class="mb-5">Feedback</h1>
             <div class="feedback-cards-container">
                 <div class="card rounded-4 border-0 feedback-card">
-                    <img src="../assets/img/braskem-logo.jpg"
-                        class="card-img-top rounded-top-4 feedback-card-img">
+                    <img src="../assets/img/braskem-logo.jpg" class="card-img-top rounded-top-4 feedback-card-img">
                     <div class="card-body rounded-bottom-4 feedback-card-body">
                         <img src="../assets/img/citacao.png" class="feedback-card-logo">
-                        <p class="feedback-card-text">Os ativos entregues superaram nossas especificações técnicas e atenderam com rigor a todos os padrões de segurança industrial. Sua alta confiabilidade é fundamental para a integridade operacional de nossas unidades.</p>
+                        <p class="feedback-card-text">Os ativos entregues superaram nossas especificações técnicas e
+                            atenderam com rigor a todos os padrões de segurança industrial. Sua alta confiabilidade é
+                            fundamental para a integridade operacional de nossas unidades.</p>
                         <div class="text-end pt-3">
                             <a href="" class="feedback-card-company">Braskem</a>
                         </div>
                     </div>
                 </div>
                 <div class="card rounded-4 border-0 feedback-card">
-                    <img src="../assets/img/innova-logo.png"
-                        class="card-img-top rounded-top-4 feedback-card-img">
+                    <img src="../assets/img/innova-logo.png" class="card-img-top rounded-top-4 feedback-card-img">
                     <div class="card-body rounded-bottom-4 feedback-card-body">
                         <img src="../assets/img/citacao.png" class="feedback-card-logo">
-                        <p class="feedback-card-text">A qualidade dos equipamentos demonstrou total conformidade e a robustez esperada para nossas unidades, especialmente as que trabalham com produção de monômeros e poliestireno. Isso reflete o alto padrão do seu processo produtivo.</p>
+                        <p class="feedback-card-text">A qualidade dos equipamentos demonstrou total conformidade e a
+                            robustez esperada para nossas unidades, especialmente as que trabalham com produção de
+                            monômeros e poliestireno. Isso reflete o alto padrão do seu processo produtivo.</p>
                         <div class="text-end pt-3">
                             <a href="" class="feedback-card-company">Innova</a>
                         </div>
                     </div>
                 </div>
                 <div class="card rounded-4 border-0 feedback-card">
-                    <img src="../assets/img/petrobras-logo.png"
-                        class="card-img-top rounded-top-4 feedback-card-img">
+                    <img src="../assets/img/petrobras-logo.png" class="card-img-top rounded-top-4 feedback-card-img">
                     <div class="card-body rounded-bottom-4 feedback-card-body">
                         <img src="../assets/img/citacao.png" class="feedback-card-logo">
-                        <p class="feedback-card-text">A qualidade dos equipamentos fornecidos não só atendeu, mas superou nossas exigências técnicas. O cumprimento dos prazos de entrega foi impecável, o que é crucial para manter nosso cronograma operacional sem interrupções.</p>
+                        <p class="feedback-card-text">A qualidade dos equipamentos fornecidos não só atendeu, mas
+                            superou nossas exigências técnicas. O cumprimento dos prazos de entrega foi impecável, o que
+                            é crucial para manter nosso cronograma operacional sem interrupções.</p>
                         <div class="text-end pt-3">
                             <a href="" class="feedback-card-company">Petrobras</a>
                         </div>
@@ -199,8 +195,10 @@
                 </div>
                 <div class="faq-answer">
                     <p>Oferecemos uma garantia padrão de 11 meses contra defeitos de fabricação. Nosso suporte técnico é
-                        exclusivo e ágil, com uma equipe de engenheiros especializados pronta para atendimento imediato e
-                        consultoria técnica. Detalhes sobre o SLA (Service Level Agreement) de atendimento são definidos em
+                        exclusivo e ágil, com uma equipe de engenheiros especializados pronta para atendimento imediato
+                        e
+                        consultoria técnica. Detalhes sobre o SLA (Service Level Agreement) de atendimento são definidos
+                        em
                         contrato.</p>
                 </div>
             </div>
@@ -213,8 +211,10 @@
                     </svg>
                 </div>
                 <div class="faq-answer">
-                    <p>Trabalhamos com parceiros logísticos especializados em cargas pesadas e de grande porte. Oferecemos
-                        soluções personalizadas incluindo transporte dedicado, seguro de carga, rastreamento em tempo real e
+                    <p>Trabalhamos com parceiros logísticos especializados em cargas pesadas e de grande porte.
+                        Oferecemos
+                        soluções personalizadas incluindo transporte dedicado, seguro de carga, rastreamento em tempo
+                        real e
                         equipe técnica para acompanhamento da instalação quando necessário.</p>
                 </div>
             </div>
@@ -227,8 +227,10 @@
                     </svg>
                 </div>
                 <div class="faq-answer">
-                    <p>Sim, oferecemos soluções sob medida para atender às necessidades específicas de cada cliente. Nossa
-                        equipe de engenharia trabalha em conjunto com você para desenvolver equipamentos customizados que
+                    <p>Sim, oferecemos soluções sob medida para atender às necessidades específicas de cada cliente.
+                        Nossa
+                        equipe de engenharia trabalha em conjunto com você para desenvolver equipamentos customizados
+                        que
                         atendam perfeitamente aos requisitos do seu projeto.</p>
                 </div>
             </div>
@@ -242,7 +244,8 @@
                 </div>
                 <div class="faq-answer">
                     <p>Os prazos variam de acordo com a complexidade e especificações do projeto. Após a aprovação do
-                        projeto técnico, fornecemos um cronograma detalhado. Em média, equipamentos customizados levam de 60
+                        projeto técnico, fornecemos um cronograma detalhado. Em média, equipamentos customizados levam
+                        de 60
                         a 120 dias para fabricação e entrega.</p>
                 </div>
             </div>
@@ -293,6 +296,9 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>
+
+    <script src="../js/header.js"></script>
+
     <script src="../js/index.js"></script>
 </body>
 

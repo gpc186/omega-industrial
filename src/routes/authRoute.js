@@ -9,6 +9,8 @@ router.post('/login', authController.login)
 
 router.get('/me', auth, authController.me)
 
+router.get('/users', auth, authController.listAllUsers)
+
 router.get("/validate-token", auth, (req, res) => {
     res.json({ ok: true });
 });

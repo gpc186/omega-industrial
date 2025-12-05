@@ -511,7 +511,6 @@ nav {
     height: 80%;
     border-radius: 25px;
     overflow: hidden;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 }
 
 .apresentacao-image {
@@ -1026,7 +1025,7 @@ nav {
 
 .faq-container {
     max-width: 100%;
-    background-color: white;
+    background-color: #fcfcfc;
     padding: 5% 15%;
     border-radius: 8px;
 }

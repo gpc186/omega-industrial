@@ -1,48 +1,5 @@
 const API_URL = 'http://localhost:4000/api';
 
-// ========== MENU HAMBÚRGUER ==========
-const hamburger = document.getElementById('hamburger');
-const navMenu = document.getElementById('navMenu');
-const body = document.body;
-
-if (hamburger && navMenu) {
-    // Toggle do menu hambúrguer
-    hamburger.addEventListener('click', (e) => {
-        e.stopPropagation();
-        hamburger.classList.toggle('active');
-        navMenu.classList.toggle('active');
-        body.classList.toggle('menu-open');
-    });
-
-    // Fechar menu ao clicar em um link
-    const navLinks = navMenu.querySelectorAll('a');
-    navLinks.forEach(link => {
-        link.addEventListener('click', () => {
-            hamburger.classList.remove('active');
-            navMenu.classList.remove('active');
-            body.classList.remove('menu-open');
-        });
-    });
-
-    // Fechar menu ao clicar fora dele
-    document.addEventListener('click', (e) => {
-        if (!hamburger.contains(e.target) && !navMenu.contains(e.target)) {
-            hamburger.classList.remove('active');
-            navMenu.classList.remove('active');
-            body.classList.remove('menu-open');
-        }
-    });
-}
-
-// Impede seleção de texto acidental
-document.body.style.userSelect = "none";
-if (navMenu) {
-    navMenu.style.userSelect = "auto";
-}
-
-
-
-
 // ===================== CARREGAR LANÇAMENTOS DO BANCO =====================
 async function carregarLancamentos() {
     try {
@@ -86,11 +43,14 @@ async function carregarLancamentos() {
                     }
                 }
 
+                const primeiraImagem = imageArray.length > 0 ? imageArray[0] : 'img/placeholder.png';
+
                 return {
                     id: produto.id,
                     titulo: produto.nome,
                     descricao: produto.descricao || 'Produto de alta qualidade para aplicações industriais',
                     preco: parseFloat(produto.preco) || 0,
+                    imagem: primeiraImagem,   // <-- ✔ Agora está correto
                     categoria: produto.categoria_nome || 'Produto Industrial',
                     created_at: produto.created_at,
                     imagem: imageArray[0] || '/img/default.png' // <<< AQUI ESTÁ A CORREÇÃO
@@ -102,8 +62,6 @@ async function carregarLancamentos() {
             mostrarMensagemVazia();
             return;
         }
-    });
-
         console.log(`✅ ${lancamentos.length} lançamentos carregados do banco de dados`);
 
         // Renderizar o carrossel com os produtos do banco
@@ -374,12 +332,6 @@ class CarouselLancamentos {
     }
 }
 
-        this.maxIndex = Math.max(0, this.totalCards - this.cardsPerView);
-        this.currentIndex = Math.min(this.currentIndex, this.maxIndex);
-        this.updateCarousel();
-    }
-}
-
 // ===================== INICIALIZAÇÃO =====================
 document.addEventListener('DOMContentLoaded', () => {
     carregarLancamentos();
@@ -387,3 +339,27 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Expor função globalmente para uso no onclick
 window.irParaProduto = irParaProduto;
+
+
+// ================== FAQ ================= //
+function toggleAnswer(element) {
+    const answer = element.nextElementSibling;
+    const arrow = element.querySelector('.arrow');
+
+    // Fecha todos os outros itens
+    document.querySelectorAll('.faq-answer').forEach(item => {
+        if (item !== answer) {
+            item.classList.remove('active');
+        }
+    });
+
+    document.querySelectorAll('.arrow').forEach(item => {
+        if (item !== arrow) {
+            item.classList.remove('active');
+        }
+    });
+
+    // Toggle do item clicado
+    answer.classList.toggle('active');
+    arrow.classList.toggle('active');
+}

@@ -1,5 +1,6 @@
 const { generateToken } = require('../utils/generateToken')
 const User = require('../models/User');
+const { mockUsers } = require('../utils/mockData');
 
 async function registrar(req, res) {
 
@@ -102,4 +103,20 @@ async function me(req, res) {
     }
 }
 
-module.exports = { registrar, login, me }
+async function listAllUsers(req, res) {
+    try {
+        let users;
+        if (process.env.NODE_ENV === 'development') {
+            users = mockUsers;
+        } else {
+            users = await User.findAll();
+        }
+
+        return res.status(200).json({ ok: true, message: "Usuários listados com sucesso!", users })
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ ok: false, error: "Erro interno do servidor!" })
+    }
+}
+
+module.exports = { registrar, login, me, listAllUsers }
