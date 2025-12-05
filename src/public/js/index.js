@@ -52,7 +52,8 @@ async function carregarLancamentos() {
                     preco: parseFloat(produto.preco) || 0,
                     imagem: primeiraImagem,   // <-- ✔ Agora está correto
                     categoria: produto.categoria_nome || 'Produto Industrial',
-                    created_at: produto.created_at
+                    created_at: produto.created_at,
+                    imagem: imageArray[0] || '/img/default.png' // <<< AQUI ESTÁ A CORREÇÃO
                 };
             });
 
@@ -61,6 +62,7 @@ async function carregarLancamentos() {
             mostrarMensagemVazia();
             return;
         }
+    });
 
         console.log(`✅ ${lancamentos.length} lançamentos carregados do banco de dados`);
 
@@ -300,6 +302,37 @@ class CarouselLancamentos {
         } else {
             this.cardsPerView = 3;
         }
+    }
+
+    prev() {
+        if (this.currentIndex > 0) {
+            this.currentIndex = Math.max(this.currentIndex - this.cardsPerView, 0);
+            this.updateCarousel();
+        }
+    }
+
+    goToSlide(index) {
+        this.currentIndex = Math.min(Math.max(0, index), this.maxIndex);
+        this.updateCarousel();
+    }
+
+    handleResize() {
+        const width = window.innerWidth;
+
+        // Ajustar cards por visualização baseado no tamanho da tela
+        if (width < 768) {
+            this.cardsPerView = 1;
+        } else if (width < 1024) {
+            this.cardsPerView = 2;
+        } else {
+            this.cardsPerView = 3;
+        }
+
+        this.maxIndex = Math.max(0, this.totalCards - this.cardsPerView);
+        this.currentIndex = Math.min(this.currentIndex, this.maxIndex);
+        this.updateCarousel();
+    }
+}
 
         this.maxIndex = Math.max(0, this.totalCards - this.cardsPerView);
         this.currentIndex = Math.min(this.currentIndex, this.maxIndex);

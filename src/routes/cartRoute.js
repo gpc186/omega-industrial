@@ -9,6 +9,6 @@ router.get('/list', auth, CartController.list);
 router.put('/:id/updateCart', auth, CartController.update);
 router.delete('/:id/remove', auth, CartController.remove);
 router.get('/total', auth, CartController.total);
-router.get('/count', auth , CartController.count);
+router.get('/count', auth, CartController.count);
 
 module.exports = router;

@@ -309,6 +309,7 @@ nav {
     display: flex;
     flex-direction: column;
 }
+
 .cart-card h4 {
     margin-bottom: 1rem;
 }
@@ -418,7 +419,8 @@ nav {
     background-color: white;
     box-shadow: 0 8px 18px rgba(0, 0, 0, 0.08);
     width: 20vw;
-    height: 50vh;
+    height: auto;
+    min-height: 50vh;
     border-radius: 16px;
     margin-bottom: 3vh;
     z-index: 2;
@@ -439,6 +441,13 @@ nav {
     border-bottom: 1px solid #eee;
 }
 
+.frete-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+    padding-bottom: 5px;
+}
+
 .totals-row:last-of-type {
     border-bottom: 2px solid #004e64;
     font-weight: 600;
@@ -451,16 +460,57 @@ nav {
     background-color: #f7931e;
     border: none;
     color: white;
-    padding: 12px;
+    padding: 14px 20px;
     border-radius: 8px;
     font-size: 1rem;
     font-weight: 600;
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow: 0 2px 8px rgba(247, 147, 30, 0.3);
 }
 
 .btn-finalizar:hover {
     background-color: #d67a15;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(247, 147, 30, 0.4);
+}
+
+.btn-finalizar:active {
+    transform: translateY(0);
+}
+
+.tipo-frete {
+    border: #ddd 1px solid;
+    border-radius: 8px;
+    width: 8.7dvw;
+    color: #666;
+    padding: 5px;
+}
+
+.btn-frete {
+    height: 4dvh;
+    width: 35%;
+    background-color: #f7931e;
+    border: none;
+    color: white;
+    padding: 1dvh;
+    border-radius: 0 8px 8px 0;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s;
+}
+
+.input-frete {
+    width: 65%;
+    border-radius: 8px 0 0 8px;
+    border: #ddd 1px solid;
+    padding-left: 0.5dvw;
 }
 
 .empty-cart {
@@ -478,16 +528,206 @@ nav {
     align-items: start;
 }
 
-@media (max-width: 768px) {
+/* ======= TABLET ========= */
+@media (max-width: 1024px) {
+    .main {
+        padding: 15vh 8%;
+    }
+
+    .card-totals {
+        width: 28vw;
+        padding: 20px;
+    }
+
+    .tipo-frete {
+        width: 12vw;
+    }
+
+    .btn-finalizar {
+        padding: 12px 18px;
+        font-size: 0.95rem;
+    }
+}
+
+/* ======= MOBILE ========= */
+@media (max-width: 870px) {
+    .op-hamburger {
+        display: flex;
+    }
+
+    .op-menu {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        height: 100%;
+        width: 260px;
+        background: #ffffff;
+        flex-direction: column;
+        padding-top: 7rem;
+        padding-left: 2rem;
+        gap: 2rem;
+        box-shadow: -4px 0px 14px rgba(0, 0, 0, 0.15);
+        transition: 0.3s ease-in-out;
+    }
+
+    .op-menu.active {
+        right: 0;
+        background: #003548;
+        color: #ffff;
+    }
+
+    .op-menu a {
+        font-size: 1.3rem;
+        color: #ffff;
+    }
+
+    .main {
+        padding: 100px 5% 30px;
+        flex-direction: column;
+    }
+
+    .container {
+        width: 100% !important;
+    }
+
     .container-totals {
         width: 100% !important;
         align-items: center;
     }
-    
+
     .card-totals {
         position: static;
         width: 100%;
         height: auto;
         margin-top: 20px;
+        padding: 20px;
+    }
+
+    .tipo-frete {
+        width: 45%;
+        font-size: 0.9rem;
+    }
+
+    .btn-finalizar {
+        padding: 16px 24px;
+        font-size: 1.05rem;
+        margin-top: 10px;
+    }
+
+    .btn-frete {
+        height: 40px;
+        font-size: 0.9rem;
+    }
+
+    .input-frete {
+        height: 40px;
+        padding-left: 10px;
+        font-size: 0.9rem;
+    }
+
+    .card-item {
+        flex-direction: column;
+        align-items: flex-start;
+        height: auto;
+        padding: 15px;
+    }
+
+    .card-item__image {
+        width: 100%;
+        height: 200px;
+    }
+
+    .card-item__info,
+    .card-item__actions {
+        width: 100%;
+        height: auto;
+    }
+
+    .card-item__actions {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 10px;
+    }
+
+    .card-item__quantity button {
+        width: 35px;
+        height: 35px;
+        font-size: 1.1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .nav-img-logo {
+        height: 30px;
+    }
+
+    .op-logo img {
+        height: 40px;
+    }
+
+    .nav-navegacao {
+        width: 80%;
+        padding: 70px 20px 20px;
+    }
+
+    .hamburger span {
+        width: 25px;
+    }
+
+    .main {
+        padding: 80px 3% 20px;
+    }
+
+    .card-totals {
+        padding: 16px;
+    }
+
+    .card-totals h5 {
+        font-size: 1.1rem;
+        margin-bottom: 15px;
+    }
+
+    .totals-row {
+        font-size: 0.9rem;
+        margin-bottom: 12px;
+        padding-bottom: 12px;
+    }
+
+    .frete-row {
+        font-size: 0.85rem;
+        flex-wrap: wrap;
+    }
+
+    .tipo-frete {
+        width: 100%;
+        margin-top: 5px;
+        padding: 8px;
+    }
+
+    .btn-finalizar {
+        padding: 14px 20px;
+        font-size: 1rem;
+        margin-top: 5px;
+    }
+
+    .btn-frete {
+        font-size: 0.85rem;
+        padding: 8px;
+    }
+
+    .input-frete {
+        font-size: 0.85rem;
+    }
+
+    .card-item__quantity button {
+        width: 32px;
+        height: 32px;
+    }
+
+    .card-item__quantity input {
+        width: 50px;
+        height: 28px;
+        font-size: 0.9rem;
     }
 }

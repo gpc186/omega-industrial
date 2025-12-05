@@ -69,15 +69,30 @@
                     <span>Subtotal:</span>
                     <span id="subtotal">R$ 0,00</span>
                 </div>
-                <div class="totals-row">
-                    <span>Frete:</span>
-                    <span id="frete">R$ 0,00</span>
+                <div class="totals-row" style="display: block !important;">
+                    <div class="frete-row" style="display: flex;">
+                        <span>Frete:</span>
+                        <span id="frete">R$ 0,00</span>
+                    </div>
+                    <div class="frete-row" id="freteOpcoes">
+                        <span>Tipo de Entrega: </span>
+                        <select class="tipo-frete" id="tiposFrete" class="hidden-select">
+                            <option value="Economica">Economica - R$100</option>
+                            <option value="Normal">Normal - R$150</option>
+                            <option value="Expressa">Expressa - R$200</option>
+                        </select>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; width: 100%;">
+                        <input class="input-frete" type="text" id="cep" oninput="maskCEP(this)"
+                            placeholder="Digite seu CEP" maxlength="9">
+                        <button class="btn-frete" id="btnCalcularFrete">Calcular Frete</button>
+                    </div>
                 </div>
                 <div class="totals-row">
                     <span>Total:</span>
                     <span id="total">R$ 0,00</span>
                 </div>
-                <button class="btn-finalizar" onclick="finalizarCompra()">Finalizar Compra</button>
+                <button class="btn-finalizar" id="finalizarCompra">Finalizar Compra</button>
             </div>
         </div>
     </div>
@@ -86,6 +101,7 @@
     <script type="module" src="../js/checkAuth.js"></script>
     <script src="../js/cart.js"></script>
     <script src="../js/header.js"></script>
+    <script type="module" src="../js/cart.js"></script>
 </body>
 
 </html>

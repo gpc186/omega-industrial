@@ -3,6 +3,7 @@ const CartItem = require('../models/CartItem');
 
 async function createOrder(req, res) {
     try {
+        const { frete } = req.body
         const userId = req.user.id;
 
         const cartItems = await CartItem.findByUser(userId);
@@ -23,7 +24,7 @@ async function createOrder(req, res) {
 
         const order_numero = Order.generateOrderNumber();
 
-        const compra_id = await Order.create(userId, order_numero, total_preco, items, req.body.notes || null);
+        const compra_id = await Order.create(userId, order_numero, total_preco, items, req.body.notes || null, req.body.frete || null);
 
         return res.status(201).json({ ok: true, message: "Pedido criado com sucesso!", compra_id, order_numero, total_preco });
     } catch (error) {
