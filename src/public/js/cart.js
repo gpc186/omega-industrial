@@ -196,10 +196,10 @@ async function atualizarTotais() {
         });
 
         const data = await handleResponse(response);
-
         const subtotal = Number(data.total) || 0;
-        const frete = Number(window.ultimoCalculoFrete?.preco) || 0;
+        const frete = Number(window.ultimoCalculoFrete) || 0;
         const total = Number(subtotal) + frete;
+        
 
         document.getElementById('subtotal').textContent =
             `R$ ${subtotal.toFixed(2).replace('.', ',')}`;
@@ -241,7 +241,7 @@ async function finalizarCompra() {
         });
 
         const data = await handleResponse(response);
-        const dados = JSON.parse(data)
+        console.log(data);
 
         alert(`Pedido realizado com sucesso! ID de compra: ${dados.compra_id}, Numero da ordem:${dados.order_numero}, total: ${dados.total_preco}`);
         window.location.href = '/produtos';
@@ -256,6 +256,7 @@ document.getElementById("finalizarCompra").addEventListener("click", finalizarCo
 
 function calcularFreteFinal() {
     const cep = document.getElementById("cep").value;
+    console.log("CEP recebido:", cep, typeof cep);
     const subtotal = window.subtotalCarrinho || 0;
 
     const opcoes = calcularFrete(cep, subtotal);
@@ -265,36 +266,36 @@ function calcularFreteFinal() {
         return;
     }
 
-    const div = document.getElementById("freteOpcoes");
-    div.innerHTML = "";
+    const select = document.getElementById("freteOpcoes");
+    select.innerHTML = "";
 
     opcoes.forEach(f => {
-        const btn = document.createElement("button");
-        btn.textContent = `${f.nome} - R$ ${f.preco.toFixed(2)} (${f.prazo})`;
+        const option = document.createElement("option");
+        option.value = JSON.stringify(f);
+        option.textContent = `${f.nome} - R$ ${f.preco.toFixed(2)}`;
+        select.appendChild(option);
+    });
 
-        btn.onclick = () => selecionarOpcaoFrete(f);
-
-        div.appendChild(btn);
+    select.addEventListener("change", () => {
+        const frete = JSON.parse(select.value);
+        window.ultimoCalculoFrete = frete.preco
+        atualizarTotais();
     });
 }
 
-function selecionarOpcaoFrete(frete) {
-    window.ultimoCalculoFrete = frete;
 
-    const subtotal = window.subtotalCarrinho || 0;
-    const total = subtotal + frete.preco;
+document.getElementById("btnCalcularFrete").addEventListener("click", () => calcularFreteFinal());
 
-    document.getElementById("frete").textContent =
-        "R$ " + frete.preco.toFixed(2).replace('.', ',');
+document.addEventListener("DOMContentLoaded", () => {
+    const btnFrete = document.getElementById("btnCalcularFrete");
 
-    document.getElementById("total").textContent =
-        "R$ " + total.toFixed(2).replace('.', ',');
+    if (btnFrete) {
+        btnFrete.addEventListener("click", calcularFreteFinal);
+    } else {
+        console.error("ERRO: Botão Calcular Frete NÃO encontrado no DOM!");
+    }
+});
 
-    alert(`Frete selecionado: ${frete.nome} | R$ ${frete.preco.toFixed(2)}`);
-}
-
-window.calcularFreteFinal = calcularFreteFinal;
-window.selecionarOpcaoFrete = selecionarOpcaoFrete;
 
 // ==================== INICIALIZAÇÃO ====================
 
@@ -338,49 +339,3 @@ if (hamburger && navMenu) {
         }
     });
 }
-
-
-
-
-function maskCEP(input) {
-    let value = input.value.replace(/\D/g, ""); // remove tudo que não é número
-
-    if (value.length > 5) {
-        value = value.replace(/(\d{5})(\d)/, "$1-$2"); // adiciona o hífen
-    }
-
-    input.value = value;
-}
-
-
-document.addEventListener("DOMContentLoaded", () => {
-    const selectReal = document.getElementById("tiposFrete");
-
-    display.addEventListener("click", (e) => {
-        e.stopPropagation();
-        options.classList.toggle("open");
-        display.classList.toggle("active");
-    });
-
-    options.querySelectorAll("div").forEach(item => {
-        item.addEventListener("click", () => {
-            const value = item.dataset.value;
-
-            display.textContent = item.textContent;
-
-            options.querySelectorAll("div").forEach(i => i.classList.remove("selected"));
-            item.classList.add("selected");
-
-            selectReal.value = value;
-            selectReal.dispatchEvent(new Event("change"));
-
-            options.classList.remove("open");
-            display.classList.remove("active");
-        });
-    });
-
-    document.addEventListener("click", () => {
-        options.classList.remove("open");
-        display.classList.remove("active");
-    });
-});
