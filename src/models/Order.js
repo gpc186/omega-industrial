@@ -93,7 +93,14 @@ class Order {
       JOIN user u ON c.user_id = u.id
       ORDER BY c.data_compra DESC
     `;
-    return await query(sql);
+    const orders = await query(sql);
+
+    // Para cada pedido, buscar os itens
+    for (const order of orders) {
+      order.items = await this.getItems(order.id);
+    }
+
+    return orders;
   }
 
   // Buscar itens do pedido

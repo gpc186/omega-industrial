@@ -50,6 +50,8 @@ app.use('/adm/produtos', (req, res)=>{
 app.use('/adm/index', (req, res)=>{
     res.status(200).sendFile(path.join(__dirname, './public/html/', 'admIndex.html'))
 })
+
+
 app.use('/index', (req, res)=>{
     res.status(200).sendFile(path.join(__dirname, './public/html/', 'index.html'))
 })

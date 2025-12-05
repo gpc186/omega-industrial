@@ -55,9 +55,6 @@ class Product {
     const results = await query(sql);
 
     return results.map(produto => {
-      if (produto.image_urls) {
-        produto.image_urls = JSON.parse(produto.image_urls);
-      }
       return produto;
     });
   }
