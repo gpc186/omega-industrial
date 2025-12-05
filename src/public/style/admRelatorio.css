@@ -212,8 +212,8 @@ nav {
         align-items: flex-start;
         padding: 80px 30px 30px;
         gap: 2rem;
-        transition: right 0.3s ease;
-        box-shadow: -5px 0 15px rgba(0, 0, 0, 0.3);
+        box-shadow: -4px 0px 14px rgba(0, 0, 0, 0.15);
+        transition: 0.3s ease-in-out;
     }
 
 
@@ -323,6 +323,28 @@ main {
     font-weight: 500;
 }
 
+/* =====================    titulo   ===========================*/
+
+.titulo-pagina {
+    font-weight: 700;
+    color: #004E64; /* Azul petróleo */
+    letter-spacing: -0.6px;
+}
+
+.subtitulo-pagina {
+    font-size: 0.98rem;
+    font-weight: 500;
+    color: #6c757d; /* cinza elegante */
+    margin-top: -4px;
+}
+
+.destaque-metrica {
+    color: #F7931E;
+    font-weight: 600;
+}
+
+
+
 /* ===================== CARD STYLES ====================== */
 
 .card {
@@ -345,7 +367,6 @@ main {
 
 .card-header h5 {
     font-weight: 600;
-    color: var(--primary);
     margin: 0;
 }
 
@@ -507,6 +528,33 @@ main {
     background-color: #fecaca;
 }
 
+.btn-outline-primary {
+    color: #f7931e !important;
+    border-color: #f7931e !important;
+}
+
+.btn-outline-primary:hover,
+.btn-check:checked+.btn-outline-primary {
+    background-color: #ffa844 !important;
+    color: white !important;
+}
+
+/* ====== Icones da parte de cima (Os quatro cards) ======*/
+
+.fa-users:before {
+    color: #003548;
+}
+
+.fa-boxes-alt:before,
+.fa-boxes-stacked:before,
+.fa-boxes:before {
+    color: #003548;
+}
+
+.fa-chart-line:before {
+    color: #003548;
+}
+
 /* ===================== RESPONSIVE ====================== */
 
 @media (max-width: 768px) {
@@ -581,7 +629,7 @@ main {
 }
 
 .text-success {
-    color: var(--success) !important;
+    color: 25, 135, 84 !important;
 }
 
 .text-warning {
@@ -590,6 +638,10 @@ main {
 
 .text-danger {
     color: var(--danger) !important;
+}
+
+.text-info {
+    color: #f7931e !important;
 }
 
 .bg-light {
@@ -607,6 +659,11 @@ main {
 }
 
 @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
 }
