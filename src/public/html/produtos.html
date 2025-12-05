@@ -10,31 +10,48 @@
 
 <body>
 
+    <!-- Header -->
+
     <header>
         <nav>
             <div class="nav-content">
                 <div class="nav-img">
-                    <img class="nav-img-logo" src="../assets/img/logo.png">
+                    <a href="/index">
+                        <img class="nav-img-logo" src="../assets/img/logo.png" alt="OmegaPetro Logo">
+                    </a>
                 </div>
-                <div class="nav-navegacao">
-                    <a href="#">
+                <div class="nav-navegacao" id="navMenu">
+                    <a href="/produtos">
                         <p>Produtos</p>
                     </a>
-                    <a href="/adm/index" id="btnAdm">
+                    <a href="/adm/index" class="btnAdm">
                         <p>Dashboard</p>
                     </a>
                     <a href="/carrinho">
                         <p>Carrinho</p>
                     </a>
+                    <a href="/login" class="login-desktop">
+                        <p>Login</p>
+                    </a>
                 </div>
             </div>
-            <div class="nav-content">
-                <div class="nav-btn-container">
-                    <a href="/index" onclick="logout()"><button class="nav-btn-entrar">Sair</button></a>
+            <div class="nav-content" style="justify-content: end;">
+                <div class="nav-login">
+                    <a href="/login">
+                        <p>Login</p>
+                        <img src="../assets/img/login.png" alt="Login Icon">
+                    </a>
+                </div>
+                <div class="hamburger" id="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
                 </div>
             </div>
         </nav>
     </header>
+
+    <!-- Header -->
 
     <main>
         <div class="filtros-container">
@@ -80,21 +97,6 @@
     // Verificar se está logado
     const token = localStorage.getItem('token');
     const user = JSON.parse(localStorage.getItem('user') || '{}');
-
-    // Atualizar navegação
-    const navLogin = document.querySelector('.nav-btn-container');
-    if (token && user.nome) {
-        navLogin.innerHTML = `
-            <span style="color: #004e64; margin-right: 1rem;">Olá, ${user.nome.split(' ')[0]}</span>
-            <button class="nav-btn-entrar" onclick="logout()">Sair</button>
-        `;
-    }
-
-    function logout() {
-        localStorage.removeItem('token');
-        localStorage.removeItem('user');
-        window.location.href = '/index';
-    }
 
     // Carregar produtos da API
     async function carregarProdutos() {
@@ -336,6 +338,8 @@
         });
     </script>
 
+    
+
 
 
     <footer class="footer">
@@ -364,7 +368,9 @@
             <p>© 2025 Omega Petro. Todos os direitos reservados.</p>
         </div>
     </footer>
+
     
+    <script src="../js/header.js"></script>
     <script type="module" src="../js/auth.js"></script>
     <script type="module" src="../js/checkAuth.js"></script>
 </body>
