@@ -62,8 +62,6 @@ async function carregarLancamentos() {
             mostrarMensagemVazia();
             return;
         }
-    });
-
         console.log(`✅ ${lancamentos.length} lançamentos carregados do banco de dados`);
 
         // Renderizar o carrossel com os produtos do banco
@@ -334,12 +332,6 @@ class CarouselLancamentos {
     }
 }
 
-        this.maxIndex = Math.max(0, this.totalCards - this.cardsPerView);
-        this.currentIndex = Math.min(this.currentIndex, this.maxIndex);
-        this.updateCarousel();
-    }
-}
-
 // ===================== INICIALIZAÇÃO =====================
 document.addEventListener('DOMContentLoaded', () => {
     carregarLancamentos();
@@ -349,14 +341,25 @@ document.addEventListener('DOMContentLoaded', () => {
 window.irParaProduto = irParaProduto;
 
 
+// ================== FAQ ================= //
+function toggleAnswer(element) {
+    const answer = element.nextElementSibling;
+    const arrow = element.querySelector('.arrow');
 
+    // Fecha todos os outros itens
+    document.querySelectorAll('.faq-answer').forEach(item => {
+        if (item !== answer) {
+            item.classList.remove('active');
+        }
+    });
 
+    document.querySelectorAll('.arrow').forEach(item => {
+        if (item !== arrow) {
+            item.classList.remove('active');
+        }
+    });
 
-
-
-
-
-
-
-
-
+    // Toggle do item clicado
+    answer.classList.toggle('active');
+    arrow.classList.toggle('active');
+}
