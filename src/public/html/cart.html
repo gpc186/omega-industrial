@@ -74,12 +74,10 @@
                         <span>Frete:</span>
                         <span id="frete">R$ 0,00</span>
                     </div>
-                    <div class="frete-row" id="freteOpcoes">
+                    <div class="frete-row">
                         <span>Tipo de Entrega: </span>
-                        <select class="tipo-frete" id="tiposFrete" class="hidden-select">
-                            <option value="Economica">Economica - R$100</option>
-                            <option value="Normal">Normal - R$150</option>
-                            <option value="Expressa">Expressa - R$200</option>
+                        <select class="tipo-frete" id="freteOpcoes" class="hidden-select">
+                            <option value="">Inisira um CEP</option>
                         </select>
                     </div>
                     <div style="display: flex; justify-content: space-between; width: 100%;">
@@ -97,6 +95,19 @@
         </div>
     </div>
 
+    <script>
+        function maskCEP(input) {
+            let value = input.value.replace(/\D/g, ""); // remove tudo que não é número
+            console.log(value);
+
+
+            if (value.length > 5) {
+                value = value.replace(/(\d{5})(\d)/, "$1-$2"); // adiciona o hífen
+            }
+
+            input.value = value;
+        }
+    </script>
     <script type="module" src="../js/auth.js"></script>
     <script type="module" src="../js/checkAuth.js"></script>
     <script src="../js/cart.js"></script>

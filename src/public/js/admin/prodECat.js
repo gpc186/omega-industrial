@@ -72,8 +72,8 @@ async function carregarProdutos() {
 
     produtos.forEach(prod => {
         const tr = document.createElement("tr");
-
-        const imagens = prod.image_urls || "[]";
+        
+        const imagens = JSON.parse(prod.img_urls) || "[]";
 
         tr.innerHTML = `
             <td>${prod.id}</td>

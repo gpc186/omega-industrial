@@ -38,9 +38,6 @@ app.use('/produto', (req, res)=>{
 app.use('/produtos', (req, res)=>{
     res.status(200).sendFile(path.join(__dirname, './public/html/', 'produtos.html'))
 })
-app.use('/registrar', (req, res)=>{
-    res.status(200).sendFile(path.join(__dirname, './public/html/', 'criar-conta.html'))
-})
 app.use('/adm/relatorio', (req, res)=>{
     res.status(200).sendFile(path.join(__dirname, './public/html/', 'admRelatorio.html'))
 })
