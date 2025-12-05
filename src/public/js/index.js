@@ -379,3 +379,27 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Expor função globalmente para uso no onclick
 window.irParaProduto = irParaProduto;
+
+
+// ================== FAQ ================= //
+function toggleAnswer(element) {
+    const answer = element.nextElementSibling;
+    const arrow = element.querySelector('.arrow');
+
+    // Fecha todos os outros itens
+    document.querySelectorAll('.faq-answer').forEach(item => {
+        if (item !== answer) {
+            item.classList.remove('active');
+        }
+    });
+
+    document.querySelectorAll('.arrow').forEach(item => {
+        if (item !== arrow) {
+            item.classList.remove('active');
+        }
+    });
+
+    // Toggle do item clicado
+    answer.classList.toggle('active');
+    arrow.classList.toggle('active');
+}
