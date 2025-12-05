@@ -1,7 +1,7 @@
 import { api } from "/js/api.js";
 
 const tabelaProdutos = document.getElementById("tabelaProdutos");
-const tabelaCategorias = document.getElementById("listaCategorias");
+const tabela = document.getElementById("listaCategorias");
 const selectCategoria = document.getElementById("selectCategoria");
 const modalEdicao = document.getElementById("modalEdicao");
 
@@ -16,18 +16,17 @@ async function carregarCategorias() {
         selectCategoria.appendChild(op);
     });
 
-    tabelaCategorias.innerHTML = "";
+    tabela.innerHTML = "";
     res.categorias.forEach(cat => {
         const tr = document.createElement("tr");
         tr.innerHTML = `
-            <td>${cat.id}</td>
-            <td>${cat.nome}</td>
-            <td>${cat.description || ""}</td>
-            <td>
-                <button class="btn-del-cat" data-id="${cat.id}">Excluir</button>
-            </td>
-        `;
-        tabelaCategorias.appendChild(tr);
+                <td>${cat.id}</td>
+                <td>${cat.nome}</td>
+                <td>
+                    <button data-id="${cat.id}" class="btnExcluir btn-del-cat">Excluir</button>
+                </td>
+            `;
+        tabela.appendChild(tr);
     });
 }
 
@@ -48,7 +47,7 @@ document.getElementById("formCategoria").addEventListener("submit", async e => {
     }
 });
 
-tabelaCategorias.addEventListener("click", async e => {
+tabela.addEventListener("click", async e => {
     if (!e.target.classList.contains("btn-del-cat")) return;
 
     const id = e.target.dataset.id;
@@ -78,18 +77,17 @@ async function carregarProdutos() {
 
         tr.innerHTML = `
             <td>${prod.id}</td>
+            <td>${imagens.map(url => `<img src="${url}" width="60">`).join("")}</td>
             <td>${prod.nome}</td>
             <td>${prod.categoria_nome}</td>
             <td>R$ ${prod.preco}</td>
             <td>${prod.quantidade}</td>
-            <td>
-                ${imagens.map(url => `<img src="${url}" width="60">`).join("")}
-            </td>
-            <td>
-                <button class="btnEditar" data-id="${prod.id}">Editar</button>
-                <button class="btnExcluir" data-id="${prod.id}">Excluir</button>
-            </td>
-        `;
+            <td class="actions">
+        <button class="btnEditar" data-id="${prod.id}">Editar</button>
+        <button class="btnExcluirProd" data-id="${prod.id}">Excluir</button>
+    </td>
+`;
+
 
         tabelaProdutos.appendChild(tr);
     });
@@ -118,7 +116,7 @@ document.getElementById("formCriarProduto").addEventListener("submit", async e =
 
     const res = await api.criarProduto(form);
 
-    if (res.ok) {
+    if (res.success || res.ok) {
         alert("Produto criado!");
         e.target.reset();
         carregarProdutos();
@@ -154,7 +152,7 @@ tabelaProdutos.addEventListener("click", async e => {
             preview.appendChild(img);
         });
 
-        modalEdicao.style.display = "block";
+        modalEdicao.style.display = "flex";
     }
 
     if (e.target.classList.contains("btnExcluir")) {
@@ -164,7 +162,8 @@ tabelaProdutos.addEventListener("click", async e => {
 
         const res = await api.deletarProduto(id);
 
-        if (res.ok) {
+        if (res.success || res.ok) {
+
             alert("Produto excluído!");
             carregarProdutos();
         } else {
@@ -211,3 +210,23 @@ window.fecharModal = function () {
 
 carregarCategorias();
 carregarProdutos();
+
+/* ===========================================
+   EVENTO DE EXCLUSÃO DE CATEGORIA
+   =========================================== */
+document.getElementById("listaCategorias").addEventListener("click", async e => {
+    if (!e.target.classList.contains("btn-del-cat")) return;
+
+    const id = e.target.dataset.id;
+
+    if (!confirm("Excluir esta categoria?")) return;
+
+    const res = await api.deletarCategoria(id);
+
+    if (res.ok) {
+        alert("Categoria removida!");
+        carregarCategorias(selectCategoria); // recarrega a tabela e o select
+    } else {
+        alert(res.error || "Erro ao excluir categoria");
+    }
+});
