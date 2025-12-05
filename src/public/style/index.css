@@ -665,8 +665,8 @@ nav {
 }
 
 .feedback-card {
-    width: 27.2rem;
-    height: 22rem;
+    width: 27rem;
+    height: 27rem;
     flex-shrink: 0;
 }
 
@@ -817,6 +817,8 @@ nav {
     flex: 1;
     overflow: hidden;
     position: relative;
+    align-items: center;
+    padding: 3% 0;
 }
 
 /* Track dos Cards */
@@ -833,14 +835,12 @@ nav {
     position: relative;
     border-radius: 15px;
     overflow: hidden;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     cursor: pointer;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .lancamentos-card:hover {
     transform: translateY(-10px);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
 }
 
 .lancamentos-card-img {
