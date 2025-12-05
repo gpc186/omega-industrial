@@ -5,8 +5,6 @@ let relatedProducts = [];
 
 // ===================== INICIALIZAÇÃO =====================
 document.addEventListener('DOMContentLoaded', () => {
-    // Inicializar o menu hambúrguer
-    initHamburgerMenu();
 
     const user = JSON.parse(localStorage.getItem('user'));
 
@@ -26,39 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
     console.log('JavaScript carregado com sucesso!');
 });
 
-// ===================== MENU HAMBÚRGUER =====================
-function initHamburgerMenu() {
-    const hamburger = document.getElementById('hamburger');
-    const navMenu = document.getElementById('navMenu');
-    const body = document.body;
 
-    if (hamburger && navMenu) {
-        hamburger.addEventListener('click', () => {
-            hamburger.classList.toggle('active');
-            navMenu.classList.toggle('active');
-            body.classList.toggle('menu-open');
-        });
-
-        // Fechar menu ao clicar em um link
-        const navLinks = navMenu.querySelectorAll('a');
-        navLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                hamburger.classList.remove('active');
-                navMenu.classList.remove('active');
-                body.classList.remove('menu-open');
-            });
-        });
-
-        // Fechar menu ao clicar fora dele
-        document.addEventListener('click', (e) => {
-            if (!hamburger.contains(e.target) && !navMenu.contains(e.target)) {
-                hamburger.classList.remove('active');
-                navMenu.classList.remove('active');
-                body.classList.remove('menu-open');
-            }
-        });
-    }
-}
 
 // ===================== CARREGAMENTO DINÂMICO DO PRODUTO =====================
 async function loadProductFromURL() {
