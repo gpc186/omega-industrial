@@ -356,36 +356,29 @@ function maskCEP(input) {
 document.addEventListener("DOMContentLoaded", () => {
     const selectReal = document.getElementById("tiposFrete");
 
-    // Toggle abrir/fechar
     display.addEventListener("click", (e) => {
         e.stopPropagation();
         options.classList.toggle("open");
         display.classList.toggle("active");
     });
 
-    // Clicar em item
     options.querySelectorAll("div").forEach(item => {
         item.addEventListener("click", () => {
             const value = item.dataset.value;
 
-            // Atualiza display
             display.textContent = item.textContent;
 
-            // Atualiza visual da seleção
             options.querySelectorAll("div").forEach(i => i.classList.remove("selected"));
             item.classList.add("selected");
 
-            // Atualiza select real (para funcionar no filtro)
             selectReal.value = value;
             selectReal.dispatchEvent(new Event("change"));
 
-            // Fecha dropdown
             options.classList.remove("open");
             display.classList.remove("active");
         });
     });
 
-    // Fecha ao clicar fora
     document.addEventListener("click", () => {
         options.classList.remove("open");
         display.classList.remove("active");
