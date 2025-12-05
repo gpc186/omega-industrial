@@ -241,9 +241,9 @@ async function finalizarCompra() {
         });
 
         const data = await handleResponse(response);
-        console.log(data);
+        let preco_final = data.total_preco + window.ultimoCalculoFrete
 
-        alert(`Pedido realizado com sucesso! ID de compra: ${dados.compra_id}, Numero da ordem:${dados.order_numero}, total: ${dados.total_preco}`);
+        alert(`Pedido realizado com sucesso! ID de compra: ${data.compra_id}, Numero da ordem:${data.order_numero}, total: ${preco_final.toFixed(2).replace('.', ',')}`);
         window.location.href = '/produtos';
 
     } catch (error) {
