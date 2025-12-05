@@ -246,7 +246,7 @@ async function addToCart(product) {
 
         if (!token) {
             alert('Você precisa estar logado para adicionar itens ao carrinho');
-            window.location.href = 'login.html';
+            window.location.href = '/login';
             return;
         }
 
