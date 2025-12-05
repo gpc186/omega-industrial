@@ -193,7 +193,6 @@ main {
 
 .card-header h5 {
     font-weight: 600;
-    color: var(--primary);
     margin: 0;
 }
 
@@ -355,6 +354,31 @@ main {
     background-color: #fecaca;
 }
 
+.btn-outline-primary {
+    color: #f7931e !important;
+    border-color: #f7931e !important;
+}
+
+.btn-outline-primary:hover,
+.btn-check:checked + .btn-outline-primary {
+    background-color: #ffa844 !important;
+    color: white !important;
+}
+
+/* ====== Icones da parte de cima (Os quatro cards) ======*/
+
+.fa-users:before{
+    color:#003548;
+}
+
+.fa-boxes-alt:before, .fa-boxes-stacked:before, .fa-boxes:before{
+    color: #003548;
+}
+
+.fa-chart-line:before{
+    color: #003548;
+}
+
 /* ===================== RESPONSIVE ====================== */
 
 @media (max-width: 768px) {
@@ -429,7 +453,7 @@ main {
 }
 
 .text-success {
-    color: var(--success) !important;
+    color: 25, 135, 84 !important;
 }
 
 .text-warning {
@@ -438,6 +462,10 @@ main {
 
 .text-danger {
     color: var(--danger) !important;
+}
+
+.text-info{
+    color: #f7931e !important;
 }
 
 .bg-light {
