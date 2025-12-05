@@ -11,39 +11,48 @@
 </head>
 
 <body>
-     <!-- ====================== HEADER NOVO ======================= -->
+     <!-- Header -->
 
-    <header class="op-header">
-        <nav class="op-nav">
-            <div class="op-container">
-
-                <a href="/index" class="op-logo">
-                    <img src="../assets/img/logo.png" alt="OmegaPetro Logo">
-                </a>
-
-                <div class="op-menu" id="navMenu">
-
-                    <a href="/produtos">Produtos</a>
-                    <a href="/adm/index" id="dashboardLink" style="display:none;">Dashboard</a>
-                    <a href="/carrinho">Carrinho</a>
-
-                    <div class="op-login nav-btn-container">
-                        <a href="#" id="loginLink">
-                            <img src="../assets/img/login.png" alt="">
-                        </a>
-                    </div>
-
+    <header>
+        <nav>
+            <div class="nav-content">
+                <div class="nav-img">
+                    <a href="/index">
+                        <img class="nav-img-logo" src="../assets/img/logo.png" alt="OmegaPetro Logo">
+                    </a>
                 </div>
-
-                <button class="op-hamburger" id="hamburger">
+                <div class="nav-navegacao" id="navMenu">
+                    <a href="/produtos">
+                        <p>Produtos</p>
+                    </a>
+                    <a href="/adm/index" id="btnAdm">
+                        <p>Dashboard</p>
+                    </a>
+                    <a href="/carrinho">
+                        <p>Carrinho</p>
+                    </a>
+                    <a href="/login" class="login-desktop">
+                        <p>Login</p>
+                    </a>
+                </div>
+            </div>
+            <div class="nav-content" style="justify-content: end;">
+                <div class="nav-login">
+                    <a href="/login">
+                        <p>Login</p>
+                        <img src="../assets/img/login.png" alt="Login Icon">
+                    </a>
+                </div>
+                <div class="hamburger" id="hamburger">
                     <span></span>
                     <span></span>
                     <span></span>
-                </button>
-
+                </div>
             </div>
         </nav>
     </header>
+
+    <!-- Header -->
 
     <div class="main">
         <div class="container" style="width: 69%;">
@@ -60,15 +69,30 @@
                     <span>Subtotal:</span>
                     <span id="subtotal">R$ 0,00</span>
                 </div>
-                <div class="totals-row">
-                    <span>Frete:</span>
-                    <span id="frete">R$ 0,00</span>
+                <div class="totals-row" style="display: block !important;">
+                    <div class="frete-row" style="display: flex;">
+                        <span>Frete:</span>
+                        <span id="frete">R$ 0,00</span>
+                    </div>
+                    <div class="frete-row" id="freteOpcoes">
+                        <span>Tipo de Entrega: </span>
+                        <select class="tipo-frete" id="tiposFrete" class="hidden-select">
+                            <option value="Economica">Economica - R$100</option>
+                            <option value="Normal">Normal - R$150</option>
+                            <option value="Expressa">Expressa - R$200</option>
+                        </select>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; width: 100%;">
+                        <input class="input-frete" type="text" id="cep" oninput="maskCEP(this)"
+                            placeholder="Digite seu CEP" maxlength="9">
+                        <button class="btn-frete" id="btnCalcularFrete">Calcular Frete</button>
+                    </div>
                 </div>
                 <div class="totals-row">
                     <span>Total:</span>
                     <span id="total">R$ 0,00</span>
                 </div>
-                <button class="btn-finalizar" onclick="finalizarCompra()">Finalizar Compra</button>
+                <button class="btn-finalizar" id="finalizarCompra">Finalizar Compra</button>
             </div>
         </div>
     </div>
@@ -76,6 +100,8 @@
     <script type="module" src="../js/auth.js"></script>
     <script type="module" src="../js/checkAuth.js"></script>
     <script src="../js/cart.js"></script>
+    <script src="../js/header.js"></script>
+    <script type="module" src="../js/cart.js"></script>
 </body>
 
 </html>

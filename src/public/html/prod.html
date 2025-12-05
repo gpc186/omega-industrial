@@ -10,6 +10,7 @@
 </head>
 <body>
     <!-- Header -->
+
     <header>
         <nav>
             <div class="nav-content">
@@ -22,11 +23,14 @@
                     <a href="/produtos">
                         <p>Produtos</p>
                     </a>
-                    <a href="/admIndex">
+                    <a href="/adm/index" id="btnAdm">
                         <p>Dashboard</p>
                     </a>
                     <a href="/carrinho">
                         <p>Carrinho</p>
+                    </a>
+                    <a href="/login" class="login-desktop">
+                        <p>Login</p>
                     </a>
                 </div>
             </div>
@@ -34,7 +38,7 @@
                 <div class="nav-login">
                     <a href="/login">
                         <p>Login</p>
-                        <img src="../assets/img/login.png" style="width: 4dvh;" alt="Login Icon">
+                        <img src="../assets/img/login.png" alt="Login Icon">
                     </a>
                 </div>
                 <div class="hamburger" id="hamburger">
@@ -45,6 +49,8 @@
             </div>
         </nav>
     </header>
+
+    <!-- Header -->
 
     <!-- Main Content -->
     <main>
@@ -137,5 +143,6 @@
     <script type="module" src="../js/auth.js"></script>
     <script type="module" src="../js/checkAuth.js"></script>
     <script src="../js/prod.js"></script>
+    <script src="../js/header.js"></script>
 </body>
 </html>

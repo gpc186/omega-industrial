@@ -1,60 +1,17 @@
 const API_URL = 'http://localhost:4000/api';
 
-// ========== MENU HAMBÚRGUER ==========
-const hamburger = document.getElementById('hamburger');
-const navMenu = document.getElementById('navMenu');
-const body = document.body;
-
-if (hamburger && navMenu) {
-    // Toggle do menu hambúrguer
-    hamburger.addEventListener('click', (e) => {
-        e.stopPropagation();
-        hamburger.classList.toggle('active');
-        navMenu.classList.toggle('active');
-        body.classList.toggle('menu-open');
-    });
-
-    // Fechar menu ao clicar em um link
-    const navLinks = navMenu.querySelectorAll('a');
-    navLinks.forEach(link => {
-        link.addEventListener('click', () => {
-            hamburger.classList.remove('active');
-            navMenu.classList.remove('active');
-            body.classList.remove('menu-open');
-        });
-    });
-
-    // Fechar menu ao clicar fora dele
-    document.addEventListener('click', (e) => {
-        if (!hamburger.contains(e.target) && !navMenu.contains(e.target)) {
-            hamburger.classList.remove('active');
-            navMenu.classList.remove('active');
-            body.classList.remove('menu-open');
-        }
-    });
-}
-
-// Impede seleção de texto acidental
-document.body.style.userSelect = "none";
-if (navMenu) {
-    navMenu.style.userSelect = "auto";
-}
-
-
-
-
 // ===================== CARREGAR LANÇAMENTOS DO BANCO =====================
 async function carregarLancamentos() {
     try {
         // Buscar todos os produtos do banco de dados via API
         const response = await fetch(`${API_URL}/product/all`);
-        
+
         if (!response.ok) {
             throw new Error('Erro ao buscar produtos do banco de dados');
         }
 
         const data = await response.json();
-        
+
         // Verificar se a resposta tem produtos
         if (!data.ok || !data.produtos) {
             throw new Error('Resposta inválida da API');
@@ -71,10 +28,10 @@ async function carregarLancamentos() {
             })
             .slice(0, 6) // Pega apenas os 6 primeiros (mais recentes)
             .map(produto => {
-                
+
+                let imageArray = [];
+
                 if (produto.image_urls) {
-                    // Se image_urls é uma string JSON, fazer parse
-                    let imageArray = [];
                     if (typeof produto.image_urls === 'string') {
                         try {
                             imageArray = JSON.parse(produto.image_urls);
@@ -84,16 +41,19 @@ async function carregarLancamentos() {
                     } else if (Array.isArray(produto.image_urls)) {
                         imageArray = produto.image_urls;
                     }
-                
                 }
+
+                const primeiraImagem = imageArray.length > 0 ? imageArray[0] : 'img/placeholder.png';
 
                 return {
                     id: produto.id,
                     titulo: produto.nome,
                     descricao: produto.descricao || 'Produto de alta qualidade para aplicações industriais',
                     preco: parseFloat(produto.preco) || 0,
+                    imagem: primeiraImagem,   // <-- ✔ Agora está correto
                     categoria: produto.categoria_nome || 'Produto Industrial',
-                    created_at: produto.created_at
+                    created_at: produto.created_at,
+                    imagem: imageArray[0] || '/img/default.png' // <<< AQUI ESTÁ A CORREÇÃO
                 };
             });
 
@@ -102,6 +62,7 @@ async function carregarLancamentos() {
             mostrarMensagemVazia();
             return;
         }
+    });
 
         console.log(`✅ ${lancamentos.length} lançamentos carregados do banco de dados`);
 
@@ -183,7 +144,7 @@ function mostrarMensagemVazia() {
             <p style="font-size: 0.95rem; color: #999; margin-top: 0.5rem;">Adicione produtos para vê-los aqui.</p>
         </div>
     `;
-    
+
     // Esconder indicadores
     const indicators = document.getElementById('lancamentos-indicators');
     if (indicators) indicators.style.display = 'none';
@@ -208,7 +169,7 @@ function mostrarErro() {
             </button>
         </div>
     `;
-    
+
     // Esconder indicadores
     const indicators = document.getElementById('lancamentos-indicators');
     if (indicators) indicators.style.display = 'none';
@@ -341,6 +302,37 @@ class CarouselLancamentos {
         } else {
             this.cardsPerView = 3;
         }
+    }
+
+    prev() {
+        if (this.currentIndex > 0) {
+            this.currentIndex = Math.max(this.currentIndex - this.cardsPerView, 0);
+            this.updateCarousel();
+        }
+    }
+
+    goToSlide(index) {
+        this.currentIndex = Math.min(Math.max(0, index), this.maxIndex);
+        this.updateCarousel();
+    }
+
+    handleResize() {
+        const width = window.innerWidth;
+
+        // Ajustar cards por visualização baseado no tamanho da tela
+        if (width < 768) {
+            this.cardsPerView = 1;
+        } else if (width < 1024) {
+            this.cardsPerView = 2;
+        } else {
+            this.cardsPerView = 3;
+        }
+
+        this.maxIndex = Math.max(0, this.totalCards - this.cardsPerView);
+        this.currentIndex = Math.min(this.currentIndex, this.maxIndex);
+        this.updateCarousel();
+    }
+}
 
         this.maxIndex = Math.max(0, this.totalCards - this.cardsPerView);
         this.currentIndex = Math.min(this.currentIndex, this.maxIndex);
@@ -355,3 +347,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Expor função globalmente para uso no onclick
 window.irParaProduto = irParaProduto;
+
+
+
+
+
+
+
+
+
+
+
+
+

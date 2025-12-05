@@ -78,12 +78,12 @@ async function login(req, res) {
 async function me(req, res) {
     try {
         const userId = req.user.id;
-    
+
         const user = await User.findById(userId);
         if (!user) {
             return res.status(404).json({ ok: false, error: "Usuário não encontrado!" })
         }
-    
+
         return res.status(200).json({
             ok: true,
             message: "Dados carregados com sucesso!",

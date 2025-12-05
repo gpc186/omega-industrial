@@ -1,54 +1,64 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard | Administrador</title>
-    
+
     <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    
+
     <!-- Font Awesome para ícones -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+
     <!-- CSS customizado -->
     <link rel="stylesheet" href="../style/admRelatorio.css">
 </head>
+
 <body>
-    <header class="op-header">
-        <nav class="op-nav">
-            <div class="op-container">
+    <!-- Header -->
 
-                <a href="/index" class="op-logo">
-                    <img src="../assets/img/logo.png" alt="OmegaPetro Logo">
-                </a>
-
-                <div class="op-menu" id="navMenu">
-
-                    <a href="/produtos">Produtos</a>
-                    <a href="/adm/index" id="dashboardLink" style="display:none;">Dashboard</a>
-                    <a href="/carrinho">Carrinho</a>
-                    <button class="btn btn-secondary mb-32" onclick="history.back()">
-                            <i class="fas fa-arrow-left"></i> Voltar
-                    </button>
-
-                    <div class="op-login nav-btn-container">
-                        <a href="/login" id="loginLink">
-                            <img src="../assets/img/login.png" alt="">
-                        </a>
-                    </div>
-
+    <header>
+        <nav>
+            <div class="nav-content">
+                <div class="nav-img">
+                    <a href="/index">
+                        <img class="nav-img-logo" src="../assets/img/logo.png" alt="OmegaPetro Logo">
+                    </a>
                 </div>
-
-                <button class="op-hamburger" id="hamburger">
+                <div class="nav-navegacao" id="navMenu">
+                    <a href="/produtos">
+                        <p>Produtos</p>
+                    </a>
+                    <a href="/adm/index" id="btnAdm">
+                        <p>Dashboard</p>
+                    </a>
+                    <a href="/carrinho">
+                        <p>Carrinho</p>
+                    </a>
+                    <a href="/login" class="login-desktop">
+                        <p>Login</p>
+                    </a>
+                </div>
+            </div>
+            <div class="nav-content" style="justify-content: end;">
+                <div class="nav-login">
+                    <a href="/login">
+                        <p>Login</p>
+                        <img src="../assets/img/login.png" alt="Login Icon">
+                    </a>
+                </div>
+                <div class="hamburger" id="hamburger">
                     <span></span>
                     <span></span>
                     <span></span>
-                </button>
-
+                </div>
             </div>
         </nav>
     </header>
+
+    <!-- Header -->
 
     <!-- Main Content -->
     <main class="container-fluid py-4">
@@ -56,7 +66,9 @@
         <div class="row mb-4">
             <div class="col-12">
                 <h1 class="display-6">Dashboard Administrativo</h1>
-                <p class="text-muted">Bem-vindo ao painel de controle. Acompanhe as métricas principais do seu negócio.</p>
+                <p class="subtitulo-pagina text-muted">
+                <p>Acompanhe as <strong class="destaque-metrica">métricas principais</strong> do seu negócio.</p>
+
             </div>
         </div>
 
@@ -113,22 +125,22 @@
                 </div>
             </div>
 
-                <div class="col-lg-3 col-md-6 mb-3">
-            <div class="card metric-card">
-                <div class="card-body">
-                    <div class="d-flex justify-content-between align-items-start">
-                        <div>
-                            <p class="card-title text-muted mb-2">Ticket Médio</p>
-                            <h3 class="card-text metric-value" id="averageTicket">R$ 0,00</h3>
+            <div class="col-lg-3 col-md-6 mb-3">
+                <div class="card metric-card">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-start">
+                            <div>
+                                <p class="card-title text-muted mb-2">Ticket Médio</p>
+                                <h3 class="card-text metric-value" id="averageTicket">R$ 0,00</h3>
+                            </div>
+                            <i class="fas fa-chart-pie text-info" style="font-size: 2rem;"></i>
                         </div>
-                        <i class="fas fa-chart-pie text-info" style="font-size: 2rem;"></i>
+                        <small class="text-info" id="ticketInfo">
+                            <i class="fas fa-info-circle"></i> Valor médio por pedido
+                        </small>
                     </div>
-                    <small class="text-info" id="ticketInfo">
-                        <i class="fas fa-info-circle"></i> Valor médio por pedido
-                    </small>
                 </div>
             </div>
-        </div>
         </div>
 
         <!-- Gráficos e Alertas -->
@@ -138,15 +150,18 @@
                 <div class="card">
                     <div class="card-header bg-light">
                         <div class="d-flex justify-content-between align-items-center">
-                            <h5 class="mb-0">Vendas</h5>
+                            <h5 class="mb-0" style="color: #003548;">Vendas</h5>
                             <div class="btn-group" role="group" id="chartPeriodButtons">
-                                <input type="radio" class="btn-check" name="chartPeriod" id="monthlyRadio" value="monthly" checked>
+                                <input type="radio" class="btn-check" name="chartPeriod" id="monthlyRadio"
+                                    value="monthly" checked>
                                 <label class="btn btn-outline-primary btn-sm" for="monthlyRadio">Mensal</label>
 
-                                <input type="radio" class="btn-check" name="chartPeriod" id="quarterlyRadio" value="quarterly">
+                                <input type="radio" class="btn-check" name="chartPeriod" id="quarterlyRadio"
+                                    value="quarterly">
                                 <label class="btn btn-outline-primary btn-sm" for="quarterlyRadio">Trimestral</label>
 
-                                <input type="radio" class="btn-check" name="chartPeriod" id="annualRadio" value="annual">
+                                <input type="radio" class="btn-check" name="chartPeriod" id="annualRadio"
+                                    value="annual">
                                 <label class="btn btn-outline-primary btn-sm" for="annualRadio">Anual</label>
                             </div>
                         </div>
@@ -161,7 +176,7 @@
             <div class="col-lg-4 mb-4">
                 <div class="card">
                     <div class="card-header bg-light">
-                        <h5 class="mb-0">
+                        <h5 class="mb-0" style="color: red!important;">
                             <i class="fas fa-exclamation-triangle text-warning"></i> Produtos com Baixo Estoque
                         </h5>
                     </div>
@@ -177,7 +192,7 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header bg-light">
-                        <h5 class="mb-0">Últimas Vendas</h5>
+                        <h5 class="mb-0" style="color: #003548;">Últimas Vendas</h5>
                     </div>
                     <div class="table-responsive">
                         <table class="table table-hover mb-0" id="salesTable">
@@ -207,12 +222,14 @@
 
     <!-- Bootstrap 5 JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    
+
     <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 
     <script type="module" src="../js/auth.js"></script>
     <script type="module" src="../js/checkAuth.js"></script>
     <script src="../js/admRelatorio.js"></script>
+    <script src="../js/header.js"></script>
 </body>
+
 </html>
