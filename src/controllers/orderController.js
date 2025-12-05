@@ -1,5 +1,6 @@
 const Order = require('../models/Order');
 const CartItem = require('../models/CartItem');
+const { mockOrders } = require('../utils/mockData');
 
 async function createOrder(req, res) {
     try {
@@ -67,7 +68,12 @@ async function getMyOrders(req, res) {
 
 async function listAllOrders(req, res) {
     try {
-        const pedidos = await Order.findAll();
+        let pedidos;
+        if (process.env.NODE_ENV === 'development') {
+            pedidos = mockOrders;
+        } else {
+            pedidos = await Order.findAll();
+        }
 
         return res.status(200).json({ ok: true, message: "Todos os pedidos foram carregados com sucesso!", pedidos })
     } catch (error) {

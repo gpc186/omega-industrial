@@ -3,45 +3,10 @@ let salesChart = null;
 let currentChartPeriod = 'monthly';
 
 
-// ===================== MENU HAMBURGUER =====================
-
-const hamburger = document.getElementById('hamburger');
-const navMenu = document.getElementById('navMenu');
-
-hamburger.addEventListener('click', (e) => {
-    e.stopPropagation(); 
-    hamburger.classList.toggle('active');
-    navMenu.classList.toggle('active');
-});
-
-// Fecha o menu quando clicar fora
-document.addEventListener('click', (e) => {
-    if (!navMenu.contains(e.target) && !hamburger.contains(e.target)) {
-        navMenu.classList.remove('active');
-        hamburger.classList.remove('active');
-    }
-});
-// Fecha o menu quando clicar fora
-document.addEventListener('click', (e) => {
-    if (!navMenu.contains(e.target) && !hamburger.contains(e.target)) {
-        navMenu.classList.remove('active');
-        hamburger.classList.remove('active');
-    }
-});
-
-// Impede seleção de texto acidental
-document.body.style.userSelect = "none";
-navMenu.style.userSelect = "auto"; // Só permite selecio
-// Impede seleção de texto acidental
-document.body.style.userSelect = "none";
-navMenu.style.userSelect = "auto"; // Só permite selecio
-
-
 
 // ===================== INICIALIZAÇÃO =====================
 document.addEventListener('DOMContentLoaded', function () {
-    // Verificar se o usuário está autenticado
-    checkAuthentication();
+    // A autenticação é tratada pelo checkAuth.js
 
     // Carregar dados do dashboard
     loadDashboardData();
@@ -54,25 +19,10 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
-    // Event listener para logout
-    document.getElementById('logoutBtn').addEventListener('click', function (e) {
-        e.preventDefault();
-        logout();
-    });
+  
 });
 
-// ===================== AUTENTICAÇÃO =====================
-function checkAuthentication() {
-    const token = localStorage.getItem('token');
-    const data = localStorage.getItem('user');
-    const user = JSON.parse(data)
-
-    if (!token || user.role !== 'adm') {
-        // Redirecionar para login se não estiver autenticado ou não for admin
-        window.location.href = '/login';
-    }
-}
-
+// A autenticação é tratada pelo checkAuth.js
 function logout() {
     localStorage.removeItem('token');
     localStorage.removeItem('user');
@@ -101,7 +51,7 @@ async function loadMetrics() {
         const token = localStorage.getItem('token');
 
         // Buscar todos os pedidos
-        const ordersResponse = await fetch(`${API_BASE_URL}/order/adm/allOrders`, {
+        const ordersResponse = await fetch(`${API_BASE_URL}/orders/adm/allOrders`, {
             headers: {
                 'Authorization': `Bearer ${token}`
             }
@@ -115,7 +65,7 @@ async function loadMetrics() {
         const orders = ordersData.pedidos || [];
 
         // Buscar todos os produtos
-        const productsResponse = await fetch(`${API_BASE_URL}/produto/all`);
+        const productsResponse = await fetch(`${API_BASE_URL}/product/all`);
 
         if (!productsResponse.ok) {
             throw new Error('Erro ao buscar produtos');
@@ -177,7 +127,7 @@ async function loadMetrics() {
         document.getElementById('monthlySales').textContent = formatCurrency(monthlySales);
         document.getElementById('newCustomers').textContent = formatNumber(newCustomersCount);
         document.getElementById('stockProducts').textContent = formatNumber(totalStockItems);
-        document.getElementById('stockValue').textContent = formatCurrency(totalStockValue);
+        
 
         // Calcular tendências (comparar com mês anterior)
         const previousMonth = currentMonth === 0 ? 11 : currentMonth - 1;
@@ -207,7 +157,7 @@ async function loadSalesChart() {
     try {
         const token = localStorage.getItem('token');
 
-        const response = await fetch(`${API_BASE_URL}/order/adm/allOrders`, {
+        const response = await fetch(`${API_BASE_URL}/orders/adm/allOrders`, {
             headers: {
                 'Authorization': `Bearer ${token}`
             }
@@ -323,7 +273,7 @@ async function loadSalesChart() {
 // ===================== PRODUTOS COM BAIXO ESTOQUE =====================
 async function loadLowStockProducts() {
     try {
-        const response = await fetch(`${API_BASE_URL}/produto/all`);
+        const response = await fetch(`${API_BASE_URL}/product/all`);
 
         if (!response.ok) {
             throw new Error('Erro ao buscar produtos');
@@ -370,7 +320,7 @@ async function loadRecentSales() {
     try {
         const token = localStorage.getItem('token');
 
-        const response = await fetch(`${API_BASE_URL}/order/adm/allOrders`, {
+        const response = await fetch(`${API_BASE_URL}/orders/adm/allOrders`, {
             headers: {
                 'Authorization': `Bearer ${token}`
             }
@@ -556,7 +506,7 @@ async function updateOrderStatus(orderId, status) {
     try {
         const token = localStorage.getItem('token');
 
-        const response = await fetch(`${API_BASE_URL}/order/adm/${orderId}/updateStatus`, {
+        const response = await fetch(`${API_BASE_URL}/orders/adm/${orderId}/updateStatus`, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',
