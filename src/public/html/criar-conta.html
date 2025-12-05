@@ -105,8 +105,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/google-libphonenumber/3.2.31/libphonenumber.js"></script>
 
 
-  <script>
-          const token = localStorage.getItem('token');
+    <script>
+        const token = localStorage.getItem('token');
         const user = JSON.parse(localStorage.getItem('user') || '{}');
         const loginLink = document.getElementById('loginLink');
         const dashboardLink = document.getElementById('dashboardLink');
@@ -128,7 +128,7 @@
             dashboardLink.style.display = "none";
         }
 
-            const hamburger = document.getElementById('hamburger');
+        const hamburger = document.getElementById('hamburger');
         const navMenu = document.getElementById('navMenu');
 
         hamburger.addEventListener('click', (e) => {
@@ -196,11 +196,14 @@
         //  TELEFONE INTERNACIONAL
         //  (SEM BORDAS VERDES/VERMELHAS)
         // =========================
+
+        let iti;
+
         (function () {
             const input = document.getElementById("telefone");
             if (!input) return;
 
-            const iti = intlTelInput(input, {
+            iti = intlTelInput(input, {
                 initialCountry: "br",
                 separateDialCode: true,
                 nationalMode: true,
@@ -331,16 +334,29 @@
             } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
                 erro = true;
                 msg = "Email inválido.";
-            } else if (telefone.length < 10) {
+            } // VALIDAÇÃO REAL DO TELEFONE PELA LIBPHONENUMBER
+            const phoneInput = document.getElementById("telefone");
+            const pais = iti.getSelectedCountryData().iso2.toUpperCase();
+            const phoneUtil = libphonenumber.PhoneNumberUtil.getInstance();
+
+            const digits = telefone.replace(/\D/g, "");
+            const max = getMaxDigits(pais);
+
+            if (digits.length !== max) {
                 erro = true;
-                msg = "Telefone incompleto.";
-            } else if (senha1 !== senha2) {
+                msg = `O número para ${pais} deve ter ${max} dígitos. Você digitou ${digits.length}.`;
+            }
+
+
+            // OUTRAS VALIDAÇÕES AQUI ⬇️
+            if (!erro && senha1 !== senha2) {
                 erro = true;
                 msg = "As senhas não coincidem.";
-            } else if (senha1.length < 6) {
+            } else if (!erro && senha1.length < 6) {
                 erro = true;
                 msg = "A senha deve ter pelo menos 6 caracteres.";
             }
+
 
             if (erro) {
                 e.preventDefault();
@@ -348,12 +364,12 @@
             }
         });
     </script>
-     <script>
+    <script>
         // Configuração da API
         const API_URL = 'http://localhost:4000/api';
 
         // Capturar o formulário
-        document.getElementById('form-cadastro').addEventListener('submit', async function(e) {
+        document.getElementById('form-cadastro').addEventListener('submit', async function (e) {
             e.preventDefault();
 
             // Pegar os valores dos campos
@@ -418,9 +434,9 @@
                     // Sucesso! Salvar token e redirecionar
                     localStorage.setItem('token', data.token);
                     localStorage.setItem('user', JSON.stringify(data.user));
-                    
+
                     mostrarAlerta('Cadastro realizado com sucesso! Redirecionando...', 'sucesso');
-                    
+
                     // Redirecionar após 1.5 segundos
                     setTimeout(() => {
                         window.location.href = '/produtos';
@@ -453,7 +469,7 @@
             alerta.id = 'alerta-custom';
             alerta.className = tipo === 'sucesso' ? 'alerta-sucesso' : 'alerta-erro';
             alerta.textContent = mensagem;
-            
+
             document.body.appendChild(alerta);
 
             // Mostrar com animação
