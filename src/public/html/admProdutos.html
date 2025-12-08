@@ -12,18 +12,48 @@
 
 <body>
 
-    <header class="op-header">
-        <nav class="op-nav">
-            <a href="/index" class="op-logo">
-                <img src="../assets/img/logo.png" alt="OmegaPetro Logo" style="height: 40px;">
-            </a>
-            <div class="op-menu">
-                <a href="/adm/index">Dashboard</a>
-                <a href="/produtos">Loja</a>
-                <a href="/login" style="color: var(--primary-orange);">Sair</a>
+    <!-- Header -->
+
+    <header>
+        <nav>
+            <div class="nav-content">
+                <div class="nav-img">
+                    <a href="/index">
+                        <img class="nav-img-logo" src="../assets/img/logo.png" alt="OmegaPetro Logo">
+                    </a>
+                </div>
+                <div class="nav-navegacao" id="navMenu">
+                    <a href="/produtos">
+                        <p>Produtos</p>
+                    </a>
+                    <a href="/adm/index" class="btnAdm">
+                        <p>Dashboard</p>
+                    </a>
+                    <a href="/carrinho">
+                        <p>Carrinho</p>
+                    </a>
+                    <a href="/login" class="login-desktop">
+                        <p>Login</p>
+                    </a>
+                </div>
+            </div>
+            <div class="nav-content" style="justify-content: end;">
+                <div class="nav-login">
+                    <a href="/login">
+                        <p>Login</p>
+                        <img src="../assets/img/login.png" alt="Login Icon">
+                    </a>
+                </div>
+                <div class="hamburger" id="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
             </div>
         </nav>
     </header>
+
+    <!-- Header -->
 
     <main class="main-container">
 
@@ -215,6 +245,7 @@
             }
         }
     </script>
+    <script src="../js/header.js"></script>
 </body>
 
 </html>
