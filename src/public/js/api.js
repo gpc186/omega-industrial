@@ -107,7 +107,7 @@ async function criarCategoria(nome, description) {
 
 async function atualizarCategoria(nome, description, id) {
     const response = await fetch(`${API_URL}/category/adm/${id}/updateCat`, {
-        method: 'POST',
+        method: 'PUT',
         headers: getAuthHeaders(),
         body: JSON.stringify({ nome, description })
     });
@@ -115,8 +115,8 @@ async function atualizarCategoria(nome, description, id) {
 }
 
 async function deletarCategoria(id) {
-    const response = await fetch(`${API_URL}/adm/${id}/removeCat`, {
-        method: 'PUT',
+    const response = await fetch(`${API_URL}/category/adm/${id}/removeCat`, {
+        method: 'DELETE',
         headers: getAuthHeaders(),
     });
     return handleResponse(response);
