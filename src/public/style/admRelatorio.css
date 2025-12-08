@@ -539,6 +539,11 @@ main {
     color: white !important;
 }
 
+.py-4{
+    padding-top: 7.5rem !important;
+    padding-bottom: 2.5rem !important;
+}
+
 /* ====== Icones da parte de cima (Os quatro cards) ======*/
 
 .fa-users:before {
@@ -553,6 +558,16 @@ main {
 
 .fa-chart-line:before {
     color: #003548;
+}
+
+.fa-edit:before, .fa-pen-to-square:before {
+    content: "\f044";
+    color: #ffa844;
+}
+
+.fa-eye:before {
+    content: "\f06e";
+    color: #004E64;
 }
 
 /* ===================== RESPONSIVE ====================== */
