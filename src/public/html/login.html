@@ -89,25 +89,44 @@
                 eyeIcon.classList.add('eye-closed');
             }
         }
+    </script>
 
-        document.getElementById('formulario-login').addEventListener('submit', function (e) {
-            e.preventDefault();
+        <script type="module">
+            import {api} from "../js/api.js";
 
+    document.getElementById('formulario-login').addEventListener('submit', async (e) => {
+                e.preventDefault();
+
+            const email = document.getElementById('email').value;
             const senha = document.getElementById('senha').value;
             const customAlert = document.getElementById('custom-alert');
 
-            const regexSenha = /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>]).{8,}$/;
+            try {
+            const res = await api.login({email, senha});
 
-            // MOSTRA MENSAGEM DE SUCESSO
-            customAlert.textContent = "Login realizado com sucesso!";
+            if (res.success) {
+                customAlert.textContent = "Login realizado com sucesso!";
             customAlert.classList.remove('error');
             customAlert.classList.add('show', 'success');
 
-            // Some sozinho depois de 1.8s (opcional)
-            setTimeout(() => {
+                setTimeout(() => window.location.href = "/painel", 1200);
+            } else {
+                customAlert.textContent = res.message || "Email ou senha incorretos!";
+            customAlert.classList.remove('success');
+            customAlert.classList.add('show', 'error');
+            }
+        } catch (error) {
+                customAlert.textContent = "Erro ao conectar com o servidor!";
+            customAlert.classList.remove('success');
+            customAlert.classList.add('show', 'error');
+        }
+
+        setTimeout(() => {
                 customAlert.classList.remove('show');
-            }, 1800);
-        });
+        }, 2000);
+    });
+    </script>
+
     </script>
     <script type="module" src="../js/login.js"></script>
     <div id="custom-alert"></div>
