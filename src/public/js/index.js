@@ -53,7 +53,7 @@ async function carregarLancamentos() {
                     imagem: primeiraImagem,   // <-- ✔ Agora está correto
                     categoria: produto.categoria_nome || 'Produto Industrial',
                     created_at: produto.created_at,
-                    imagem: imageArray[0] || '/img/default.png' // <<< AQUI ESTÁ A CORREÇÃO
+                    imagem: imageArray[0] || '/img/default.png'
                 };
             });
 

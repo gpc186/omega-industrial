@@ -32,7 +32,6 @@ header {
     padding: 1rem 2rem;
     position: fixed;
     z-index: 1000;
-    top: 0;
 }
 
 nav {
@@ -64,7 +63,7 @@ nav {
 }
 
 .nav-img-logo {
-    height: 40px;
+    height: 32.5px;
     width: auto;
 }
 
@@ -121,7 +120,6 @@ nav {
     border-bottom: 1px solid #f7931e;
 }
 
-
 /* Div do login */
 
 .nav-login {
@@ -151,9 +149,6 @@ nav {
     border-bottom: 1px solid #f7931e;
 }
 
-.nav-login a p, .nav-navegacao a p {
-    margin-bottom: 0;
-}
 
 .login-desktop {
     display: none;
@@ -294,13 +289,14 @@ nav {
     display: flex;
     gap: 40px;
     padding: 100px;
+    justify-content: center;
 }
 
 /* CARD */
 .card {
     background: white;
     padding: 36px;
-    width: 520px;
+    width: 30dvw;
     border-radius: 16px;
     box-shadow: 0px 10px 22px rgba(0, 0, 0, 0.05);
 }
@@ -396,5 +392,9 @@ nav {
     .container {
         flex-direction: column;
         align-items: center;
+        margin: 5dvh auto;
+    }
+    .card{
+        width: 90dvw;
     }
 }
