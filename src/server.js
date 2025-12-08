@@ -26,7 +26,7 @@ app.use('/api/orders', orderRoute);
 app.use('/login', (req, res)=>{
     res.status(200).sendFile(path.join(__dirname, './public/html/', 'login.html'))
 })
-app.use('/resgistrar', (req, res)=>{
+app.use('/registrar', (req, res)=>{
     res.status(200).sendFile(path.join(__dirname, './public/html/', 'criar-conta.html'))
 })
 app.use('/carrinho', (req, res)=>{
