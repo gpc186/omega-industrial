@@ -78,6 +78,9 @@ async function remove(req, res) {
     try {
         const existe = await Category.findById(id);
         if (!existe) return res.status(404).json({ ok: false, error: "Categoria não encontrada!" });
+        if (produtos.length > 0) {
+            return res.status(400).json({ok: false, error: "Esta categoria possui produtos associados e não pode ser excluída!"});
+        }
 
         await Category.delete(id)
 

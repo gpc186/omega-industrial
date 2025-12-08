@@ -73,7 +73,7 @@ async function carregarProdutos() {
     produtos.forEach(prod => {
         const tr = document.createElement("tr");
         
-        const imagens = JSON.parse(prod.img_urls) || "[]";
+        const imagens = JSON.parse(prod.image_urls) || "[]";    
 
         tr.innerHTML = `
             <td>${prod.id}</td>
@@ -157,10 +157,11 @@ tabelaProdutos.addEventListener("click", async e => {
 
     if (e.target.classList.contains("btnExcluir")) {
         const id = e.target.dataset.id;
+        console.log(id);
 
         if (!confirm("Excluir este produto?")) return;
 
-        const res = await api.deletarProduto(id);
+        const res = await api.deletarCategoria(id);
 
         if (res.success || res.ok) {
 
@@ -210,23 +211,3 @@ window.fecharModal = function () {
 
 carregarCategorias();
 carregarProdutos();
-
-/* ===========================================
-   EVENTO DE EXCLUSÃO DE CATEGORIA
-   =========================================== */
-document.getElementById("listaCategorias").addEventListener("click", async e => {
-    if (!e.target.classList.contains("btn-del-cat")) return;
-
-    const id = e.target.dataset.id;
-
-    if (!confirm("Excluir esta categoria?")) return;
-
-    const res = await api.deletarCategoria(id);
-
-    if (res.ok) {
-        alert("Categoria removida!");
-        carregarCategorias(selectCategoria); // recarrega a tabela e o select
-    } else {
-        alert(res.error || "Erro ao excluir categoria");
-    }
-});
