@@ -289,7 +289,7 @@ nav {
 
 .container {
     max-width: 2100px;
-    margin: 120px auto;
+    margin: 220px auto;
     /* espaço devido ao header fixo */
     display: flex;
     gap: 40px;
