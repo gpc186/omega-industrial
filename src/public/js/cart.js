@@ -95,7 +95,7 @@ function renderizarCarrinho(items) {
             
             <div class="card-item__actions">
                 <div class="card-item__remove">
-                    <button onclick="removerItem('${item.product_id}')" title="Remover item">
+                    <button class="removeItem" data-id="${item.product_id}" title="Remover item">
                         x
                     </button>
                 </div>
