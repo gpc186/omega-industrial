@@ -6,7 +6,7 @@
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    min-height: 100vh;
+    min-height: 100dvh;
     display: flex;
     flex-direction: column;
     background: #f4f6fa;
@@ -19,6 +19,10 @@ a {
 
 p {
     margin: 0;
+}
+
+main{
+    min-height: 66.9dvh;
 }
 
 /* ------------ Header ------------ */
@@ -64,7 +68,7 @@ nav {
 }
 
 .nav-img-logo {
-    height: 40px;
+    height: 32.5px;
     width: auto;
 }
 
@@ -658,7 +662,7 @@ nav {
 }
 
 .footer-logo img {
-    height: 60px;
+    height: 50px;
     width: auto;
 }
 
