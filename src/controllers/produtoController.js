@@ -102,7 +102,7 @@ async function update(req, res) {
             image_urls = getImageUrls(req.files);
         }
 
-        await produto.update({
+        await Product.update(id, {
             nome: nome ?? produto.nome,
             preco: preco ?? produto.preco,
             descricao: descricao ?? produto.descricao,

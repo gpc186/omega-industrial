@@ -213,7 +213,9 @@ function loadCarouselProducts(products) {
 
         const img = document.createElement('img');
         img.className = 'card-img';
-        img.src = product.image_urls && product.image_urls[0] ? product.image_urls[0] : 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"%3E%3Crect fill="%23f0f0f0" width="400" height="300"/%3E%3Ccircle cx="200" cy="150" r="60" fill="%23004e64" opacity="0.2"/%3E%3C/svg%3E';
+        img.src = JSON.parse(product.image_urls)[0]
+        
+        
         img.alt = product.nome;
 
         const content = document.createElement('div');

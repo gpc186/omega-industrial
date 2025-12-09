@@ -3,6 +3,7 @@ import { api } from "/js/api.js";
 const tabelaProdutos = document.getElementById("tabelaProdutos");
 const tabela = document.getElementById("listaCategorias");
 const selectCategoria = document.getElementById("selectCategoria");
+const editCategoria = document.getElementById("edit_categoria");
 const modalEdicao = document.getElementById("modalEdicao");
 
 async function carregarCategorias() {
@@ -14,6 +15,14 @@ async function carregarCategorias() {
         op.value = cat.id;
         op.textContent = cat.nome;
         selectCategoria.appendChild(op);
+    });
+
+    editCategoria.innerHTML = "<option value=''>Selecione</option>";
+    res.categorias.forEach(cat => {
+        const op = document.createElement("option");
+        op.value = cat.id;
+        op.textContent = cat.nome;
+        editCategoria.appendChild(op);
     });
 
     tabela.innerHTML = "";
@@ -72,8 +81,8 @@ async function carregarProdutos() {
 
     produtos.forEach(prod => {
         const tr = document.createElement("tr");
-        
-        const imagens = JSON.parse(prod.image_urls) || "[]";    
+
+        const imagens = JSON.parse(prod.image_urls) || "[]";
 
         tr.innerHTML = `
             <td>${prod.id}</td>
@@ -139,13 +148,13 @@ tabelaProdutos.addEventListener("click", async e => {
         document.getElementById("edit_quantidade").value = p.quantidade;
         document.getElementById("edit_descricao").value = p.descricao;
 
-        await carregarCategorias(document.getElementById("edit_categoria"));
+        await carregarCategorias();
         document.getElementById("edit_categoria").value = p.category_id;
 
         // Preview imagens
         const preview = document.getElementById("edit_preview");
         preview.innerHTML = "";
-        JSON.parse(p.image_urls).forEach(url => {
+        p.image_urls.forEach(url => {
             const img = document.createElement("img");
             img.src = url;
             img.width = 80;
@@ -186,8 +195,8 @@ document.getElementById("formEditarProduto").addEventListener("submit", async e 
     form.append("descricao", document.getElementById("edit_descricao").value);
     form.append("category_id", document.getElementById("edit_categoria").value);
 
-    const img1 = document.querySelector("input[name='image1']").files[0];
-    const img2 = document.querySelector("input[name='image2']").files[0];
+    const img1 = document.getElementById("edit_image1").files[0];
+    const img2 = document.getElementById("edit_image2").files[0];
 
     if (img1 && img2) {
         form.append("images", img1);

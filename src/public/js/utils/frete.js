@@ -17,7 +17,6 @@ export function calcularFrete(cep, subtotal = 0) {
     return [{
       nome: "Frete Grátis",
       codigo: "FREE",
-      prazo: "3-7 dias úteis",
       preco: 0.00
     }];
   }
