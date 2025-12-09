@@ -200,6 +200,8 @@ async function atualizarTotais() {
         const frete = Number(window.ultimoCalculoFrete) || 0;
         const total = Number(subtotal) + frete;
         
+        
+        window.subtotalCarrinho = Number(subtotal)
 
         document.getElementById('subtotal').textContent =
             `R$ ${subtotal.toFixed(2).replace('.', ',')}`;
@@ -222,8 +224,9 @@ async function finalizarCompra() {
             window.location.href = '/login';
             return;
         }
-
-        if (!window.ultimoCalculoFrete) {
+        console.log(window.ultimoCalculoFrete);
+        
+        if (window.ultimoCalculoFrete === undefined || window.ultimoCalculoFrete === null) {
             alert("Escolha um frete antes de finalizar a compra!");
             return;
         }
@@ -267,21 +270,48 @@ function calcularFreteFinal() {
     }
 
     const select = document.getElementById("freteOpcoes");
+    if (!select) {
+        console.error("select #freteOpcoes não encontrado no DOM!");
+        return;
+    }
+
     select.innerHTML = "";
 
-    opcoes.forEach(f => {
+    opcoes.forEach((f, idx) => {
         const option = document.createElement("option");
         option.value = JSON.stringify(f);
         option.textContent = `${f.nome} - R$ ${f.preco.toFixed(2)}`;
+        if (idx === 0) {
+            option.selected = true;
+            try {
+                const parsed = f;
+                window.ultimoCalculoFrete = Number(parsed.preco);
+            } catch (err) {
+                window.ultimoCalculoFrete = Number(f.preco);
+            }
+        }
         select.appendChild(option);
     });
 
-    select.addEventListener("change", () => {
-        const frete = JSON.parse(select.value);
-        window.ultimoCalculoFrete = frete.preco
-        atualizarTotais();
+    select.replaceWith(select.cloneNode(true));
+    const freshSelect = document.getElementById("freteOpcoes");
+
+    freshSelect.addEventListener("change", () => {
+        try {
+            const frete = JSON.parse(freshSelect.value);
+            window.ultimoCalculoFrete = Number(frete.preco);
+            console.log("Frete selecionado (change):", window.ultimoCalculoFrete);
+            atualizarTotais();
+        } catch (err) {
+            console.error("Erro ao parsear opção de frete:", err, freshSelect.value);
+            window.ultimoCalculoFrete = null;
+        }
     });
+
+    console.log("Frete selecionado (default):", window.ultimoCalculoFrete);
+    atualizarTotais();
 }
+
 
 
 document.getElementById("btnCalcularFrete").addEventListener("click", () => calcularFreteFinal());
