@@ -1,7 +1,6 @@
 import { isAuthenticated, isAdmin, logout, getToken } from "./auth.js";
 
 const userProtected = [
-    "/meus-pedidos",
     "/carrinho"
 ];
 
@@ -26,8 +25,10 @@ if (userProtected.includes(page)) {
 }
 
 if (!isAdmin()){
-    const btnAdm = document.getElementById("btnAdm");
-    btnAdm.style.display = "none"
+    const btnAdm = document.querySelectorAll(".btnAdm");
+    btnAdm.forEach(f=>{
+        f.style.display = "none";
+    })
 }
 
 if (adminProtected.includes(page)) {
