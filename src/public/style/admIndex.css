@@ -283,8 +283,8 @@ nav {
 /* ===================== CONTEÚDO ====================== */
 
 .container {
-    width: 100dvw;
-    margin: 10dvh auto;
+    max-width: 2100px;
+    margin: 220px auto;
     /* espaço devido ao header fixo */
     display: flex;
     gap: 40px;

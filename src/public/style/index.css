@@ -668,17 +668,21 @@ nav {
     width: 27rem;
     height: 27rem;
     flex-shrink: 0;
+    transition: all 0.35s ease;
+    cursor: pointer;
 }
 
 .feedback-card-img {
     height: 10rem;
     width: 100%;
     object-fit: cover;
+    transition: all 0.35s ease;
 }
 
 .feedback-card-body {
     background-color: #f4f4f4;
     padding: 1rem;
+    transition: background 0.35s ease;
 }
 
 .feedback-card-logo {
@@ -696,7 +700,28 @@ nav {
     font-size: 1rem;
     font-weight: bold;
     text-decoration: none;
+    transition: color 0.3s ease;
 }
+
+/* ----- Hover para cards de Feedback ----- */
+
+.feedback-card:hover {
+    transform: translateY(-6px) scale(1.02);
+    box-shadow: 0 12px 22px rgba(0, 0, 0, 0.12);
+}
+
+.feedback-card:hover .feedback-card-img {
+    filter: brightness(1.12);
+}
+
+.feedback-card:hover .feedback-card-body {
+    background-color: #ffffff;
+}
+
+.feedback-card:hover .feedback-card-company {
+    color: #f7931e !important;
+}
+
 
 /* Responsividade Feedback */
 @media (max-width: 1400px) {
